@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.4.24)  28 APR 2026 11:27
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.4.24)  28 APR 2026 13:10
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -476,7 +476,7 @@ File: Images/acelerometro_dewesoft traduzido.png Graphic file (type png)
 Package pdftex.def Info: Images/acelerometro_dewesoft traduzido.png  used on input line 82.
 (pdftex.def)             Requested size: 273.14923pt x 245.9309pt.
  [4 <./Images/acelerometro_dewesoft traduzido.png>]
-<Images/LDV traduzido.png, id=101, 2698.08pt x 1601.985pt>
+<Images/LDV traduzido.png, id=102, 2698.08pt x 1601.985pt>
 File: Images/LDV traduzido.png Graphic file (type png)
 <use Images/LDV traduzido.png>
 Package pdftex.def Info: Images/LDV traduzido.png  used on input line 99.
@@ -484,7 +484,7 @@ Package pdftex.def Info: Images/LDV traduzido.png  used on input line 99.
 <Images/camerabased vibrometry traduzido.png, id=107, 2034.85219pt x 1018.55531pt>
 File: Images/camerabased vibrometry traduzido.png Graphic file (type png)
 <use Images/camerabased vibrometry traduzido.png>
-Package pdftex.def Info: Images/camerabased vibrometry traduzido.png  used on input line 113.
+Package pdftex.def Info: Images/camerabased vibrometry traduzido.png  used on input line 111.
 (pdftex.def)             Requested size: 273.14923pt x 136.72194pt.
  [5 <./Images/LDV traduzido.png>] [6 <./Images/camerabased vibrometry traduzido.png>] (c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.bbl [7]) [8] (c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.aux)
  ***********
@@ -495,17 +495,17 @@ Package rerunfilecheck Info: File `"TCC - Vinicius Andrade Trento".out' has not 
 (rerunfilecheck)             Checksum: 1652B1544E9483FF563D05DD60FE104B;730.
  ) 
 Here is how much of TeX's memory you used:
- 16142 strings out of 467871
- 320915 string characters out of 5417408
- 704350 words of memory out of 5000000
+ 16141 strings out of 467871
+ 320905 string characters out of 5417408
+ 703350 words of memory out of 5000000
  44798 multiletter control sequences out of 15000+600000
  644029 words of font info for 82 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,6n,80p,847b,1157s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,6n,80p,1049b,1157s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1200.pk> <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1200.pk> <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk> <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm2074.pk> <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2074.pk>
-Output written on "c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.pdf" (8 pages, 10592433 bytes).
+Output written on "c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.pdf" (8 pages, 10592089 bytes).
 PDF statistics:
- 509 PDF objects out of 1000 (max. 8388607)
- 32 named destinations out of 1000 (max. 500000)
+ 506 PDF objects out of 1000 (max. 8388607)
+ 31 named destinations out of 1000 (max. 500000)
  109 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -92,7 +92,7 @@ Contudo, uma vez que é necessário fazer a montagem física dos sensores nas pe
     \item Componentes que trabalham em altas temperaturas.
 \end{itemize}
 
-Para contornar essas limitações, técnicas de vibrometria óptica têm sido cada vez mais utilizadas para a medição sem contato \cite{Phase2022}. Essas técnicas permitem a obtenção de informações sobre o comportamento dinâmico de estruturas sem a necessidade de instalação física de sensores, o que é particularmente vantajoso onde a adição de massa do sensor afetaria as características vibracionais do sistema. Uma das técnicas ópticas comuns é a vibrometria por Laser Doppler (LDV) mostrada na Figura \ref{fig:ldv}.
+Para contornar as limitações de instrumentação física, técnicas de vibrometria óptica têm sido cada vez mais utilizadas para a medição sem contato \cite{Phase2022}. Essas técnicas permitem a obtenção de informações sobre o comportamento dinâmico de estruturas sem o acréscimo indesejado de massa (mass loading), o que é particularmente vantajoso em sistemas sensíveis. Uma das técnicas ópticas consagradas é a vibrometria por Laser Doppler (LDV) apresentada na figura \ref{fig:ldv}. No entanto, apesar de sua alta fidelidade e precisão \cite{LDVpolytec2006}, sistemas LDV industriais apresentam custos de aquisição e manutenção bastante elevados, além de exigirem setups experimentais complexos e realizarem medições limitadas a pontos específicos (espacialmente discretas). Isso enfatiza a necessidade de alternativas que mantenham a natureza não intrusiva, mas com maior viabilidade econômica e capacidade de monitoramento global.
 
 \begin{figure}[H]
     \centering
@@ -102,9 +102,7 @@ Para contornar essas limitações, técnicas de vibrometria óptica têm sido ca
 \end{figure}
 
 
-A Vibrometria por Laser Doppler (LDV) baseia-se na utilização de um transdutor óptico de alta precisão capaz de determinar a velocidade de vibração e o deslocamento em um ponto específico da estrutura \cite{LDVpolytec2006}. Apesar de sua alta fidelidade, sistemas LDV industriais apresentam um custo de aquisição e manutenção bastante elevado, além de exigirem setups experimentais complexos. Isso enfatiza a necessidade de alternativas  que entreguem a natureza não intrusiva, mas com melhor viabilidade econômica para ensaios dinâmicos contínuos.
-
-Uma alternativa promissora é a vibrometria por imagem, que utiliza câmeras de vídeo convencionais para capturar o movimento vibracional de uma estrutura. Através de técnicas avançadas de processamento digital de imagens, é possível extrair informações sobre a amplitude e frequência das vibrações, permitindo uma análise detalhada do comportamento dinâmico da estrutura \cite{robotcamera2025}. Essa abordagem tem o potencial de ser uma solução de baixo custo e fácil implementação para monitoramento de vibrações em tempo real, especialmente em ambientes onde a instalação de sensores físicos é inviável. 
+Uma alternativa promissora é a vibrometria por imagem, que utiliza câmeras de vídeo convencionais para capturar o movimento vibracional de uma estrutura. Através de técnicas avançadas de processamento digital de imagens (phase-based e amplificação de movimento), é possível extrair informações sobre a amplitude e frequência das vibrações, permitindo uma análise detalhada do comportamento dinâmico da estrutura \cite{robotcamera2025}. Essa abordagem tem o potencial de ser uma solução de baixo custo e fácil implementação para monitoramento de vibrações em tempo real, especialmente em ambientes onde a instalação de sensores físicos é inviável. 
 
 O maior desafio dessa abordagem se encontra na necessidade de estabilização de video e na capacidade do equipamento de captura de vídeo em lidar com frequencias muito altas e de amplitudes muito baixas, o que pode limitar a precisão e a aplicabilidade em certos cenários de teste. No entanto, avanços recentes em algoritmos de processamento de imagens e melhorias na qualidade das câmeras de vídeo estão continuamente expandindo as possibilidades dessa técnica para aplicações industriais e de pesquisa \cite{Phase2022}. Um modelo de como pode ser montado um sistema de vibrometria por câmera baseada em imagem é apresentado na Figura \ref{fig:camerabased_vibrometry}.
 
@@ -115,25 +113,22 @@ O maior desafio dessa abordagem se encontra na necessidade de estabilização de
     \label{fig:camerabased_vibrometry}
 \end{figure}
 
-A maior diferença entre as técnicas de vibrometria óptica e os métodos tradicionais de contato é a capacidade de obter um histórico visual contínuo da propagação de falhas mecânicas, o que é particularmente valioso para a compreensão dos modos de falha ao longo de todo o componente em teste. 
+O grande diferencial desta técnica em relação aos métodos tradicionais de contato (e até mesmo ao LDV pontual) é a capacidade de obter um histórico visual contínuo da propagação de falhas mecânicas. Isso é particularmente valioso para a compreensão espacial dos modos de falha ao longo de todo o componente em teste, otimizando a segurança operacional e a análise forense.
+
+%  TODO: ADICIONAR COMPARAÇÃO DIRETA ENTRE ACELEROMETRO E MEDIÇÕES OPTICAS
 
 \subsection{Problema}
-Embora a eficácia dos acelerômetros, sistemas tradicionais de bancada de testes baseiam-se em medições discretas, monitorando pontos específicos da estrutura e também ensaios destrutivos que causam prejuízo devido a perda do equipamento de medição. Ademais, a própria implementação de técnicas de vibrometria óptica em testes dinâmicos apresenta desafios específicos, como a necessidade de condições controladas de iluminação, a sensibilidade a ruídos ambientais e a complexidade computacional na extração, processamento de imagens e interpretação dos dados obtidos \cite{Phase2022}. 
+Apesar da ampla utilização e eficácia dos acelerômetros em medições vibracionais, os sistemas tradicionais de testes em bancada baseiam-se, em geral, em medições pontuais e discretas, limitadas ao monitoramento de regiões específicas da estrutura. Essa abordagem pode não capturar de forma completa o comportamento dinâmico global do sistema, além de, em alguns casos, exigir ensaios destrutivos que acarretam prejuízos devido à perda ou danificação do equipamento testado.
+
+Nesse contexto, a aplicação da vibrometria óptica por câmeras e visão computacionalsurge como uma  boa alternativa, não para subsituir os métodos tradicionais, mas para complementá-los, por possibilitar medições sem contato e com maior resolução espacial. Contudo, sua implementação em testes dinâmicos de bancada ainda apresenta desafios relevantes, tais como a necessidade de condições controladas de iluminação, a elevada sensibilidade a ruídos ambientais e a complexidade computacional envolvida na aquisição, processamento e interpretação dos dados obtidos\cite{Phase2022}. 
 
 \subsection{Objetivos}
 
-O objetivo geral deste trabalho é explorar e validar a aplicação de metodologias não intrusivas de vibrometria óptica para medição de vibrações em testes dinâmicos de bancada, buscando superar os desafios de instrumentação física. 
-
-\subsubsection*{Objetivos Específicos}
-\begin{itemize}
-    \item Implementar rotinas de processamento digital de imagens, utilizando Filtros de convolução via Python, para realizar Structure Health Monitoring (SHM).
-    \item Desenvolver e validar uma metodologia não intrusiva de baixo custo utilizando câmeras de vídeo convencionais.
-    \item Comparar os resultados ópticos com os métodos tradicionais de contato.
-\end{itemize}
+O objetivo geral deste trabalho é explorar e validar a aplicação de metodologias não intrusivas de vibrometria óptica para medição de vibrações em testes dinâmicos de bancada, buscando superar os desafios de instrumentação. Para alcançar este propósito, o estudo propõe-se a implementar rotinas de processamento digital de imagens via Python, voltadas ao \textit{Structural Health Monitoring} (SHM), e comparar os resultados ópticos obtidos com aqueles advindos de métodos tradicionais de contato.
 
 
 \subsection{Justificativa}
-O desenvolvimento e a validação de um sistema de medição \textit{contactless} e de baixo custo justificam-se pela necessidade contínua de otimizar a segurança operacional (safety margin) em ensaios de durabilidade. Ao contornar as limitações físicas dos sensores tradicionais, a abordagem óptica viabiliza a criação de um histórico visual e contínuo da propagação de falhas mecânicas. Dessa forma, demonstra-se não apenas as vantagens dessa abordagem em comparação aos métodos tradicionais, mas também garante-se uma alta viabilidade econômica e maior precisão forense na compreensão de modos de falha ao longo de todo o componente em teste.
+O desenvolvimento e a validação de um sistema de medição sem contato e de baixo custo justificam-se pela necessidade contínua de segurança operacional (\textit{safety margin}) em ensaios de durabilidade. Ao contornar as limitações físicas dos sensores tradicionais, a abordagem óptica viabiliza a criação de um histórico visual e contínuo de falhas mecânicas. Dessa forma, demonstra-se não apenas as vantagens dessa abordagem em comparação aos métodos tradicionais, mas também garante-se uma alta viabilidade econômica e mais ferramentas de análise forense para compreensão de modos de falha ao longo de todo o componente em teste.
 
 \section{Materiais e Métodos}
 
