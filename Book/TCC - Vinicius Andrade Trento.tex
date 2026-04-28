@@ -2,7 +2,7 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[brazil]{babel}
+\usepackage[brazilian]{babel}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{siunitx}
@@ -33,27 +33,28 @@
 
 \author{
     \textbf{Autor:} Vinicius Andrade Trento \\[0.5cm]
-    \textbf{Orientador:} Prof. Helio Emmendorf \\
-    \textbf{Coorientador:} Prof. Nilson Barbieri
+    % \textbf{Orientador:} Prof. Helio Emmendorf \\
+    % \textbf{Coorientador:} Prof. Nilson Barbieri
 }
 
 \date{\today}
 
 \begin{document}
+\sloppy
 
 \onehalfspacing
 
 \maketitle
 
-\newpage
-\vspace*{\fill}
-\begin{flushright}
-    \begin{minipage}{0.5\textwidth}
-        \textbf{Agradecimentos}\\[0.5cm]
-        Agradeço primeiramente ao meu orientador, Prof. Helio Emmendorf, pela confiança e direcionamento fundamental ao longo deste trabalho. Estendo minha gratidão ao coorientador, Prof. Nilson Barbieri, pelas valiosas discussões técnicas e suporte prático. Agradeço também aos meus familiares e colegas de curso pelo apoio constante durante toda a graduação.
-    \end{minipage}
-\end{flushright}
-\vspace*{\fill}
+% \newpage
+% \vspace*{\fill}
+% \begin{flushright}
+%     \begin{minipage}{0.5\textwidth}
+%         \textbf{Agradecimentos}\\[0.5cm]
+%         Agradeço primeiramente ao meu orientador, Prof. Helio Emmendorf, pela confiança e direcionamento fundamental ao longo deste trabalho. Estendo minha gratidão ao coorientador, Prof. Nilson Barbieri, pelas valiosas discussões técnicas e suporte prático. Agradeço também aos meus familiares e colegas de curso pelo apoio constante durante toda a graduação.
+%     \end{minipage}
+% \end{flushright}
+% \vspace*{\fill}
 
 
 \newpage
@@ -72,7 +73,18 @@ Espaço pro abstract.
 \section{Introdução}
 
 \subsection{Contextualização}
-Acelerômetros são os dispositivos mais comuns para medição de vibrações em sistemas automotivos, aeroespaciais e industriais \cite{Anna2026}. O destaque para esses dispositivos piezoelétricos provém de sua estrutura simples, processamento eficaz e capacidade de identificar frequências altas \cite{PiezoAccelerometer2023}. Contudo, uma vez que é necessário fazer a montagem física dos sensores nas peças, limitações físicas e de acesso podem restringir ou impedir sua utilização em certos casos. Alguns exemplos de aplicações críticas incluem:
+
+Os acelerômetros são os dispositivos mais difundidos para a medição de vibrações nos setores automotivo, aeroespacial e industrial \cite{Anna2026}. Eles operam através da detecção de forças estáticas contínuas ou de vibrações e movimentos dinâmicos, sendo capazes de capturar fenômenos que variam desde impactos e oscilações comuns até eventos sísmicos. Dependendo do tipo de elemento sensível utilizado, esses sensores são classificados em piezorresistivos, capacitivos, piezoelétricos ou ressonantes \cite{PiezoAccelerometer2023}. A Figura 1 apresenta um esquema representativo de um aceleromômetro de compressão piezoelétrico, um dos tipos mais comuns utilizados em aplicações industriais para medição de frequências altas.
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Images/acelerometro_dewesoft traduzido.png}
+    \caption{Acelerômetro de compressão piezoelétrico da Dewesoft. Fonte: \cite{aceletrometroDewesoft2025}.}
+    \label{fig:acelerometro_dewesoft}
+\end{figure}
+
+Contudo, uma vez que é necessário fazer a montagem física dos sensores nas peças, limitações físicas e de acesso podem restringir ou impedir sua utilização em certos casos. Alguns exemplos de aplicações críticas incluem:
 
 \begin{itemize}
     \item Monitoramento de vibrações em pás de rotores.
@@ -80,10 +92,33 @@ Acelerômetros são os dispositivos mais comuns para medição de vibrações em
     \item Componentes que trabalham em altas temperaturas.
 \end{itemize}
 
-Para contornar essas limitações, técnicas de vibrometria óptica têm sido cada vez mais utilizadas para a medição sem contato \cite{Phase2022}. Essas técnicas permitem a obtenção de informações sobre o comportamento dinâmico de estruturas sem a necessidade de instalação física de sensores, o que é particularmente vantajoso onde a adição de massa do sensor afetaria as características vibracionais do sistema.
+Para contornar essas limitações, técnicas de vibrometria óptica têm sido cada vez mais utilizadas para a medição sem contato \cite{Phase2022}. Essas técnicas permitem a obtenção de informações sobre o comportamento dinâmico de estruturas sem a necessidade de instalação física de sensores, o que é particularmente vantajoso onde a adição de massa do sensor afetaria as características vibracionais do sistema. Uma das técnicas ópticas comuns é a vibrometria por Laser Doppler (LDV) mostrada na Figura \ref{fig:ldv}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Images/LDV traduzido.png}
+    \caption{Vibrometria por Laser Doppler . Fonte: \cite{LDVpolytec2006}.}
+    \label{fig:ldv}
+\end{figure}
+
+
+A Vibrometria por Laser Doppler (LDV) baseia-se na utilização de um transdutor óptico de alta precisão capaz de determinar a velocidade de vibração e o deslocamento em um ponto específico da estrutura \cite{LDVpolytec2006}. Apesar de sua alta fidelidade, sistemas LDV industriais apresentam um custo de aquisição e manutenção bastante elevado, além de exigirem setups experimentais complexos. Isso enfatiza a necessidade de alternativas  que entreguem a natureza não intrusiva, mas com melhor viabilidade econômica para ensaios dinâmicos contínuos.
+
+Uma alternativa promissora é a vibrometria por imagem, que utiliza câmeras de vídeo convencionais para capturar o movimento vibracional de uma estrutura. Através de técnicas avançadas de processamento digital de imagens, é possível extrair informações sobre a amplitude e frequência das vibrações, permitindo uma análise detalhada do comportamento dinâmico da estrutura \cite{robotcamera2025}. Essa abordagem tem o potencial de ser uma solução de baixo custo e fácil implementação para monitoramento de vibrações em tempo real, especialmente em ambientes onde a instalação de sensores físicos é inviável. 
+
+O maior desafio dessa abordagem se encontra na necessidade de estabilização de video e na capacidade do equipamento de captura de vídeo em lidar com frequencias muito altas e de amplitudes muito baixas, o que pode limitar a precisão e a aplicabilidade em certos cenários de teste. No entanto, avanços recentes em algoritmos de processamento de imagens e melhorias na qualidade das câmeras de vídeo estão continuamente expandindo as possibilidades dessa técnica para aplicações industriais e de pesquisa \cite{Phase2022}. Um modelo de como pode ser montado um sistema de vibrometria por câmera baseada em imagem é apresentado na Figura \ref{fig:camerabased_vibrometry}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Images/camerabased vibrometry traduzido.png}
+    \caption{Vibrometria por câmera baseada em imagem. Fonte: \cite{robotcamera2025}.}
+    \label{fig:camerabased_vibrometry}
+\end{figure}
+
+A maior diferença entre as técnicas de vibrometria óptica e os métodos tradicionais de contato é a capacidade de obter um histórico visual contínuo da propagação de falhas mecânicas, o que é particularmente valioso para a compreensão dos modos de falha ao longo de todo o componente em teste. 
 
 \subsection{Problema}
-Apesar da eficácia dos acelerômetros, sistemas tradicionais de bancada de testes baseiam-se em medições discretas, monitorando pontos específicos da estrutura. Além disso, a própria implementação de técnicas de vibrometria óptica em testes dinâmicos apresenta desafios específicos, como a necessidade de condições controladas de iluminação, a sensibilidade a ruídos ambientais e a complexidade computacional na extração, processamento de imagens e interpretação dos dados obtidos \cite{Phase2022}. 
+Embora a eficácia dos acelerômetros, sistemas tradicionais de bancada de testes baseiam-se em medições discretas, monitorando pontos específicos da estrutura e também ensaios destrutivos que causam prejuízo devido a perda do equipamento de medição. Ademais, a própria implementação de técnicas de vibrometria óptica em testes dinâmicos apresenta desafios específicos, como a necessidade de condições controladas de iluminação, a sensibilidade a ruídos ambientais e a complexidade computacional na extração, processamento de imagens e interpretação dos dados obtidos \cite{Phase2022}. 
 
 \subsection{Objetivos}
 
@@ -91,9 +126,11 @@ O objetivo geral deste trabalho é explorar e validar a aplicação de metodolog
 
 \subsubsection*{Objetivos Específicos}
 \begin{itemize}
-    \item Implementar rotinas de processamento digital de imagens para extração de deslocamento.
+    \item Implementar rotinas de processamento digital de imagens, utilizando Filtros de convolução via Python, para realizar Structure Health Monitoring (SHM).
+    \item Desenvolver e validar uma metodologia não intrusiva de baixo custo utilizando câmeras de vídeo convencionais.
     \item Comparar os resultados ópticos com os métodos tradicionais de contato.
 \end{itemize}
+
 
 \subsection{Justificativa}
 O desenvolvimento e a validação de um sistema de medição \textit{contactless} e de baixo custo justificam-se pela necessidade contínua de otimizar a segurança operacional (safety margin) em ensaios de durabilidade. Ao contornar as limitações físicas dos sensores tradicionais, a abordagem óptica viabiliza a criação de um histórico visual e contínuo da propagação de falhas mecânicas. Dessa forma, demonstra-se não apenas as vantagens dessa abordagem em comparação aos métodos tradicionais, mas também garante-se uma alta viabilidade econômica e maior precisão forense na compreensão de modos de falha ao longo de todo o componente em teste.
@@ -108,7 +145,7 @@ O desenvolvimento e a validação de um sistema de medição \textit{contactless
 
 \section{Considerações finais}
 
-\bibliographystyle{plain} 
+\bibliographystyle{unsrt} 
 
 \bibliography{referencias} 
 

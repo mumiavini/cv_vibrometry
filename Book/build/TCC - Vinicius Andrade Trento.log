@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.4.24)  24 APR 2026 13:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.4.24)  28 APR 2026 11:27
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -53,17 +53,12 @@ Package babel Info: Configuration files are deprecated, as
 *
 (C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex/latex/arabi\bblopts.cfg
 File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of babel
-) (C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex/generic/babel/locale/invalid\babel-brazil.tex)
-
-Package babel Warning: Name 'brazil' is deprecated.
-(babel)                Use 'brazilian' instead.
-(babel)                Reported on input line 4320.
-
-Package babel Info: Importing font and identification data for brazil
+) (C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex/generic/babel/locale/pt\babel-brazilian.tex)
+Package babel Info: Importing font and identification data for brazilian
 (babel)             from babel-pt-BR.ini. Reported on input line 4320.
-(C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex/latex/babel-portuges\brazilian.ldf
+ (C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex/latex/babel-portuges\brazilian.ldf
 Language: portuges 2026/01/24 v1.2u Portuguese support from the babel system
-Package babel Info: Hyphen rules for 'brazil' set to \l@portuguese
+Package babel Info: Hyphen rules for 'brazilian' set to \l@portuguese
 (babel)             (\language56). Reported on input line 100.
 Package babel Info: Making " an active character on input line 132.
 )) (C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
@@ -368,7 +363,7 @@ Package color Info: Driver file: pdftex.def on input line 149.
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count333
 ) (c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.aux
-Package babel Info: 'brazil' activates 'portuges' shorthands.
+Package babel Info: 'brazilian' activates 'portuges' shorthands.
 (babel)             Reported on input line 8.
 )
 \openout1 = `"TCC - Vinicius Andrade Trento.aux"'.
@@ -457,29 +452,41 @@ Package hyperref Info: Link coloring ON on input line 42.
 <Images/LogoPUCPR.png, id=47, 248.42813pt x 298.86656pt>
 File: Images/LogoPUCPR.png Graphic file (type png)
 <use Images/LogoPUCPR.png>
-Package pdftex.def Info: Images/LogoPUCPR.png  used on input line 47.
+Package pdftex.def Info: Images/LogoPUCPR.png  used on input line 48.
 (pdftex.def)             Requested size: 136.57462pt x 164.30414pt.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 47.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 48.
  (C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 47.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 48.
  (C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\se-pdfdoc.def
 File: se-pdfdoc.def 2019/11/29 v1.12 stringenc: PDFDocEncoding
 ) [1
 
-{C:/Users/a542012/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./Images/LogoPUCPR.png>] [2] [3] (c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.toc)
+{C:/Users/a542012/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./Images/LogoPUCPR.png>] [2] (c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.toc)
 \tf@toc=\write4
 \openout4 = `"TCC - Vinicius Andrade Trento.toc"'.
 
- [4]
-Overfull \hbox (9.02855pt too wide) in paragraph at lines 86--87
-[]\T1/cmr/m/n/12 Apesar da efi-cá-cia dos ace-le-rô-me-tros, sis-te-mas tra-di-ci-o-nais de ban-cada de tes-tes baseiam-
- []
-
-[5] (c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.bbl) [6] (c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.aux)
+ [3]
+<Images/acelerometro_dewesoft traduzido.png, id=86, 2176.13pt x 1959.32pt>
+File: Images/acelerometro_dewesoft traduzido.png Graphic file (type png)
+<use Images/acelerometro_dewesoft traduzido.png>
+Package pdftex.def Info: Images/acelerometro_dewesoft traduzido.png  used on input line 82.
+(pdftex.def)             Requested size: 273.14923pt x 245.9309pt.
+ [4 <./Images/acelerometro_dewesoft traduzido.png>]
+<Images/LDV traduzido.png, id=101, 2698.08pt x 1601.985pt>
+File: Images/LDV traduzido.png Graphic file (type png)
+<use Images/LDV traduzido.png>
+Package pdftex.def Info: Images/LDV traduzido.png  used on input line 99.
+(pdftex.def)             Requested size: 273.14923pt x 162.16342pt.
+<Images/camerabased vibrometry traduzido.png, id=107, 2034.85219pt x 1018.55531pt>
+File: Images/camerabased vibrometry traduzido.png Graphic file (type png)
+<use Images/camerabased vibrometry traduzido.png>
+Package pdftex.def Info: Images/camerabased vibrometry traduzido.png  used on input line 113.
+(pdftex.def)             Requested size: 273.14923pt x 136.72194pt.
+ [5 <./Images/LDV traduzido.png>] [6 <./Images/camerabased vibrometry traduzido.png>] (c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.bbl [7]) [8] (c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
@@ -488,17 +495,17 @@ Package rerunfilecheck Info: File `"TCC - Vinicius Andrade Trento".out' has not 
 (rerunfilecheck)             Checksum: 1652B1544E9483FF563D05DD60FE104B;730.
  ) 
 Here is how much of TeX's memory you used:
- 16104 strings out of 467871
- 319653 string characters out of 5417408
- 704090 words of memory out of 5000000
- 44769 multiletter control sequences out of 15000+600000
- 643716 words of font info for 81 fonts, out of 8000000 for 9000
+ 16142 strings out of 467871
+ 320915 string characters out of 5417408
+ 704350 words of memory out of 5000000
+ 44798 multiletter control sequences out of 15000+600000
+ 644029 words of font info for 82 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,6n,80p,750b,1051s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1200.pk> <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk> <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm2074.pk> <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2074.pk>
-Output written on "c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.pdf" (6 pages, 186834 bytes).
+ 75i,6n,80p,847b,1157s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1200.pk> <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1200.pk> <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk> <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm2074.pk> <C:\Users\a542012\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2074.pk>
+Output written on "c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.pdf" (8 pages, 10592433 bytes).
 PDF statistics:
- 450 PDF objects out of 1000 (max. 8388607)
- 24 named destinations out of 1000 (max. 500000)
- 94 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 509 PDF objects out of 1000 (max. 8388607)
+ 32 named destinations out of 1000 (max. 500000)
+ 109 words of extra memory for PDF output out of 10000 (max. 10000000)
 

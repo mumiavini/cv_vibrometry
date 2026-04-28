@@ -1,11 +1,5 @@
 \begin{thebibliography}{1}
 
-\bibitem{Phase2022}
-Jae~Young An and Soo~Il Lee.
-\newblock Phase-based motion magnification for structural vibration monitoring
-  at a video streaming rate.
-\newblock {\em IEEE Access}, 10:123423--123435, 2022.
-
 \bibitem{Anna2026}
 Anna Li, Yongquan Su, Cheng Zhang, Jiachang Zhang, Hao Huang, Dalong Chen,
   Wenli Xue, Lihao Wang, Yichen Liu, Feng Tian, Yang Wang, and Zhenyu Wu.
@@ -18,5 +12,32 @@ Tianqiong Wu, Di~You, Huayun Gao, Pinghua Lian, Weigang Ma, Xinyi Zhou,
   Chuanmin Wang, Jianghai Luo, Haibo Zhang, and Hua Tan.
 \newblock Research status and development trend of piezoelectric accelerometer.
 \newblock {\em Crystals}, 13(9), 2023.
+
+\bibitem{aceletrometroDewesoft2025}
+Grant~Maloy Smith.
+\newblock Medindo choque e vibração com sensores de acelerômetro.
+\newblock
+  \url{https://dewesoft.com/pt/blog/medir-choque-vibrao-com-acelermetros}, sep
+  2025.
+\newblock Acessado em: 28 abr. 2026. Base de Conhecimentos de Aquisição de
+  Dados.
+
+\bibitem{Phase2022}
+Jae~Young An and Soo~Il Lee.
+\newblock Phase-based motion magnification for structural vibration monitoring
+  at a video streaming rate.
+\newblock {\em IEEE Access}, 10:123423--123435, 2022.
+
+\bibitem{LDVpolytec2006}
+{Polytec GmbH}.
+\newblock Nature \& technology: Vibrations everywhere!
+\newblock Application Note VIB-G-05, Polytec, Waldbronn, Germany, jun 2006.
+
+\bibitem{robotcamera2025}
+Tuniyazi Abudoureheman, Hayato Otsubo, Feiyue Wang, Kohei Shimasaki, and Idaku
+  Ishii.
+\newblock High-frame-rate camera-based vibration analysis for health monitoring
+  of industrial robots across multiple postures.
+\newblock {\em Applied Sciences}, 15:12771, 2025.
 
 \end{thebibliography}

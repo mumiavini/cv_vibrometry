@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex build/TCC - Vinicius Andrade Trento"] 1777049822.03043 "build/TCC - Vinicius Andrade Trento.aux" "build/TCC - Vinicius Andrade Trento.bbl" "build/TCC - Vinicius Andrade Trento" 1777049826.19262 0
-  "./referencias.bib" 1777048637 4529 75c2266cd4c108d71efb7ed225742aeb ""
-  "C:/Users/a542012/AppData/Local/Programs/MiKTeX/bibtex/bst/bibtex/plain.bst" 1291864736 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "build/TCC - Vinicius Andrade Trento.aux" 1777049824 1847 ce4933faf3c2ee11ce7e4c29a0d80f4d "pdflatex"
+["bibtex build/TCC - Vinicius Andrade Trento"] 1777386196.01625 "build/TCC - Vinicius Andrade Trento.aux" "build/TCC - Vinicius Andrade Trento.bbl" "build/TCC - Vinicius Andrade Trento" 1777386444.79438 0
+  "./referencias.bib" 1777375965 5819 13e8cf935533c0e2153edfbc5df97adb ""
+  "C:/Users/a542012/AppData/Local/Programs/MiKTeX/bibtex/bst/bibtex/unsrt.bst" 1291864736 18030 1376b4b231b50c66211e47e42eda2875 ""
+  "build/TCC - Vinicius Andrade Trento.aux" 1777386443 3071 0724bffa5c1f9afb7d8de23c4576f270 "pdflatex"
   (generated)
   "build/TCC - Vinicius Andrade Trento.bbl"
   "build/TCC - Vinicius Andrade Trento.blg"
   (rewritten before read)
-["pdflatex"] 1777049822.58826 "c:/soft/cv_vibrometry/Book/TCC - Vinicius Andrade Trento.tex" "TCC - Vinicius Andrade Trento.pdf" "TCC - Vinicius Andrade Trento" 1777049826.19518 0
+["pdflatex"] 1777386424.29133 "c:/soft/cv_vibrometry/Book/TCC - Vinicius Andrade Trento.tex" "TCC - Vinicius Andrade Trento.pdf" "TCC - Vinicius Andrade Trento" 1777386444.7955 0
   "C:/Users/a542012/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1777046268 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/a542012/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1095.pk" 1777046281 28976 b902565f9bcd67af83e9456d6dd55626 ""
   "C:/Users/a542012/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1200.pk" 1777033822 31952 bc78d48a82f2e0e0817f25a3e05be486 ""
@@ -19,6 +19,7 @@
   "C:/Users/a542012/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecrm1440.pk" 1777046294 34320 cd7f2927ba48a3b8d6e0957feb3ce2d8 ""
   "C:/Users/a542012/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecrm2074.pk" 1777046297 53736 76e1a3be1ab60a34a71cd101f2633952 ""
   "C:/Users/a542012/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecti1200.pk" 1777046289 39120 a492cec94e3b8e7308595acd5400b321 ""
+  "C:/Users/a542012/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ectt1200.pk" 1777046276 24152 a397c55830e65f33579148bf4051a15f ""
   "C:/Users/a542012/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1200.pk" 1777046286 14064 1221b6963f60dcb41ea9c6bdadc1ad5d ""
   "C:/Users/a542012/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1777029339 13334455 bf8b22a9359b57d3ef43cdd4387f6af7 ""
   "C:/Users/a542012/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/ecbx1095.tfm" 993061956 3228 aacd2ac2d814480e4422ad7e830fd2d4 ""
@@ -32,6 +33,7 @@
   "C:/Users/a542012/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/ecrm1728.tfm" 993062128 3168 11457c8185ce67fb79662ba8b03d6db1 ""
   "C:/Users/a542012/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/ecrm2074.tfm" 993062130 3184 b2541675eba9fa86d240ec0ecc913558 ""
   "C:/Users/a542012/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/ecti1200.tfm" 993062324 2832 28bbd97ca29f46e76c87a158a9915203 ""
+  "C:/Users/a542012/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/ectt1200.tfm" 993062344 1348 c48a0620e07683860afba1730adf9e53 ""
   "C:/Users/a542012/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/tcrm1200.tfm" 993062508 1444 95ffe0f19b974d50849790c8225c7ef7 ""
   "C:/Users/a542012/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
   "C:/Users/a542012/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1233951848 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -51,7 +53,7 @@
   "C:/Users/a542012/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmsy8.tfm" 1136765053 1120 8b7d695260f3cff42e636090a8002094 ""
   "C:/Users/a542012/AppData/Local/Programs/MiKTeX/tex/context/base/mkii/supp-pdf.mkii" 1580390158 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "C:/Users/a542012/AppData/Local/Programs/MiKTeX/tex/generic/babel/babel.sty" 1765441417 146654 eaac99efd6386094bb8a3980e34ec87b ""
-  "C:/Users/a542012/AppData/Local/Programs/MiKTeX/tex/generic/babel/locale/invalid/babel-brazil.tex" 1765441421 652 7dccbebb70081db63e04f21ba35d0012 ""
+  "C:/Users/a542012/AppData/Local/Programs/MiKTeX/tex/generic/babel/locale/pt/babel-brazilian.tex" 1765441424 379 9f94ea4211dd06e65f547717726f23f5 ""
   "C:/Users/a542012/AppData/Local/Programs/MiKTeX/tex/generic/babel/locale/pt/babel-pt-BR.ini" 1765441424 4550 1f8aa8e0148d8a21ebf02f586bbb2fc0 ""
   "C:/Users/a542012/AppData/Local/Programs/MiKTeX/tex/generic/babel/txtbabel.def" 1765441417 5231 82bb24bf20af7e4d760717f2cadb5170 ""
   "C:/Users/a542012/AppData/Local/Programs/MiKTeX/tex/generic/bigintcalc/bigintcalc.sty" 1576433602 40635 c40361e206be584d448876bba8a64a3b ""
@@ -118,13 +120,16 @@
   "C:/Users/a542012/AppData/Local/Programs/MiKTeX/tex/latex/translations/dicts/translations-basic-dictionary-brazil.trsl" 1644048522 5992 3b92a9a1524d0f6a211951f4106f778c ""
   "C:/Users/a542012/AppData/Local/Programs/MiKTeX/tex/latex/translations/translations.sty" 1644048522 44247 2188b95d0ee74e31eca4d316263c58a7 ""
   "C:/Users/a542012/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
+  "Images/LDV traduzido.png" 1777386088 3916822 746ba316208c58849718d8575e05a695 ""
   "Images/LogoPUCPR.png" 1777046791 80937 e26e406b20407156eb2c442ccd09b6fa ""
-  "TCC - Vinicius Andrade Trento.tex" 1777049817 5232 a57720f0cb22d6d8b319977aac083976 ""
-  "build/TCC - Vinicius Andrade Trento.aux" 1777049824 1847 ce4933faf3c2ee11ce7e4c29a0d80f4d "pdflatex"
-  "build/TCC - Vinicius Andrade Trento.bbl" 1777049822 935 f515ccc28f8e38f555b1b0d3fb26de13 "bibtex build/TCC - Vinicius Andrade Trento"
-  "build/TCC - Vinicius Andrade Trento.out" 1777049824 730 1652b1544e9483ff563d05dd60fe104b "pdflatex"
-  "build/TCC - Vinicius Andrade Trento.toc" 1777049824 910 c4ed11991feb6c92535fffc2732b5c0e "pdflatex"
-  "c:/soft/cv_vibrometry/Book/TCC - Vinicius Andrade Trento.tex" 1777049817 5232 a57720f0cb22d6d8b319977aac083976 ""
+  "Images/acelerometro_dewesoft traduzido.png" 1777386000 4480997 d08dbc88601dd3b085923e749fe4563a ""
+  "Images/camerabased vibrometry traduzido.png" 1777386394 4550121 e9de3d159624fc3c98ae2d841845ed0b ""
+  "TCC - Vinicius Andrade Trento.tex" 1777386423 9064 e5d9f28ce6cc194684acab1b2d1db1b1 ""
+  "build/TCC - Vinicius Andrade Trento.aux" 1777386443 3071 0724bffa5c1f9afb7d8de23c4576f270 "pdflatex"
+  "build/TCC - Vinicius Andrade Trento.bbl" 1777386196 1731 7213c973638799d03406b022a1d038c3 "bibtex build/TCC - Vinicius Andrade Trento"
+  "build/TCC - Vinicius Andrade Trento.out" 1777386443 730 1652b1544e9483ff563d05dd60fe104b "pdflatex"
+  "build/TCC - Vinicius Andrade Trento.toc" 1777386443 913 d6c081063b35ed38a98fc2f78acb8fe5 "pdflatex"
+  "c:/soft/cv_vibrometry/Book/TCC - Vinicius Andrade Trento.tex" 1777386423 9064 e5d9f28ce6cc194684acab1b2d1db1b1 ""
   (generated)
   "TCC - Vinicius Andrade Trento.pdf"
   "build/TCC - Vinicius Andrade Trento.aux"

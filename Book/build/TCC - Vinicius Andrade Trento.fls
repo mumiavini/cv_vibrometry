@@ -19,9 +19,9 @@ INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex\generic\babel\txtbabel.
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex\latex\arabi\bblopts.cfg
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex\latex\arabi\bblopts.cfg
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex\latex\arabi\bblopts.cfg
-INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex\generic\babel\locale\invalid\babel-brazil.tex
-INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex\generic\babel\locale\invalid\babel-brazil.tex
-INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex\generic\babel\locale\invalid\babel-brazil.tex
+INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex\generic\babel\locale\pt\babel-brazilian.tex
+INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex\generic\babel\locale\pt\babel-brazilian.tex
+INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex\generic\babel\locale\pt\babel-brazilian.tex
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex\generic\babel\locale\pt\babel-pt-BR.ini
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex\latex\babel-portuges\brazilian.ldf
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex\latex\babel-portuges\brazilian.ldf
@@ -193,6 +193,13 @@ INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex\generic\stringenc\se-pd
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex\generic\stringenc\se-pdfdoc.def
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex\generic\stringenc\se-pdfdoc.def
 INPUT C:\Users\a542012\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
+INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecrm1095.tfm
+INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecbx1095.tfm
+INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecrm1728.tfm
+INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecbx1728.tfm
+INPUT c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.toc
+INPUT c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.toc
+INPUT c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.toc
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecbx1200.tfm
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr8.tfm
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr6.tfm
@@ -211,34 +218,51 @@ INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\s
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
-INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecrm1095.tfm
-INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecbx1095.tfm
-INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecrm1728.tfm
-INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecbx1728.tfm
-INPUT c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.toc
-INPUT c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.toc
-INPUT c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.toc
 OUTPUT c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.toc
+INPUT .\Images\acelerometro_dewesoft traduzido.png
+INPUT .\Images\acelerometro_dewesoft traduzido.png
+INPUT .\Images\acelerometro_dewesoft traduzido.png
+INPUT .\Images\acelerometro_dewesoft traduzido.png
+INPUT .\Images\acelerometro_dewesoft traduzido.png
+INPUT .\Images\acelerometro_dewesoft traduzido.png
+INPUT .\Images\acelerometro_dewesoft traduzido.png
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\tcrm1200.tfm
+INPUT .\Images\LDV traduzido.png
+INPUT .\Images\LDV traduzido.png
+INPUT .\Images\LDV traduzido.png
+INPUT .\Images\LDV traduzido.png
+INPUT .\Images\LDV traduzido.png
+INPUT .\Images\LDV traduzido.png
+INPUT .\Images\LDV traduzido.png
+INPUT .\Images\camerabased vibrometry traduzido.png
+INPUT .\Images\camerabased vibrometry traduzido.png
+INPUT .\Images\camerabased vibrometry traduzido.png
+INPUT .\Images\camerabased vibrometry traduzido.png
+INPUT .\Images\camerabased vibrometry traduzido.png
+INPUT .\Images\camerabased vibrometry traduzido.png
+INPUT .\Images\camerabased vibrometry traduzido.png
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecti1200.tfm
 INPUT c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.bbl
 INPUT c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.bbl
 INPUT c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.bbl
+INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ectt1200.tfm
 INPUT c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.aux
 INPUT c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.out
 INPUT c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.out
+INPUT C:\Users\a542012\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ectt1200.pk
+INPUT C:\Users\a542012\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ectt1200.pk
 INPUT C:\Users\a542012\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecti1200.pk
 INPUT C:\Users\a542012\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecti1200.pk
 INPUT C:\Users\a542012\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm1200.pk
 INPUT C:\Users\a542012\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm1200.pk
+INPUT C:\Users\a542012\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk
+INPUT C:\Users\a542012\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk
 INPUT C:\Users\a542012\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1728.pk
 INPUT C:\Users\a542012\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1728.pk
 INPUT C:\Users\a542012\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1095.pk
 INPUT C:\Users\a542012\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1095.pk
 INPUT C:\Users\a542012\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1095.pk
 INPUT C:\Users\a542012\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1095.pk
-INPUT C:\Users\a542012\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk
-INPUT C:\Users\a542012\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk
 INPUT C:\Users\a542012\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1200.pk
 INPUT C:\Users\a542012\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1200.pk
 INPUT C:\Users\a542012\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1440.pk
