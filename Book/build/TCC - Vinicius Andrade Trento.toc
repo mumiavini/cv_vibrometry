@@ -1,12 +1,49 @@
 \babel@toc {brazilian}{}\relax 
-\contentsline {section}{\numberline {1}Introdução}{4}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Contextualização}{4}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}Problema}{6}{subsection.1.2}%
-\contentsline {subsection}{\numberline {1.3}Objetivos}{6}{subsection.1.3}%
-\contentsline {subsection}{\numberline {1.4}Justificativa}{7}{subsection.1.4}%
-\contentsline {section}{\numberline {2}Materiais e Métodos}{7}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Equipamentos Utilizados}{7}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Modelagem e Simulação}{7}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}Procedimentos de ensaios}{7}{subsection.2.3}%
-\contentsline {section}{\numberline {3}Resultados e Discussão}{7}{section.3}%
-\contentsline {section}{\numberline {4}Considerações finais}{7}{section.4}%
+\contentsline {section}{\numberline {1}Introdução}{5}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Contextualização}{5}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Problema}{7}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Objetivos}{7}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Justificativa}{8}{subsection.1.4}%
+\contentsline {section}{\numberline {2}Fundamentação Teórica}{8}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Conceitos Fundamentais de Dinâmica e Vibrações Mecânicas}{8}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}Sistema massa-mola-amortecedor de 1 GDL}{8}{subsubsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.2}Vibração forçada e ressonância}{9}{subsubsection.2.1.2}%
+\contentsline {subsubsection}{\numberline {2.1.3}Sistemas de múltiplos graus de liberdade e análise modal}{10}{subsubsection.2.1.3}%
+\contentsline {subsubsection}{\numberline {2.1.4}Structural Health Monitoring (SHM) e assinatura vibracional}{10}{subsubsection.2.1.4}%
+\contentsline {subsection}{\numberline {2.2}Instrumentação Tradicional por Contato: Acelerômetros}{11}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Tecnologias de transdução}{11}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}Efeito de mass loading e demais limitações práticas}{12}{subsubsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.3}Vibrometria Óptica Sem Contato: Laser Doppler Vibrometry (LDV)}{12}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}Interferômetro heterodino e a célula de Bragg}{13}{subsubsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.2}Vantagens e limitações}{13}{subsubsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.4}Vibrometria por Imagem e Processamento Digital de Sinais}{14}{subsection.2.4}%
+\contentsline {subsubsection}{\numberline {2.4.1}Aquisição de vídeo e amostragem temporal}{14}{subsubsection.2.4.1}%
+\contentsline {subsubsection}{\numberline {2.4.2}Rastreamento por correspondência de padrões (\textit {template matching} / DIC)}{15}{subsubsection.2.4.2}%
+\contentsline {subsubsection}{\numberline {2.4.3}Análise espectral dos sinais de deslocamento}{16}{subsubsection.2.4.3}%
+\contentsline {subsubsection}{\numberline {2.4.4}Desafios práticos e fontes de erro}{16}{subsubsection.2.4.4}%
+\contentsline {subsection}{\numberline {2.5}Instrumentação Tradicional por Contato: Acelerômetros}{19}{subsection.2.5}%
+\contentsline {subsubsection}{\numberline {2.5.1}Princípio do transdutor inercial}{19}{subsubsection.2.5.1}%
+\contentsline {subsubsection}{\numberline {2.5.2}Tecnologias de transdução}{19}{subsubsection.2.5.2}%
+\contentsline {subsubsection}{\numberline {2.5.3}Efeito de mass loading}{19}{subsubsection.2.5.3}%
+\contentsline {subsubsection}{\numberline {2.5.4}Limitações práticas de montagem}{19}{subsubsection.2.5.4}%
+\contentsline {subsection}{\numberline {2.6}Vibrometria Óptica Sem Contato: Laser Doppler Vibrometry (LDV)}{19}{subsection.2.6}%
+\contentsline {subsubsection}{\numberline {2.6.1}Fundamentos do efeito Doppler óptico}{19}{subsubsection.2.6.1}%
+\contentsline {subsubsection}{\numberline {2.6.2}Interferômetro de Mach-Zehnder modificado}{19}{subsubsection.2.6.2}%
+\contentsline {subsubsection}{\numberline {2.6.3}Variantes}{19}{subsubsection.2.6.3}%
+\contentsline {subsubsection}{\numberline {2.6.4}Vantagens e limitações}{19}{subsubsection.2.6.4}%
+\contentsline {subsection}{\numberline {2.7}Vibrometria por Imagem e Processamento Digital de Sinais}{19}{subsection.2.7}%
+\contentsline {subsubsection}{\numberline {2.7.1}Formação de imagem e amostragem temporal}{19}{subsubsection.2.7.1}%
+\contentsline {subsubsection}{\numberline {2.7.2}Resolução espacial e detecção sub-pixel}{19}{subsubsection.2.7.2}%
+\contentsline {subsubsection}{\numberline {2.7.3}Princípio do método phase-based (PMM/PBOF)}{19}{subsubsection.2.7.3}%
+\contentsline {subsubsection}{\numberline {2.7.4}Filtros de Gabor e Pirâmide Orientável Complexa (CSP)}{19}{subsubsection.2.7.4}%
+\contentsline {subsubsection}{\numberline {2.7.5}Pipeline de processamento}{19}{subsubsection.2.7.5}%
+\contentsline {subsubsection}{\numberline {2.7.6}Motion Magnification (visualização)}{19}{subsubsection.2.7.6}%
+\contentsline {subsubsection}{\numberline {2.7.7}Métodos complementares (vale mencionar pra contextualizar)}{19}{subsubsection.2.7.7}%
+\contentsline {subsubsection}{\numberline {2.7.8}Desafios e fontes de erro}{19}{subsubsection.2.7.8}%
+\contentsline {subsubsection}{\numberline {2.7.9}Estado da arte e ferramentas Python}{19}{subsubsection.2.7.9}%
+\contentsline {section}{\numberline {3}Materiais e Métodos}{19}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Equipamentos Utilizados}{19}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Modelagem e Simulação}{19}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Procedimentos de ensaios}{19}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Resultados e Discussão}{19}{section.4}%
+\contentsline {section}{\numberline {5}Considerações finais}{19}{section.5}%

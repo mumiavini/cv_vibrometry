@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{Anna2026}
 Anna Li, Yongquan Su, Cheng Zhang, Jiachang Zhang, Hao Huang, Dalong Chen,
@@ -39,5 +39,46 @@ Tuniyazi Abudoureheman, Hayato Otsubo, Feiyue Wang, Kohei Shimasaki, and Idaku
 \newblock High-frame-rate camera-based vibration analysis for health monitoring
   of industrial robots across multiple postures.
 \newblock {\em Applied Sciences}, 15:12771, 2025.
+
+\bibitem{Downey2026}
+Austin R.~J. Downey and Laura Micheli.
+\newblock {\em Vibration Mechanics: A Practical Introduction for Mechanical,
+  Civil, and Aerospace Engineers}.
+\newblock University of South Carolina, Columbia, SC, USA, 2026.
+\newblock DOI: 10.31224/6182.
+
+\bibitem{Rao2010}
+Singiresu~S. Rao.
+\newblock {\em Mechanical Vibrations}.
+\newblock Prentice Hall, Upper Saddle River, NJ, USA, 5 edition, 2010.
+
+\bibitem{Ewins2000}
+D.~J. Ewins.
+\newblock {\em Modal Testing: Theory, Practice and Application}.
+\newblock Research Studies Press, Baldock, UK, 2 edition, 2000.
+
+\bibitem{Doebling1998}
+Scott~W. Doebling, Charles~R. Farrar, and Michael~B. Prime.
+\newblock A summary review of vibration-based damage identification methods.
+\newblock {\em The Shock and Vibration Digest}, 30(2):91--105, 1998.
+
+\bibitem{ASTM_E1049}
+{ASTM International}.
+\newblock Standard practices for cycle counting in fatigue analysis.
+\newblock Technical Report E1049-85(2017), ASTM International, West
+  Conshohocken, PA, USA, 2017.
+
+\bibitem{Miner1945}
+Milton~A. Miner.
+\newblock Cumulative damage in fatigue.
+\newblock {\em Journal of Applied Mechanics}, 12(3):A159--A164, 1945.
+
+\bibitem{Mhatre2026}
+Aatmaj Mhatre, Advait Nagvekar, Sonali Patil, Bhakti Palkar, Bharati~P.
+  Khedkar, and Dinesh Chawde.
+\newblock Visual vibration analysis for high amplitude movements using pixel
+  matching.
+\newblock In {\em Advances in Thermal System, Materials and Design
+  Engineering}, pages 271--275. CRC Press, 2026.
 
 \end{thebibliography}

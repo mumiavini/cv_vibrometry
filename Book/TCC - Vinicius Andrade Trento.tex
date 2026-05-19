@@ -33,7 +33,7 @@
 
 \author{
     \textbf{Autor:} Vinicius Andrade Trento \\[0.5cm]
-    % \textbf{Orientador:} Prof. Helio Emmendorf \\
+    \textbf{Orientador:} Prof. Helio Emmendoerfer \\
     % \textbf{Coorientador:} Prof. Nilson Barbieri
 }
 
@@ -129,6 +129,174 @@ O objetivo geral deste trabalho é explorar e validar a aplicação de metodolog
 
 \subsection{Justificativa}
 O desenvolvimento e a validação de um sistema de medição sem contato e de baixo custo justificam-se pela necessidade contínua de segurança operacional (\textit{safety margin}) em ensaios de durabilidade. Ao contornar as limitações físicas dos sensores tradicionais, a abordagem óptica viabiliza a criação de um histórico visual e contínuo de falhas mecânicas. Dessa forma, demonstra-se não apenas as vantagens dessa abordagem em comparação aos métodos tradicionais, mas também garante-se uma alta viabilidade econômica e mais ferramentas de análise forense para compreensão de modos de falha ao longo de todo o componente em teste.
+
+\section{Fundamentação Teórica}
+
+\subsection{Conceitos Fundamentais de Dinâmica e Vibrações Mecânicas}
+
+Antes de discutir transdutores e técnicas de medição, é necessário caracterizar o fenômeno a ser medido. Vibração mecânica é, em essência, a oscilação de um sistema em torno de uma posição de equilíbrio, sustentada pela troca contínua entre energia potencial (armazenada em elementos elásticos) e energia cinética (associada ao movimento de massa) \cite{Downey2026, Rao2010}. Presente em praticamente todo sistema mecânico real, o fenômeno pode ser desejável (peneiras vibratórias, lixadeiras orbitais) ou destrutivo (ressonâncias em estruturas aeronáuticas e civis), e seu correto modelamento é etapa fundamental no projeto e na manutenção de máquinas e estruturas.
+
+\subsubsection{Sistema massa-mola-amortecedor de 1 GDL}
+
+O modelo mais simples capaz de descrever um sistema vibratório é o de um grau de liberdade (1~GDL), composto por uma massa concentrada $m$, uma mola linear de rigidez $k$ e um amortecedor viscoso de coeficiente $c$. Aplicando-se a segunda lei de Newton, obtém-se a equação de movimento (EOM) na forma padrão \cite{Downey2026}:
+\begin{equation}
+    m\ddot{x}(t) + c\dot{x}(t) + k\,x(t) = F(t),
+    \label{eq:eom_1gdl}
+\end{equation}
+em que $F(t)$ é uma eventual força externa aplicada. No caso de vibração livre, $F(t) = 0$, e a Equação \ref{eq:eom_1gdl} se torna uma equação diferencial linear homogênea de segunda ordem, cuja resolução conduz aos parâmetros fundamentais do sistema: a frequência natural não amortecida $\omega_n = \sqrt{k/m}$ e a razão de amortecimento adimensional $\zeta = c/(2m\omega_n)$.
+
+Essa razão $\zeta$ classifica o sistema em três regimes de resposta livre (Tabela \ref{tab:casos_amortecimento}): subamortecido ($0 < \zeta < 1$), criticamente amortecido ($\zeta = 1$) e superamortecido ($\zeta > 1$) \cite{Downey2026}. A grande maioria dos sistemas mecânicos reais opera no regime subamortecido, em que a resposta livre toma a forma de uma oscilação decrescente exponencialmente:
+\begin{equation}
+    x(t) = A\,e^{-\zeta \omega_n t}\sin(\omega_d t + \phi),
+    \label{eq:resposta_subamortecida}
+\end{equation}
+com $\omega_d = \omega_n\sqrt{1 - \zeta^2}$ a frequência natural amortecida. Tanto $\omega_d$ quanto $\zeta$ podem ser extraídos diretamente de um sinal experimental de resposta livre, por meio de análise espectral e do decremento logarítmico, respectivamente \cite{Downey2026, Rao2010}.
+
+\begin{table}[H]
+    \centering
+    \caption{Regimes de resposta livre em função da razão de amortecimento $\zeta$.}
+    \label{tab:casos_amortecimento}
+    \begin{tabularx}{\textwidth}{l c X}
+        \toprule
+        \textbf{Regime} & \textbf{Razão de amortecimento} & \textbf{Natureza da resposta} \\
+        \midrule
+        Não amortecido          & $\zeta = 0$     & Oscilação harmônica permanente. \\
+        Subamortecido           & $0 < \zeta < 1$ & Oscilação com decaimento exponencial. \\
+        Criticamente amortecido & $\zeta = 1$     & Retorno ao equilíbrio sem oscilação, no menor tempo possível. \\
+        Superamortecido         & $\zeta > 1$     & Retorno lento ao equilíbrio, sem oscilação. \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsubsection{Vibração forçada e ressonância}
+
+Quando o sistema é submetido a uma excitação harmônica do tipo $F(t) = F_0\cos(\omega t)$, a solução da EOM é composta por uma parcela transitória, que se extingue após alguns ciclos, e uma parcela permanente que governa o comportamento de longo prazo. A amplitude da resposta permanente é dada por \cite{Downey2026}:
+\begin{equation}
+    X = \frac{F_0/k}{\sqrt{(1 - r^2)^2 + (2\zeta r)^2}},
+    \label{eq:amplitude_forcada}
+\end{equation}
+em que $r = \omega/\omega_n$ é a razão de frequências adimensional. A relação entre a amplitude normalizada e $r$ define a \textbf{Função de Resposta em Frequência} (FRF) do sistema, ferramenta central da análise vibracional experimental.
+
+A condição de \textbf{ressonância} ocorre quando $\omega$ se aproxima de $\omega_n$ ($r \approx 1$). No caso não amortecido, a Equação \ref{eq:amplitude_forcada} diverge, e mesmo em sistemas com amortecimento real a amplitude pode atingir valores várias ordens de grandeza maiores do que aqueles observados fora da banda de ressonância. Esse fenômeno é a causa raiz de inúmeras falhas estruturais documentadas e justifica a necessidade de mapear as frequências naturais antes de colocar um componente em operação \cite{Downey2026, Rao2010}.
+
+No contexto deste trabalho, o caso da \textbf{excitação de base} é particularmente relevante, pois corresponde ao cenário dos testes dinâmicos de bancada com excitadores eletromagnéticos (\textit{shakers}), nos quais a peça em teste é montada sobre uma plataforma cuja aceleração é controlada \cite{Downey2026}.
+
+\subsubsection{Sistemas de múltiplos graus de liberdade e análise modal}
+
+Estruturas reais raramente são adequadamente representadas por um único grau de liberdade. Quando duas ou mais coordenadas independentes são necessárias para descrever a configuração do sistema, fala-se em \textbf{sistemas de múltiplos graus de liberdade} (MGDL). A EOM, agora vetorial, é convenientemente expressa em forma matricial \cite{Downey2026, Rao2010}:
+\begin{equation}
+    \mathbf{M}\,\ddot{\vec{x}}(t) + \mathbf{C}\,\dot{\vec{x}}(t) + \mathbf{K}\,\vec{x}(t) = \vec{F}(t),
+    \label{eq:eom_mdof}
+\end{equation}
+em que $\mathbf{M}$, $\mathbf{C}$ e $\mathbf{K}$ são as matrizes de massa, amortecimento e rigidez do sistema. Para o caso não amortecido em vibração livre, a substituição de uma solução harmônica resulta em um problema de autovalor cuja solução fornece pares de \textbf{frequências naturais} $\omega_i$ e \textbf{modos de vibrar} $\vec{u}_i$ (\textit{mode shapes}) \cite{Downey2026}.
+
+A interpretação física é central para o presente trabalho: um modo de vibrar não representa o deslocamento absoluto do sistema, mas sim o \textit{padrão espacial} de oscilação que a estrutura assume naturalmente quando excitada na frequência correspondente. A obtenção experimental desses pares constitui a \textbf{análise modal experimental} (\textit{Experimental Modal Analysis}), área consolidada da dinâmica estrutural \cite{Ewins2000}. É justamente nesse ponto que se manifesta a maior limitação dos métodos por contato: como os acelerômetros fornecem informação \textit{pontual}, a reconstrução de um modo de vibrar com boa resolução espacial exige um grande número de sensores ou múltiplas montagens sequenciais. A vibrometria por imagem, em contraposição, oferece naturalmente a capacidade de campo completo (\textit{full-field}), motivando sua investigação como complemento aos métodos consagrados \cite{robotcamera2025}.
+
+\subsubsection{Structural Health Monitoring (SHM) e assinatura vibracional}
+
+O \textit{Structural Health Monitoring} (SHM) consiste no processo contínuo ou periódico de aquisição, processamento e interpretação de dados oriundos de uma estrutura, com o objetivo de detectar, localizar e caracterizar danos antes que estes evoluam para falha catastrófica \cite{Doebling1998}. No contexto vibracional, o SHM se apoia em uma premissa direta: como os parâmetros modais (frequências naturais, modos de vibrar e razões de amortecimento) são funções das propriedades físicas do sistema (massa, rigidez e amortecimento), alterações nessas propriedades --- introduzidas por trincas, perda de seção resistente, afrouxamento de fixações ou desgaste --- resultam em mudanças mensuráveis nas propriedades modais \cite{Doebling1998}.
+
+Considerando o sistema de 1~GDL, uma perda localizada de rigidez $\Delta k < 0$ desloca a frequência natural para $\omega_n' = \sqrt{(k + \Delta k)/m} < \omega_n$, ou seja, danos estruturais tendem a \textbf{reduzir} as frequências naturais observadas, ao passo que folgas e trincas tendem a aumentar a razão de amortecimento $\zeta$, alargando os picos da FRF. Esses dois efeitos constituem a base da chamada \textbf{assinatura vibracional} do componente. Em sistemas de MGDL, indicadores adicionais ficam disponíveis, como variações nas componentes dos modos de vibrar (especialmente em suas curvaturas) e alterações na FRF em bandas de frequência específicas \cite{Doebling1998}, todos mais sensíveis a danos localizados do que o simples deslocamento de frequência natural.
+
+Como aplicação a jusante dessa cadeia, os históricos temporais de deslocamento obtidos por qualquer método de medição (incluindo a vibrometria óptica investigada neste trabalho) podem alimentar análises clássicas de fadiga, em que ciclos de carregamento são contabilizados pelo método de \textit{rainflow counting} \cite{ASTM_E1049} e convertidos em dano acumulado por meio da regra linear de Palmgren-Miner \cite{Miner1945}. Essa ponte conecta a medição de vibrações a estimativas de vida útil, ampliando o escopo de aplicação da técnica em ensaios de durabilidade.
+
+\subsection{Instrumentação Tradicional por Contato: Acelerômetros}
+
+Os acelerômetros, já apresentados na contextualização, são transdutores inerciais que convertem aceleração mecânica em sinal elétrico. Internamente, todos compartilham um mesmo princípio físico: um sistema massa-mola-amortecedor em miniatura, no qual uma massa sísmica $m_s$ aplica uma força inercial sobre um elemento sensor à medida que a base do dispositivo é acelerada \cite{Downey2026}. Pela segunda lei de Newton, essa força é proporcional à aceleração da base, e a deformação resultante no elemento sensor é convertida em sinal elétrico mensurável. A faixa útil de operação do sensor é necessariamente bem abaixo de sua frequência natural interna, justamente para que a massa sísmica acompanhe fielmente o movimento da base.
+
+\subsubsection{Tecnologias de transdução}
+
+A natureza física do elemento sensor define a tecnologia de transdução e, consequentemente, as características e limitações do acelerômetro \cite{PiezoAccelerometer2023}:
+
+\begin{itemize}
+    \item \textbf{Piezoelétricos:} utilizam cristais (quartzo) ou cerâmicas polarizadas (PZT) que geram carga elétrica proporcional à força aplicada. Apresentam ampla faixa dinâmica, robustez e frequência de operação que pode chegar à ordem de dezenas de kHz, sendo o tipo predominante em aplicações industriais de média e alta frequência \cite{PiezoAccelerometer2023, aceletrometroDewesoft2025}. Por exigirem força dinâmica para gerar carga, não medem aceleração estática (DC).
+    \item \textbf{Piezorresistivos:} empregam extensômetros em ponte de Wheatstone cuja resistência varia com a deformação. Medem componente DC e respondem bem a impactos e baixas frequências.
+    \item \textbf{Capacitivos (tipicamente MEMS):} baseiam-se na variação de capacitância entre placas separadas pela massa sísmica. Permitem medição DC, têm baixo custo e dimensões reduzidas, mas com faixa dinâmica e frequência de operação mais limitadas \cite{Anna2026}.
+    \item \textbf{Ressonantes:} a grandeza medida é o deslocamento da frequência de ressonância do elemento sensor causado pelo carregamento inercial. Oferecem altíssima precisão e são empregados em sistemas de navegação inercial.
+\end{itemize}
+
+\subsubsection{Efeito de mass loading e demais limitações práticas}
+
+Apesar de consagrados, os acelerômetros impõem restrições importantes que motivam a busca por alternativas sem contato. A principal delas é o chamado \textbf{efeito de \textit{mass loading}}: ao ser fixado à peça em teste, o sensor adiciona massa ao sistema e desloca sua frequência natural local. Para uma massa modal efetiva $m_{ef}$ no ponto de montagem, a frequência natural se modifica aproximadamente para
+\begin{equation}
+    \omega_n' = \omega_n \sqrt{\frac{m_{ef}}{m_{ef} + m_s}},
+    \label{eq:mass_loading}
+\end{equation}
+em que $m_s$ é a massa total adicionada (sensor mais cabeamento e elemento de fixação). Para estruturas leves --- pás de rotores, painéis automotivos finos, componentes aeronáuticos --- essa perturbação pode ser significativa e distorcer a medição da resposta natural \cite{robotcamera2025}.
+
+Além do \textit{mass loading}, outras limitações práticas comprometem a aplicação dos acelerômetros em determinados cenários: o método de fixação (parafuso, cola, cera ou ímã) define uma frequência de corte adicional acima da qual o acoplamento mecânico deixa de ser rígido; o cabeamento introduz ruído triboelétrico e está sujeito a interferências eletromagnéticas; há restrições térmicas (a temperatura de Curie limita o uso de elementos piezoelétricos); e, finalmente, ensaios destrutivos colocam o sensor em risco de perda, com custos relevantes. Em muitos componentes críticos, o acesso físico simplesmente impede a instalação adequada do transdutor.
+
+\subsection{Vibrometria Óptica Sem Contato: Laser Doppler Vibrometry (LDV)}
+
+A Vibrometria por Laser Doppler (\textit{Laser Doppler Vibrometry} -- LDV) é a técnica óptica sem contato mais consagrada para medição de vibrações de alta precisão \cite{LDVpolytec2006}. Seu princípio físico se baseia no \textbf{efeito Doppler aplicado à luz}: quando um feixe coerente é refletido por uma superfície em movimento com velocidade $v$ na direção da propagação, a frequência da luz refletida sofre um deslocamento dado por
+\begin{equation}
+    \Delta f = \frac{2v}{\lambda},
+    \label{eq:doppler}
+\end{equation}
+em que $\lambda$ é o comprimento de onda do laser empregado (tipicamente $\lambda \approx 633$~nm para lasers HeNe). Medindo-se $\Delta f$, recupera-se diretamente a velocidade instantânea do ponto iluminado.
+
+\subsubsection{Interferômetro heterodino e a célula de Bragg}
+
+Para detectar um deslocamento de frequência tão pequeno comparado à frequência óptica da luz, utiliza-se um \textbf{interferômetro}, geralmente em configuração do tipo Mach-Zehnder. O feixe original é dividido em dois: um feixe de medição, que incide na peça em teste e retorna modulado pelo efeito Doppler, e um feixe de referência, que percorre um caminho óptico interno conhecido. A recombinação dos dois feixes em um fotodetector gera um padrão de interferência cuja frequência de batimento contém a informação Doppler da peça \cite{LDVpolytec2006}.
+
+Para resolver a ambiguidade de sinal da velocidade --- isto é, distinguir se a superfície se aproxima ou se afasta do vibrômetro --- é introduzido um deslocamento de frequência conhecido (tipicamente de 30--40~MHz) em um dos feixes por meio de uma \textbf{célula de Bragg} (modulador acusto-óptico). Esse arranjo, conhecido como \textit{detecção heterodina}, gera um sinal portador no fotodetector cuja modulação em frequência corresponde diretamente à velocidade da peça, permitindo demodulação eletrônica precisa e direcional \cite{LDVpolytec2006}.
+
+\subsubsection{Vantagens e limitações}
+
+A LDV oferece resolução de velocidade da ordem de nanômetros por segundo, banda larga (de DC até a faixa de MHz) e, por ser uma medição sem contato, elimina por completo o efeito de \textit{mass loading} \cite{LDVpolytec2006}. Por essas razões, é considerada o padrão-ouro para validação de outras técnicas de medição vibracional. Suas principais limitações, no entanto, são significativas para aplicações industriais: a medição é \textit{espacialmente discreta} (ponto a ponto), o que torna a reconstrução de modos de vibrar lenta quando feita por varredura sequencial; o custo de aquisição e manutenção de sistemas comerciais é elevado; o setup experimental é complexo, exigindo alinhamento óptico cuidadoso, superfícies com refletividade adequada (frequentemente preparadas com \textit{spray} retrorrefletivo) e estabilidade do caminho óptico; e a técnica é sensível a movimentos de corpo rígido da própria estrutura e a vibrações do suporte do equipamento.
+
+Essas limitações --- particularmente o custo e a natureza pontual da medição --- abrem espaço para abordagens alternativas que mantenham a vantagem do não contato, mas com maior cobertura espacial e menor custo de implementação, motivando a investigação da vibrometria por imagem apresentada a seguir.
+
+\subsection{Vibrometria por Imagem e Processamento Digital de Sinais}
+
+A vibrometria por imagem utiliza câmeras de vídeo convencionais como sensores de vibração, extraindo o movimento de pontos de interesse na cena por meio de algoritmos de processamento digital de imagens. Comparada à LDV, essa abordagem é de baixo custo, de implementação mais simples e, principalmente, capaz de fornecer medições \textit{full-field}: cada região da peça visível no quadro pode ser tratada como um sensor virtual independente \cite{robotcamera2025, Mhatre2026}. Estudos recentes demonstram que sistemas baseados em câmera podem atingir precisão da ordem de micrômetros em frequências de até centenas de hertz, dependendo da configuração óptica e do algoritmo empregado \cite{robotcamera2025}.
+
+A presente seção descreve o pipeline de medição que será implementado neste trabalho, organizado em quatro blocos: aquisição e amostragem do vídeo, rastreamento de regiões de interesse por correspondência de padrões (\textit{template matching}), conversão dos sinais de deslocamento para o domínio da frequência, e mapeamento dos principais desafios práticos do método.
+
+\subsubsection{Aquisição de vídeo e amostragem temporal}
+
+A câmera atua como o transdutor primário do sistema, convertendo o movimento físico da peça em uma sequência discreta de quadros. Para uma taxa de captura de $F$ quadros por segundo (\textit{frames per second}, fps), o intervalo de amostragem entre quadros consecutivos é $\Delta t = 1/F$ \cite{robotcamera2025}. Pelo \textbf{teorema de amostragem de Nyquist}, a maior frequência vibracional que pode ser identificada sem \textit{aliasing} é $F/2$; na prática, recomenda-se operar com $F$ ao menos 5 a 10 vezes superior à frequência máxima de interesse, para garantir resolução adequada no espectro.
+
+Dois parâmetros adicionais da câmera merecem atenção. O \textbf{tempo de exposição} deve ser curto o suficiente para que cada quadro registre o movimento como praticamente congelado; exposições longas introduzem borramento (\textit{motion blur}) que atenua artificialmente a amplitude medida. A relação $\Delta x_{blur} \approx v \cdot t_{exp}$, em que $v$ é a velocidade instantânea do ponto e $t_{exp}$ o tempo de exposição, fornece uma estimativa direta desse efeito. Já o \textbf{tipo de obturador} é crítico: o obturador global (\textit{global shutter}) captura todo o sensor simultaneamente, enquanto o obturador de rolagem (\textit{rolling shutter}) captura linha a linha, introduzindo distorções geométricas em vibrações rápidas. Para vibrometria, o obturador global é fortemente preferido.
+
+A calibração espacial converte deslocamentos medidos em pixels para unidades físicas (mm/pixel), tipicamente por meio de um objeto de referência de dimensões conhecidas posicionado no mesmo plano da peça. Em \cite{robotcamera2025}, por exemplo, foi obtida resolução espacial de 0,6~mm/pixel com câmera a 1,2~m da peça e lente de 20~mm de distância focal.
+
+\subsubsection{Rastreamento por correspondência de padrões (\textit{template matching} / DIC)}
+
+O método central a ser implementado é o \textbf{rastreamento por correspondência de padrões}, conhecido em sua forma mais geral como \textit{Digital Image Correlation} (DIC). A ideia é simples e robusta: o usuário (ou um algoritmo automático) define no primeiro quadro do vídeo uma ou mais \textbf{regiões de interesse} (ROIs, do inglês \textit{Regions of Interest}), também chamadas de áreas de interesse. Cada ROI é uma pequena janela retangular de pixels, centrada em um ponto característico da peça --- tipicamente uma quina, uma marca de alto contraste, ou um padrão de manchas (\textit{speckle pattern}) aplicado propositalmente à superfície \cite{Mhatre2026}.
+
+A cada novo quadro, o algoritmo busca, em uma vizinhança limitada $d$ em torno da posição anterior da ROI, a sub-imagem que melhor se assemelha ao padrão de referência. A similaridade é tipicamente quantificada por uma métrica como a soma das diferenças absolutas (\textit{Sum of Absolute Differences}, SAD), a soma das diferenças quadráticas (\textit{Sum of Squared Differences}, SSD) ou o coeficiente de correlação normalizada \cite{Mhatre2026}. A posição que minimiza a diferença (ou maximiza a correlação) é tomada como a nova localização da ROI naquele quadro. Repetindo o procedimento ao longo de todo o vídeo, obtém-se a trajetória $(x(t), y(t))$ de cada ROI ao longo do tempo, conforme ilustrado na Figura \ref{fig:camerabased_vibrometry}.
+
+Formalmente, para $N$ pontos de medição $\vec{x}^i = (x^i, y^i)$ definidos no quadro de referência $I_R$, o vetor deslocamento $\vec{d}^i(t)$ no quadro $I(x,y,t)$ é estimado por uma função do tipo \cite{robotcamera2025}:
+\begin{equation}
+    \vec{d}^i(t) = \mathrm{DIC}\!\left(I(x,y,t),\; I_R(x,y);\; \vec{x}^i\right), \quad i = 0, \ldots, N-1.
+    \label{eq:dic}
+\end{equation}
+A restrição da busca a uma região limitada de tamanho $d$ em torno da posição anterior --- e não em todo o quadro --- reduz drasticamente o custo computacional e é apropriada para vibrações nas quais o deslocamento entre quadros consecutivos é pequeno \cite{Mhatre2026}. Para suprimir movimentos espúrios da câmera ou do tripé, é prática comum incluir ao menos uma ROI fixada a um ponto rígido do fundo da cena, cujo movimento aparente é subtraído das demais ROIs como referência \cite{Mhatre2026, robotcamera2025}.
+
+A grande vantagem desse arranjo é a capacidade nativa de medição multiponto: dado que cada ROI é processada independentemente, dezenas ou centenas de pontos podem ser monitorados simultaneamente no mesmo vídeo, simulando um arranjo virtual de sensores que seria proibitivo de implementar com acelerômetros físicos \cite{robotcamera2025}. A precisão alcançável pelo DIC depende de fatores como o tamanho da ROI, a riqueza de textura local, a iluminação e a relação sinal-ruído da câmera, mas valores da ordem de micrômetros são reportados na literatura recente em configurações comparáveis à proposta neste trabalho \cite{robotcamera2025}.
+
+\subsubsection{Análise espectral dos sinais de deslocamento}
+
+Concluído o rastreamento, cada ROI produz dois sinais discretos no tempo, $x(t_k)$ e $y(t_k)$, amostrados à taxa $F$ da câmera. Esses sinais são equivalentes, do ponto de vista da análise dinâmica, aos sinais que seriam fornecidos por sensores de deslocamento posicionados em cada ROI. A análise dos sinais segue o procedimento clássico da análise vibracional experimental.
+
+No \textbf{domínio do tempo}, a inspeção direta dos sinais permite identificar amplitudes, decaimentos exponenciais (com extração da razão de amortecimento $\zeta$ pelo decremento logarítmico) e correlação temporal entre diferentes pontos da estrutura. No \textbf{domínio da frequência}, a \textbf{Transformada Rápida de Fourier} (\textit{Fast Fourier Transform}, FFT) é aplicada para identificar as componentes espectrais dominantes, revelando as frequências naturais da peça e suas respectivas amplitudes modais \cite{Mhatre2026}.
+
+Para ensaios em que a frequência de excitação varia ao longo do tempo (\textit{frequency sweeps}, partidas e paradas de máquinas), a \textbf{Transformada de Fourier de Tempo Curto} (\textit{Short-Time Fourier Transform}, STFT) é mais apropriada, pois fornece um espectrograma --- representação conjunta tempo-frequência --- que permite acompanhar a evolução das componentes espectrais ao longo do ensaio \cite{robotcamera2025}. Quando o sinal de excitação aplicado à base é conhecido (por exemplo, a partir de um acelerômetro montado no \textit{shaker}), pode-se ainda calcular a FRF experimental ponto a ponto como a razão entre o espectro de saída em cada ROI e o espectro de entrada na excitação, conforme aplicado em \cite{robotcamera2025} para identificação de ressonâncias estruturais em manipuladores robóticos.
+
+\subsubsection{Desafios práticos e fontes de erro}
+
+A vibrometria por imagem não está livre de limitações, e o desempenho do sistema depende de um conjunto de cuidados experimentais. Os principais desafios encontrados na literatura e a serem tratados neste trabalho são:
+
+\begin{itemize}
+    \item \textbf{Iluminação:} variações temporais na intensidade luminosa podem ser interpretadas pelo algoritmo de correspondência como movimento aparente. A solução é iluminação contínua e estável (LED de qualidade, evitando fontes com modulação PWM) e, quando necessário, pré-processamento dos quadros para normalização de intensidade \cite{robotcamera2025}.
+    \item \textbf{Movimento da câmera:} qualquer vibração do tripé ou do suporte da câmera contamina todas as ROIs simultaneamente. A mitigação envolve fixação rígida do suporte e, como já mencionado, a subtração do movimento de uma ROI de referência fixada ao fundo \cite{Mhatre2026}.
+    \item \textbf{Limite de Nyquist e \textit{aliasing}:} vibrações de frequência superior a $F/2$ produzem componentes espectrais espúrias. Esse limite define a escolha da câmera para a aplicação pretendida; em \cite{robotcamera2025}, por exemplo, uma câmera a 1000~fps permitiu análise confiável até cerca de 125~Hz, com perda de qualidade nas faixas extremas devido a outros fatores (rigidez estrutural na base e \textit{backlash} no topo).
+    \item \textbf{Textura da superfície:} regiões de baixa textura (superfícies lisas e uniformes) oferecem pouca informação para o algoritmo de correspondência. A aplicação de um \textit{speckle pattern} artificial --- padrão aleatório de manchas pintado ou impresso sobre a peça --- é prática consolidada e foi utilizada inclusive em \cite{robotcamera2025} para melhorar a robustez do rastreamento.
+    \item \textbf{Custo computacional:} o processamento de vídeos longos em alta resolução com muitas ROIs pode ser exigente. A restrição da busca a uma vizinhança $d$ \cite{Mhatre2026} e a paralelização (em GPU, quando disponível \cite{robotcamera2025}) são as estratégias usuais para garantir desempenho compatível com a aplicação.
+\end{itemize}
+
+Mesmo com esses cuidados, a vibrometria por imagem não substitui integralmente os métodos tradicionais. Ela se posiciona como um complemento de alto valor, particularmente em cenários em que o \textit{mass loading} é proibitivo, em que o número de pontos de medição desejado é grande, ou em que se busca informação espacial de modos de vibrar para fins de SHM e análise forense de falhas.
 
 \section{Materiais e Métodos}
 
