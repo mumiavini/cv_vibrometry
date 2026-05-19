@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex build/TCC - Vinicius Andrade Trento"] 1779151751.83092 "build/TCC - Vinicius Andrade Trento.aux" "build/TCC - Vinicius Andrade Trento.bbl" "build/TCC - Vinicius Andrade Trento" 1779151782.3546 0
+["bibtex build/TCC - Vinicius Andrade Trento"] 1779157133.40646 "build/TCC - Vinicius Andrade Trento.aux" "build/TCC - Vinicius Andrade Trento.bbl" "build/TCC - Vinicius Andrade Trento" 1779157159.15849 0
   "./referencias.bib" 1779151497 8149 d4fe22ea1c4a617880279ce3154dd285 ""
   "C:/Users/trent/AppData/Local/Programs/MiKTeX/bibtex/bst/bibtex/unsrt.bst" 1291864736 18030 1376b4b231b50c66211e47e42eda2875 ""
-  "build/TCC - Vinicius Andrade Trento.aux" 1779151781 11372 1cf0740a39584998a6cdad680e4a9d54 "pdflatex"
+  "build/TCC - Vinicius Andrade Trento.aux" 1779157158 8271 adb7e72ed0b65d54fed2fe455829639a "pdflatex"
   (generated)
   "build/TCC - Vinicius Andrade Trento.bbl"
   "build/TCC - Vinicius Andrade Trento.blg"
   (rewritten before read)
-["pdflatex"] 1779151752.40685 "c:/soft/cv_vibrometry/Book/TCC - Vinicius Andrade Trento.tex" "build/TCC - Vinicius Andrade Trento.pdf" "TCC - Vinicius Andrade Trento" 1779151782.3556 0
+["pdflatex"] 1779157133.84797 "c:/soft/cv_vibrometry/Book/TCC - Vinicius Andrade Trento.tex" "build/TCC - Vinicius Andrade Trento.pdf" "TCC - Vinicius Andrade Trento" 1779157159.15926 0
   "C:/Users/trent/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1777148500 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/trent/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbi1200.pk" 1766080905 42728 47276077e03f5da27b45e74a6de39095 ""
   "C:/Users/trent/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1095.pk" 1765150610 28976 6ef7f8fe44cd5522b9445281bceef8b7 ""
@@ -145,12 +145,12 @@
   "Images/LogoPUCPR.png" 1778466201 80937 e26e406b20407156eb2c442ccd09b6fa ""
   "Images/acelerometro_dewesoft traduzido.png" 1778466201 4480997 d08dbc88601dd3b085923e749fe4563a ""
   "Images/camerabased vibrometry traduzido.png" 1778466201 4550121 e9de3d159624fc3c98ae2d841845ed0b ""
-  "TCC - Vinicius Andrade Trento.tex" 1779151719 37477 0e1d7ebb6d01a1e75f6bde517e8f304f ""
-  "build/TCC - Vinicius Andrade Trento.aux" 1779151781 11372 1cf0740a39584998a6cdad680e4a9d54 "pdflatex"
-  "build/TCC - Vinicius Andrade Trento.bbl" 1779151752 3270 3ca75a70978f7c4eaafa5b14033131a2 "bibtex build/TCC - Vinicius Andrade Trento"
-  "build/TCC - Vinicius Andrade Trento.out" 1779151781 5041 0bb7b7c2056516e8e70528f01bde11a7 "pdflatex"
-  "build/TCC - Vinicius Andrade Trento.toc" 1779151781 5247 1646698b2e0ccd32eb1ee7d12871bab0 "pdflatex"
-  "c:/soft/cv_vibrometry/Book/TCC - Vinicius Andrade Trento.tex" 1779151719 37477 0e1d7ebb6d01a1e75f6bde517e8f304f ""
+  "TCC - Vinicius Andrade Trento.tex" 1779155103 36370 91dce737ce0c970e185aded7715c60d8 ""
+  "build/TCC - Vinicius Andrade Trento.aux" 1779157158 8271 adb7e72ed0b65d54fed2fe455829639a "pdflatex"
+  "build/TCC - Vinicius Andrade Trento.bbl" 1779157133 3270 3ca75a70978f7c4eaafa5b14033131a2 "bibtex build/TCC - Vinicius Andrade Trento"
+  "build/TCC - Vinicius Andrade Trento.out" 1779157158 2811 2c9fa60a679cbe8bd477267109b08ff0 "pdflatex"
+  "build/TCC - Vinicius Andrade Trento.toc" 1779157158 2967 a056bc31da9b123e6e5fff5facb8bff5 "pdflatex"
+  "c:/soft/cv_vibrometry/Book/TCC - Vinicius Andrade Trento.tex" 1779155103 36370 91dce737ce0c970e185aded7715c60d8 ""
   (generated)
   "build/TCC - Vinicius Andrade Trento.aux"
   "build/TCC - Vinicius Andrade Trento.log"
