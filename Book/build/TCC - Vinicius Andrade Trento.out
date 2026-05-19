@@ -17,7 +17,7 @@
 \BOOKMARK [3][-]{subsubsection.2.3.2}{Vantagens\040e\040limita\347\365es}{subsection.2.3}% 17
 \BOOKMARK [2][-]{subsection.2.4}{Vibrometria\040por\040Imagem\040e\040Processamento\040Digital\040de\040Sinais}{section.2}% 18
 \BOOKMARK [3][-]{subsubsection.2.4.1}{Aquisi\347\343o\040de\040v\355deo\040e\040amostragem\040temporal}{subsection.2.4}% 19
-\BOOKMARK [3][-]{subsubsection.2.4.2}{Rastreamento\040por\040correspond\352ncia\040de\040padr\365es\040\(template\040matching\040/\040DIC\)}{subsection.2.4}% 20
+\BOOKMARK [3][-]{subsubsection.2.4.2}{Estimativa\040de\040movimento\040baseada\040em\040fase\040com\040filtros\040de\040Gabor}{subsection.2.4}% 20
 \BOOKMARK [3][-]{subsubsection.2.4.3}{An\341lise\040espectral\040dos\040sinais\040de\040deslocamento}{subsection.2.4}% 21
 \BOOKMARK [3][-]{subsubsection.2.4.4}{Desafios\040pr\341ticos\040e\040fontes\040de\040erro}{subsection.2.4}% 22
 \BOOKMARK [1][-]{section.3}{Materiais\040e\040M\351todos}{}% 23

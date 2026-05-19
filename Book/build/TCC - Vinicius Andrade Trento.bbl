@@ -73,6 +73,25 @@ Milton~A. Miner.
 \newblock Cumulative damage in fatigue.
 \newblock {\em Journal of Applied Mechanics}, 12(3):A159--A164, 1945.
 
+\bibitem{AgilentAN243-3}
+{Agilent Technologies}.
+\newblock The fundamentals of modal testing.
+\newblock Application Note 243-3, Agilent Technologies, Palo Alto, CA, USA,
+  2000.
+
+\bibitem{Serridge1987}
+Mark Serridge and Torben~R. Licht.
+\newblock {\em Piezoelectric Accelerometers and Vibration Preamplifiers: Theory
+  and Application Handbook}.
+\newblock Brüel \& Kjær, Nærum, Denmark, 1987.
+
+\bibitem{OptometHeNe}
+{Optomet GmbH}.
+\newblock Laser sources for precision measurements: Helium-neon laser.
+\newblock \url{https://www.optomet.com/knowledge-technology/laser-source/},
+  2024.
+\newblock Acessado em: 19 mai. 2026.
+
 \bibitem{Mhatre2026}
 Aatmaj Mhatre, Advait Nagvekar, Sonali Patil, Bhakti Palkar, Bharati~P.
   Khedkar, and Dinesh Chawde.
@@ -80,5 +99,30 @@ Aatmaj Mhatre, Advait Nagvekar, Sonali Patil, Bhakti Palkar, Bharati~P.
   matching.
 \newblock In {\em Advances in Thermal System, Materials and Design
   Engineering}, pages 271--275. CRC Press, 2026.
+
+\bibitem{LavatelliZappa2017}
+Alberto Lavatelli and Emanuele Zappa.
+\newblock A displacement uncertainty model for 2-d {DIC} measurement under
+  motion blur conditions.
+\newblock {\em IEEE Transactions on Instrumentation and Measurement},
+  66(3):451--459, 2017.
+
+\bibitem{Wadhwa2013}
+Neal Wadhwa, Michael Rubinstein, Fr{\'e}do Durand, and William~T. Freeman.
+\newblock Phase-based video motion processing.
+\newblock {\em ACM Transactions on Graphics}, 32(4):80:1--80:10, 2013.
+
+\bibitem{ZhangLogGabor2024}
+Wendi Zhang, Xiaojian Wang, Hongguang Li, Jiwen Zhou, Zhong Luo, and Guang
+  Meng.
+\newblock Vibration measurement from an adaptive phase-based motion estimation
+  using parameter optimised log-{Gabor} filter.
+\newblock {\em Measurement}, 224:113812, 2024.
+
+\bibitem{WangLogGabor2022}
+Yongmeng Wang, Xinxin Liu, Liang Cheng, Yujie Cong, Cheng Cao, and Hao Wu.
+\newblock Phase-based motion estimation in complex environments using the
+  illumination-invariant log-{Gabor} filter.
+\newblock {\em Mechanical Systems and Signal Processing}, 186:109847, 2022.
 
 \end{thebibliography}
