@@ -21,9 +21,10 @@
 \contentsline {subsubsection}{\numberline {2.4.2}Estimativa de movimento baseada em fase com filtros de Gabor}{18}{subsubsection.2.4.2}%
 \contentsline {subsubsection}{\numberline {2.4.3}Análise espectral dos sinais de deslocamento}{20}{subsubsection.2.4.3}%
 \contentsline {subsubsection}{\numberline {2.4.4}Desafios práticos e fontes de erro}{20}{subsubsection.2.4.4}%
-\contentsline {section}{\numberline {3}Materiais e Métodos}{22}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Equipamentos Utilizados}{22}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Modelagem e Simulação}{22}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Procedimentos de ensaios}{22}{subsection.3.3}%
+\contentsline {section}{\numberline {3}Materiais e Métodos}{21}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Produto Mínimo Viavel (MVP)}{21}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Equipamentos Utilizados}{22}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Modelagem e Simulação}{22}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Procedimentos de ensaios}{22}{subsection.3.4}%
 \contentsline {section}{\numberline {4}Resultados e Discussão}{22}{section.4}%
 \contentsline {section}{\numberline {5}Considerações finais}{22}{section.5}%
