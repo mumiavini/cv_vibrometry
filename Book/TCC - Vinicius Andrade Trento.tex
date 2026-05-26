@@ -1,85 +1,122 @@
-\documentclass[a4paper,12pt]{article}
+%==============================================================================
+%  ARTIGO CIENTIFICO - Concepcao e Design de Projeto Transformador
+%  Engenharia Mecanica - PUCPR
+%  Layout adaptado a partir do template Word fornecido:
+%    - A4, margens ~2 cm, Times New Roman
+%    - Cabecalho em todas as paginas
+%    - Titulo / autores / afiliacao / resumo / palavras-chave em 1 coluna
+%    - Corpo do artigo em 2 colunas
+%    - Citacoes numericas estilo [1]
+%==============================================================================
+\documentclass[a4paper,10pt,twocolumn]{article}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[brazilian]{babel}
+\usepackage[brazilian,provide=*]{babel}  % 'provide=*' carrega o pt-BR via babel moderno
+\usepackage{mathptmx}        % Times New Roman (texto + matematica)
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{siunitx}
+
+% ----- Geometria da pagina (espelha o template: A4, margens ~2 cm) ----------
 \usepackage{geometry}
-\geometry{a4paper, left=3cm, right=2cm, top=3cm, bottom=2cm}
+\geometry{a4paper, left=2cm, right=2cm, top=2.3cm, bottom=1.5cm,
+          headsep=0.5cm, columnsep=0.6cm}
+
 \usepackage{setspace}
 \usepackage{indentfirst}
 \usepackage{graphicx}
-\usepackage{float} 
+\usepackage{float}
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{tabularx}
-\usepackage{hyperref}
-\hypersetup{
-    colorlinks=true,
-    linkcolor=black,
-    filecolor=magenta,      
-    urlcolor=blue,
-    citecolor=black,
-    pdfencoding=auto
-}
+\usepackage{ragged2e}
+\usepackage[font=small,labelfont=bf]{caption}
 
-\title{
-    \includegraphics[width=0.3\textwidth]{Images/LogoPUCPR.png}\\[1cm]
-    \textbf{Trabalho de Conclusão de Curso}\\[0.5cm]
-    Vibrometria óptica aplicada para medição de vibrações em testes dinâmicos de bancada
-}
+% ----- Cabecalho em todas as paginas (igual ao template) --------------------
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyhead[C]{\footnotesize\itshape Concepção e Design de Projeto
+              Transformador -- Engenharia Mecânica -- 1\textsuperscript{o}
+              Semestre 2026}
+\fancyfoot[C]{\thepage}
 
-\author{
-    \textbf{Autor:} Vinicius Andrade Trento \\[0.5cm]
-     \textbf{Orientador:} Prof. Helio Emmendoerfer Junior \\
-    % \textbf{Coorientador:} Prof. Nilson Barbieri
-}
+% ----- Espacamentos das secoes proximos do template -------------------------
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\bfseries}{\thesection.}{0.5em}{\MakeUppercase}
+\titleformat{\subsection}{\normalfont\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalfont\itshape}{\thesubsubsection}{0.5em}{}
+\titlespacing*{\section}{0pt}{1.2em}{0.6em}
+\titlespacing*{\subsection}{0pt}{0.8em}{0.4em}
 
-\date{\today}
+\usepackage[hidelinks]{hyperref}
+
+% ----- Estilo das citacoes numericas [1] e referencias ----------------------
+% (requer o pacote, ja padrao em distribuicoes TeX)
+\usepackage[numbers,square,sort&compress]{natbib}
+\setlength{\bibsep}{0pt}
+
+\setlength{\parindent}{1.25em}
+\setlength{\columnsep}{0.6cm}
 
 \begin{document}
-\sloppy
 
-\onehalfspacing
+%==============================================================================
+%  CABECALHO
+%==============================================================================
+\twocolumn[
+  \begin{@twocolumnfalse}
+  \begin{center}
+    {\LARGE Vibrometria óptica aplicada para medição de vibrações
+     em testes dinâmicos de bancada\par}
+    \vspace{1em}
+    {\large Vinicius Andrade Trento\textsuperscript{1} e
+     Prof. Helio Emmendoerfer Junior\textsuperscript{2}\par}
+    \vspace{0.6em}
+    {\itshape Pontifícia Universidade Católica do Paraná -- Engenharia Mecânica\par}
+    {\itshape vinicius.trento@pucpr.br \qquad helio.emmendoerfer@pucpr.br\par}
+  \end{center}
+  \vspace{0.5em}
+  \hrule
+  \vspace{0.8em}
 
-\maketitle
+  % ----- RESUMO -----
+  {\noindent\bfseries\itshape Resumo}
+  \par\vspace{0.3em}
+  {\small\justifying\noindent
+  Texto de até 250 palavras. O resumo deve ser conciso e direto, incluindo
+  brevemente o objetivo do trabalho, os principais resultados e as conclusões
+  mais importantes. (Substituir por seu resumo.) Este trabalho explora e valida
+  a aplicação de metodologias não intrusivas de vibrometria óptica para medição
+  de vibrações em testes dinâmicos de bancada, utilizando câmeras de vídeo
+  convencionais e estimativa de movimento baseada em fase com filtros de Gabor,
+  buscando uma alternativa de baixo custo e \textit{full-field} aos métodos
+  tradicionais por contato.\par}
 
-% \newpage
-% \vspace*{\fill}
-% \begin{flushright}
-%     \begin{minipage}{0.5\textwidth}
-%         \textbf{Agradecimentos}\\[0.5cm]
-%         Agradeço primeiramente ao meu orientador, Prof. Helio Emmendorf, pela confiança e direcionamento fundamental ao longo deste trabalho. Estendo minha gratidão ao coorientador, Prof. Nilson Barbieri, pelas valiosas discussões técnicas e suporte prático. Agradeço também aos meus familiares e colegas de curso pelo apoio constante durante toda a graduação.
-%     \end{minipage}
-% \end{flushright}
-% \vspace*{\fill}
+  \vspace{0.6em}
+  {\noindent\bfseries\itshape Palavras-Chave}{\itshape: vibrometria óptica;
+  estimativa de movimento baseada em fase; análise modal; SHM;
+  processamento de imagens.\par}
 
+  \vspace{1.2em}
+  \hrule
+  \vspace{1.2em}
+  \end{@twocolumnfalse}
+]
 
-\newpage
-\begin{abstract}
-Espaço pro abstract.
-
-\vspace{1em}
-\noindent \textbf{Palavras-chave:} palavra-chave 1, palavra-chave 2, palavra-chave 3.
-\end{abstract}
-
-
-\newpage
-\tableofcontents
-\newpage
+%==============================================================================
+%  CORPO DO ARTIGO 
+%==============================================================================
 
 \section{Introdução}
 
-\subsection{Contextualização}
+Os acelerômetros são os dispositivos mais difundidos para a medição de vibrações nos setores automotivo, aeroespacial e industrial \cite{Anna2026}. Eles operam através da detecção de forças estáticas contínuas ou de vibrações e movimentos dinâmicos, sendo capazes de capturar fenômenos que variam desde impactos e oscilações comuns até eventos sísmicos. Dependendo do tipo de elemento sensível utilizado, esses sensores são classificados em piezorresistivos, capacitivos, piezoelétricos ou ressonantes \cite{PiezoAccelerometer2023}. A Figura \ref{fig:acelerometro_dewesoft} apresenta um esquema representativo de um acelerômetro de compressão piezoelétrico, um dos tipos mais comuns utilizados em aplicações industriais para medição de altas frequências.
 
-Os acelerômetros são os dispositivos mais difundidos para a medição de vibrações nos setores automotivo, aeroespacial e industrial \cite{Anna2026}. Eles operam através da detecção de forças estáticas contínuas ou de vibrações e movimentos dinâmicos, sendo capazes de capturar fenômenos que variam desde impactos e oscilações comuns até eventos sísmicos. Dependendo do tipo de elemento sensível utilizado, esses sensores são classificados em piezorresistivos, capacitivos, piezoelétricos ou ressonantes \cite{PiezoAccelerometer2023}. A Figura \ref{fig:acelerometro_dewesoft} apresenta um esquema representativo de um acelerômetro de compressão piezoelétrico, um dos tipos mais comuns utilizados em aplicações industriais para medição de altas frequências .
-
-
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.6\textwidth]{Images/acelerometro_dewesoft traduzido.png}
+    \includegraphics[width=\columnwidth]{Images/acelerometro_dewesoft traduzido.png}
     \caption{Acelerômetro de compressão piezoelétrico da Dewesoft. Fonte: \cite{aceletrometroDewesoft2025}.}
     \label{fig:acelerometro_dewesoft}
 \end{figure}
@@ -94,39 +131,36 @@ Contudo, uma vez que é necessário fazer a montagem física dos sensores nas pe
 
 Para contornar as limitações de instrumentação física, técnicas de vibrometria óptica têm sido cada vez mais utilizadas para a medição sem contato \cite{Phase2022}. Essas técnicas permitem a obtenção de informações sobre o comportamento dinâmico de estruturas sem o acréscimo indesejado de massa (\textit{mass loading}), o que é particularmente vantajoso em sistemas sensíveis. Uma das técnicas ópticas consagradas é a vibrometria por Laser Doppler (LDV) apresentada na Figura \ref{fig:ldv}. No entanto, apesar de sua alta fidelidade e precisão \cite{LDVpolytec2006}, sistemas LDV industriais apresentam custos de aquisição e manutenção bastante elevados, além de exigirem \textit{setups} experimentais complexos e realizarem medições limitadas a pontos específicos (espacialmente discretas). Isso enfatiza a necessidade de alternativas que mantenham a natureza não intrusiva, mas com maior viabilidade econômica e capacidade de monitoramento global.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.6\textwidth]{Images/LDV traduzido.png}
+    \includegraphics[width=\columnwidth]{Images/LDV traduzido.png}
     \caption{Vibrometria por Laser Doppler. Fonte: \cite{LDVpolytec2006}.}
     \label{fig:ldv}
 \end{figure}
 
-
-Uma alternativa promissora é a vibrometria por imagem, que utiliza câmeras de vídeo convencionais para capturar o movimento vibracional de uma estrutura. Através de técnicas avançadas de processamento digital de imagens (\textit{phase-based} e amplificação de movimento), é possível extrair informações sobre a amplitude e frequência das vibrações, permitindo uma análise detalhada do comportamento dinâmico da estrutura \cite{robotcamera2025}. Essa abordagem tem o potencial de ser uma solução de baixo custo e fácil implementação para monitoramento de vibrações em tempo real, especialmente em ambientes onde a instalação de sensores físicos é inviável. 
+Uma alternativa promissora é a vibrometria por imagem, que utiliza câmeras de vídeo convencionais para capturar o movimento vibracional de uma estrutura. Através de técnicas avançadas de processamento digital de imagens (\textit{phase-based} e amplificação de movimento), é possível extrair informações sobre a amplitude e frequência das vibrações, permitindo uma análise detalhada do comportamento dinâmico da estrutura \cite{robotcamera2025}. Essa abordagem tem o potencial de ser uma solução de baixo custo e fácil implementação para monitoramento de vibrações em tempo real, especialmente em ambientes onde a instalação de sensores físicos é inviável.
 
 O maior desafio dessa abordagem se encontra na necessidade de estabilização de vídeo e na capacidade do equipamento de captura de vídeo em lidar com frequências muito altas e de amplitudes muito baixas, o que pode limitar a precisão e a aplicabilidade em certos cenários de teste. No entanto, avanços recentes em algoritmos de processamento de imagens e melhorias na qualidade das câmeras de vídeo estão continuamente expandindo as possibilidades dessa técnica para aplicações industriais e de pesquisa \cite{Phase2022}. Um modelo de como pode ser montado um sistema de vibrometria por câmera baseada em imagem é apresentado na Figura \ref{fig:camerabased_vibrometry}.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.6\textwidth]{Images/camerabased vibrometry traduzido.png}
+    \includegraphics[width=\columnwidth]{Images/camerabased vibrometry traduzido.png}
     \caption{Vibrometria por câmera baseada em imagem. Fonte: \cite{robotcamera2025}.}
     \label{fig:camerabased_vibrometry}
 \end{figure}
 
 O grande diferencial desta técnica em relação aos métodos tradicionais de contato (e até mesmo ao LDV pontual) é a capacidade de obter um histórico visual contínuo da propagação de falhas mecânicas. Isso é particularmente valioso para a compreensão espacial dos modos de falha ao longo de todo o componente em teste, otimizando a segurança operacional e a análise forense.
 
-%  TODO: ADICIONAR COMPARAÇÃO DIRETA ENTRE ACELEROMETRO E MEDIÇÕES OPTICAS
-
 \subsection{Problema}
 Apesar da ampla utilização e eficácia dos acelerômetros em medições vibracionais, os sistemas tradicionais de testes em bancada baseiam-se, em geral, em medições pontuais e discretas, limitadas ao monitoramento de regiões específicas da estrutura. Essa abordagem pode não capturar de forma completa o comportamento dinâmico global do sistema, além de, em alguns casos, exigir ensaios destrutivos que acarretam prejuízos devido à perda ou danificação do equipamento testado.
 
-Nesse contexto, a aplicação da vibrometria óptica por câmeras e visão computacional surge como uma boa alternativa, não para substituir os métodos tradicionais, mas para complementá-los, por possibilitar medições sem contato e com maior resolução espacial. Contudo, sua implementação em testes dinâmicos de bancada ainda apresenta desafios relevantes, tais como a necessidade de condições controladas de iluminação, a elevada sensibilidade a ruídos ambientais e a complexidade computacional envolvida na aquisição, processamento e interpretação dos dados obtidos\cite{Phase2022}. 
+Nesse contexto, a aplicação da vibrometria óptica por câmeras e visão computacional surge como uma boa alternativa, não para substituir os métodos tradicionais, mas para complementá-los, por possibilitar medições sem contato e com maior resolução espacial. Contudo, sua implementação em testes dinâmicos de bancada ainda apresenta desafios relevantes, tais como a necessidade de condições controladas de iluminação, a elevada sensibilidade a ruídos ambientais e a complexidade computacional envolvida na aquisição, processamento e interpretação dos dados obtidos \cite{Phase2022}.
 
 \subsection{Objetivos}
 
-O objetivo geral deste trabalho é explorar e validar a aplicação de metodologias não intrusivas de vibrometria óptica para medição de vibrações em testes dinâmicos de bancada, buscando superar os desafios de instrumentação. 
+O objetivo geral deste trabalho é explorar e validar a aplicação de metodologias não intrusivas de vibrometria óptica para medição de vibrações em testes dinâmicos de bancada, buscando superar os desafios de instrumentação.
 
-\subsubsection*{Objetivos Específicos}
+\noindent\textit{Objetivos Específicos:}
 \begin{itemize}
     \item Desenvolver e implementar rotinas de processamento digital de imagens em ambiente Python, baseadas em filtragem por convolução com filtros de Gabor para estimativa de movimento baseada em fase, aplicadas ao monitoramento da integridade estrutural (\textit{Structural Health Monitoring} -- SHM);
     \item Propor e validar uma metodologia não intrusiva de baixo custo, baseada no uso de câmeras de vídeo convencionais, para a medição de vibrações;
@@ -134,7 +168,7 @@ O objetivo geral deste trabalho é explorar e validar a aplicação de metodolog
 \end{itemize}
 
 \subsection{Justificativa}
-O desenvolvimento e a validação de um sistema de medição sem contato e de baixo custo justificam-se pela necessidade contínua de segurança operacional (\textit{safety margin}) em ensaios de durabilidade. Ao contornar as limitações físicas dos sensores tradicionais, a abordagem óptica viabiliza a criação de um histórico visual e contínuo de falhas mecânicas. Dessa forma, demonstra-se não apenas as vantagens dessa abordagem em comparação aos métodos tradicionais, mas também garante-se uma alta viabilidade econômica e mais ferramentas de análise forense para compreensão de modos de falha ao longo de todo o componente em teste.
+O desenvolvimento e a validação de um sistema de medição sem contato e de baixo custo justificam-se pela necessidade contínua de segurança operacional (\textit{safety margin}) em ensaios de durabilidade. Ao contornar as limitações físicas dos sensores tradicionais, a abordagem óptica viabiliza a criação de um histórico visual e contínuo da iniciação e propagação de falhas mecânicas. Dessa forma, demonstra-se não apenas as vantagens dessa abordagem em comparação aos métodos tradicionais, mas também garante-se uma alta viabilidade econômica e mais ferramentas de análise forense para compreensão de modos de falha ao longo de todo o componente em teste.
 
 \section{Fundamentação Teórica}
 
@@ -158,31 +192,31 @@ Essa razão $\zeta$ classifica o sistema em três regimes de resposta livre (Tab
 \end{equation}
 com $\omega_d = \omega_n\sqrt{1 - \zeta^2}$ a frequência natural amortecida. Tanto $\omega_d$ quanto $\zeta$ podem ser extraídos diretamente de um sinal experimental de resposta livre, por meio de análise espectral e do decremento logarítmico, respectivamente \cite{Downey2026, Rao2010}.
 
-\begin{table}[H]
+\begin{table}[htbp]
     \centering
     \caption{Regimes de resposta livre em função da razão de amortecimento $\zeta$.}
     \label{tab:casos_amortecimento}
-    \begin{tabularx}{\textwidth}{l c X}
+    \small
+    \begin{tabularx}{\columnwidth}{l c X}
         \toprule
-        \textbf{Regime} & \textbf{Razão de amortecimento} & \textbf{Natureza da resposta} \\
+        \textbf{Regime} & \textbf{$\zeta$} & \textbf{Natureza da resposta} \\
         \midrule
         Não amortecido          & $\zeta = 0$     & Oscilação harmônica permanente. \\
         Subamortecido           & $0 < \zeta < 1$ & Oscilação com decaimento exponencial. \\
-        Criticamente amortecido & $\zeta = 1$     & Retorno ao equilíbrio sem oscilação, no menor tempo possível. \\
-        Superamortecido         & $\zeta > 1$     & Retorno lento ao equilíbrio, sem oscilação. \\
+        Criticamente amortecido & $\zeta = 1$     & Retorno ao equilíbrio sem oscilação. \\
+        Superamortecido         & $\zeta > 1$     & Retorno lento ao equilíbrio. \\
         \bottomrule
     \end{tabularx}
 \end{table}
 
-A figura \ref{fig:regimes_amortecimento} ilustra os diferentes regimes de resposta livre para um sistema de 1~GDL, evidenciando a influência da razão de amortecimento na forma do sinal temporal.
+A Figura \ref{fig:regimes_amortecimento} ilustra os diferentes regimes de resposta livre para um sistema de 1~GDL, evidenciando a influência da razão de amortecimento na forma do sinal temporal.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=1\textwidth]{Images/fig_regimes_amortecimento.png}
+    \includegraphics[width=\columnwidth]{Images/fig_regimes_amortecimento.png}
     \caption{Respostas de regime de amortecimento. Fonte: O autor.}
     \label{fig:regimes_amortecimento}
 \end{figure}
-
 
 \subsubsection{Vibração forçada e ressonância}
 
@@ -193,11 +227,11 @@ Quando o sistema é submetido a uma excitação harmônica do tipo $F(t) = F_0\c
 \end{equation}
 em que $r = \omega/\omega_n$ é a razão de frequências adimensional. A relação entre a amplitude normalizada e $r$ define a Função de Resposta em Frequência (FRF) do sistema, ferramenta central da análise vibracional experimental.
 
-A condição de ressonância ocorre quando $\omega$ se aproxima de $\omega_n$ ($r \approx 1$). No caso não amortecido, a Equação \ref{eq:amplitude_forcada} diverge, e mesmo em sistemas com amortecimento real a amplitude pode atingir valores várias ordens de grandeza maiores do que aqueles observados fora da banda de ressonância. Esse fenômeno é a causa raiz de inúmeras falhas estruturais documentadas e justifica a necessidade de mapear as frequências naturais antes de colocar um componente em operação \cite{Downey2026, Rao2010}. Esse comportamento pode ser evidenciado na figura \ref{fig:ressonancia}, onde a FRF apresenta um pico acentuado na frequência de ressonância, cuja amplitude é inversamente proporcional à razão de amortecimento $\zeta$.
+A condição de ressonância ocorre quando $\omega$ se aproxima de $\omega_n$ ($r \approx 1$). No caso não amortecido, a Equação \ref{eq:amplitude_forcada} diverge, e mesmo em sistemas com amortecimento real a amplitude pode atingir valores várias ordens de grandeza maiores do que aqueles observados fora da banda de ressonância. Esse fenômeno é a causa raiz de inúmeras falhas estruturais documentadas e justifica a necessidade de mapear as frequências naturais antes de colocar um componente em operação \cite{Downey2026, Rao2010}. Esse comportamento pode ser evidenciado na Figura \ref{fig:ressonancia}, onde a FRF apresenta um pico acentuado na frequência de ressonância, cuja amplitude é inversamente proporcional à razão de amortecimento $\zeta$.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=1\textwidth]{Images/fig_ressonancia.png}
+    \includegraphics[width=\columnwidth]{Images/fig_ressonancia.png}
     \caption{Função de Resposta em Frequência e pico de ressonância. Fonte: O autor.}
     \label{fig:ressonancia}
 \end{figure}
@@ -217,13 +251,13 @@ A interpretação física é central para o presente trabalho: um modo de vibrar
 
 \subsubsection{Structural Health Monitoring (SHM) e assinatura vibracional}
 
-O \textit{Structural Health Monitoring} (SHM) consiste no processo contínuo ou periódico de aquisição, processamento e interpretação de dados oriundos de uma estrutura, com o objetivo de detectar, localizar e caracterizar danos antes que estes evoluam para falha catastrófica \cite{Doebling1998}. No contexto vibracional, o SHM se apoia em uma premissa direta: como os parâmetros modais (frequências naturais, modos de vibrar e razões de amortecimento) são funções das propriedades físicas do sistema (massa, rigidez e amortecimento), alterações nessas propriedades introduzidas por trincas, perda de seção resistente, afrouxamento de fixações ou desgaste  resultam em mudanças mensuráveis nas propriedades modais \cite{Doebling1998}.
+O \textit{Structural Health Monitoring} (SHM) consiste no processo contínuo ou periódico de aquisição, processamento e interpretação de dados oriundos de uma estrutura, com o objetivo de detectar, localizar e caracterizar danos antes que estes evoluam para falha catastrófica \cite{Doebling1998}. No contexto vibracional, o SHM se apoia em uma premissa direta: como os parâmetros modais (frequências naturais, modos de vibrar e razões de amortecimento) são funções das propriedades físicas do sistema (massa, rigidez e amortecimento), alterações nessas propriedades introduzidas por trincas, perda de seção resistente, afrouxamento de fixações ou desgaste resultam em mudanças mensuráveis nas propriedades modais \cite{Doebling1998}.
 
-Considerando o sistema de 1~GDL, uma perda localizada de rigidez $\Delta k < 0$ desloca a frequência natural para $\omega_n' = \sqrt{(k + \Delta k)/m} < \omega_n$, ou seja, danos estruturais tendem a reduzir as frequências naturais observadas, ao passo que folgas e trincas tendem a aumentar a razão de amortecimento $\zeta$, alargando os picos da FRF. Esses dois efeitos constituem a base da chamada assinatura vibracional do componente. Em sistemas de MGDL, indicadores adicionais ficam disponíveis, como variações nas componentes dos modos de vibrar (especialmente em suas curvaturas) e alterações na FRF em bandas de frequência específicas \cite{Doebling1998}, todos mais sensíveis a danos localizados do que o simples deslocamento de frequência natural. Essa perda de rígides pode ser visualizada na figura \ref{fig:perda_rigidez}
+Considerando o sistema de 1~GDL, uma perda localizada de rigidez $\Delta k < 0$ desloca a frequência natural para $\omega_n' = \sqrt{(k + \Delta k)/m} < \omega_n$, ou seja, danos estruturais tendem a reduzir as frequências naturais observadas, ao passo que folgas e trincas tendem a aumentar a razão de amortecimento $\zeta$, alargando os picos da FRF. Esses dois efeitos constituem a base da chamada assinatura vibracional do componente. Em sistemas de MGDL, indicadores adicionais ficam disponíveis, como variações nas componentes dos modos de vibrar (especialmente em suas curvaturas) e alterações na FRF em bandas de frequência específicas \cite{Doebling1998}, todos mais sensíveis a danos localizados do que o simples deslocamento de frequência natural. Essa perda de rigidez pode ser visualizada na Figura \ref{fig:perda_rigidez}.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=1\textwidth]{Images/fig_perda_rigidez.png}
+    \includegraphics[width=\columnwidth]{Images/fig_perda_rigidez.png}
     \caption{Resposta de sistema submetido a perda de rigidez. Fonte: O autor.}
     \label{fig:perda_rigidez}
 \end{figure}
@@ -254,9 +288,9 @@ Apesar de consagrados, os acelerômetros impõem restrições importantes que mo
 \end{equation}
 em que $m_s$ é a massa total adicionada (sensor mais cabeamento e elemento de fixação) \cite{Serridge1987}. Para estruturas leves, por exemplo pás de rotores, painéis automotivos finos e componentes aeronáuticos, essa perturbação pode ser significativa e distorcer a medição da resposta natural \cite{AgilentAN243-3, robotcamera2025}, como exemplificado na Figura \ref{fig:mass_loading}.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=1\textwidth]{Images/fig_mass_loading.png}
+    \includegraphics[width=\columnwidth]{Images/fig_mass_loading.png}
     \caption{Efeito de mass loading. Fonte: O autor.}
     \label{fig:mass_loading}
 \end{figure}
@@ -294,19 +328,19 @@ A presente seção descreve o pipeline de medição que será implementado neste
 
 A câmera atua como o transdutor primário do sistema, convertendo o movimento físico da peça em uma sequência discreta de quadros. Para uma taxa de captura de $F$ quadros por segundo (\textit{frames per second}, fps), o intervalo de amostragem entre quadros consecutivos é $\Delta t = 1/F$ \cite{robotcamera2025}. Pelo teorema de amostragem de Nyquist, a maior frequência vibracional que pode ser identificada sem \textit{aliasing} é $F/2$; na prática, recomenda-se operar com $F$ ao menos 5 a 10 vezes superior à frequência máxima de interesse, para garantir resolução adequada no espectro. O \textit{aliasing} ocorre quando frequências acima de $F/2$ são amostradas, resultando em um deslocamento aparente para frequências mais baixas, o que pode distorcer a interpretação dos dados. A Figura \ref{fig:nyquist_aliasing} ilustra esse fenômeno, evidenciando a importância de escolher uma taxa de captura adequada para evitar confusão entre componentes espectrais reais e artefatos de amostragem.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=1\textwidth]{Images/fig_nyquist_aliasing.png}
+    \includegraphics[width=\columnwidth]{Images/fig_nyquist_aliasing.png}
     \caption{Teorema de amostragem de Nyquist e efeito de aliasing. Fonte: O autor.}
     \label{fig:nyquist_aliasing}
 \end{figure}
 
 Dois parâmetros adicionais da câmera merecem atenção. O tempo de exposição deve ser curto o suficiente para que cada quadro registre o movimento como praticamente congelado; exposições longas introduzem borramento (\textit{motion blur}) que atenua artificialmente a amplitude medida \cite{LavatelliZappa2017}. A relação $\Delta x_{blur} \approx v \cdot t_{exp}$, em que $v$ é a velocidade instantânea do ponto e $t_{exp}$ o tempo de exposição, fornece uma estimativa direta desse efeito \cite{LavatelliZappa2017}. Já o tipo de obturador é crítico: o obturador global (\textit{global shutter}) captura todo o sensor simultaneamente, enquanto o obturador de rolagem (\textit{rolling shutter}) captura linha a linha, introduzindo distorções geométricas em vibrações rápidas. Para vibrometria, o obturador global é fortemente preferido \cite{robotcamera2025}.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=1\textwidth]{Images/fig_motion_blur.png}
-    \caption{Efeito de borramento por moveimento. Fonte: O autor.}
+    \includegraphics[width=\columnwidth]{Images/fig_motion_blur.png}
+    \caption{Efeito de borramento por movimento. Fonte: O autor.}
     \label{fig:motion_blur}
 \end{figure}
 
@@ -314,7 +348,7 @@ A calibração espacial converte deslocamentos medidos em pixels para unidades f
 
 \subsubsection{Estimativa de movimento baseada em fase com filtros de Gabor}
 
-O método central a ser implementado neste trabalho é a estimativa de movimento baseada em fase (\textit{Phase-Based Motion Estimation}, PME), obtida por meio da decomposição local da imagem com filtros de Gabor. Diferentemente de abordagens que operam diretamente sobre a intensidade dos pixels  como o rastreamento por correspondência de padrões e o \textit{Digital Image Correlation} (DIC) clássico , a abordagem baseada em fase explora a propriedade fundamental de que, em uma vizinhança espacial estreita, pequenas translações de uma estrutura visual se manifestam como variações lineares na fase de coeficientes complexos obtidos por filtragem direcional \cite{Wadhwa2013, Phase2022}. Como a fase local é uma quantidade intrinsecamente robusta a variações de iluminação e a ruído da câmera, essa formulação alcança sensibilidades sub-pixel da ordem de milésimos de pixel, sem exigir marcadores artificiais nem padrões de \textit{speckle} aplicados à superfície \cite{ZhangLogGabor2024, WangLogGabor2022}.
+O método central a ser implementado neste trabalho é a estimativa de movimento baseada em fase (\textit{Phase-Based Motion Estimation}, PME), obtida por meio da decomposição local da imagem com filtros de Gabor. Diferentemente de abordagens que operam diretamente sobre a intensidade dos pixels como o rastreamento por correspondência de padrões e o \textit{Digital Image Correlation} (DIC) clássico, a abordagem baseada em fase explora a propriedade fundamental de que, em uma vizinhança espacial estreita, pequenas translações de uma estrutura visual se manifestam como variações lineares na fase de coeficientes complexos obtidos por filtragem direcional \cite{Wadhwa2013, Phase2022}. Como a fase local é uma quantidade intrinsecamente robusta a variações de iluminação e a ruído da câmera, essa formulação alcança sensibilidades sub-pixel da ordem de milésimos de pixel, sem exigir marcadores artificiais nem padrões de \textit{speckle} aplicados à superfície \cite{ZhangLogGabor2024, WangLogGabor2022}.
 
 O filtro de Gabor é um filtro de banda passante orientado, definido pelo produto de uma senoide complexa com uma envoltória gaussiana. Em duas dimensões, sua resposta ao impulso pode ser escrita, para uma orientação $\theta$ e uma frequência central $\omega_0$, como \cite{Wadhwa2013}:
 \begin{equation}
@@ -351,45 +385,46 @@ Para ensaios em que a frequência de excitação varia ao longo do tempo (\texti
 
 A vibrometria por imagem não está livre de limitações, e o desempenho do sistema depende de um conjunto de cuidados experimentais. Os principais desafios encontrados na literatura e a serem tratados neste trabalho são:
 
-
 \begin{itemize}
     \item Iluminação: variações temporais na intensidade luminosa podem ser interpretadas pelo algoritmo de correspondência como movimento aparente. A solução é iluminação contínua e estável (LED de qualidade, evitando fontes com modulação PWM) e, quando necessário, pré-processamento dos quadros para normalização de intensidade \cite{robotcamera2025}.
     \item Movimento da câmera: qualquer vibração do tripé ou do suporte da câmera contamina todas as ROIs simultaneamente. A mitigação envolve fixação rígida do suporte e, como já mencionado, a subtração do movimento de uma ROI de referência fixada ao fundo \cite{Mhatre2026}.
-    \item Limite de Nyquist e \textit{aliasing}: vibrações de frequência superior a $F/2$ produzem componentes espectrais espúrias. Esse limite define a escolha da câmera para a aplicação pretendida; em \cite{robotcamera2025}, por exemplo, uma câmera a 1000~fps permitiu análise confiável até cerca de 125~Hz, com perda de qualidade nas faixas extremas devido a outros fatores (rigidez estrutural na base e \textit{backlash} no topo).
-    \item Textura da superfície: regiões de baixa textura (superfícies lisas e uniformes) produzem amplitude local $A$ próxima de zero na saída do filtro de Gabor, tornando a fase indefinida e contaminando a estimativa de deslocamento. Quando a textura natural da peça é insuficiente, pode-se recorrer à aplicação de um \textit{speckle pattern} artificial padrão aleatório de manchas pintado ou impresso sobre a peça ou de marcadores de alto contraste em pontos de medição específicos \cite{robotcamera2025, Mhatre2026}. Alternativamente, a literatura recente propõe variantes como o filtro \textit{log-Gabor}, que oferece melhor robustez em superfícies pouco texturizadas \cite{WangLogGabor2022}.
-    \item Custo computacional: a aplicação de um banco de filtros de Gabor com múltiplas orientações e escalas a cada quadro de um vídeo longo em alta resolução é computacionalmente exigente. As estratégias usuais para garantir desempenho compatível com a aplicação incluem a restrição do processamento às ROIs de interesse (em vez do quadro inteiro), a implementação das convoluções no domínio da frequência via FFT, e a paralelização em GPU quando disponível \cite{robotcamera2025}.
+    \item Limite de Nyquist e \textit{aliasing}: vibrações de frequência superior a $F/2$ produzem componentes espectrais espúrias. Esse limite define a escolha da câmera para a aplicação pretendida; em \cite{robotcamera2025}, por exemplo, uma câmera a 1000~fps permitiu análise confiável até cerca de 125~Hz.
+    \item Textura da superfície: regiões de baixa textura (superfícies lisas e uniformes) produzem amplitude local $A$ próxima de zero na saída do filtro de Gabor, tornando a fase indefinida e contaminando a estimativa de deslocamento. Quando a textura natural da peça é insuficiente, pode-se recorrer à aplicação de um \textit{speckle pattern} artificial ou de marcadores de alto contraste em pontos de medição específicos \cite{robotcamera2025, Mhatre2026}.
+    \item Custo computacional: a aplicação de um banco de filtros de Gabor com múltiplas orientações e escalas a cada quadro de um vídeo longo em alta resolução é computacionalmente exigente. As estratégias usuais incluem a restrição do processamento às ROIs de interesse, a implementação das convoluções no domínio da frequência via FFT, e a paralelização em GPU quando disponível \cite{robotcamera2025}.
 \end{itemize}
 
 Mesmo com esses cuidados, a vibrometria por imagem não substitui integralmente os métodos tradicionais. Ela se posiciona como um complemento de alto valor, particularmente em cenários em que o \textit{mass loading} é proibitivo, em que o número de pontos de medição desejado é grande, ou em que se busca informação espacial de modos de vibrar para fins de SHM e análise forense de falhas.
 
-\section{Materiais e Métodos}
+\section{Metodologia}
 
-Com o objetivo de validação de hipoteses a abordagem realizada começou nacriação de um Produto Mínimo Viável, e em sequência evoluiu para um sistema mais robusto.  
+Com o objetivo de validação de hipóteses, a abordagem realizada começou na criação de um Produto Mínimo Viável e, em sequência, evoluiu para um sistema mais robusto.
 
-\subsection{Produto Mínimo Viavel (MVP)}
+\subsection{Produto Mínimo Viável (MVP)}
 
-O MVP segue 3 pilares principais: Viabilidade, Valor e Capacidade de Aprendizado. Seguindo o princípios de reduzir riscos, agilidade e foco no essencial.
+O MVP segue três pilares principais: Viabilidade, Valor e Capacidade de Aprendizado, seguindo os princípios de reduzir riscos, agilidade e foco no essencial.
 
-Com objetivo de simular a oscilação de 1 DOF de uma viga engastada (\textit{cantilever}) validando a aquisição de dados a partir desse movimento foram selecionados os seguintes equipamentos:
+Com o objetivo de simular a oscilação de 1~GDL de uma viga engastada (\textit{cantilever}) validando a aquisição de dados a partir desse movimento, foram selecionados os seguintes equipamentos:
 
 \begin{itemize}
     \item Câmera DJI Osmo Action 4;
     \item Régua com marcador na ponta;
-    \item Bancada para teste;
+    \item Bancada para teste.
 \end{itemize}
 
-
-
 \subsection{Equipamentos Utilizados}
+
 \subsection{Modelagem e Simulação}
+
 \subsection{Procedimentos de ensaios}
 
 \section{Resultados e Discussão}
 
-\section{Considerações finais}
+\section{Considerações Finais}
 
-\bibliographystyle{unsrt} 
-
-\bibliography{referencias} 
+%==============================================================================
+%  REFERENCIAS 
+%==============================================================================
+\bibliographystyle{unsrt}
+\bibliography{referencias}
 
 \end{document}

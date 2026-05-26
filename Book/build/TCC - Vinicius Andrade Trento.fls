@@ -4,28 +4,26 @@ INPUT c:\soft\cv_vibrometry\Book\TCC - Vinicius Andrade Trento.tex
 OUTPUT c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.log
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\base\article.cls
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\base\article.cls
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\base\size12.clo
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\base\size12.clo
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\base\size12.clo
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr12.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\base\size10.clo
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\base\size10.clo
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\base\size10.clo
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\base\inputenc.sty
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\base\inputenc.sty
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\base\fontenc.sty
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\base\fontenc.sty
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecrm1200.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecrm1000.tfm
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\generic\babel\babel.sty
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\generic\babel\babel.sty
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\generic\babel\txtbabel.def
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\arabi\bblopts.cfg
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\arabi\bblopts.cfg
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\arabi\bblopts.cfg
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\babel-portuges\brazilian.ldf
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\babel-portuges\brazilian.ldf
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\babel-portuges\brazilian.ldf
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\generic\babel\locale\pt\babel-brazilian.tex
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\generic\babel\locale\pt\babel-brazilian.tex
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\generic\babel\locale\pt\babel-brazilian.tex
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\generic\babel\locale\pt\babel-pt-BR.ini
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\mathptmx.sty
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\mathptmx.sty
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\amsmath\amsmath.sty
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\amsmath\amsmath.sty
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\amsmath\amsopn.sty
@@ -87,6 +85,16 @@ INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\booktabs\booktabs.s
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\booktabs\booktabs.sty
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\tools\tabularx.sty
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\tools\tabularx.sty
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\ragged2e\ragged2e.sty
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\ragged2e\ragged2e.sty
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\caption\caption.sty
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\caption\caption.sty
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\caption\caption3.sty
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\caption\caption3.sty
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\fancyhdr\fancyhdr.sty
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\fancyhdr\fancyhdr.sty
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\titlesec\titlesec.sty
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\titlesec\titlesec.sty
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\hyperref\hyperref.sty
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\hyperref\hyperref.sty
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\kvsetkeys\kvsetkeys.sty
@@ -136,8 +144,8 @@ INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\rerunfilecheck\reru
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\rerunfilecheck\rerunfilecheck.sty
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\generic\uniquecounter\uniquecounter.sty
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\generic\uniquecounter\uniquecounter.sty
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\generic\stringenc\stringenc.sty
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\generic\stringenc\stringenc.sty
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\natbib\natbib.sty
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\natbib\natbib.sty
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\graphics\color.sty
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\graphics\color.sty
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\graphics-cfg\color.cfg
@@ -146,15 +154,16 @@ INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\graphics-cfg\color.
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\graphics\mathcolor.ltx
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\graphics\mathcolor.ltx
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\graphics\mathcolor.ltx
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\t1ptm.fd
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\t1ptm.fd
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\t1ptm.fd
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr8t.tfm
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\l3backend\l3backend-pdftex.def
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\l3backend\l3backend-pdftex.def
 INPUT c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.aux
 INPUT c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.aux
 INPUT c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.aux
 OUTPUT c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.aux
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\translations\dicts\translations-basic-dictionary-brazil.trsl
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\translations\dicts\translations-basic-dictionary-brazil.trsl
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\translations\dicts\translations-basic-dictionary-brazil.trsl
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\context\base\mkii\supp-pdf.mkii
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\context\base\mkii\supp-pdf.mkii
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\context\base\mkii\supp-pdf.mkii
@@ -171,104 +180,190 @@ OUTPUT c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.pdf
 INPUT c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.out
 INPUT c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.out
 OUTPUT c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.out
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecrm2074.tfm
-INPUT .\Images\LogoPUCPR.png
-INPUT .\Images\LogoPUCPR.png
-INPUT .\Images\LogoPUCPR.png
-INPUT .\Images\LogoPUCPR.png
-INPUT .\Images\LogoPUCPR.png
-INPUT .\Images\LogoPUCPR.png
-INPUT .\Images\LogoPUCPR.png
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecbx2074.tfm
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecrm1440.tfm
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr12.tfm
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi12.tfm
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmsy10.tfm
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmex10.tfm
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\cmextra\cmex7.tfm
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\amsfonts\umsa.fd
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\amsfonts\umsa.fd
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\amsfonts\umsa.fd
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr8t.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr8t.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ot1ztmcm.fd
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ot1ztmcm.fd
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ot1ztmcm.fd
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\zptmcm7t.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\zptmcm7t.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\zptmcm7t.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\omlztmcm.fd
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\omlztmcm.fd
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\omlztmcm.fd
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\zptmcm7m.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\zptmcm7m.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\zptmcm7m.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\omsztmcm.fd
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\omsztmcm.fd
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\omsztmcm.fd
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\zptmcm7y.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\zptmcm7y.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\zptmcm7y.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\omxztmcm.fd
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\omxztmcm.fd
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\omxztmcm.fd
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\zptmcm7v.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\zptmcm7v.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\zptmcm7v.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ot1ptm.fd
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ot1ptm.fd
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ot1ptm.fd
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb7t.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb7t.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb7t.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmri7t.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmri7t.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmri7t.tfm
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam10.tfm
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam10.tfm
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam7.tfm
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\amsfonts\umsb.fd
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\amsfonts\umsb.fd
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\amsfonts\umsb.fd
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam10.tfm
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecbx1440.tfm
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\generic\stringenc\se-pdfdoc.def
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\generic\stringenc\se-pdfdoc.def
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\generic\stringenc\se-pdfdoc.def
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr8t.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmri8t.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb8t.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmbi8t.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmri8t.tfm
+INPUT .\Images\acelerometro_dewesoft traduzido.png
+INPUT .\Images\acelerometro_dewesoft traduzido.png
+INPUT .\Images\acelerometro_dewesoft traduzido.png
+INPUT .\Images\acelerometro_dewesoft traduzido.png
+INPUT .\Images\acelerometro_dewesoft traduzido.png
+INPUT .\Images\acelerometro_dewesoft traduzido.png
+INPUT .\Images\acelerometro_dewesoft traduzido.png
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb8t.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ts1ptm.fd
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ts1ptm.fd
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ts1ptm.fd
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr8c.tfm
+INPUT .\Images\LDV traduzido.png
+INPUT .\Images\LDV traduzido.png
+INPUT .\Images\LDV traduzido.png
+INPUT .\Images\LDV traduzido.png
+INPUT .\Images\LDV traduzido.png
+INPUT .\Images\LDV traduzido.png
+INPUT .\Images\LDV traduzido.png
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr8t.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmri8t.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\zptmcm7t.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\zptmcm7t.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\zptmcm7t.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\zptmcm7m.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\zptmcm7m.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\zptmcm7m.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\zptmcm7y.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\zptmcm7y.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\zptmcm7y.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\zptmcm7v.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\zptmcm7v.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\zptmcm7v.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb7t.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb7t.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb7t.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmri7t.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmri7t.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmri7t.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam10.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam10.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam10.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmri8t.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmri8t.vf
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmri8r.tfm
 INPUT C:\Users\trent\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecrm1095.tfm
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecbx1095.tfm
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecrm1728.tfm
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecbx1728.tfm
-INPUT c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.toc
-INPUT c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.toc
-INPUT c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.toc
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecbx1200.tfm
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr8.tfm
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr6.tfm
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi12.tfm
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi8.tfm
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi6.tfm
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmsy10.tfm
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmsy8.tfm
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmsy6.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\base\8r.enc
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmri8t.vf
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmri8r.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmr8t.vf
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr8r.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmr8t.vf
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr8r.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmr8t.vf
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr8r.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmri8t.vf
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmri8r.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmbi8t.vf
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmbi8r.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmri8t.vf
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmri8r.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmb8t.vf
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb8r.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmr8t.vf
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr8r.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmb8t.vf
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb8r.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmr8c.vf
+INPUT .\Images\camerabased vibrometry traduzido.png
+INPUT .\Images\camerabased vibrometry traduzido.png
+INPUT .\Images\camerabased vibrometry traduzido.png
+INPUT .\Images\camerabased vibrometry traduzido.png
+INPUT .\Images\camerabased vibrometry traduzido.png
+INPUT .\Images\camerabased vibrometry traduzido.png
+INPUT .\Images\camerabased vibrometry traduzido.png
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\zptmcm7t.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\zptmcm7t.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\zptmcm7m.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\zptmcm7m.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\zptmcm7y.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\zptmcm7y.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\zptmcm7v.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\zptmcm7v.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb7t.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb7t.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmri7t.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmri7t.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam10.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam10.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\zptmcm7m.vf
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\psyro.tfm
+INPUT .\Images\fig_regimes_amortecimento.png
+INPUT .\Images\fig_regimes_amortecimento.png
+INPUT .\Images\fig_regimes_amortecimento.png
+INPUT .\Images\fig_regimes_amortecimento.png
+INPUT .\Images\fig_regimes_amortecimento.png
+INPUT .\Images\fig_regimes_amortecimento.png
+INPUT .\Images\fig_regimes_amortecimento.png
+INPUT .\Images\fig_ressonancia.png
+INPUT .\Images\fig_ressonancia.png
+INPUT .\Images\fig_ressonancia.png
+INPUT .\Images\fig_ressonancia.png
+INPUT .\Images\fig_ressonancia.png
+INPUT .\Images\fig_ressonancia.png
+INPUT .\Images\fig_ressonancia.png
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\zptmcm7t.vf
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\symbol\psyr.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\zptmcm7m.vf
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\psyro.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi10.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmri8r.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\zptmcm7v.vf
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmex10.tfm
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\cmextra\cmex8.tfm
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\cmextra\cmex7.tfm
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam10.tfm
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam10.tfm
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam7.tfm
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
-OUTPUT c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.toc
-INPUT .\Images\acelerometro_dewesoft traduzido.png
-INPUT .\Images\acelerometro_dewesoft traduzido.png
-INPUT .\Images\acelerometro_dewesoft traduzido.png
-INPUT .\Images\acelerometro_dewesoft traduzido.png
-INPUT .\Images\acelerometro_dewesoft traduzido.png
-INPUT .\Images\acelerometro_dewesoft traduzido.png
-INPUT .\Images\acelerometro_dewesoft traduzido.png
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\tcrm1200.tfm
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecti1200.tfm
-INPUT .\Images\LDV traduzido.png
-INPUT .\Images\LDV traduzido.png
-INPUT .\Images\LDV traduzido.png
-INPUT .\Images\LDV traduzido.png
-INPUT .\Images\LDV traduzido.png
-INPUT .\Images\LDV traduzido.png
-INPUT .\Images\LDV traduzido.png
-INPUT .\Images\camerabased vibrometry traduzido.png
-INPUT .\Images\camerabased vibrometry traduzido.png
-INPUT .\Images\camerabased vibrometry traduzido.png
-INPUT .\Images\camerabased vibrometry traduzido.png
-INPUT .\Images\camerabased vibrometry traduzido.png
-INPUT .\Images\camerabased vibrometry traduzido.png
-INPUT .\Images\camerabased vibrometry traduzido.png
-INPUT .\Images\fig_regimes_amortecimento.png
-INPUT .\Images\fig_regimes_amortecimento.png
-INPUT .\Images\fig_regimes_amortecimento.png
-INPUT .\Images\fig_regimes_amortecimento.png
-INPUT .\Images\fig_regimes_amortecimento.png
-INPUT .\Images\fig_regimes_amortecimento.png
-INPUT .\Images\fig_regimes_amortecimento.png
-INPUT .\Images\fig_ressonancia.png
-INPUT .\Images\fig_ressonancia.png
-INPUT .\Images\fig_ressonancia.png
-INPUT .\Images\fig_ressonancia.png
-INPUT .\Images\fig_ressonancia.png
-INPUT .\Images\fig_ressonancia.png
-INPUT .\Images\fig_ressonancia.png
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx12.tfm
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx8.tfm
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx6.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\symbol\psyr.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\zptmcm7y.vf
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmsy10.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\symbol\psyr.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr8r.tfm
+INPUT C:\Users\trent\AppData\Local\MiKTeX\fonts\tfm\public\rsfs\rsfs10.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\zptmcm7m.vf
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\psyro.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi10.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\zptmcm7y.vf
+INPUT C:\Users\trent\AppData\Local\MiKTeX\fonts\tfm\public\rsfs\rsfs10.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\zptmcm7t.vf
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr10.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\zptmcm7m.vf
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\psyro.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi10.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\zptmcm7t.vf
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\symbol\psyr.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr10.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmb7t.vf
 INPUT .\Images\fig_perda_rigidez.png
 INPUT .\Images\fig_perda_rigidez.png
 INPUT .\Images\fig_perda_rigidez.png
@@ -297,57 +392,39 @@ INPUT .\Images\fig_motion_blur.png
 INPUT .\Images\fig_motion_blur.png
 INPUT .\Images\fig_motion_blur.png
 INPUT .\Images\fig_motion_blur.png
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\zptmcm7t.vf
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\symbol\psyr.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr8r.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr10.tfm
 INPUT c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.bbl
 INPUT c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.bbl
 INPUT c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.bbl
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\base\t1cmtt.fd
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\base\t1cmtt.fd
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\tex\latex\base\t1cmtt.fd
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ectt1200.tfm
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ectt1000.tfm
 INPUT c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.aux
 INPUT c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.out
 INPUT c:\soft\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.out
-INPUT C:\Users\trent\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ectt1200.pk
-INPUT C:\Users\trent\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ectt1200.pk
-INPUT C:\Users\trent\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecti1200.pk
-INPUT C:\Users\trent\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecti1200.pk
-INPUT C:\Users\trent\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm1200.pk
-INPUT C:\Users\trent\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm1200.pk
-INPUT C:\Users\trent\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk
-INPUT C:\Users\trent\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk
-INPUT C:\Users\trent\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1728.pk
-INPUT C:\Users\trent\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1728.pk
-INPUT C:\Users\trent\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1095.pk
-INPUT C:\Users\trent\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1095.pk
-INPUT C:\Users\trent\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1095.pk
-INPUT C:\Users\trent\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1095.pk
-INPUT C:\Users\trent\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1200.pk
-INPUT C:\Users\trent\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1200.pk
-INPUT C:\Users\trent\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1440.pk
-INPUT C:\Users\trent\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1440.pk
-INPUT C:\Users\trent\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1440.pk
-INPUT C:\Users\trent\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1440.pk
-INPUT C:\Users\trent\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm2074.pk
-INPUT C:\Users\trent\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm2074.pk
-INPUT C:\Users\trent\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx2074.pk
-INPUT C:\Users\trent\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx2074.pk
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx12.pfb
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx12.pfb
+INPUT C:\Users\trent\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ectt1000.pk
+INPUT C:\Users\trent\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ectt1000.pk
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmex10.pfb
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmex10.pfb
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi12.pfb
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi12.pfb
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi6.pfb
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi6.pfb
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi8.pfb
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi8.pfb
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr12.pfb
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr12.pfb
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr6.pfb
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr6.pfb
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr8.pfb
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr8.pfb
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi10.pfb
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi10.pfb
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr10.pfb
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr10.pfb
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
 INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy8.pfb
-INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy8.pfb
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\urw\symbol\usyr.pfb
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\urw\symbol\usyr.pfb
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\urw\symbol\usyr.pfb
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\urw\symbol\usyr.pfb
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\urw\times\utmb8a.pfb
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\urw\times\utmb8a.pfb
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\urw\times\utmbi8a.pfb
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\urw\times\utmbi8a.pfb
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\urw\times\utmr8a.pfb
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\urw\times\utmr8a.pfb
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\urw\times\utmri8a.pfb
+INPUT C:\Users\trent\AppData\Local\Programs\MiKTeX\fonts\type1\urw\times\utmri8a.pfb
