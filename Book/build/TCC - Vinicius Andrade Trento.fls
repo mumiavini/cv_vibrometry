@@ -91,6 +91,8 @@ INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex\latex\caption\caption.s
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex\latex\caption\caption.sty
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex\latex\caption\caption3.sty
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex\latex\caption\caption3.sty
+INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex\latex\sttools\stfloats.sty
+INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex\latex\sttools\stfloats.sty
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex\latex\fancyhdr\fancyhdr.sty
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex\latex\fancyhdr\fancyhdr.sty
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex\latex\titlesec\titlesec.sty
@@ -314,22 +316,22 @@ INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\s
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\zptmcm7m.vf
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\psyro.tfm
-INPUT .\Images\fig_regimes_amortecimento.png
-INPUT .\Images\fig_regimes_amortecimento.png
-INPUT .\Images\fig_regimes_amortecimento.png
-INPUT .\Images\fig_regimes_amortecimento.png
-INPUT .\Images\fig_regimes_amortecimento.png
-INPUT .\Images\fig_regimes_amortecimento.png
-INPUT .\Images\fig_regimes_amortecimento.png
-INPUT .\Images\fig_ressonancia.png
-INPUT .\Images\fig_ressonancia.png
-INPUT .\Images\fig_ressonancia.png
-INPUT .\Images\fig_ressonancia.png
-INPUT .\Images\fig_ressonancia.png
-INPUT .\Images\fig_ressonancia.png
-INPUT .\Images\fig_ressonancia.png
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\zptmcm7t.vf
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\symbol\psyr.tfm
+INPUT .\Images\fig_regimes_amortecimento.png
+INPUT .\Images\fig_regimes_amortecimento.png
+INPUT .\Images\fig_regimes_amortecimento.png
+INPUT .\Images\fig_regimes_amortecimento.png
+INPUT .\Images\fig_regimes_amortecimento.png
+INPUT .\Images\fig_regimes_amortecimento.png
+INPUT .\Images\fig_regimes_amortecimento.png
+INPUT .\Images\fig_ressonancia.png
+INPUT .\Images\fig_ressonancia.png
+INPUT .\Images\fig_ressonancia.png
+INPUT .\Images\fig_ressonancia.png
+INPUT .\Images\fig_ressonancia.png
+INPUT .\Images\fig_ressonancia.png
+INPUT .\Images\fig_ressonancia.png
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\zptmcm7m.vf
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\psyro.tfm
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi10.tfm
@@ -391,10 +393,6 @@ INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr10.t
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr8t.tfm
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr8t.tfm
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb8t.tfm
-INPUT c:\soft\Personal\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.bbl
-INPUT c:\soft\Personal\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.bbl
-INPUT c:\soft\Personal\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.bbl
-INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ectt1000.tfm
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\zptmcm7m.vf
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\psyro.tfm
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi10.tfm
@@ -405,6 +403,17 @@ INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr8
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr10.tfm
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmb8t.vf
 INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb8r.tfm
+INPUT .\Images\cronograma.png
+INPUT .\Images\cronograma.png
+INPUT .\Images\cronograma.png
+INPUT .\Images\cronograma.png
+INPUT .\Images\cronograma.png
+INPUT .\Images\cronograma.png
+INPUT .\Images\cronograma.png
+INPUT c:\soft\Personal\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.bbl
+INPUT c:\soft\Personal\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.bbl
+INPUT c:\soft\Personal\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.bbl
+INPUT C:\Users\a542012\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ectt1000.tfm
 INPUT c:\soft\Personal\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.aux
 INPUT c:\soft\Personal\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.out
 INPUT c:\soft\Personal\cv_vibrometry\Book\build\TCC - Vinicius Andrade Trento.out

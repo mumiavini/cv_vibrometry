@@ -32,6 +32,7 @@
 \usepackage{tabularx}
 \usepackage{ragged2e}
 \usepackage[font=small,labelfont=bf]{caption}
+\usepackage{stfloats}
 
 % ----- Cabecalho em todas as paginas (igual ao template) --------------------
 \usepackage{fancyhdr}
@@ -86,18 +87,12 @@
   {\noindent\bfseries\itshape Resumo}
   \par\vspace{0.3em}
   {\small\justifying\noindent
-  Texto de até 250 palavras. O resumo deve ser conciso e direto, incluindo
-  brevemente o objetivo do trabalho, os principais resultados e as conclusões
-  mais importantes. (Substituir por seu resumo.) Este trabalho explora e valida
-  a aplicação de metodologias não intrusivas de vibrometria óptica para medição
-  de vibrações em testes dinâmicos de bancada, utilizando câmeras de vídeo
-  convencionais e estimativa de movimento baseada em fase com filtros de Gabor,
-  buscando uma alternativa de baixo custo e \textit{full-field} aos métodos
-  tradicionais por contato.\par}
+  Este trabalho explora e valida a aplicação de metodologias não intrusivas de vibrometria óptica para medição
+  de vibrações em testes dinâmicos de bancada, utilizando câmeras de vídeo convencionais e estimativa de movimento baseada em fase com filtros de Gabor, buscando uma alternativa de baixo custo e \textit{full-field} aos métodos tradicionais por contato.\par}
 
   \vspace{0.6em}
   {\noindent\bfseries\itshape Palavras-Chave}{\itshape: vibrometria óptica;
-  estimativa de movimento baseada em fase; análise modal; SHM;
+  visão Computacional; análise modal; SHM;
   processamento de imagens.\par}
 
   \vspace{1.2em}
@@ -470,18 +465,107 @@ A Tabela~\ref{tab:parametros_materiais} apresenta os parâmetros dos materiais m
     \end{tabularx}
 \end{table}
 
-\subsection{Resultados Preliminares}
+\subsection{Calibração Espacial}
 
+O procedimento de calibração espacial estabelece o fator de escala $s$~[mm/pixel] que converte os deslocamentos medidos em pixels pelo algoritmo de fase para unidade física de comprimento. Antes de cada sessão de ensaio, um objeto de referência de dimensão linear conhecida $d_{ref}$~[mm] é posicionado no mesmo plano focal da régua e fotografado nas condições de aquisição finais (distância câmera-peça, resolução e configuração de zoom). Na imagem de calibração, a extensão do objeto é medida pelo número de pixels $d_{px}$ entre dois pontos de referência de posição conhecida, e o fator de escala é calculado como:
+\begin{equation}
+    s = \frac{d_{ref}}{d_{px}} \quad \text{[mm/pixel]}.
+    \label{eq:escala}
+\end{equation}
 
+Qualquer deslocamento em pixels $\delta_{px}(t)$ extraído pelo algoritmo é então convertido para deslocamento físico por:
+\begin{equation}
+    \delta(t) = s \cdot \delta_{px}(t) \quad \text{[mm]}.
+    \label{eq:deslocamento_fisico}
+\end{equation}
 
-\section{Resultados e Discussão}
+Para minimizar erros sistemáticos, o objeto de referência deve estar rigorosamente no mesmo plano focal da peça, pois variações de profundidade alteram $s$ localmente. A calibração é repetida sempre que houver qualquer alteração na posição ou configuração da câmera.
 
-\section{Considerações Finais}
+\subsection{Arquitetura do Software e Pipeline de Processamento}
+
+O software de vibrometria óptica é implementado em Python e organizado em quatro módulos sequenciais.
+
+\subsubsection{Importação dos quadros}
+
+O vídeo é importado quadro a quadro e cada quadro é convertido para escala de cinza, armazenado como matriz bidimensional $I(x,y,t_k)$, em que $t_k = k/F$ é o instante de captura do $k$-ésimo quadro à taxa $F$~[fps]. O primeiro quadro $I(x,y,t_0)$ é designado quadro de referência, em relação ao qual todos os deslocamentos subsequentes são calculados.
+
+\subsubsection{Definição das regiões de interesse}
+
+Sobre o quadro de referência, o usuário define interativamente dois conjuntos de ROIs:
+
+\begin{itemize}
+    \item \textbf{ROIs de medição:} regiões retangulares sobre os pontos de interesse da estrutura (tipicamente a ponta livre da viga e pontos intermediários ao longo do comprimento), descritas pelas coordenadas $(x_0, y_0, w, h)$;
+    \item \textbf{ROI de referência:} região fixada a um ponto imóvel do fundo da cena, utilizada para estimar e compensar movimentos de corpo rígido da câmera e do suporte.
+\end{itemize}
+
+\subsubsection{Banco de filtros de Gabor e extração de fase}
+
+O núcleo do algoritmo é um banco de $N_\theta \times N_\omega$ filtros de Gabor, com $N_\theta$ orientações $\theta_k$ e $N_\omega$ frequências centrais $\omega_{0,\ell}$. Para cada par $(\theta_k, \omega_{0,\ell})$, o filtro é construído conforme a Equação~\ref{eq:gabor_kernel} e convolvido com o quadro atual:
+\begin{equation}
+    C_{\theta_k,\omega_{0,\ell}}(x,y,t) = \bigl(I(\cdot,t)*G_{\theta_k,\omega_{0,\ell}}\bigr)(x,y),
+    \label{eq:conv_gabor}
+\end{equation}
+produzindo o coeficiente complexo $C = A\exp(j\varphi)$ para cada pixel. Conforme estabelecido na fundamentação teórica (Equações~\ref{eq:gabor_coef}--\ref{eq:fase_deslocamento}), a variação de fase local entre o quadro atual e o de referência é proporcional ao deslocamento sub-pixel na direção do filtro, permitindo sua recuperação direta. O sinal temporal representativo de cada ROI é então obtido por média ponderada pela amplitude $A$ sobre todos os pixels e filtros do banco \cite{Phase2022, WangLogGabor2022}, de modo que regiões de baixa textura contribuam menos para a estimativa final.
+
+\subsection{Extração de Parâmetros Modais e Mitigação de Ruído}
+
+\subsubsection{Subtração da ROI de referência}
+
+O sinal $\bar{\delta}_{ref}(t)$ extraído da ROI de referência captura exclusivamente os movimentos espúrios da câmera e do suporte. O sinal compensado de cada ROI de medição é calculado como:
+\begin{equation}
+    \tilde{\delta}(t) = \bar{\delta}_{meas}(t) - \bar{\delta}_{ref}(t),
+    \label{eq:compensacao}
+\end{equation}
+eliminando a componente de corpo rígido comum a todas as ROIs e melhorando substancialmente a relação sinal-ruído \cite{Mhatre2026, robotcamera2025}. O offset DC residual é removido por subtração do valor médio de $\tilde{\delta}(t)$ antes da análise espectral.
+
+\subsubsection{Análise espectral e identificação modal}
+
+O sinal compensado $\tilde{\delta}(t)$, com $N$ amostras a taxa $F$, é processado pela Transformada Rápida de Fourier (FFT) para obtenção do espectro de amplitude:
+\begin{equation}
+    \tilde{\Delta}(f_n) = \sum_{k=0}^{N-1} \tilde{\delta}(t_k)\,w_k\,e^{-j2\pi f_n t_k},
+    \label{eq:fft}
+\end{equation}
+em que $w_k$ é a janela de Hann, aplicada para redução do vazamento espectral, e $f_n = nF/N$ são as frequências discretas. As frequências naturais da estrutura são identificadas pelos picos de $|\tilde{\Delta}(f)|$. Para ensaios com excitação de base conhecida, a FRF é estimada como $H(f) = \tilde{\Delta}_{out}(f)/\tilde{\Delta}_{in}(f)$ \cite{Downey2026}. A razão de amortecimento de cada modo é extraída pelo método da meia potência (\textit{half-power bandwidth}):
+\begin{equation}
+    \zeta_i \approx \frac{f_{i,2} - f_{i,1}}{2\,f_{n,i}},
+    \label{eq:zeta_halfpower}
+\end{equation}
+em que $f_{i,1}$ e $f_{i,2}$ são as frequências para as quais $|H(f)| = |H(f_{n,i})|/\sqrt{2}$ \cite{Ewins2000}.
+
+\subsection{Estratégia de Validação dos Resultados}
+
+A validação dos resultados extraídos pelo algoritmo é estruturada em dois níveis, correspondentes às Fases~1 e~2 do cronograma.
+
+\subsubsection{Comparação com o modelo analítico (Fase~1)}
+
+Na Fase~1, a frequência $f_{n,1}^{opt}$ identificada pelo pico da FFT é comparada ao valor teórico $f_{n,1}^{anal}$ calculado pela Equação~\ref{eq:fn_cantilever} para a geometria e o material reais da régua. O critério de aprovação é:
+\begin{equation}
+    \varepsilon = \frac{\bigl|f_{n,1}^{opt} - f_{n,1}^{anal}\bigr|}{f_{n,1}^{anal}} \times 100\% < 5\%.
+    \label{eq:criterio_validacao}
+\end{equation}
+Caso o critério não seja atingido, os parâmetros do banco de filtros ($\theta_k$, $\omega_{0,\ell}$, $\sigma$) são ajustados iterativamente e os ensaios são repetidos.
+
+\subsubsection{Ensaio comparativo com acelerômetro piezoelétrico (Fase~2)}
+
+Na Fase~2, um acelerômetro piezoelétrico é fixado na ponta livre da viga e seus sinais de aceleração são integrados duplamente no domínio da frequência para obtenção do deslocamento equivalente, possibilitando comparação direta com o deslocamento óptico \cite{AgilentAN243-3}. O ensaio persegue dois objetivos simultâneos: (i)~validar a acurácia do método óptico frente ao método de contato em uma configuração controlada; (ii)~evidenciar quantitativamente o efeito de \textit{mass loading} introduzido pelo sensor. Para tanto, a frequência $f_{n,1}$ é identificada em dois cenários: com o acelerômetro fixado ($f_{n,1}^{acc}$) e após sua remoção, utilizando exclusivamente o método óptico ($f_{n,1}^{opt}$). O deslocamento de frequência previsto pela Equação~\ref{eq:mass_loading} é contrastado com o valor medido, fornecendo evidência experimental quantitativa da distorção introduzida pelo método por contato em estruturas leves e fechando o ciclo de validação do sistema proposto.
+
+\clearpage
+\section{Cronograma}
+
+A sequência do projeto é organizada em quatro etapas principais, conforme ilustrado na Figura~\ref{fig:cronograma}:
+
+\begin{figure*}[!htb]
+    \centering
+    \includegraphics[width=\textwidth]{Images/cronograma.png}
+    \caption{Cronograma do projeto. Fonte: O autor.}
+    \label{fig:cronograma}
+\end{figure*}
+
 
 %==============================================================================
-%  REFERENCIAS 
+%  REFERENCIAS
 %==============================================================================
 \bibliographystyle{unsrt}
-\bibliography{referencias}
+\bibliography{referencias.bib}
 
 \end{document}

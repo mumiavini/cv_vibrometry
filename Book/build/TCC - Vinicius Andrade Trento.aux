@@ -34,6 +34,7 @@
 \@writefile{toc}{\contentsline {section}{\numberline {2}Fundamentação Teórica}{2}{section.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Conceitos Fundamentais de Dinâmica e Vibrações Mecânicas}{2}{subsection.2.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.1}Sistema massa-mola-amortecedor de 1 GDL}{2}{subsubsection.2.1.1}\protected@file@percent }
+\newlabel{eq:eom_1gdl}{{1}{2}{Sistema massa-mola-amortecedor de 1 GDL}{equation.1}{}}
 \citation{Downey2026}
 \citation{Downey2026,Rao2010}
 \citation{Downey2026}
@@ -41,7 +42,6 @@
 \citation{Downey2026}
 \citation{Downey2026,Rao2010}
 \citation{Downey2026}
-\newlabel{eq:eom_1gdl}{{1}{3}{Sistema massa-mola-amortecedor de 1 GDL}{equation.1}{}}
 \newlabel{eq:resposta_subamortecida}{{2}{3}{Sistema massa-mola-amortecedor de 1 GDL}{equation.2}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Regimes de resposta livre em função da razão de amortecimento $\zeta $.}}{3}{table.caption.4}\protected@file@percent }
 \newlabel{tab:casos_amortecimento}{{1}{3}{Regimes de resposta livre em função da razão de amortecimento $\zeta $}{table.caption.4}{}}
@@ -132,9 +132,6 @@
 \citation{Mhatre2026}
 \citation{Rao2010}
 \citation{Rao2010,Downey2026}
-\bibstyle{unsrt}
-\bibdata{referencias}
-\bibcite{Anna2026}{{1}{}{{}}{{}}}
 \@writefile{toc}{\contentsline {section}{\numberline {3}Metodologia}{8}{section.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Produto Mínimo Viável (MVP)}{8}{subsection.3.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Equipamentos Utilizados}{8}{subsection.3.2}\protected@file@percent }
@@ -146,6 +143,34 @@
 \newlabel{eq:fn_cantilever}{{10}{8}{Modelo analítico da viga cantilever}{equation.10}{}}
 \newlabel{eq:fn_simplificado}{{11}{8}{Modelo analítico da viga cantilever}{equation.11}{}}
 \newlabel{eq:keq_meq}{{12}{8}{Modelo analítico da viga cantilever}{equation.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Calibração Espacial}{8}{subsection.3.4}\protected@file@percent }
+\citation{Phase2022,WangLogGabor2022}
+\citation{Mhatre2026,robotcamera2025}
+\citation{Downey2026}
+\citation{Ewins2000}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Parâmetros materiais de referência para estimativa de $f_{n,1}$.}}{9}{table.caption.11}\protected@file@percent }
+\newlabel{tab:parametros_materiais}{{2}{9}{Parâmetros materiais de referência para estimativa de $f_{n,1}$}{table.caption.11}{}}
+\newlabel{eq:escala}{{13}{9}{Calibração Espacial}{equation.13}{}}
+\newlabel{eq:deslocamento_fisico}{{14}{9}{Calibração Espacial}{equation.14}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Arquitetura do Software e Pipeline de Processamento}{9}{subsection.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.1}Importação dos quadros}{9}{subsubsection.3.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.2}Definição das regiões de interesse}{9}{subsubsection.3.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.3}Banco de filtros de Gabor e extração de fase}{9}{subsubsection.3.5.3}\protected@file@percent }
+\newlabel{eq:conv_gabor}{{15}{9}{Banco de filtros de Gabor e extração de fase}{equation.15}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Extração de Parâmetros Modais e Mitigação de Ruído}{9}{subsection.3.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.6.1}Subtração da ROI de referência}{9}{subsubsection.3.6.1}\protected@file@percent }
+\newlabel{eq:compensacao}{{16}{9}{Subtração da ROI de referência}{equation.16}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.6.2}Análise espectral e identificação modal}{9}{subsubsection.3.6.2}\protected@file@percent }
+\newlabel{eq:fft}{{17}{9}{Análise espectral e identificação modal}{equation.17}{}}
+\newlabel{eq:zeta_halfpower}{{18}{9}{Análise espectral e identificação modal}{equation.18}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.7}Estratégia de Validação dos Resultados}{9}{subsection.3.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.7.1}Comparação com o modelo analítico (Fase~1)}{9}{subsubsection.3.7.1}\protected@file@percent }
+\newlabel{eq:criterio_validacao}{{19}{9}{Comparação com o modelo analítico (Fase~1)}{equation.19}{}}
+\citation{AgilentAN243-3}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.7.2}Ensaio comparativo com acelerômetro piezoelétrico (Fase~2)}{10}{subsubsection.3.7.2}\protected@file@percent }
+\bibstyle{unsrt}
+\bibdata{referencias.bib}
+\bibcite{Anna2026}{{1}{}{{}}{{}}}
 \bibcite{PiezoAccelerometer2023}{{2}{}{{}}{{}}}
 \bibcite{aceletrometroDewesoft2025}{{3}{}{{}}{{}}}
 \bibcite{Phase2022}{{4}{}{{}}{{}}}
@@ -162,13 +187,11 @@
 \bibcite{OptometHeNe}{{15}{}{{}}{{}}}
 \bibcite{Mhatre2026}{{16}{}{{}}{{}}}
 \bibcite{LavatelliZappa2017}{{17}{}{{}}{{}}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Cronograma do projeto. Fonte: O autor.}}{11}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:cronograma}{{10}{11}{Cronograma do projeto. Fonte: O autor}{figure.caption.12}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Cronograma}{11}{section.4}\protected@file@percent }
 \bibcite{Wadhwa2013}{{18}{}{{}}{{}}}
 \bibcite{ZhangLogGabor2024}{{19}{}{{}}{{}}}
 \bibcite{WangLogGabor2022}{{20}{}{{}}{{}}}
 \providecommand\NAT@force@numbers{}\NAT@force@numbers
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Parâmetros materiais de referência para estimativa de $f_{n,1}$.}}{9}{table.caption.11}\protected@file@percent }
-\newlabel{tab:parametros_materiais}{{2}{9}{Parâmetros materiais de referência para estimativa de $f_{n,1}$}{table.caption.11}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Resultados Preliminares}{9}{subsection.3.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}Resultados e Discussão}{9}{section.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5}Considerações Finais}{9}{section.5}\protected@file@percent }
-\gdef \@abspage@last{9}
+\gdef \@abspage@last{12}

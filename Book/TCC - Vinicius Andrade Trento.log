@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.4.24)  1 JUN 2026 21:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.4.24)  2 JUN 2026 16:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -376,6 +376,12 @@ Package caption Info: Standard document class detected.
 \c@continuedfloat=\count323
 Package caption Info: float package is loaded.
 )
+(C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex/latex/sttools\stfloats.sty
+Package: stfloats 2025/06/18 v3.4 Improve float mechanism and baselineskip sett
+ings
+\@dblbotnum=\count324
+\c@dblbotnumber=\count325
+)
 (C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex/latex/fancyhdr\fancyhdr.sty
 Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
 
@@ -439,7 +445,7 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 ty
 Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 ))
-\c@section@level=\count324
+\c@section@level=\count326
 )
 (C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\stringenc
 .sty
@@ -447,8 +453,8 @@ Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO
 )
 )
 \@linkdim=\dimen263
-\Hy@linkcounter=\count325
-\Hy@pagecounter=\count326
+\Hy@linkcounter=\count327
+\Hy@pagecounter=\count328
 
 (C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc.def
 File: pd1enc.def 2025-07-12 v7.01o Hyperref: PDFDocEncoding definition (HO)
@@ -458,7 +464,7 @@ Now handling font encoding PD1 ...
 (C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-\Hy@SavedSpaceFactor=\count327
+\Hy@SavedSpaceFactor=\count329
  (C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.def
 File: puenc.def 2025-07-12 v7.01o Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
@@ -471,7 +477,7 @@ Package hyperref Info: Plain pages OFF on input line 4210.
 Package hyperref Info: Backreferencing OFF on input line 4215.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4462.
-\c@Hy@tempcnt=\count328
+\c@Hy@tempcnt=\count330
 (C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
 \Urlmuskip=\muskip18
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
@@ -487,7 +493,7 @@ lc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 )
 ))
-\Fld@menulength=\count329
+\Fld@menulength=\count331
 \Field@Width=\dimen265
 \Fld@charsize=\dimen266
 Package hyperref Info: Hyper figures OFF on input line 6078.
@@ -497,16 +503,16 @@ Package hyperref Info: backreferencing OFF on input line 6093.
 Package hyperref Info: Link coloring OFF on input line 6098.
 Package hyperref Info: Link coloring with OCG OFF on input line 6103.
 Package hyperref Info: PDF/A mode OFF on input line 6108.
-\Hy@abspage=\count330
-\c@Item=\count331
-\c@Hfootnote=\count332
+\Hy@abspage=\count332
+\c@Item=\count333
+\c@Hfootnote=\count334
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
 
 (C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdftex.def
 File: hpdftex.def 2025-07-12 v7.01o Hyperref driver for pdfTeX
-\Fld@listcount=\count333
-\c@bookmark@seq@number=\count334
+\Fld@listcount=\count335
+\c@bookmark@seq@number=\count336
 
 (C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerunf
 ilecheck.sty
@@ -526,7 +532,7 @@ Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip87
 \bibsep=\skip88
 LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count335
+\c@NAT@ctr=\count337
 )
 (C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex/latex/graphics\color.sty
 Package: color 2025/01/14 v1.3e Standard LaTeX Color (DPC)
@@ -539,7 +545,7 @@ Package color Info: Driver file: pdftex.def on input line 149.
 
 (C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.lt
 x))
-LaTeX Font Info:    Trying to load font information for T1+ptm on input line 64
+LaTeX Font Info:    Trying to load font information for T1+ptm on input line 65
 .
  (C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
@@ -547,28 +553,28 @@ File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 (C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-p
 dftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count336
+\l__color_backend_stack_int=\count338
 ) (TCC - Vinicius Andrade Trento.aux)
 \openout1 = `"TCC - Vinicius Andrade Trento.aux"'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -608,16 +614,16 @@ LaTeX Font Info:    ... okay on input line 64.
 (C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.
 mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count337
+\scratchcounter=\count339
 \scratchdimen=\dimen267
 \scratchbox=\box68
-\nofMPsegments=\count338
-\nofMParguments=\count339
+\nofMPsegments=\count340
+\nofMParguments=\count341
 \everyMPshowfont=\toks32
-\MPscratchCnt=\count340
+\MPscratchCnt=\count342
 \MPscratchDim=\dimen268
-\MPnumerator=\count341
-\makeMPintoPDFobject=\count342
+\MPnumerator=\count343
+\makeMPintoPDFobject=\count344
 \everyMPtoPDFconversion=\toks33
 )
 (C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf
@@ -633,106 +639,106 @@ File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring OFF on input line 64.
+Package hyperref Info: Link coloring OFF on input line 65.
  (TCC - Vinicius Andrade Trento.out) (TCC - Vinicius Andrade Trento.out)
 \@outlinefile=\write3
 \openout3 = `"TCC - Vinicius Andrade Trento.out"'.
 
 LaTeX Font Info:    Trying to load font information for OT1+ztmcm on input line
- 107.
+ 108.
 
 (C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1ztmcm.fd
 File: ot1ztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ztmcm.
 )
 LaTeX Font Info:    Trying to load font information for OML+ztmcm on input line
- 107.
+ 108.
 
 (C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omlztmcm.fd
 File: omlztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ztmcm.
 )
 LaTeX Font Info:    Trying to load font information for OMS+ztmcm on input line
- 107.
+ 108.
 
 (C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omsztmcm.fd
 File: omsztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/ztmcm.
 )
 LaTeX Font Info:    Trying to load font information for OMX+ztmcm on input line
- 107.
+ 108.
 
 (C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omxztmcm.fd
 File: omxztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/ztmcm.
 )
 LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 1
-07.
+08.
 
 (C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 107.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 108.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 107.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 108.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 107.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 108.
 
 
 Package natbib Warning: Citation `Anna2026' on page 1 undefined on input line 1
-15.
+16.
 
 
 Package natbib Warning: Citation `PiezoAccelerometer2023' on page 1 undefined o
-n input line 115.
+n input line 116.
 
-<Images/acelerometro_dewesoft traduzido.png, id=152, 2176.13pt x 1959.32pt>
+<Images/acelerometro_dewesoft traduzido.png, id=164, 2176.13pt x 1959.32pt>
 File: Images/acelerometro_dewesoft traduzido.png Graphic file (type png)
 <use Images/acelerometro_dewesoft traduzido.png>
 Package pdftex.def Info: Images/acelerometro_dewesoft traduzido.png  used on in
-put line 119.
+put line 120.
 (pdftex.def)             Requested size: 233.31252pt x 210.05475pt.
 
 Package natbib Warning: Citation `aceletrometroDewesoft2025' on page 1 undefine
-d on input line 120.
+d on input line 121.
 
 
 Package natbib Warning: Citation `aceletrometroDewesoft2025' on page 1 undefine
-d on input line 120.
+d on input line 121.
 
 LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 1
-27.
+28.
 (C:\Users\a542012\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
 
 Package natbib Warning: Citation `Phase2022' on page 1 undefined on input line 
-132.
+133.
 
 
 Package natbib Warning: Citation `LDVpolytec2006' on page 1 undefined on input 
-line 132.
+line 133.
 
-<Images/LDV traduzido.png, id=155, 2698.08pt x 1601.985pt>
+<Images/LDV traduzido.png, id=167, 2698.08pt x 1601.985pt>
 File: Images/LDV traduzido.png Graphic file (type png)
 <use Images/LDV traduzido.png>
-Package pdftex.def Info: Images/LDV traduzido.png  used on input line 136.
+Package pdftex.def Info: Images/LDV traduzido.png  used on input line 137.
 (pdftex.def)             Requested size: 233.31252pt x 138.52579pt.
 
 Package natbib Warning: Citation `LDVpolytec2006' on page 1 undefined on input 
-line 137.
+line 138.
 
 
 Package natbib Warning: Citation `LDVpolytec2006' on page 1 undefined on input 
-line 137.
+line 138.
 
 
 Package natbib Warning: Citation `robotcamera2025' on page 1 undefined on input
- line 141.
+ line 142.
 
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 142.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 143.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 142.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 143.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 142.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 143.
 [1{C:/Users/a542012/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/
 a542012/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}
 
@@ -740,298 +746,298 @@ a542012/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}
  <./Images/acelerometro_dewesoft traduzido.png> <./Images/LDV traduzido.png>]
 
 Package natbib Warning: Citation `Phase2022' on page 2 undefined on input line 
-143.
+144.
 
-<Images/camerabased vibrometry traduzido.png, id=170, 2034.85219pt x 1018.55531
+<Images/camerabased vibrometry traduzido.png, id=182, 2034.85219pt x 1018.55531
 pt>
 File: Images/camerabased vibrometry traduzido.png Graphic file (type png)
 <use Images/camerabased vibrometry traduzido.png>
 Package pdftex.def Info: Images/camerabased vibrometry traduzido.png  used on i
-nput line 147.
+nput line 148.
 (pdftex.def)             Requested size: 233.31252pt x 116.7817pt.
 
 Package natbib Warning: Citation `robotcamera2025' on page 2 undefined on input
- line 148.
+ line 149.
 
 
 Package natbib Warning: Citation `robotcamera2025' on page 2 undefined on input
- line 148.
+ line 149.
 
 
 Package natbib Warning: Citation `Phase2022' on page 2 undefined on input line 
-157.
+158.
 
 
 Package natbib Warning: Citation `Downey2026' on page 2 undefined on input line
- 177.
+ 178.
 
 
 Package natbib Warning: Citation `Rao2010' on page 2 undefined on input line 17
-7.
+8.
 
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 181.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 182.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 181.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 182.
 
 Package natbib Warning: Citation `Downey2026' on page 2 undefined on input line
- 181.
+ 182.
 
 [2 <./Images/camerabased vibrometry traduzido.png>]
 
 Package natbib Warning: Citation `Downey2026' on page 3 undefined on input line
- 188.
+ 189.
 
 
 Package natbib Warning: Citation `Downey2026' on page 3 undefined on input line
- 193.
+ 194.
 
 
 Package natbib Warning: Citation `Rao2010' on page 3 undefined on input line 19
-3.
+4.
 
 
-Underfull \hbox (badness 2460) in paragraph at lines 209--209
+Underfull \hbox (badness 2460) in paragraph at lines 210--210
 []|\T1/ptm/b/n/9 Natureza da res-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 209--209
+Underfull \hbox (badness 10000) in paragraph at lines 210--210
 []|\T1/ptm/m/n/9 Oscilação har-mô-
  []
 
 
-Underfull \hbox (badness 1005) in paragraph at lines 209--209
+Underfull \hbox (badness 1005) in paragraph at lines 210--210
 \T1/ptm/m/n/9 cai-mento ex-po-nen-
  []
 
 
-Underfull \hbox (badness 1107) in paragraph at lines 209--209
+Underfull \hbox (badness 1107) in paragraph at lines 210--210
 []|\T1/ptm/m/n/9 Retorno ao equi-lí-
  []
 
 
-Underfull \hbox (badness 7759) in paragraph at lines 209--209
+Underfull \hbox (badness 7759) in paragraph at lines 210--210
 []|\T1/ptm/m/n/9 Retorno lento ao
  []
 
-<Images/fig_regimes_amortecimento.png, id=180, 711.6186pt x 472.4049pt>
+<Images/fig_regimes_amortecimento.png, id=192, 711.6186pt x 472.4049pt>
 File: Images/fig_regimes_amortecimento.png Graphic file (type png)
 <use Images/fig_regimes_amortecimento.png>
 Package pdftex.def Info: Images/fig_regimes_amortecimento.png  used on input li
-ne 216.
+ne 217.
 (pdftex.def)             Requested size: 233.31252pt x 154.88493pt.
 
 Package natbib Warning: Citation `Downey2026' on page 3 undefined on input line
- 223.
+ 224.
 
 
 Package natbib Warning: Citation `Downey2026' on page 3 undefined on input line
- 230.
+ 231.
 
 
 Package natbib Warning: Citation `Rao2010' on page 3 undefined on input line 23
-0.
+1.
 
-<Images/fig_ressonancia.png, id=183, 567.5604pt x 349.5459pt>
+<Images/fig_ressonancia.png, id=195, 567.5604pt x 349.5459pt>
 File: Images/fig_ressonancia.png Graphic file (type png)
 <use Images/fig_ressonancia.png>
-Package pdftex.def Info: Images/fig_ressonancia.png  used on input line 234.
+Package pdftex.def Info: Images/fig_ressonancia.png  used on input line 235.
 (pdftex.def)             Requested size: 233.31252pt x 143.69344pt.
 
 Package natbib Warning: Citation `Downey2026' on page 3 undefined on input line
- 239.
+ 240.
 
 
 Package natbib Warning: Citation `Downey2026' on page 3 undefined on input line
- 243.
+ 244.
 
 
 Package natbib Warning: Citation `Rao2010' on page 3 undefined on input line 24
-3.
+4.
 
 
 Package natbib Warning: Citation `Downey2026' on page 3 undefined on input line
- 248.
+ 249.
 
 [3 <./Images/fig_regimes_amortecimento.png> <./Images/fig_ressonancia.png>]
 
 Package natbib Warning: Citation `Ewins2000' on page 4 undefined on input line 
-250.
+251.
 
 
 Package natbib Warning: Citation `robotcamera2025' on page 4 undefined on input
- line 250.
+ line 251.
 
 
 Package natbib Warning: Citation `Doebling1998' on page 4 undefined on input li
-ne 254.
+ne 255.
 
 
 Package natbib Warning: Citation `Doebling1998' on page 4 undefined on input li
-ne 254.
+ne 255.
 
 
 Package natbib Warning: Citation `Doebling1998' on page 4 undefined on input li
-ne 256.
+ne 257.
 
-<Images/fig_perda_rigidez.png, id=203, 783.6477pt x 355.3275pt>
+<Images/fig_perda_rigidez.png, id=215, 783.6477pt x 355.3275pt>
 File: Images/fig_perda_rigidez.png Graphic file (type png)
 <use Images/fig_perda_rigidez.png>
-Package pdftex.def Info: Images/fig_perda_rigidez.png  used on input line 260.
+Package pdftex.def Info: Images/fig_perda_rigidez.png  used on input line 261.
 (pdftex.def)             Requested size: 233.31252pt x 105.78578pt.
 
 Package natbib Warning: Citation `ASTM_E1049' on page 4 undefined on input line
- 265.
+ 266.
 
 
 Package natbib Warning: Citation `Miner1945' on page 4 undefined on input line 
-265.
+266.
 
 
 Package natbib Warning: Citation `Downey2026' on page 4 undefined on input line
- 269.
+ 270.
 
 
 Package natbib Warning: Citation `PiezoAccelerometer2023' on page 4 undefined o
-n input line 273.
+n input line 274.
 
 
 Package natbib Warning: Citation `PiezoAccelerometer2023' on page 4 undefined o
-n input line 276.
+n input line 277.
 
 
 Package natbib Warning: Citation `aceletrometroDewesoft2025' on page 4 undefine
-d on input line 276.
+d on input line 277.
 
 
 Package natbib Warning: Citation `Anna2026' on page 4 undefined on input line 2
-78.
+79.
 
 
 Package natbib Warning: Citation `AgilentAN243-3' on page 4 undefined on input 
-line 284.
+line 285.
 
 
 Package natbib Warning: Citation `Ewins2000' on page 4 undefined on input line 
-284.
+285.
 
 [4 <./Images/fig_perda_rigidez.png>]
 
 Package natbib Warning: Citation `Serridge1987' on page 5 undefined on input li
-ne 289.
+ne 290.
 
 
 Package natbib Warning: Citation `AgilentAN243-3' on page 5 undefined on input 
-line 289.
+line 290.
 
 
 Package natbib Warning: Citation `robotcamera2025' on page 5 undefined on input
- line 289.
+ line 290.
 
-<Images/fig_mass_loading.png, id=212, 783.4068pt x 354.6048pt>
+<Images/fig_mass_loading.png, id=224, 783.4068pt x 354.6048pt>
 File: Images/fig_mass_loading.png Graphic file (type png)
 <use Images/fig_mass_loading.png>
-Package pdftex.def Info: Images/fig_mass_loading.png  used on input line 293.
+Package pdftex.def Info: Images/fig_mass_loading.png  used on input line 294.
 (pdftex.def)             Requested size: 233.31252pt x 105.6085pt.
 
 Package natbib Warning: Citation `Serridge1987' on page 5 undefined on input li
-ne 298.
+ne 299.
 
 
 Package natbib Warning: Citation `PiezoAccelerometer2023' on page 5 undefined o
-n input line 298.
+n input line 299.
 
 
 Package natbib Warning: Citation `LDVpolytec2006' on page 5 undefined on input 
-line 302.
+line 303.
 
 
 Package natbib Warning: Citation `OptometHeNe' on page 5 undefined on input lin
-e 307.
+e 308.
 
 
 Package natbib Warning: Citation `LDVpolytec2006' on page 5 undefined on input 
-line 307.
+line 308.
 
 
 Package natbib Warning: Citation `LDVpolytec2006' on page 5 undefined on input 
-line 311.
+line 312.
 
 
 Package natbib Warning: Citation `LDVpolytec2006' on page 5 undefined on input 
-line 313.
+line 314.
 
 
 Package natbib Warning: Citation `LDVpolytec2006' on page 5 undefined on input 
-line 317.
+line 318.
 
 
 Package natbib Warning: Citation `robotcamera2025' on page 5 undefined on input
- line 323.
+ line 324.
 
 
 Package natbib Warning: Citation `Mhatre2026' on page 5 undefined on input line
- 323.
+ 324.
 
 
 Package natbib Warning: Citation `robotcamera2025' on page 5 undefined on input
- line 323.
+ line 324.
 
 [5 <./Images/fig_mass_loading.png>]
 
 Package natbib Warning: Citation `robotcamera2025' on page 6 undefined on input
- line 329.
+ line 330.
 
-<Images/fig_nyquist_aliasing.png, id=222, 784.3704pt x 580.3281pt>
+<Images/fig_nyquist_aliasing.png, id=234, 784.3704pt x 580.3281pt>
 File: Images/fig_nyquist_aliasing.png Graphic file (type png)
 <use Images/fig_nyquist_aliasing.png>
 Package pdftex.def Info: Images/fig_nyquist_aliasing.png  used on input line 33
-3.
+4.
 (pdftex.def)             Requested size: 233.31252pt x 172.62097pt.
 
 Package natbib Warning: Citation `LavatelliZappa2017' on page 6 undefined on in
-put line 338.
+put line 339.
 
 
 Package natbib Warning: Citation `LavatelliZappa2017' on page 6 undefined on in
-put line 338.
+put line 339.
 
 
 Package natbib Warning: Citation `robotcamera2025' on page 6 undefined on input
- line 338.
+ line 339.
 
-<Images/fig_motion_blur.png, id=223, 1678.27pt x 944.52875pt>
+<Images/fig_motion_blur.png, id=235, 1678.27pt x 944.52875pt>
 File: Images/fig_motion_blur.png Graphic file (type png)
 <use Images/fig_motion_blur.png>
-Package pdftex.def Info: Images/fig_motion_blur.png  used on input line 342.
+Package pdftex.def Info: Images/fig_motion_blur.png  used on input line 343.
 (pdftex.def)             Requested size: 233.31252pt x 131.29631pt.
 
 Package natbib Warning: Citation `robotcamera2025' on page 6 undefined on input
- line 347.
+ line 348.
 
 
 Package natbib Warning: Citation `Wadhwa2013' on page 6 undefined on input line
- 351.
+ 352.
 
 
 Package natbib Warning: Citation `Phase2022' on page 6 undefined on input line 
-351.
+352.
 
 
 Package natbib Warning: Citation `ZhangLogGabor2024' on page 6 undefined on inp
-ut line 351.
+ut line 352.
 
 
 Package natbib Warning: Citation `WangLogGabor2022' on page 6 undefined on inpu
-t line 351.
+t line 352.
 
 
 Package natbib Warning: Citation `Wadhwa2013' on page 6 undefined on input line
- 353.
+ 354.
 
 
-Overfull \hbox (8.78311pt too wide) detected at line 362
+Overfull \hbox (8.78311pt too wide) detected at line 363
 [][][]\OML/ztmcm/m/it/10 C[]\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 x; y; t\OT1/z
 tmcm/m/n/10 ) = []\OML/ztmcm/m/it/10 I \OMS/ztmcm/m/n/10 ^^C \OML/ztmcm/m/it/10
  G[][]\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 x; y; t\OT1/ztmcm/m/n/10 ) = \OML/z
@@ -1042,179 +1048,196 @@ ztmcm/m/n/10 )[]\OML/ztmcm/m/it/10 ;
 
 
 Package natbib Warning: Citation `Wadhwa2013' on page 6 undefined on input line
- 363.
+ 364.
 
 
 Package natbib Warning: Citation `Wadhwa2013' on page 6 undefined on input line
- 365.
+ 366.
 
 
 Package natbib Warning: Citation `Phase2022' on page 6 undefined on input line 
-365.
+366.
 
 [6 <./Images/fig_nyquist_aliasing.png> <./Images/fig_motion_blur.png (PNG copy)
 >]
 
 Package natbib Warning: Citation `Wadhwa2013' on page 7 undefined on input line
- 370.
+ 371.
 
 
 Package natbib Warning: Citation `Wadhwa2013' on page 7 undefined on input line
- 372.
+ 373.
 
 
 Package natbib Warning: Citation `Phase2022' on page 7 undefined on input line 
-372.
+373.
 
 
 Package natbib Warning: Citation `WangLogGabor2022' on page 7 undefined on inpu
-t line 372.
+t line 373.
 
 
 Package natbib Warning: Citation `Mhatre2026' on page 7 undefined on input line
- 372.
+ 373.
 
 
 Package natbib Warning: Citation `robotcamera2025' on page 7 undefined on input
- line 372.
+ line 373.
 
 
 Package natbib Warning: Citation `robotcamera2025' on page 7 undefined on input
- line 374.
+ line 375.
 
 
 Package natbib Warning: Citation `ZhangLogGabor2024' on page 7 undefined on inp
-ut line 374.
+ut line 375.
 
 
 Package natbib Warning: Citation `WangLogGabor2022' on page 7 undefined on inpu
-t line 374.
+t line 375.
 
 
 Package natbib Warning: Citation `ZhangLogGabor2024' on page 7 undefined on inp
-ut line 374.
+ut line 375.
 
 
 Package natbib Warning: Citation `Mhatre2026' on page 7 undefined on input line
- 380.
+ 381.
 
 
 Package natbib Warning: Citation `robotcamera2025' on page 7 undefined on input
- line 382.
+ line 383.
 
 
 Package natbib Warning: Citation `robotcamera2025' on page 7 undefined on input
- line 382.
+ line 383.
 
 
 Package natbib Warning: Citation `robotcamera2025' on page 7 undefined on input
- line 389.
+ line 390.
 
 
 Package natbib Warning: Citation `Mhatre2026' on page 7 undefined on input line
- 390.
-
-
-Package natbib Warning: Citation `robotcamera2025' on page 7 undefined on input
- line 391.
+ 391.
 
 
 Package natbib Warning: Citation `robotcamera2025' on page 7 undefined on input
  line 392.
 
 
+Package natbib Warning: Citation `robotcamera2025' on page 7 undefined on input
+ line 393.
+
+
 Package natbib Warning: Citation `Mhatre2026' on page 7 undefined on input line
- 392.
+ 393.
 
 
 Package natbib Warning: Citation `robotcamera2025' on page 7 undefined on input
- line 393.
+ line 394.
 
 [7]
 
 Package natbib Warning: Citation `robotcamera2025' on page 8 undefined on input
- line 418.
+ line 419.
 
 
 Package natbib Warning: Citation `robotcamera2025' on page 8 undefined on input
- line 420.
+ line 421.
 
 
 Package natbib Warning: Citation `LavatelliZappa2017' on page 8 undefined on in
-put line 420.
+put line 421.
 
 
 Package natbib Warning: Citation `Wadhwa2013' on page 8 undefined on input line
- 424.
+ 425.
 
 
 Package natbib Warning: Citation `Mhatre2026' on page 8 undefined on input line
- 426.
-
-
-Package natbib Warning: Citation `robotcamera2025' on page 8 undefined on input
- line 430.
+ 427.
 
 
 Package natbib Warning: Citation `Rao2010' on page 8 undefined on input line 43
-9.
+6.
 
 
 Package natbib Warning: Citation `Rao2010' on page 8 undefined on input line 45
-3.
+0.
 
 
 Package natbib Warning: Citation `Downey2026' on page 8 undefined on input line
- 453.
+ 450.
 
-[8]
-Underfull \hbox (badness 10000) in alignment at lines 474--474
+
+Underfull \hbox (badness 10000) in alignment at lines 471--471
 [][][] 
  []
 
-
-Package natbib Warning: Citation `Wadhwa2013' on page 9 undefined on input line
- 487.
-
+[8]
 
 Package natbib Warning: Citation `Phase2022' on page 9 undefined on input line 
-487.
+514.
+
+
+Package natbib Warning: Citation `WangLogGabor2022' on page 9 undefined on inpu
+t line 514.
 
 
 Package natbib Warning: Citation `Mhatre2026' on page 9 undefined on input line
- 491.
-
-
-Underfull \hbox (badness 4391) in paragraph at lines 493--493
-|[]\T1/ptm/m/it/10 Etapa 3 -- Va-li-da-ção ex-pe-ri-men-tal con-tro-lada
- []
+ 525.
 
 
 Package natbib Warning: Citation `robotcamera2025' on page 9 undefined on input
- line 495.
+ line 525.
 
 
-Package natbib Warning: Citation `Mhatre2026' on page 9 undefined on input line
- 499.
+Package natbib Warning: Citation `Downey2026' on page 9 undefined on input line
+ 534.
+
+
+Package natbib Warning: Citation `Ewins2000' on page 9 undefined on input line 
+539.
+
+[9]
+
+Package natbib Warning: Citation `AgilentAN243-3' on page 10 undefined on input
+ line 556.
+
+[10
+
+]
+<Images/cronograma.png, id=283, 1208.71574pt x 611.28375pt>
+File: Images/cronograma.png Graphic file (type png)
+<use Images/cronograma.png>
+Package pdftex.def Info: Images/cronograma.png  used on input line 565.
+(pdftex.def)             Requested size: 483.69687pt x 244.6211pt.
 
 No file "TCC - Vinicius Andrade Trento".bbl.
 
 Package natbib Warning: There were undefined citations.
 
-[9] (TCC - Vinicius Andrade Trento.aux)
+[11
+
+
+ <./Images/cronograma.png>] (TCC - Vinicius Andrade Trento.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package rerunfilecheck Info: File `"TCC - Vinicius Andrade Trento".out' has not
  changed.
-(rerunfilecheck)             Checksum: D96DE609D1A6366B7242C5DE589AE1B7;9766.
+(rerunfilecheck)             Checksum: EEB1B68C8AF00DA906377AC74B62D133;10160.
  ) 
 Here is how much of TeX's memory you used:
- 18477 strings out of 467871
- 352172 string characters out of 5417408
- 760075 words of memory out of 5000000
- 47047 multiletter control sequences out of 15000+600000
+ 18552 strings out of 467871
+ 353756 string characters out of 5417408
+ 764622 words of memory out of 5000000
+ 47105 multiletter control sequences out of 15000+600000
  704909 words of font info for 161 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,15n,80p,1219b,1119s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1229,10 +1252,10 @@ Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/a542012/AppData/Loca
 l/Programs/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/a542012/AppData/L
 ocal/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/a542012/AppData
 /Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on "TCC - Vinicius Andrade Trento.pdf" (9 pages, 13628092 bytes)
-.
+Output written on "TCC - Vinicius Andrade Trento.pdf" (11 pages, 13752454 bytes
+).
 PDF statistics:
- 319 PDF objects out of 1000 (max. 8388607)
- 70 named destinations out of 1000 (max. 500000)
- 342 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 353 PDF objects out of 1000 (max. 8388607)
+ 83 named destinations out of 1000 (max. 500000)
+ 371 words of extra memory for PDF output out of 10000 (max. 10000000)
 
