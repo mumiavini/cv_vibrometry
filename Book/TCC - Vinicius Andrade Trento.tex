@@ -425,10 +425,6 @@ A estrutura de teste é uma régua graduada fixada por grampo em uma das extremi
 
 A bancada de suporte consiste em uma mesa rígida sobre a qual o grampo é fixado. Uma região estática da bancada é designada como ROI de referência, cujo sinal de deslocamento estimado é subtraído das demais ROIs de medição para compensar eventuais vibrações de corpo rígido da câmera ou do suporte \cite{Mhatre2026}.
 
-\subsubsection{Iluminação e calibração espacial}
-
-A iluminação é provida por painéis LED alimentados por fonte de corrente constante, eliminando a modulação de intensidade periódica associada ao controle por largura de pulso (PWM) presente em muitas luminárias convencionais. Variações temporais de intensidade luminosa podem ser interpretadas pelo algoritmo de fase como movimento aparente, gerando componentes espectrais espúrias \cite{robotcamera2025}. Os painéis são posicionados frontalmente e de forma difusa para minimizar reflexos especulares sobre a superfície da régua.
-
 A calibração espacial é realizada com um objeto de referência de dimensões conhecidas posicionado no plano focal da câmera, imediatamente antes de cada sessão de ensaio. O fator de escala $s$ [mm/pixel] é extraído da razão entre a dimensão física conhecida e o número de pixels correspondente na imagem, sendo utilizado para converter os deslocamentos estimados pelo algoritmo de pixel para milímetro.
 
 \subsection{Modelagem e Simulação}
@@ -474,9 +470,9 @@ A Tabela~\ref{tab:parametros_materiais} apresenta os parâmetros dos materiais m
     \end{tabularx}
 \end{table}
 
-\subsubsection{Validação numérica do algoritmo}
+\subsection{Resultados Preliminares}
 
-Antes dos ensaios experimentais, o pipeline de filtros de Gabor é validado com dados sintéticos (Fase~1, CW~32--33). O sinal de deslocamento na ponta da viga é gerado numericamente como a resposta livre subamortecida (Equação~\ref{eq:resposta_subamortecida}) com $\omega_n$ e $\zeta$ calculados a partir das Equações~\ref{eq:fn_cantilever} e~\ref{eq:keq_meq}. Desse sinal, geram-se sequências de imagens sintéticas em que um marcador vertical se translada lateralmente conforme $x(t)$, reproduzindo o comportamento esperado no vídeo real. O algoritmo processa essas imagens e a frequência natural extraída pela FFT é comparada ao valor analítico de referência. A etapa é considerada aprovada quando o desvio relativo for inferior a 2\%, garantindo que discrepâncias observadas nos experimentos reais sejam atribuídas a efeitos físicos e não a erros de implementação.
+
 
 \section{Resultados e Discussão}
 
