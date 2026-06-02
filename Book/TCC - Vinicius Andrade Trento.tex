@@ -413,9 +413,70 @@ Com o objetivo de simular a oscilação de 1~GDL de uma viga engastada (\textit{
 
 \subsection{Equipamentos Utilizados}
 
-\subsection{Modelagem e Simulação}
+\subsubsection{Câmera de aquisição}
 
-\subsection{Procedimentos de ensaios}
+A câmera selecionada para os ensaios é a DJI Osmo Action 4, equipada com sensor CMOS de 1/1{,}7'' e abertura fixa de $f$/2{,}8. Para as finalidades de vibrometria, os modos de captura relevantes são 4K a 120\,fps e 1080p a 240\,fps, que estabelecem frequências de Nyquist de, respectivamente, 60\,Hz e 120\,Hz. O modo de 240\,fps é preferido sempre que a frequência fundamental da estrutura sob análise estiver abaixo de 100\,Hz, satisfazendo a recomendação prática de operar com taxa de captura ao menos cinco vezes superior à frequência máxima de interesse \cite{robotcamera2025}.
+
+O sensor da câmera opera com obturador de rolagem (\textit{rolling shutter}), capturando o sensor linha a linha ao invés de instantaneamente. Em oscilações de amplitude elevada, esse mecanismo introduz distorções geométricas entre linhas consecutivas do quadro \cite{robotcamera2025}, constituindo uma limitação relevante para a vibrometria por imagem. A mitigação é realizada mantendo o tempo de exposição suficientemente curto (tipicamente $t_{exp} \leq 1/2000\,\text{s}$), de modo que o deslocamento da estrutura durante cada quadro seja desprezível frente à amplitude total da vibração \cite{LavatelliZappa2017}. A função de estabilização eletrônica RockSteady é desativada durante todos os ensaios, uma vez que esse recurso altera artificialmente o conteúdo de movimento do vídeo e comprometeria a extração de fase.
+
+\subsubsection{Estrutura vibratória e bancada}
+
+A estrutura de teste é uma régua graduada fixada por grampo em uma das extremidades, simulando uma viga engastada-livre (\textit{cantilever}). Esse modelo é escolhido por representar, de forma controlada e analiticamente tratável, o comportamento de 1~GDL de interesse. Na extremidade livre, é aplicado um marcador de alto contraste --- ponto preto sobre fundo branco --- que eleva a amplitude local $A$ na saída dos filtros de Gabor, tornando a estimativa de fase mais confiável naquela região de interesse \cite{Wadhwa2013}. O comprimento livre $L$, a largura $b$ e a espessura $h$ da régua são medidos antes de cada ensaio para alimentar o modelo analítico descrito na Seção~\ref{sec:modelagem}.
+
+A bancada de suporte consiste em uma mesa rígida sobre a qual o grampo é fixado. Uma região estática da bancada é designada como ROI de referência, cujo sinal de deslocamento estimado é subtraído das demais ROIs de medição para compensar eventuais vibrações de corpo rígido da câmera ou do suporte \cite{Mhatre2026}.
+
+\subsubsection{Iluminação e calibração espacial}
+
+A iluminação é provida por painéis LED alimentados por fonte de corrente constante, eliminando a modulação de intensidade periódica associada ao controle por largura de pulso (PWM) presente em muitas luminárias convencionais. Variações temporais de intensidade luminosa podem ser interpretadas pelo algoritmo de fase como movimento aparente, gerando componentes espectrais espúrias \cite{robotcamera2025}. Os painéis são posicionados frontalmente e de forma difusa para minimizar reflexos especulares sobre a superfície da régua.
+
+A calibração espacial é realizada com um objeto de referência de dimensões conhecidas posicionado no plano focal da câmera, imediatamente antes de cada sessão de ensaio. O fator de escala $s$ [mm/pixel] é extraído da razão entre a dimensão física conhecida e o número de pixels correspondente na imagem, sendo utilizado para converter os deslocamentos estimados pelo algoritmo de pixel para milímetro.
+
+\subsection{Modelagem e Simulação}
+\label{sec:modelagem}
+
+\subsubsection{Modelo analítico da viga cantilever}
+
+A régua é modelada como uma viga de Euler-Bernoulli com seção retangular uniforme de largura $b$ e espessura $h$. Para o primeiro modo de flexão de uma viga engastada-livre, a frequência natural é \cite{Rao2010}:
+
+\begin{equation}
+    f_{n,1} = \frac{(\beta_1 L)^2}{2\pi L^2}\sqrt{\frac{EI}{\rho A}},
+    \label{eq:fn_cantilever}
+\end{equation}
+
+em que $\beta_1 L = 1{,}8751$ é a raiz característica do primeiro modo, $I = bh^3/12$ é o momento de inércia de área, $A = bh$ é a área da seção transversal, $E$ é o módulo de Young e $\rho$ é a densidade do material. Substituindo $I$ e $A$, a Equação~\ref{eq:fn_cantilever} se simplifica para:
+
+\begin{equation}
+    f_{n,1} = \frac{(1{,}8751)^2\, h}{2\pi\sqrt{12}\, L^2}\sqrt{\frac{E}{\rho}},
+    \label{eq:fn_simplificado}
+\end{equation}
+
+evidenciando que $f_{n,1}$ é proporcional à espessura $h$ e inversamente proporcional a $L^2$, o que permite ajustar a frequência do ensaio simplesmente variando o comprimento livre encastrado. Para o cálculo da resposta temporal, a viga é reduzida a um sistema de 1~GDL com parâmetros equivalentes avaliados na ponta livre \cite{Rao2010, Downey2026}:
+
+\begin{equation}
+    k_{eq} = \frac{3EI}{L^3}, \qquad m_{eq} = 0{,}2357\,\rho A L.
+    \label{eq:keq_meq}
+\end{equation}
+
+A Tabela~\ref{tab:parametros_materiais} apresenta os parâmetros dos materiais mais comuns em réguas de escritório, utilizados como estimativa inicial de $f_{n,1}$ antes da medição geométrica da régua real.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Parâmetros materiais de referência para estimativa de $f_{n,1}$.}
+    \label{tab:parametros_materiais}
+    \small
+    \begin{tabularx}{\columnwidth}{l c c}
+        \toprule
+        \textbf{Material} & \textbf{$E$ (GPa)} & \textbf{$\rho$ (kg/m\textsuperscript{3})} \\
+        \midrule
+        Aço inox      & 193 & 7850 \\
+        Polipropileno & 1{,}5 & 900 \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsubsection{Validação numérica do algoritmo}
+
+Antes dos ensaios experimentais, o pipeline de filtros de Gabor é validado com dados sintéticos (Fase~1, CW~32--33). O sinal de deslocamento na ponta da viga é gerado numericamente como a resposta livre subamortecida (Equação~\ref{eq:resposta_subamortecida}) com $\omega_n$ e $\zeta$ calculados a partir das Equações~\ref{eq:fn_cantilever} e~\ref{eq:keq_meq}. Desse sinal, geram-se sequências de imagens sintéticas em que um marcador vertical se translada lateralmente conforme $x(t)$, reproduzindo o comportamento esperado no vídeo real. O algoritmo processa essas imagens e a frequência natural extraída pela FFT é comparada ao valor analítico de referência. A etapa é considerada aprovada quando o desvio relativo for inferior a 2\%, garantindo que discrepâncias observadas nos experimentos reais sejam atribuídas a efeitos físicos e não a erros de implementação.
 
 \section{Resultados e Discussão}
 
