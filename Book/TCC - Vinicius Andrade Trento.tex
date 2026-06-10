@@ -539,9 +539,9 @@ A validação dos resultados extraídos pelo algoritmo é estruturada em dois n�
 
 \subsubsection{Comparação com o modelo analítico (Fase~1)}
 
-Na Fase~1, a frequência $f_{n,1}^{opt}$ identificada pelo pico da FFT é comparada ao valor teórico $f_{n,1}^{anal}$ calculado pela Equação~\ref{eq:fn_cantilever} para a geometria e o material reais da régua. O critério de aprovação é:
+Na Fase~1, a frequência $f_{n,1}^{opt}$ identificada pelo pico da FFT é comparada ao valor teórico $f_{n,1}^{anl}$ calculado pela Equação~\ref{eq:fn_cantilever} para a geometria e o material reais da régua. O critério de aprovação é:
 \begin{equation}
-    \varepsilon = \frac{\bigl|f_{n,1}^{opt} - f_{n,1}^{anal}\bigr|}{f_{n,1}^{anal}} \times 100\% < 5\%.
+    \varepsilon = \frac{\bigl|f_{n,1}^{opt} - f_{n,1}^{anl}\bigr|}{f_{n,1}^{anl}} \times 100\% < 5\%.
     \label{eq:criterio_validacao}
 \end{equation}
 Caso o critério não seja atingido, os parâmetros do banco de filtros ($\theta_k$, $\omega_{0,\ell}$, $\sigma$) são ajustados iterativamente e os ensaios são repetidos.
@@ -551,17 +551,22 @@ Caso o critério não seja atingido, os parâmetros do banco de filtros ($\theta
 Na Fase~2, um acelerômetro piezoelétrico é fixado na ponta livre da viga e seus sinais de aceleração são integrados duplamente no domínio da frequência para obtenção do deslocamento equivalente, possibilitando comparação direta com o deslocamento óptico \cite{AgilentAN243-3}. O ensaio persegue dois objetivos simultâneos: (i)~validar a acurácia do método óptico frente ao método de contato em uma configuração controlada; (ii)~evidenciar quantitativamente o efeito de \textit{mass loading} introduzido pelo sensor. Para tanto, a frequência $f_{n,1}$ é identificada em dois cenários: com o acelerômetro fixado ($f_{n,1}^{acc}$) e após sua remoção, utilizando exclusivamente o método óptico ($f_{n,1}^{opt}$). O deslocamento de frequência previsto pela Equação~\ref{eq:mass_loading} é contrastado com o valor medido, fornecendo evidência experimental quantitativa da distorção introduzida pelo método por contato em estruturas leves e fechando o ciclo de validação do sistema proposto.
 
 \clearpage
+\onecolumn % <-- 1. Switch to a single column layout
+
 \section{Cronograma}
 
 A sequência do projeto é organizada em quatro etapas principais, conforme ilustrado na Figura~\ref{fig:cronograma}:
 
-\begin{figure*}[!htb]
+% 2. Use a standard figure environment (no asterisk)
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=\textwidth]{Images/cronograma.png}
     \caption{Cronograma do projeto. Fonte: O autor.}
     \label{fig:cronograma}
-\end{figure*}
+\end{figure}
 
+\clearpage
+\twocolumn % <-- 3. Switch back to two columns for your references
 
 %==============================================================================
 %  REFERENCIAS
