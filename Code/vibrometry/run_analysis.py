@@ -39,9 +39,18 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--out", default="vibrometry/outputs",
                    help="output directory (default: %(default)s)")
     p.add_argument("--fps", type=float,
-                   help="override the container fps (high-frame-rate footage)")
+                   help="override the auto-detected fps (needed for footage "
+                        "re-timestamped for slow motion; otherwise fps is "
+                        "auto-detected from the container and cross-checked "
+                        "against actual frame timestamps)")
     p.add_argument("--scale", type=float,
-                   help="spatial calibration s [mm/pixel] (eq:escala)")
+                   help="spatial calibration s [mm/pixel] (eq:escala), "
+                        "measured on the video at its ORIGINAL resolution; "
+                        "automatically adjusted if --resize-width is used")
+    p.add_argument("--resize-width", type=int,
+                   help="downscale frames to this width in pixels (aspect "
+                        "ratio preserved) before analysis, trading spatial "
+                        "resolution for lower memory/runtime; see issues.md")
     p.add_argument("--axis", choices=("x", "y", "auto"), default="auto",
                    help="displacement component to analyse")
 
@@ -96,20 +105,29 @@ def main(argv: list[str] | None = None) -> int:
     else:
         if not args.video:
             raise SystemExit("Provide a video path or use --synthetic.")
-        video = load_video(args.video, fps_override=args.fps)
+        video = load_video(args.video, fps_override=args.fps,
+                           resize_width=args.resize_width)
         if args.rois:
-            rois = load_rois(args.rois)
+            rois = load_rois(args.rois, frame_shape=video.shape)
         else:
             print("Select the measurement ROIs, then the reference ROI...")
             rois = select_rois_interactive(video.reference_frame)
             if not rois:
                 raise SystemExit("No ROI selected.")
             if args.save_rois:
-                save_rois(rois, args.save_rois)
+                save_rois(rois, args.save_rois, frame_shape=video.shape)
                 print(f"ROIs saved to {args.save_rois}")
 
+    scale = args.scale
+    if scale is not None and video.resize_factor != 1.0:
+        adjusted = scale / video.resize_factor
+        print(f"[run_analysis] --scale {scale} was measured at the "
+              f"original resolution; adjusting to {adjusted:.4f} mm/px "
+              f"for the resized ({video.resize_factor:.3f}x) frames.")
+        scale = adjusted
+
     config = PipelineConfig(
-        scale_mm_per_px=args.scale,
+        scale_mm_per_px=scale,
         beam=beam,
         axis=args.axis,
     )
