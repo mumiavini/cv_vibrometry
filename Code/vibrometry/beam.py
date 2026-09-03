@@ -115,8 +115,8 @@ def validate_frequency(
     """
     error = abs(f_measured - f_analytical) / f_analytical * 100.0
     return ValidationResult(
-        f_measured=f_measured,
-        f_analytical=f_analytical,
-        error_percent=error,
-        passed=error < tolerance_percent,
+        f_measured=float(f_measured),
+        f_analytical=float(f_analytical),
+        error_percent=float(error),
+        passed=bool(error < tolerance_percent),
     )
