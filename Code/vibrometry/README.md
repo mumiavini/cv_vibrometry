@@ -45,11 +45,25 @@ python -m vibrometry.run_analysis videos/ruler.mp4 --save-rois rois.json
 # full analysis: saved ROIs, mm calibration, analytical validation
 python -m vibrometry.run_analysis videos/ruler.mp4 --rois rois.json \
     --scale 0.45 --material steel --length 0.25 --width 0.026 --thickness 0.001
+
+# faster/lower-memory run on a downscaled copy (see issues.md for the tradeoff)
+python -m vibrometry.run_analysis videos/ruler.mp4 --rois rois.json \
+    --scale 0.45 --resize-width 720
 ```
 
-Use `--fps` when the capture rate differs from the container metadata
-(e.g. 240 fps footage tagged for 30 fps playback). Outputs (PNG figures,
-`displacement_signals.csv`, `modal_results.json`) go to
+fps is auto-detected from the container and cross-checked against the
+actual frame timestamps (catches a mislabeled/rounded fps tag); pass
+`--fps` to override when this can't work, e.g. footage re-timestamped for
+slow motion (240 fps captured, authored to play back at 30 fps) — the true
+capture rate isn't recoverable from container timing in that case.
+
+`--resize-width` downscales frames (aspect ratio preserved) before
+tracking; `--scale` should always be the value measured at the video's
+*original* resolution — it is rescaled automatically. ROIs saved with
+`--save-rois` remember the frame size they were drawn on and are
+auto-rescaled with a warning if loaded against a different `--resize-width`.
+
+Outputs (PNG figures, `displacement_signals.csv`, `modal_results.json`) go to
 `vibrometry/outputs/` by default.
 
 See `demo.ipynb` for the same workflow as a notebook.

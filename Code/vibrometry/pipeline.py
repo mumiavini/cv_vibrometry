@@ -222,6 +222,8 @@ class VibrometryPipeline:
             "n_frames": self.video.n_frames,
             "duration_s": self.video.duration,
             "nyquist_hz": self.video.nyquist,
+            "fps_source": self.video.fps_source,
+            "resize_factor": self.video.resize_factor,
             "unit": unit,
             "scale_mm_per_px": cfg.scale_mm_per_px,
             "rois": [m.to_dict() for m in self.modal_results],
@@ -273,8 +275,14 @@ class VibrometryPipeline:
         lines = [
             f"Video: {self.video.path}",
             f"  {self.video.n_frames} frames @ {self.video.fps:.2f} fps "
-            f"({self.video.duration:.2f} s, Nyquist {self.video.nyquist:.2f} Hz)",
+            f"({self.video.duration:.2f} s, Nyquist {self.video.nyquist:.2f} Hz) "
+            f"[fps: {self.video.fps_source}]",
         ]
+        if self.video.resize_factor != 1.0:
+            lines.append(
+                f"  resized to {self.video.resize_factor:.3f}x native "
+                f"resolution -> {self.video.shape[1]}x{self.video.shape[0]}"
+            )
         cfg = self.config
         if cfg.beam is not None:
             lines.append(

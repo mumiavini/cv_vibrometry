@@ -43,12 +43,41 @@ class ROI:
         return ROI(self.name, x, y, w, h, self.is_reference)
 
 
-def save_rois(rois: list[ROI], path: str | Path) -> None:
-    Path(path).write_text(json.dumps([asdict(r) for r in rois], indent=2))
+def save_rois(rois: list[ROI], path: str | Path,
+             frame_shape: tuple[int, int] | None = None) -> None:
+    """Save ROIs, tagged with the (height, width) of the frame they were
+    drawn on so a later ``load_rois`` can detect a resolution mismatch
+    (e.g. re-running with a different ``--resize-width``) and rescale."""
+    payload = {
+        "frame_shape": list(frame_shape) if frame_shape else None,
+        "rois": [asdict(r) for r in rois],
+    }
+    Path(path).write_text(json.dumps(payload, indent=2))
 
 
-def load_rois(path: str | Path) -> list[ROI]:
-    return [ROI(**d) for d in json.loads(Path(path).read_text())]
+def load_rois(path: str | Path,
+              frame_shape: tuple[int, int] | None = None) -> list[ROI]:
+    """Load ROIs, rescaling them if ``frame_shape`` (height, width) of the
+    current video differs from the one they were saved against."""
+    payload = json.loads(Path(path).read_text())
+    if isinstance(payload, list):  # backward compat: old bare-list format
+        rois_data, saved_shape = payload, None
+    else:
+        rois_data, saved_shape = payload["rois"], payload.get("frame_shape")
+    rois = [ROI(**d) for d in rois_data]
+
+    if frame_shape and saved_shape and tuple(saved_shape) != tuple(frame_shape):
+        ratio_h = frame_shape[0] / saved_shape[0]
+        ratio_w = frame_shape[1] / saved_shape[1]
+        print(f"[roi] '{path}' was saved for frame size {tuple(saved_shape)} "
+              f"but the current video is {tuple(frame_shape)} -> rescaling "
+              f"ROIs by ({ratio_w:.3f}, {ratio_h:.3f}).")
+        rois = [
+            ROI(r.name, round(r.x * ratio_w), round(r.y * ratio_h),
+                round(r.w * ratio_w), round(r.h * ratio_h), r.is_reference)
+            for r in rois
+        ]
+    return rois
 
 
 def select_rois_interactive(frame: np.ndarray) -> list[ROI]:
