@@ -1,0 +1,36 @@
+{
+  // Build the TCC with latexmk, which reads Book/.latexmkrc so all the aux
+  // artifacts go into Book/build/ and only the PDF lands next to the .tex.
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "latexmk",
+      "tools": ["latexmk"]
+    }
+  ],
+  "latex-workshop.latex.tools": [
+    {
+      "name": "latexmk",
+      "command": "latexmk",
+      "args": [
+        "-pdf",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "%DOC%"
+      ]
+    }
+  ],
+  // Let LaTeX Workshop find the aux files in the build/ subfolder.
+  "latex-workshop.latex.outDir": "%DIR%",
+  "latex-workshop.latex.aux.files": ["build/"],
+
+  // Auto-clean stray artifacts and never leave junk behind on build.
+  "latex-workshop.latex.autoClean.run": "onBuilt",
+  "latex-workshop.latex.clean.subfolder.enabled": true,
+  "latex-workshop.latex.clean.fileTypes": [
+    "*.aux", "*.bbl", "*.blg", "*.idx", "*.ind", "*.lof", "*.lot",
+    "*.out", "*.toc", "*.acn", "*.acr", "*.alg", "*.glg", "*.glo",
+    "*.gls", "*.fls", "*.log", "*.fdb_latexmk", "*.snm", "*.nav",
+    "*.vrb", "*.synctex.gz", "*.run.xml", "*.bcf"
+  ]
+}
