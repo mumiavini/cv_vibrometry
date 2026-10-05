@@ -396,6 +396,7 @@ Mesmo com esses cuidados, a vibrometria por imagem não substitui integralmente 
 Com o objetivo de validação de hipóteses, a abordagem realizada começou na criação de um Produto Mínimo Viável e, em sequência, evoluiu para um sistema mais robusto.
 
 \subsection{Produto Mínimo Viável (MVP)}
+\label{sec:mvp}
 
 O MVP segue três pilares principais: Viabilidade, Valor e Capacidade de Aprendizado, seguindo os princípios de reduzir riscos, agilidade e foco no essencial.
 
@@ -415,7 +416,7 @@ A câmera selecionada para os ensaios é a DJI Osmo Action 4, equipada com senso
 
 O sensor da câmera opera com obturador de rolagem (\textit{rolling shutter}), capturando o sensor linha a linha ao invés de instantaneamente. Em oscilações de amplitude elevada, esse mecanismo introduz distorções geométricas entre linhas consecutivas do quadro \cite{robotcamera2025}, constituindo uma limitação relevante para a vibrometria por imagem. A mitigação é realizada mantendo o tempo de exposição suficientemente curto (tipicamente $t_{exp} \leq 1/2000\,\text{s}$), de modo que o deslocamento da estrutura durante cada quadro seja desprezível frente à amplitude total da vibração \cite{LavatelliZappa2017}. A função de estabilização eletrônica RockSteady é desativada durante todos os ensaios, uma vez que esse recurso altera artificialmente o conteúdo de movimento do vídeo e comprometeria a extração de fase.
 
-\subsubsection{Estrutura vibratória e bancada}
+\subsubsection{Estrutura vibratória do ensaio inicial (régua)}
 
 A estrutura de teste é uma régua graduada fixada por grampo em uma das extremidades, simulando uma viga engastada-livre (\textit{cantilever}). Esse modelo é escolhido por representar, de forma controlada e analiticamente tratável, o comportamento de 1~GDL de interesse. Na extremidade livre, é aplicado um marcador de alto contraste --- ponto preto sobre fundo branco --- que eleva a amplitude local $A$ na saída dos filtros de Gabor, tornando a estimativa de fase mais confiável naquela região de interesse \cite{Wadhwa2013}. O comprimento livre $L$, a largura $b$ e a espessura $h$ da régua são medidos antes de cada ensaio para alimentar o modelo analítico descrito na Seção~\ref{sec:modelagem}.
 
@@ -428,7 +429,7 @@ A calibração espacial é realizada com um objeto de referência de dimensões 
 
 \subsubsection{Modelo analítico da viga cantilever}
 
-A régua é modelada como uma viga de Euler-Bernoulli com seção retangular uniforme de largura $b$ e espessura $h$. Para o primeiro modo de flexão de uma viga engastada-livre, a frequência natural é \cite{Rao2010}:
+A régua (e, na etapa seguinte, a barra de alumínio descrita na Seção~\ref{sec:preparacao_ensaio}) é modelada como uma viga de Euler-Bernoulli com seção retangular uniforme de largura $b$ e espessura $h$. Para o primeiro modo de flexão de uma viga engastada-livre, a frequência natural é \cite{Rao2010}:
 
 \begin{equation}
     f_{n,1} = \frac{(\beta_1 L)^2}{2\pi L^2}\sqrt{\frac{EI}{\rho A}},
@@ -449,7 +450,7 @@ evidenciando que $f_{n,1}$ é proporcional à espessura $h$ e inversamente propo
     \label{eq:keq_meq}
 \end{equation}
 
-A Tabela~\ref{tab:parametros_materiais} apresenta os parâmetros dos materiais mais comuns em réguas de escritório, utilizados como estimativa inicial de $f_{n,1}$ antes da medição geométrica da régua real.
+A Tabela~\ref{tab:parametros_materiais} apresenta os parâmetros dos materiais considerados: os mais comuns em réguas de escritório, utilizados como estimativa inicial de $f_{n,1}$ antes da medição geométrica da régua real, e a liga de alumínio 6351-T6 da barra ensaiada na bancada de vibrações.
 
 \begin{table}[htbp]
     \centering
@@ -462,9 +463,93 @@ A Tabela~\ref{tab:parametros_materiais} apresenta os parâmetros dos materiais m
         \midrule
         Aço inox      & 193 & 7850 \\
         Polipropileno & 1{,}5 & 900 \\
+        Alumínio 6351-T6 & 69 & 2710 \\
         \bottomrule
     \end{tabularx}
 \end{table}
+
+\subsection{Preparação do Ensaio: Barra de Alumínio na Bancada de Vibrações}
+\label{sec:preparacao_ensaio}
+
+Concluída a etapa inicial com a régua (MVP), cujos resultados são reunidos na Seção~\ref{sec:resultados_preliminares}, o sistema de vibrometria óptica é aplicado a um corpo de prova de maior porte montado em uma bancada de vibrações do laboratório. O corpo de prova é uma barra maciça de alumínio 6351-T6 de seção retangular, com comprimento de 750~mm, largura de 1~polegada ($b = 25{,}4$~mm) e espessura de 1/2~polegada ($h = 12{,}7$~mm), engastada em uma das extremidades e posta em oscilação pelo mecanismo de excitação da bancada.
+
+\subsubsection{Corpo de prova: barra de alumínio 6351-T6}
+
+A liga 6351 pertence à série 6xxx, cujos principais elementos de liga são o magnésio e o silício, que se combinam formando o precipitado endurecedor Mg$_2$Si. A designação de têmpera T6 indica que o material foi solubilizado e envelhecido artificialmente, condição que maximiza a resistência mecânica da liga \cite{ASM1990}. Trata-se de uma liga estrutural amplamente empregada na forma de perfis extrudados, com boa usinabilidade e boa resistência à corrosão, apresentando limite de escoamento típico da ordem de 280~MPa e limite de resistência à tração da ordem de 310~MPa \cite{ASM1990}.
+
+Para o ensaio dinâmico, as propriedades de interesse são o módulo de elasticidade $E \approx 69$~GPa e a densidade $\rho \approx 2710$~kg/m\textsuperscript{3} (Tabela~\ref{tab:parametros_materiais}). A rigidez específica $E/\rho$ do alumínio é praticamente igual à do aço; pela Equação~\ref{eq:fn_simplificado}, a barra apresenta, portanto, frequências naturais muito próximas às de uma barra de aço de mesma geometria, com cerca de um terço da massa. O baixo amortecimento interno do metal produz picos de ressonância estreitos e decaimentos longos na resposta livre, favoráveis à identificação de $f_{n,1}$; nessas condições, o amortecimento medido tende a ser dominado pela dissipação no engaste. A massa total da barra é $m = \rho\, b\, h\, L \approx 0{,}66$~kg.
+
+A Figura~\ref{fig:barra_aluminio} mostra as barras utilizadas. A superfície extrudada é lisa e reflexiva, com marcas longitudinais do processo de fabricação, e os furos passantes visíveis destinam-se à fixação da barra por parafusos.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\columnwidth]{Images/barra_aluminio_6351.jpg}
+    \caption{Barras de alumínio 6351-T6 ($1'' \times 1/2''$) utilizadas como corpo de prova, com furos para fixação. Fonte: O autor.}
+    \label{fig:barra_aluminio}
+\end{figure}
+
+\subsubsection{Bancada de vibrações e mecanismo de excitação}
+
+A bancada (Figura~\ref{fig:bancada}) é um equipamento didático para ensaios de vibrações livres e forçadas, construído sobre uma estrutura rígida de perfis de aço cuja base possui rasgos para a fixação dos componentes. Seus principais elementos são:
+
+\begin{itemize}
+    \item Excitador de massa desbalanceada: discos com recortes excêntricos (em vermelho na figura), montados em um eixo acionado por motor elétrico por meio de transmissão por polia dentada;
+    \item Braço de aço perfurado, articulado em uma das extremidades por um mancal de rolamento, cuja série de furos permite variar a posição de fixação das molas;
+    \item Molas helicoidais, que conectam o braço a uma travessa superior e à estrutura;
+    \item Amortecedor posicionado sob o braço.
+\end{itemize}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\columnwidth]{Images/bancada_teste.jpg}
+    \caption{Bancada de vibrações com a barra de alumínio posicionada junto ao mecanismo de excitação. Fonte: O autor.}
+    \label{fig:bancada}
+\end{figure}
+
+O princípio de excitação é o desbalanceamento rotativo: uma massa excêntrica $m_d$, a uma distância $e$ do eixo de rotação e girando à velocidade angular $\Omega$, gera uma força centrífuga girante cuja componente na direção de interesse é harmônica \cite{Rao2010}:
+\begin{equation}
+    F(t) = m_d\, e\, \Omega^2 \sin(\Omega t).
+    \label{eq:forca_desbalanceamento}
+\end{equation}
+A frequência de excitação $f = \Omega/2\pi = N/60$, com $N$ a rotação do motor em rpm, é controlada diretamente pela velocidade do motor, enquanto a amplitude da força cresce com $\Omega^2$. Essa dependência deve ser considerada ao normalizar a resposta para obtenção da FRF, já que a força aplicada não é constante ao longo de uma varredura de frequência.
+
+Na configuração proposta, a barra de alumínio é engastada em uma das extremidades à estrutura rígida da bancada, reproduzindo a condição engastada-livre do modelo da Seção~\ref{sec:modelagem}, e o mecanismo de excitação impõe a oscilação. Ajustando-se a rotação do motor, a frequência de excitação pode ser posicionada abaixo, sobre e acima de $f_{n,1}$. A bancada permite, assim, dois tipos de ensaio:
+
+\begin{itemize}
+    \item Vibração livre: com o motor desligado, a extremidade livre recebe um deslocamento inicial (ou um impacto) e é liberada; o decaimento registrado fornece $\omega_d$ e $\zeta$ (Equação~\ref{eq:resposta_subamortecida}) e alimenta diretamente a comparação com o modelo analítico (Fase~1);
+    \item Vibração forçada: o motor opera em patamares de rotação constante ou em varredura lenta através da ressonância, permitindo levantar a curva de resposta (Equação~\ref{eq:amplitude_forcada}) e acompanhar a evolução espectral por STFT.
+\end{itemize}
+
+\subsubsection{Relação com o sistema de vibrometria óptica}
+
+Aplicando-se a Equação~\ref{eq:fn_cantilever} à barra, com flexão na direção da espessura e substituindo $\beta_1 L$ pelas raízes $\beta_2 L = 4{,}6941$ e $\beta_3 L = 7{,}8548$ para os modos superiores, obtêm-se as frequências previstas na Tabela~\ref{tab:freq_aluminio}. Como parte do comprimento fica retida no engaste, o comprimento livre efetivo é menor que 750~mm e as frequências aumentam com $1/L^2$; por isso a tabela também apresenta o caso $L = 700$~mm. O comprimento livre real é medido antes de cada ensaio.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Frequências naturais previstas para a barra de alumínio 6351-T6 ($b = 25{,}4$~mm, $h = 12{,}7$~mm).}
+    \label{tab:freq_aluminio}
+    \small
+    \begin{tabularx}{\columnwidth}{c c >{\centering\arraybackslash}X >{\centering\arraybackslash}X}
+        \toprule
+        \textbf{Modo} & \textbf{$\beta_i L$} & \textbf{$f_{n,i}$ (Hz) $L = 750$~mm} & \textbf{$f_{n,i}$ (Hz) $L = 700$~mm} \\
+        \midrule
+        1 & 1{,}8751 & 18{,}4  & 21{,}1 \\
+        2 & 4{,}6941 & 115{,}3 & 132{,}4 \\
+        3 & 7{,}8548 & 322{,}9 & 370{,}7 \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+Esses valores conectam o corpo de prova diretamente às escolhas do sistema de medição:
+
+\begin{itemize}
+    \item Amostragem: o primeiro modo (cerca de 18 a 21~Hz) é capturado com folga em ambos os modos da câmera, já que 120\,fps e 240\,fps correspondem a mais de cinco vezes $f_{n,1}$; o modo 4K a 120\,fps pode, então, ser preferido pela maior resolução espacial. O segundo modo, por outro lado, fica próximo ou acima do limite de Nyquist de 120\,Hz do modo de 240\,fps, e o terceiro está sempre acima dele. Se excitados, esses modos aparecem rebatidos no espectro em $|f - kF|$ (por exemplo, 322,9\,Hz aparece em cerca de 83\,Hz a 240\,fps). O modelo analítico permite prever essas posições e não confundi-las com frequências naturais reais;
+    \item Medição \textit{full-field}: o comprimento de 750~mm comporta várias ROIs ao longo do vão, permitindo reconstruir a forma de deflexão da barra e compará-la ao modo de vibrar teórico da viga engastada-livre, demonstrando a principal vantagem da técnica frente a um acelerômetro pontual;
+    \item Textura da superfície: a superfície lisa e reflexiva do alumínio (Figura~\ref{fig:barra_aluminio}) produz reflexos especulares e pouca textura, reduzindo a amplitude $A$ na saída dos filtros de Gabor. Por isso, marcadores de alto contraste, como os da régua, são aplicados ao longo da barra;
+    \item ROIs de referência e de entrada: como o excitador desbalanceado também transmite vibração à estrutura da bancada, a ROI de referência para compensação do movimento da câmera é posicionada fora dela, como na parede de tijolos ao fundo, que oferece textura abundante. Uma ROI sobre a região do engaste mede o movimento da base, que pode ser usado como sinal de entrada $\tilde{\Delta}_{in}(f)$ na estimativa da FRF;
+    \item Calibração espacial: as dimensões conhecidas da própria barra (25,4~mm e 12,7~mm), situadas no mesmo plano focal da medição, servem como objeto de referência $d_{ref}$ na Equação~\ref{eq:escala};
+    \item \textit{Mass loading} (Fase~2): a massa equivalente na ponta é $m_{eq} \approx 0{,}155$~kg (Equação~\ref{eq:keq_meq}). Um acelerômetro de 10~g, por exemplo, reduziria $f_{n,1}$ em cerca de 3\,\% pela Equação~\ref{eq:mass_loading}, de 18,4 para 17,8~Hz. O efeito é mensurável, mas menor que na régua, que permanece o corpo de prova mais indicado para evidenciá-lo, enquanto a barra de alumínio é mais adequada para avaliar a acurácia do método.
+\end{itemize}
 
 \subsection{Calibração Espacial}
 
@@ -549,6 +634,22 @@ Caso o critério não seja atingido, os parâmetros do banco de filtros ($\theta
 \subsubsection{Ensaio comparativo com acelerômetro piezoelétrico (Fase~2)}
 
 Na Fase~2, um acelerômetro piezoelétrico é fixado na ponta livre da viga e seus sinais de aceleração são integrados duplamente no domínio da frequência para obtenção do deslocamento equivalente, possibilitando comparação direta com o deslocamento óptico \cite{AgilentAN243-3}. O ensaio persegue dois objetivos simultâneos: (i)~validar a acurácia do método óptico frente ao método de contato em uma configuração controlada; (ii)~evidenciar quantitativamente o efeito de \textit{mass loading} introduzido pelo sensor. Para tanto, a frequência $f_{n,1}$ é identificada em dois cenários: com o acelerômetro fixado ($f_{n,1}^{acc}$) e após sua remoção, utilizando exclusivamente o método óptico ($f_{n,1}^{opt}$). O deslocamento de frequência previsto pela Equação~\ref{eq:mass_loading} é contrastado com o valor medido, fornecendo evidência experimental quantitativa da distorção introduzida pelo método por contato em estruturas leves e fechando o ciclo de validação do sistema proposto.
+
+\section{Resultados Preliminares}
+\label{sec:resultados_preliminares}
+
+Esta seção reúne os resultados dos ensaios iniciais, realizados para verificar o sistema de aquisição e o pipeline de processamento antes do ensaio com a barra de alumínio na bancada de vibrações (Seção~\ref{sec:preparacao_ensaio}).
+
+\subsection{Ensaio Inicial com Régua Engastada}
+\label{sec:resultado_regua}
+
+O primeiro ensaio utiliza a régua engastada descrita na Seção~\ref{sec:mvp}. A frequência $f_{n,1}^{opt}$ identificada pelo algoritmo é comparada ao valor analítico $f_{n,1}^{anl}$ (Equação~\ref{eq:fn_cantilever}) segundo o critério da Equação~\ref{eq:criterio_validacao}.
+
+% TODO: inserir os resultados do ensaio com a régua engastada:
+%   - parâmetros do ensaio: L, b, h, material, fps, tempo de exposição, escala s;
+%   - sinal de deslocamento da ponta no tempo e espectro (FFT);
+%   - f_{n,1}^{opt} vs. f_{n,1}^{anl} e erro epsilon (eq:criterio_validacao);
+%   - razão de amortecimento (decremento logarítmico / meia potência).
 
 \clearpage
 \onecolumn % <-- 1. Switch to a single column layout
