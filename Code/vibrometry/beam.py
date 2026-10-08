@@ -26,6 +26,7 @@ BETA_L = (1.8751, 4.6941, 7.8548)
 MATERIALS: dict[str, dict[str, float]] = {
     "steel":         {"E": 193e9, "rho": 7850.0},   # stainless steel
     "polypropylene": {"E": 1.5e9, "rho": 900.0},
+    "polystyrene":   {"E": 3.2e9, "rho": 1050.0},   # school ruler
     "aluminum_6351_t6": {"E": 69e9, "rho": 2710.0},  # bench test bar
 }
 

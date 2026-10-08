@@ -1,0 +1,24 @@
+{
+  "frame_shape": [
+    640,
+    360
+  ],
+  "rois": [
+    {
+      "name": "roi_0",
+      "x": 85,
+      "y": 197,
+      "w": 145,
+      "h": 95,
+      "is_reference": false
+    },
+    {
+      "name": "reference",
+      "x": 190,
+      "y": 47,
+      "w": 65,
+      "h": 55,
+      "is_reference": true
+    }
+  ]
+}

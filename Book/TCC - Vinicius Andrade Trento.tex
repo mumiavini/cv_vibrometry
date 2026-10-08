@@ -411,6 +411,7 @@ Com o objetivo de simular a oscilação de 1~GDL de uma viga engastada (\textit{
 \subsection{Equipamentos Utilizados}
 
 \subsubsection{Câmera de aquisição}
+\label{sec:camera}
 
 A câmera selecionada para os ensaios é a DJI Osmo Action 4, equipada com sensor CMOS de 1/1{,}7'' e abertura fixa de $f$/2{,}8. Para as finalidades de vibrometria, os modos de captura relevantes são 4K a 120\,fps e 1080p a 240\,fps, que estabelecem frequências de Nyquist de, respectivamente, 60\,Hz e 120\,Hz. O modo de 240\,fps é preferido sempre que a frequência fundamental da estrutura sob análise estiver abaixo de 100\,Hz, satisfazendo a recomendação prática de operar com taxa de captura ao menos cinco vezes superior à frequência máxima de interesse \cite{robotcamera2025}.
 
@@ -463,6 +464,7 @@ A Tabela~\ref{tab:parametros_materiais} apresenta os parâmetros dos materiais c
         \midrule
         Aço inox      & 193 & 7850 \\
         Polipropileno & 1{,}5 & 900 \\
+        Poliestireno  & 3{,}2 & 1050 \\
         Alumínio 6351-T6 & 69 & 2710 \\
         \bottomrule
     \end{tabularx}
@@ -643,13 +645,78 @@ Esta seção reúne os resultados dos ensaios iniciais, realizados para verifica
 \subsection{Ensaio Inicial com Régua Engastada}
 \label{sec:resultado_regua}
 
-O primeiro ensaio utiliza a régua engastada descrita na Seção~\ref{sec:mvp}. A frequência $f_{n,1}^{opt}$ identificada pelo algoritmo é comparada ao valor analítico $f_{n,1}^{anl}$ (Equação~\ref{eq:fn_cantilever}) segundo o critério da Equação~\ref{eq:criterio_validacao}.
+O primeiro ensaio utiliza a régua engastada descrita na Seção~\ref{sec:mvp}, com o objetivo de verificar a cadeia completa de aquisição e processamento em uma estrutura real antes do ensaio na bancada. A frequência $f_{n,1}^{opt}$ identificada pelo algoritmo é comparada ao valor analítico $f_{n,1}^{anl}$ (Equação~\ref{eq:fn_cantilever}) segundo o critério da Equação~\ref{eq:criterio_validacao}.
 
-% TODO: inserir os resultados do ensaio com a régua engastada:
-%   - parâmetros do ensaio: L, b, h, material, fps, tempo de exposição, escala s;
-%   - sinal de deslocamento da ponta no tempo e espectro (FFT);
-%   - f_{n,1}^{opt} vs. f_{n,1}^{anl} e erro epsilon (eq:criterio_validacao);
-%   - razão de amortecimento (decremento logarítmico / meia potência).
+\subsubsection{Configuração e procedimento}
+
+A régua escolar utilizada possui comprimento livre $L = 300$~mm, largura $b = 35$~mm e espessura $h = 3$~mm. Como o material não foi caracterizado, adotou-se o poliestireno, polímero usual em réguas escolares, com $E = 3{,}2$~GPa e $\rho = 1050$~kg/m\textsuperscript{3} (Tabela~\ref{tab:parametros_materiais}), valores dentro das faixas tabeladas para o material, que para o módulo vai de 2,28 a 3,28~GPa \cite{Callister2014}. Com esses parâmetros, as Equações~\ref{eq:fn_cantilever} e~\ref{eq:keq_meq} fornecem $f_{n,1}^{anl} = 9{,}40$~Hz, $k_{eq} = 28{,}0$~N/m e $m_{eq} = 7{,}80$~g. Na ponta livre foi fixado um cartão de papel branco com um ponto de caneta, que atua como marcador de alto contraste. A régua foi excitada por um toque manual na ponta e deixada em vibração livre.
+
+O vídeo analisado é o arquivo de baixa resolução (\textit{proxy}) gravado automaticamente pela câmera, com $720 \times 1280$~pixels, 23,98~fps e 34,4~s de duração (825 quadros). Para reduzir o custo computacional, os quadros foram reduzidos a $360 \times 640$~pixels antes do processamento. Essa taxa de captura fixa o limite de Nyquist em 11,99~Hz, bem abaixo da recomendação de operar com taxa ao menos cinco vezes superior à frequência de interesse (Seção~\ref{sec:camera}); o ensaio tem, portanto, caráter exploratório. Não foi realizada calibração espacial, e os deslocamentos são apresentados em pixels.
+
+A Figura~\ref{fig:regua_rois}a mostra as ROIs adotadas: a ROI de medição cobre apenas o interior do cartão, e a ROI de referência foi posicionada sobre uma caixa elétrica fixada à parede, região estática e com textura abundante. Em uma primeira tentativa, a ROI de medição incluía também parte da parede ao lado do cartão. Durante os maiores deslocamentos, o estágio de rastreamento grosseiro passou a seguir o fundo em vez do marcador, e o sinal resultante apresentou um deslocamento permanente espúrio de cerca de 145~pixels. Restringir a ROI ao interior do cartão eliminou o problema. A Figura~\ref{fig:regua_rois}b evidencia o borramento por movimento nos primeiros ciclos, consequência do tempo de exposição longo imposto pela baixa iluminação do ambiente \cite{LavatelliZappa2017}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\columnwidth]{Images/fig_regua_rois.png}
+    \caption{(a) Quadro de referência com as ROIs de medição e de referência; (b) quadro durante os primeiros ciclos de oscilação, com borramento por movimento. Fonte: O autor.}
+    \label{fig:regua_rois}
+\end{figure}
+
+\subsubsection{Resultados}
+
+A Figura~\ref{fig:regua_deslocamento} apresenta o deslocamento vertical compensado do marcador. Antes da excitação, o sinal permanece em torno de zero, com desvio-padrão de 0,8~pixel. O toque manual ocorre em $t \approx 10{,}5$~s e leva a ponta a cerca de 100~pixels de deslocamento. Segue-se uma vibração livre subamortecida que se extingue por volta de $t = 20$~s. Ao final do registro, a posição de repouso coincide com a inicial, o que confirma que o rastreamento acompanhou o marcador durante todo o ensaio.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\columnwidth]{Images/fig_regua_deslocamento.png}
+    \caption{Deslocamento vertical do marcador na ponta da régua, com os picos utilizados no ajuste do decremento logarítmico. Fonte: O autor.}
+    \label{fig:regua_deslocamento}
+\end{figure}
+
+O espectro de amplitude (Figura~\ref{fig:regua_espectro}) apresenta um pico dominante em $f_{n,1}^{opt} = 10{,}58$~Hz. O conteúdo abaixo de 2~Hz corresponde ao transitório lento do toque manual, que desloca a ponta de forma quase estática antes da liberação, e não a um modo de vibrar. O espectrograma (Figura~\ref{fig:regua_espectrograma}) mostra a faixa larga associada ao toque entre 9 e 14~s e, em seguida, a componente em 10,6~Hz, que decai gradualmente e permanece visível até o fim do registro. Essa componente já é perceptível antes do toque, em amplitudes da ordem de 1~pixel, o que indica que o método detecta também a vibração ambiente da régua. A Tabela~\ref{tab:resultados_regua} resume os resultados.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\columnwidth]{Images/fig_regua_espectro.png}
+    \caption{Espectro de amplitude do deslocamento do marcador, com a frequência analítica e o limite de Nyquist. Fonte: O autor.}
+    \label{fig:regua_espectro}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\columnwidth]{Images/fig_regua_espectrograma.png}
+    \caption{Espectrograma (STFT) do deslocamento do marcador. Fonte: O autor.}
+    \label{fig:regua_espectrograma}
+\end{figure}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Resultados do ensaio preliminar com a régua engastada.}
+    \label{tab:resultados_regua}
+    \small
+    \begin{tabularx}{\columnwidth}{X c}
+        \toprule
+        \textbf{Grandeza} & \textbf{Valor} \\
+        \midrule
+        $f_{n,1}^{anl}$ (poliestireno, Eq.~\ref{eq:fn_cantilever}) & 9,40~Hz \\
+        $f_{n,1}^{opt}$ (pico da FFT) & 10,58~Hz \\
+        Erro $\varepsilon$ (Eq.~\ref{eq:criterio_validacao}) & 12,5\,\% \\
+        $\zeta$ (meia potência, Eq.~\ref{eq:zeta_halfpower}) & 0,0053 \\
+        $\zeta$ (decremento logarítmico) & 0,0090 \\
+        Amplitude máxima na ponta & $\approx 100$~px \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsubsection{Discussão}
+
+O erro de 12,5\,\% não atende ao critério de 5\,\% da Equação~\ref{eq:criterio_validacao}. A frequência medida é superior à prevista, e a principal fonte da diferença está nos dados de entrada do modelo, adotados de forma nominal. Mesmo o limite superior da faixa de módulo do poliestireno (3,28~GPa) eleva $f_{n,1}^{anl}$ apenas para 9,52~Hz. Reproduzir 10,58~Hz com a geometria adotada exigiria $E \approx 4{,}05$~GPa, fora da faixa do material. Por outro lado, como $f_{n,1}$ é proporcional a $h/L^2$ (Equação~\ref{eq:fn_simplificado}), um comprimento livre efetivo de 283~mm ou uma espessura de 3,4~mm explicariam sozinhos a diferença. A massa do cartão na ponta reduz a frequência (Equação~\ref{eq:mass_loading}) e, portanto, aumentaria a discrepância. A medição criteriosa de $L$ a partir da borda do engaste, a medição de $h$ com paquímetro e a identificação do material são, assim, pré-requisitos para a validação quantitativa.
+
+A taxa de 23,98~fps também limita a interpretação. O pico em 10,58~Hz é amostrado com apenas 2,27 quadros por ciclo, próximo ao limite de Nyquist. Uma componente real em $23{,}98 - 10{,}58 = 13{,}40$~Hz apareceria rebatida na mesma posição do espectro (Seção~\ref{sec:camera}). Adotou-se a leitura direta, pois 13,40~Hz distaria 42,5\,\% do valor analítico, contra 12,5\,\% da leitura direta, mas a ambiguidade só é eliminada com taxa de captura maior.
+
+As duas estimativas de amortecimento divergem (0,0053 e 0,0090), mas ambas indicam um sistema levemente amortecido ($\zeta < 1\,\%$). Com cerca de 2,3 amostras por ciclo, os quadros raramente coincidem com os picos reais da oscilação. As amplitudes amostradas flutuam (Figura~\ref{fig:regua_deslocamento}), e o detector de picos deixa de registrar parte dos ciclos: o espaçamento entre os picos detectados corresponde a 7,35~Hz, e não a 10,58~Hz. O valor obtido pelo decremento logarítmico é, por isso, apenas indicativo. A estimativa por meia potência é menos sensível a esse efeito, mas é limitada pela resolução espectral ($\Delta f = 1/T \approx 0{,}03$~Hz) e pelo alargamento do pico causado pela janela de Hann.
+
+Em síntese, o ensaio preliminar verificou qualitativamente o pipeline em uma estrutura real. O marcador foi rastreado ao longo de todo o registro, a compensação pela ROI de referência funcionou e a vibração livre e sua frequência dominante foram identificadas. A validação quantitativa depende de ensaios com taxa de 240~fps, tempo de exposição curto com iluminação adequada, geometria medida e calibração espacial. Esses requisitos foram incorporados à preparação do ensaio na bancada (Seção~\ref{sec:preparacao_ensaio}).
 
 \clearpage
 \onecolumn % <-- 1. Switch to a single column layout
