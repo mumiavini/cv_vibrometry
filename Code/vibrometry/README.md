@@ -18,8 +18,18 @@ at the free tip) and identifies its modal parameters.
 | `calibration.py` | Calibração Espacial | `s = d_ref / d_px` mm/pixel (eq. `escala`) |
 | `beam.py` | Modelagem e Simulação | Euler–Bernoulli cantilever `f_n` (eq. `fn_cantilever`), `k_eq`, `m_eq`, mass loading (eq. `mass_loading`), 5 % validation criterion (eq. `criterio_validacao`) |
 | `pipeline.py` | Arquitetura do Software | orchestration, reference-ROI compensation (eq. `compensacao`), export of figures / CSV / JSON |
-| `synthetic.py` | Estratégia de Validação | synthetic free-decay video with exact ground truth for software verification |
+| `synthetic.py` | Estratégia de Validação | synthetic videos (sub-pixel, anti-aliased) and video + accelerometer datasets with exact ground truth for software verification |
+| `streaming.py` | — (desktop app) | frame-by-frame tracking without loading the whole clip, clip pre-checks (dropped frames, flicker, focus, saturation) |
+| `accelerometer.py` | Ensaio comparativo com acelerômetro | CSV/TXT import (separator / decimal comma / header detection), units, double integration (frequency domain with detrending, or time domain) |
+| `sync.py` | — (planejamento §8.7) | video ↔ accelerometer clock model, offset by cross-correlation with fractional lag, drift, common band-pass |
+| `analysis.py` | — (planejamento §8.9–8.10) | dominant frequency, least-squares sine fit, optical-vs-reference metrics, coherence / FRF, CV |
+| `session.py` | — (planejamento §7) | session file `*.vibro.json` with every processing parameter |
+| `workflow.py` | — | session-level processing shared by the app and the batch mode (tracking cache, comparison) |
+| `report.py` | — (planejamento §8.11) | CSV / JSON / LaTeX (booktabs) / PDF+PNG export |
 | `run_analysis.py` | — | command-line entry point |
+
+The desktop app built on these modules is in `Code/vibroapp/` (see its
+README); tests are in `Code/tests/` (`pytest tests` from `Code/`).
 
 ## Why "coarse + fine" tracking?
 
