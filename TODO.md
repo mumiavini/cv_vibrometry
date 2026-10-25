@@ -50,8 +50,12 @@ Confirmado: raiz = **junta com mancal (articulada)**, alumínio 6351-T6, 660 g, 
 catálogo k₁ = 1500 e k₂ = 2500 N/m, acelerômetro 5 g a 300 mm do engaste, mola a 632 mm
 do engaste (furo de 88 mm da ponta). Pico do acelerômetro: **7,600 Hz**.
 
-**Confirmado após pesagem:** a massa da mola explica a diferença e a curva de 7,6 Hz é da **mola k₁**
-(registrar as massas medidas em A4 e rodar o `BeamFE` com elas).
+**Não separável com os dados atuais (k × massa):** os 7,6 Hz só dizem que k_total/m_efetiva é o do ajuste; as
+massas pesadas da mola/ferragens não foram registradas (o "383 g" é o valor *necessário* com k = 1500 N/m, não
+uma medida). Com f₁ = 7,60 Hz: k = 1500 N/m exige ≈ 383 g de massa efetiva no ponto da mola; k = 1000 → ≈ 162 g;
+k = 630 → 0 g. A mola 2 (nominal 2500 N/m) **não** distingue as hipóteses (≈ 9,8 Hz em ambas). Resolver
+medindo **k estaticamente** (pendurar massa conhecida no mesmo ponto de fixação, k = m·g/Δx) e registrando a
+massa da mola + parafuso + porcas + gancho.
 
 Modelo `BeamFE` (articulada + mola + 5 g, **sem massa da mola**): **11,7 Hz (k₁)** e
 **15,1 Hz (k₂)**. Falta ≈ 380 g de massa efetiva no ponto da mola (k₁) para chegar a 7,6 Hz
