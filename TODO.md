@@ -204,6 +204,39 @@ seria 626 N/m); considerar inércia do conjunto cilindro/dial do lado da junta.
 - [~] **D11. Referências**: adicionar fontes para flicker/rolling shutter em vibrometria de
       baixo custo e para a mola helicoidal (Shigley/Rao).
 
+## E. Pontos de melhoria da autoavaliação (2026-10-25)
+
+Impacto decrescente. Os pontos 1 e 2 são os que mais elevam o nível do trabalho.
+
+- [ ] **E1. Linha de base: fase × correlação simples.** O texto afirma que a estimativa por fase é mais robusta
+      que a correlação de intensidade, mas isso não foi medido. Rodar os mesmos vídeos só com a correlação
+      cruzada normalizada (o estágio grosseiro já existe em `tracking.py`, sem o refinamento por fase) e comparar
+      f_n, amplitude, ruído (D1) e ζ com o método completo. Entra em Resultados (nova subseção) e na Discussão.
+- [ ] **E2. Orçamento de incerteza** (junto de B2): propagar a incerteza de k (medido), massas, L, posições, escala
+      (mm/px), fps e resolução espectral (Δf = 1/T) até f_n previsto e medido, e colocar barras de erro nas
+      tabelas e figuras de C1–C2. Reportar também n = 3 como mínimo (média, desvio, intervalo).
+- [ ] **E5. Decidir "full-field".** Ou mostrar a forma modal com ≥ 5 ROIs ao longo da barra (amplitude e fase ×
+      posição, comparada ao `BeamFE`; é só pós-processamento do mesmo vídeo) ou trocar "full-field" por
+      "medição multiponto" na introdução, na justificativa, no resumo e na discussão. (Ver também C7.)
+- [ ] **E6. Enxugar a teoria.** Cortar ou ligar aos resultados o que não é usado: célula de Bragg/heterodinagem,
+      rainflow e Palmgren-Miner, detalhes de SHM. Ver também E9 (escopo de SHM).
+- [ ] **E7. Fixar os critérios de aceitação antes de olhar os dados finais.** Hoje o texto usa 1 % para a frequência
+      vídeo × acelerômetro e a sessão `k1_cm_acc` usa 2,7 % (`crit_freq_pct`), valor que faz o resultado
+      preliminar passar. Combinar com o orientador, gravar o valor no texto e na sessão, e não alterar depois.
+- [ ] **E8. Explicar o amortecimento.** Vídeo ζ ≈ 0,001 × PULSE ζ ≈ 0,007 (≈ 7×) na primeira análise, em tomadas
+      diferentes. Na campanha, comparar na mesma liberação; testar configuração (lâmina do amortecedor, pré-carga,
+      cabo do acelerômetro) e o método (janela, ROI, taxa). Se persistir, discutir como limitação, não esconder.
+- [ ] **E9. Escopo de SHM.** O trabalho valida uma técnica de **medição** de vibração; nenhum ensaio detecta dano.
+      Decidir e alinhar com o orientador: (a) rebaixar SHM a motivação/trabalho futuro (objetivo específico 1,
+      subseção de SHM, palavras-chave, justificativa) ou (b) manter um recorte honesto: a troca k₁ → k₂ emula uma
+      variação de rigidez e mostra que o método detecta Δf, sem afirmar detecção de dano.
+- [ ] **E10. Teste de afrouxamento da fixação (SHM, recorte honesto).** Mesma mola k₁ com a porca/parafuso de
+      fixação em 4 níveis (torque normal, ≈ 50 %, só dedos, frouxo) × 3 tomadas, mais um reaperto ao torque base
+      (24 tomadas totais no roteiro, seção 5b). Medir f_n, ζ, amplitude e harmônicos (Δζ costuma aparecer antes de
+      Δf); duas amplitudes de liberação; confirmar reversibilidade (A' = A). Prioridade P2: só depois do P1 do
+      roteiro e de E8 (ζ vídeo × PULSE). **Não entra no texto por enquanto** — decidir após ver os dados e alinhar
+      com o orientador (ver E9).
+
 ## Perguntas em aberto
 
 1. Massa da(s) mola(s), do parafuso, das porcas e do gancho (pesar). Qual mola gerou 7,6 Hz?

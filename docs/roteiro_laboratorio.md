@@ -132,6 +132,44 @@ estavam como nas outras. **Fotografe o amortecedor** (lâmina dentro/fora) antes
   bancada; a diferença de fase entre os marcadores dá o tempo de leitura do sensor.
 - **fps real:** anote o modo escolhido no celular (1080p, 240 fps) e **não** use "câmera lenta" com rampa.
 
+## 5b. Teste de afrouxamento da fixação (P2) — sensibilidade a mudança de condição
+
+Só **depois** do P1 e se o ζ de vídeo e PULSE já fechar na mesma tomada. Objetivo: ver se o método detecta uma
+mudança de condição da junta (parafuso e porca que prendem a mola à barra), no estilo de SHM. Mesma mola (k₁),
+mesmo enquadramento, mesma liberação das tomadas 1–3; vídeo e PULSE ao mesmo tempo.
+
+**Níveis** (anote o torque com torquímetro; sem ele, conte as voltas de afrouxamento a partir do aperto da linha de
+base e marque porca e parafuso com tinta/caneta para ver se giram):
+
+| # | Nível | Parafuso/porca | Rep. | Arquivo vídeo | Arquivo PULSE | f_n (cursor) [Hz] | Obs. (ruído, batida, folga) |
+|---|---|---|---|---|---|---|---|
+| 12 | A (linha de base) | torque/aperto normal = ______ | 1 | | | | |
+| 13 | A | idem | 2 | | | | |
+| 14 | A | idem | 3 | | | | |
+| 15 | B | ≈ 50 % do torque = ______ | 1 | | | | |
+| 16 | B | idem | 2 | | | | |
+| 17 | B | idem | 3 | | | | |
+| 18 | C | só com os dedos | 1 | | | | |
+| 19 | C | idem | 2 | | | | |
+| 20 | C | idem | 3 | | | | |
+| 21 | D | frouxo (¼ de volta no fim da rosca, sem soltar) | 1 | | | | |
+| 22 | D | idem | 2 | | | | |
+| 23 | D | idem | 3 | | | | |
+| 24 | A' | **reaperto** ao torque da linha de base | 1 | | | | volta ao baseline? |
+
+Regras:
+- **Ordem:** A → B → C → D → A'. Não volte a um nível sem anotar. A tomada de reaperto (A') confirma que o efeito é
+  reversível e não deriva do tempo ou da temperatura; se f_n em A' ≠ A, a diferença entre níveis não é confiável.
+- **Duas amplitudes** de liberação no nível D (e se der no C): a amplitude de sempre e ≈ metade. Folga costuma
+  aparecer como f_n/ζ que dependem da amplitude.
+- **Escute e anote** batidas (rattle). Registre no vídeo e no PULSE pelo menos até o 3º harmônico (banda ≥ 100 Hz).
+- Mantenha tudo mais igual (pré-carga da mola, lâmina do amortecedor, cabo do acelerômetro, enquadramento).
+- Registre f_n, ζ, amplitude e o espectro; o esperado é **Δζ** (atrito/folga) antes de um **Δf** apreciável.
+
+> Por quê: f_n sozinho pode mal mudar até a junta estar bem frouxa (a rigidez da conexão entra em série com a da
+> mola). Detectar Δζ e harmônicos é o que daria sensibilidade. Resultado negativo (nada muda além do ruído)
+> também vale: mostra o limite de detecção do método.
+
 ## 6. Depois, no PC (ainda no laboratório, se der)
 
 1. Abrir cada vídeo no app, definir ROIs (acelerômetro, parafuso, parede), posição de cada ROI na barra e a
@@ -151,3 +189,5 @@ estavam como nas outras. **Fotografe o amortecedor** (lâmina dentro/fora) antes
 | ζ vídeo ≈ ζ PULSE na mesma tomada | a diferença anterior vinha de configuração (amortecedor/pré-carga/tomada) |
 | ζ vídeo ≠ ζ PULSE mesmo simultâneos | investigar o método (janela, ROI, taxa) antes de escrever resultado |
 | f_n sem acelerômetro ≈ com (dentro de Δf = 1/T) | efeito de massa do acelerômetro não resolvido, como previsto |
+| Δζ ou harmônicos com o afrouxamento, e A' volta ao baseline | a técnica detecta a mudança de condição da junta (usar como sensibilidade, sem afirmar SHM completo) |
+| nada muda além do ruído ou A' ≠ A | reportar o limite de detecção; não usar para SHM |
