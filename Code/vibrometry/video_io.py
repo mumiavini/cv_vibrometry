@@ -89,6 +89,107 @@ def _measure_fps(cap: cv2.VideoCapture, n_frames: int, start_frame: int) -> floa
     return (n_frames - 1) / ((t_last - t_first) / 1000.0)
 
 
+def _resolve_fps(
+    cap: cv2.VideoCapture,
+    path: str,
+    start_frame: int = 0,
+    fps_override: float | None = None,
+) -> tuple[float, str, float, float | None]:
+    """Sampling rate to use for ``cap``: the override, else the container
+    tag cross-checked against the frame timestamps (see ``_measure_fps``).
+
+    Returns (fps, fps_source, declared_fps, measured_fps).
+    """
+    n_frames_meta = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+    declared_fps = cap.get(cv2.CAP_PROP_FPS)
+    measured_fps = _measure_fps(cap, n_frames_meta - start_frame, start_frame) \
+        if n_frames_meta > start_frame else None
+
+    if fps_override is not None:
+        fps, fps_source = fps_override, "override"
+    elif (measured_fps and declared_fps
+            and abs(measured_fps - declared_fps) / declared_fps > FPS_MISMATCH_TOLERANCE):
+        print(f"[video_io] fps mismatch in '{path}': container tag says "
+              f"{declared_fps:.3f} fps, measured from frame timestamps "
+              f"{measured_fps:.3f} fps -> using the measured value. "
+              f"Pass fps_override explicitly if this is wrong (e.g. "
+              f"footage re-timestamped for slow motion).")
+        fps, fps_source = measured_fps, "measured"
+    else:
+        fps, fps_source = declared_fps, "container"
+
+    if not fps or fps <= 0:
+        raise ValueError(
+            f"Invalid fps ({fps}) in '{path}' metadata; pass fps_override."
+        )
+    return float(fps), fps_source, float(declared_fps), measured_fps
+
+
+@dataclass
+class VideoInfo:
+    """Container metadata of a video, read without decoding the frames."""
+
+    path: str
+    width: int
+    height: int
+    n_frames: int
+    fps: float
+    fps_source: str
+    declared_fps: float
+    measured_fps: float | None
+    codec: str
+
+    @property
+    def duration(self) -> float:
+        return self.n_frames / self.fps
+
+
+def probe_video(path: str | Path, fps_override: float | None = None) -> VideoInfo:
+    path = str(path)
+    cap = cv2.VideoCapture(path)
+    if not cap.isOpened():
+        raise FileNotFoundError(f"Could not open video: {path}")
+    try:
+        fps, source, declared, measured = _resolve_fps(
+            cap, path, fps_override=fps_override)
+        fourcc = int(cap.get(cv2.CAP_PROP_FOURCC))
+        codec = "".join(chr((fourcc >> 8 * i) & 0xFF) for i in range(4)).strip()
+        return VideoInfo(
+            path=path,
+            width=int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)),
+            height=int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT)),
+            n_frames=int(cap.get(cv2.CAP_PROP_FRAME_COUNT)),
+            fps=fps, fps_source=source,
+            declared_fps=declared, measured_fps=measured,
+            codec=codec if codec.isprintable() else "",
+        )
+    finally:
+        cap.release()
+
+
+class FrameReader:
+    """Random access to single frames, for previews (keeps the file open)."""
+
+    def __init__(self, path: str | Path) -> None:
+        self.cap = cv2.VideoCapture(str(path))
+        if not self.cap.isOpened():
+            raise FileNotFoundError(f"Could not open video: {path}")
+        self._next = 0
+
+    def read(self, index: int, gray: bool = True) -> np.ndarray | None:
+        if index != self._next:
+            self.cap.set(cv2.CAP_PROP_POS_FRAMES, index)
+        ok, frame = self.cap.read()
+        if not ok:
+            self._next = -1
+            return None
+        self._next = index + 1
+        return cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY) if gray else frame
+
+    def close(self) -> None:
+        self.cap.release()
+
+
 def load_video(
     path: str | Path,
     start_frame: int = 0,
@@ -115,29 +216,7 @@ def load_video(
     if not cap.isOpened():
         raise FileNotFoundError(f"Could not open video: {path}")
 
-    n_frames_meta = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-    declared_fps = cap.get(cv2.CAP_PROP_FPS)
-
-    if fps_override is not None:
-        fps, fps_source = fps_override, "override"
-    else:
-        measured_fps = _measure_fps(cap, n_frames_meta, start_frame) \
-            if n_frames_meta > start_frame else None
-        if (measured_fps and declared_fps
-                and abs(measured_fps - declared_fps) / declared_fps > FPS_MISMATCH_TOLERANCE):
-            print(f"[video_io] fps mismatch in '{path}': container tag says "
-                  f"{declared_fps:.3f} fps, measured from frame timestamps "
-                  f"{measured_fps:.3f} fps -> using the measured value. "
-                  f"Pass fps_override explicitly if this is wrong (e.g. "
-                  f"footage re-timestamped for slow motion).")
-            fps, fps_source = measured_fps, "measured"
-        else:
-            fps, fps_source = declared_fps, "container"
-
-    if not fps or fps <= 0:
-        raise ValueError(
-            f"Invalid fps ({fps}) in '{path}' metadata; pass fps_override."
-        )
+    fps, fps_source, _, _ = _resolve_fps(cap, path, start_frame, fps_override)
 
     if start_frame > 0:
         cap.set(cv2.CAP_PROP_POS_FRAMES, start_frame)

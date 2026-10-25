@@ -69,6 +69,28 @@ Tradeoff of downscaling:
   warning, if reused at a different `--resize-width` — otherwise a saved ROI
   would silently point at the wrong region after a resolution change.
 
+**Partial mitigation implemented (2026-10-08): streaming tracker + FFT
+Gabor bank.** Two of the proposed items are done for the desktop app /
+batch path (`workflow.run_video` → `streaming.track_video`):
+- *No full frame stack in memory.* `tracking.RoiTracker` tracks one frame at
+  a time (`update(frame)`); `streaming.track_video` feeds it while decoding,
+  so memory no longer grows with clip length. `track_roi` is now a thin
+  wrapper over `RoiTracker`, same results.
+- *Cheaper Gabor stage.* Profiling showed 86 % of the time in
+  `cv2.filter2D` (16 calls per ROI per frame, 55×55 kernels, and OpenCV
+  recomputes the kernel DFT on every call). `GaborBank.responses` now does
+  one FFT of the zero-padded patch and multiplies by cached kernel spectra
+  (`scipy.fft`, `next_fast_len`, complex64). Results are identical in the
+  interior used by `phase_displacement` (relative error ~3e-7; covered by
+  `tests/test_tracking_physics.py`); 13.2 ms → 1.8 ms per 104×130 patch.
+- Measured end to end: synthetic 640×360 / 240 fps clip, 2 ROIs, 1920
+  frames: 52.5 s → 9.1 s (~210 frames/s). Real `video low res.LRF`
+  (825 frames, 720×1280, resized to 360 wide): 17.9 s.
+
+Still OPEN: cost remains O(n_frames) and fully offline (no incremental /
+sliding STFT), and the legacy CLI `run_analysis` still goes through
+`video_io.load_video` (whole clip in memory).
+
 ---
 
 ## [SOLVED] fps trusted the container tag with no cross-check against actual frame timing
