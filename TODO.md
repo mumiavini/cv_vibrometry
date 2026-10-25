@@ -13,6 +13,25 @@ Ordem sugerida: **A → B → C → D**. Dados e decisões (A) destravam tudo.
 
 ---
 
+## ⚠ Discrepância modelo × medição (resolver antes de escrever resultados)
+
+O espectro do acelerômetro mostra pico em **≈ 7,6 Hz** (cursor 7,600 Hz). O modelo
+barra Al 6351-T6 (L livre 720 mm, 25,4 × 12,7 mm) **engastada** com mola no furo de
+88 mm da ponta dá **≈ 23,8 Hz (k₁ = 1500) e ≈ 26,0 Hz (k₂ = 2500)** — três vezes maior.
+Candidatos (calculados com `BeamFE`, ver `Code/tests`):
+
+| Hipótese | f₁ (k₁ = 1500) | f₁ (k₂ = 2500) |
+|---|---|---|
+| Alumínio, engaste rígido | 23,8 Hz | 26,0 Hz |
+| Alumínio, raiz articulada (mancal) | 11,8 Hz | 15,1 Hz |
+| Aço (1,9 kg), raiz articulada | 6,9 Hz | 8,9 Hz |
+| Alumínio, raiz com mola torsional ~200–400 N·m/rad | ~5,7–6,4 Hz | ~6,3–7,4 Hz |
+
+Precisa-se saber qual mola gerou a curva de 7,6 Hz, qual é a **condição real na raiz**
+(o lado esquerdo é um conjunto com cilindro/mancal e dial, e há um cilindro de óleo
+com haste ao fundo — amortecedor da bancada?), e o material/massa real da barra
+(a foto de perto parece aço). O modelo analítico do TCC só vale depois disso.
+
 ## A. Dados e decisões (bloqueia o resto)
 
 - [ ] **A1. Manifesto dos vídeos** (`Code/videos/manifest.csv`): um registro por vídeo
@@ -23,18 +42,25 @@ Ordem sugerida: **A → B → C → D**. Dados e decisões (A) destravam tudo.
       git + SHA256 no manifesto).
 - [x] **A2. fps do slow-mo**: decidido que não entra no TCC como tema; basta declarar na
       metodologia o fps de captura (240 fps) e passá-lo ao app via `--fps`.
-- [ ] **A3. Descrever o acelerômetro**: modelo, tipo (MEMS/piezo), **massa**, posição na
-      barra, taxa de amostragem, como o f_n foi extraído, incerteza do instrumento.
-      Hoje só existem f_n em Hz e a imagem da curva (ver A6).
-- [ ] **A4. Montagem (definida)**: barra de alumínio engastada numa ponta e **mola no extremo
-      livre**, com **duas molas de k diferentes** (≈ 3 vídeos por mola, 240 fps). Faltam
-      os números: k₁, k₂ (medidos ou de catálogo, com incerteza), posição de fixação da
-      mola, massa da mola, massa/posição do acelerômetro.
-- [ ] **A5. Dados da barra de alumínio**: L livre medido a partir da borda do engaste, b, h
-      (paquímetro), E/ρ adotados. Posições das ROIs ao longo da barra (distância ao
-      engaste): parafuso, acelerômetro, ponta.
-- [ ] **A6. Sinal do acelerômetro**: 1ª opção, exportar CSV do software de aquisição (dado
-      real). 2ª opção (fallback): **digitalizar a imagem da curva** (calibração dos eixos +
+- [x] **A3. Instrumentação (identificada nas fotos, conferir no certificado/datasheet)**:
+      acelerômetro Brüel & Kjær **Type 4507 001** (nº de série na foto: 30837; ≈ 5 g,
+      piezoelétrico DeltaTron), fixado sobre a face superior da barra; aquisitor
+      **B&K LAN-XI Type 3160-A-4/2** (4 entradas/2 saídas, 51,2 kHz) ligado ao notebook;
+      software **PULSE LabShop 20.0.0.455**, projeto "acelerometro pratica", medições de
+      15/10/2026. Falta: sensibilidade/ganho, taxa de amostragem e duração do registro usadas.
+- [ ] **A4. Montagem**: barra de alumínio, 750 mm (720 mm livres), 25,4 × 12,7 mm,
+      ≈ 660 g; **mola k₁ = 1500 N/m e k₂ = 2500 N/m** presas por parafuso no **furo a 88 mm
+      da ponta** (outro furo a 250 mm, não usado); acelerômetro de 5 g. Falta: como k₁/k₂
+      foram obtidos (incerteza), massa da mola, e a condição real da raiz (ver acima).
+- [ ] **A5. Posições** (medir e confirmar): o enunciado diz acelerômetro a 300 mm "da ponta
+      não engastada", mas no quadro do vídeo ele está a ≈ 430 mm da ponta
+      (≈ 290 mm do engaste) — confirmar de qual extremo se mediu. ROIs: parafuso (88 mm da
+      ponta), acelerômetro, parede (limpeza/compensação).
+- [ ] **A6. Sinal do acelerômetro** (PULSE mostra sinal no tempo, 0–18 s, decaimento a partir
+      de ≈ 2 s, pico ±15–20 m/s², e espectro 0–10 Hz): 1ª opção, **exportar do PULSE LabShop**
+      (dados do Recorder/Display para ASCII/Excel/MAT) — dado real. 2ª opção (fallback):
+      **digitalizar a imagem da curva** (a foto atual é da tela com perspectiva/moiré, serve
+      pouco; screenshot ou export do gráfico é melhor) (calibração dos eixos +
       segmentação da linha) para obter f_n e ζ. Nesse caso o texto deve dizer
       "sinal digitalizado a partir da curva exportada pelo software", nunca "sinal bruto".
       Precisa saber se a imagem é domínio do tempo ou espectro, resolução e escala dos eixos.
@@ -54,13 +80,12 @@ Ordem sugerida: **A → B → C → D**. Dados e decisões (A) destravam tudo.
       (dupla integração no domínio da frequência, eq. do texto) com o deslocamento óptico.
       Trocar o critério de aprovação: referência primária = acelerômetro; teoria =
       secundária (hoje `validate_frequency` só compara com a viga).
-- [x] **B4. Modelo da barra com mola na ponta** (`beam.SpringSupportedBeam`): viga de
-      Euler-Bernoulli engastada com mola k (e massa concentrada opcional) no extremo livre,
-      frequências dos modos pelas raízes do determinante, forma modal, aproximação 1 GDL
-      √((k_eq+k)/(m_eq+M))/2π. **Verificado contra elementos finitos próprio** (3 modos, 5
-      casos, concordância ≤ 0,001 Hz; k=0 reproduz 21,13 Hz da Tabela do texto; k→∞
-      reproduz a viga engastada-apoiada). CLI: `--spring-k`, `--tip-mass`.
-      Falta: incerteza propagada (k, L, h, E) e transformar a verificação em teste (B9).
+- [x] **B4. Modelos analíticos** (`beam.py`): `SpringSupportedBeam` (forma fechada, mola na
+      ponta) e **`BeamFE`** (elementos finitos de Euler-Bernoulli: molas e massas em posições
+      quaisquer, raiz engastada/articulada/mola torsional, forma modal). Verificados entre si
+      e contra a tabela do texto (21,1 Hz). CLI: `--spring-k/--spring-pos`,
+      `--tip-mass/--mass-pos`, `--root`, `--root-stiffness`. Falta: incerteza propagada
+      (k, L, h, E).
 - [ ] **B5. Análise de flicker** (`flicker.py`): espectro do brilho médio de uma região
       estática; checar picos em 100/120 Hz (rede 60 Hz → ripple em 120 Hz) e o
       alias deles dado o fps; reportar razão de modulação e se interfere na banda de
@@ -77,8 +102,8 @@ Ordem sugerida: **A → B → C → D**. Dados e decisões (A) destravam tudo.
 - [ ] **B8. Checagem de aliasing automática** no relatório: marcar picos acima de ~0,4·fs
       e listar candidatos de alias `|f − k·fs|` (hoje `f_n = peaks[0]`, o pico mais alto,
       sem checar).
-- [ ] **B9. Testes** (`pytest`) a partir da verificação sintética já existente
-      (f_n 0,09 %, ζ ~2 %) para travar regressões.
+- [~] **B9. Testes**: `Code/tests/test_beam.py` (11 testes, passam). Falta teste da verificação
+      sintética (f_n 0,09 %, ζ ~2 %) como regressão.
 - [x] **B10. Higiene do repositório** (feito)
   - [x] `__pycache__` removido do git e ignorado (`**/__pycache__/`, `*.pyc`).
   - [x] Notebooks de rascunho sem valor pro TCC removidos (`random.ipynb` = IRA,
@@ -99,12 +124,11 @@ Ordem sugerida: **A → B → C → D**. Dados e decisões (A) destravam tudo.
 - [ ] **C4.** Amortecimento ζ (decremento logarítmico, só óptico) por caso — o ensaio não
       precisa do acelerômetro para isso.
 - [ ] **C5.** Mapa de sensibilidade: efeito de ROI, resize e fps na f_n (barato de rodar com B1).
-- [ ] **C6. Mass loading — só estimativa analítica.** Não existe gravação sem o acelerômetro,
-      e o vídeo também mede a barra *carregada*, então a comparação é justa mas o efeito não
-      é medido. Calcular com `SpringSupportedBeam(tip_mass=...)` (e Eq. mass_loading) com a
-      massa real do acelerômetro: o texto atual já estima ≈ 3 % para 10 g na ponta da barra,
-      ou seja, **não é desprezível em "duas casas decimais"** a não ser que o sensor seja de
-      poucos gramas e fique longe da ponta. Reportar o número, não a suposição.
+- [ ] **C6. Mass loading — medir.** Existe um vídeo **sem** o acelerômetro. Previsão com
+      `BeamFE` (5 g a 300–420 mm): −0,1 a −0,4 % (≈ 0,02–0,08 Hz), **abaixo ou na ordem da
+      resolução espectral Δf = 1/T** — o esperado é "diferença não resolvida", e isso vira
+      resultado (o efeito é pequeno nessa posição/massa; para 10 g na ponta seria ≈ 3 %).
+      Comparar f_n com/sem acelerômetro com a incerteza de cada vídeo.
 - [ ] **C7. Multiponto / full-field**: ROIs definidas em pós-processamento sobre o mesmo
       vídeo atuam como uma matriz de sensores virtuais. Para sustentar o termo
       "full-field" no texto, mostrar N ROIs ao longo da barra (amplitude e fase × posição)
@@ -117,7 +141,9 @@ Ordem sugerida: **A → B → C → D**. Dados e decisões (A) destravam tudo.
 > **todo número que ainda não saiu do app fica como placeholder marcado** (`\TODO{}`/`??`),
 > nunca valor inventado. Os relatórios exportados pelo app entram como tabelas/figuras.
 
-- [ ] **D1. Equipamentos**: substituir DJI Osmo Action 4 / RockSteady / exposição ≤ 1/2000 s
+- [ ] **D1. Equipamentos** (acelerômetro B&K 4507 001, aquisitor LAN-XI 3160-A-4/2, PULSE
+      LabShop; fotos já em `Book/Images/acelerometro_montado.jpg`, `aquisitor_bk_3160.jpg`,
+      `frame_ensaio_mola.jpg`; a foto da tela `pulse_curva_acelerometro_foto.jpg` é provisória): substituir DJI Osmo Action 4 / RockSteady / exposição ≤ 1/2000 s
       pelo smartphone real (modelo, modo slow-mo, fps real, resolução, exposição se
       conhecida). Reescrever o parágrafo de rolling shutter: não foi mitigado por exposição,
       foi **quantificado** (B6).
@@ -146,9 +172,11 @@ Ordem sugerida: **A → B → C → D**. Dados e decisões (A) destravam tudo.
 
 ## Perguntas em aberto
 
-1. k₁ e k₂ das molas (e como foram obtidos); onde a mola prende (ponta exata?) e se está
-   pré-carregada/vertical.
-2. Massa do acelerômetro e posição na barra; distâncias engaste→parafuso→acelerômetro→ponta.
-3. A imagem da curva do acelerômetro é sinal no tempo ou espectro? O software exporta CSV?
-4. Há uma ROI em região estática (fundo) para compensar movimento da câmera nesses vídeos?
-5. L livre, b e h medidos da barra usada nesses ensaios.
+1. Qual mola gerou a curva de 7,6 Hz (k₁ ou k₂)? Quais são os valores de f_n do acelerômetro de
+   cada gravação?
+2. Condição real na raiz: engaste rígido, mancal articulado ou outro? O que é o conjunto de
+   cilindro/mancal à esquerda e o cilindro de óleo com haste (amortecedor ligado à barra)?
+3. Material e massa da barra desse ensaio (alumínio de 660 g ou aço?).
+4. Distância do acelerômetro: 300 mm da ponta ou do engaste?
+5. Taxa de amostragem e sensibilidade configuradas no PULSE; é possível exportar os dados?
+6. Como k₁ e k₂ foram obtidos? Massa das molas?

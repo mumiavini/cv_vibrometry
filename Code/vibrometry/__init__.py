@@ -11,7 +11,7 @@ dinâmicos de bancada" (Trento, PUCPR):
        tracking      — coarse template tracking + phase-based sub-pixel refinement
     4. spectral      — FFT (Hann), peak picking, half-power and log-decrement damping
     calibration      — mm/pixel spatial scale factor
-    beam             — Euler-Bernoulli cantilever (+ tip spring) analytical model and validation
+    beam             — Euler-Bernoulli cantilever (+ springs/masses, FE) model and validation
     pipeline         — end-to-end orchestration and result export
     synthetic        — synthetic cantilever video generator (ground-truth checks)
 """
@@ -29,7 +29,7 @@ from .spectral import (
 )
 from .calibration import scale_from_pixels, scale_from_points
 from .beam import (
-    CantileverBeam, SpringSupportedBeam, MATERIALS, validate_frequency,
+    BeamFE, CantileverBeam, SpringSupportedBeam, MATERIALS, validate_frequency,
 )
 from .pipeline import VibrometryPipeline, PipelineConfig
 
@@ -41,6 +41,7 @@ __all__ = [
     "amplitude_spectrum", "find_spectral_peaks",
     "half_power_damping", "log_decrement_damping", "stft_spectrogram",
     "scale_from_pixels", "scale_from_points",
-    "CantileverBeam", "SpringSupportedBeam", "MATERIALS", "validate_frequency",
+    "BeamFE", "CantileverBeam", "SpringSupportedBeam", "MATERIALS",
+    "validate_frequency",
     "VibrometryPipeline", "PipelineConfig",
 ]

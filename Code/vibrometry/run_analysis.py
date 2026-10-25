@@ -20,7 +20,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from .beam import CantileverBeam, SpringSupportedBeam, MATERIALS
+from .beam import BeamFE, CantileverBeam, MATERIALS
 from .pipeline import PipelineConfig, VibrometryPipeline
 from .roi import ROI, load_rois, save_rois, select_rois_interactive
 from .video_io import load_video
@@ -63,10 +63,18 @@ def build_parser() -> argparse.ArgumentParser:
                    help="cross-section thickness h [m]")
 
     g.add_argument("--spring-k", type=float,
-                   help="stiffness k [N/m] of a spring at the free end "
-                        "(bar + tip spring bench configuration)")
+                   help="stiffness k [N/m] of a spring attached to the beam")
+    g.add_argument("--spring-pos", type=float,
+                   help="spring position [m] from the root (default: free end)")
     g.add_argument("--tip-mass", type=float, default=0.0,
-                   help="lumped mass at the free end, e.g. accelerometer [kg]")
+                   help="lumped mass [kg], e.g. accelerometer")
+    g.add_argument("--mass-pos", type=float,
+                   help="lumped-mass position [m] from the root "
+                        "(default: free end)")
+    g.add_argument("--root", choices=("clamped", "pinned", "rotational"),
+                   default="clamped", help="root boundary condition")
+    g.add_argument("--root-stiffness", type=float,
+                   help="torsional stiffness [N m/rad] for --root rotational")
 
     p.add_argument("--synthetic", action="store_true",
                    help="generate a synthetic ground-truth video and run the "
@@ -89,9 +97,16 @@ def main(argv: list[str] | None = None) -> int:
         beam = CantileverBeam.from_material(
             args.length, args.width, args.thickness, args.material
         )
-        if args.spring_k is not None or args.tip_mass:
-            beam = SpringSupportedBeam(beam, args.spring_k or 0.0,
-                                       args.tip_mass)
+        if (args.spring_k is not None or args.tip_mass
+                or args.root != "clamped"):
+            springs = ((args.spring_pos if args.spring_pos is not None
+                        else args.length, args.spring_k),) \
+                if args.spring_k is not None else ()
+            masses = ((args.mass_pos if args.mass_pos is not None
+                       else args.length, args.tip_mass),) \
+                if args.tip_mass else ()
+            beam = BeamFE(beam, springs=springs, masses=masses,
+                          root=args.root, root_stiffness=args.root_stiffness)
 
     if args.synthetic:
         from .synthetic import generate_cantilever_video
