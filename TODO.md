@@ -214,7 +214,10 @@ seria 626 N/m); considerar inércia do conjunto cilindro/dial do lado da junta.
 
 Impacto decrescente. Os pontos 1 e 2 são os que mais elevam o nível do trabalho.
 
-- [x] **E1. Linha de base: fase × correlação simples.** O texto afirma que a estimativa por fase é mais robusta
+- [x] **E1. Linha de base: fase × correlação simples.** **Decisão (2026-10-25): não entra no texto** — não é
+      necessário para a tese (f_n vídeo × acelerômetro); as vantagens da fase ficam só na fundamentação, citadas da
+      literatura, e Resultados/Conclusão não afirmam que este trabalho provou a fase superior. Registro do que foi
+      feito, caso a banca pergunte: O texto afirma que a estimativa por fase é mais robusta
       que a correlação de intensidade, mas isso não foi medido. Rodar os mesmos vídeos só com a correlação
       cruzada normalizada (o estágio grosseiro já existe em `tracking.py`, sem o refinamento por fase) e comparar
       f_n, amplitude, ruído (D1) e ζ com o método completo. Entra em Resultados (nova subseção) e na Discussão.

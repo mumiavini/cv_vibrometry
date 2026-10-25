@@ -140,8 +140,6 @@ estavam como nas outras. **Fotografe o amortecedor** (lâmina dentro/fora) antes
 - **D1, estabilidade (≈ 2 min):** filme a barra parada por 10 s no mesmo enquadramento. O desvio-padrão do
   deslocamento medido é o piso de ruído do método (referência da primeira sessão, duas regiões da parede:
   σ ≈ 0,03 px ≈ 15 µm; aqui ele sai com a textura das marcas da barra).
-- **Baixa amplitude (P3, E1):** 2 tomadas com um toque leve (amplitude < 1 px ≈ 0,5 mm). É onde a fase deve se
-  separar da correlação com parábola; na amplitude normal (15–30 px) os dois empatam.
 - **D2, escala:** filme a régua de 100 mm (ou as marcas da barra) no plano do movimento; 5 medidas na imagem.
 - **Cintilação:** filme 10 s de uma região estática/clara com a iluminação do dia; o app (aba Qualidade) mede a
   cintilação. Se a luz for fluorescente, repita com LED DC.
@@ -210,4 +208,3 @@ Regras:
 | nada muda além do ruído ou A' ≠ A | reportar o limite de detecção; não usar para SHM |
 | todas as marcas da barra rastreadas (NCC ≥ 0,8) | forma modal com 13–15 pontos e MAC × `BeamFE`; sustenta "multiponto" (e, com fase, "campo") |
 | eixo do mancal ≈ 36 mm antes do x = 0 do vídeo | usar a raiz nesse ponto no modelo (MAC 0,9988 → 0,9999 na primeira sessão) |
-| no toque leve a fase tem ruído menor que a NCC com parábola | aí sim o texto pode dizer que a fase é superior em amplitude sub-pixel |
