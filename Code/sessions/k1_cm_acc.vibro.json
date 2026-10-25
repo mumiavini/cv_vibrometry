@@ -26,6 +26,11 @@
         "name": "acelerometro B&K 4507",
         "x_mm": 300.0,
         "mass_g": 5.0
+      },
+      {
+        "name": "ferragem",
+        "x_mm": 632.0,
+        "mass_g": 383.0
       }
     ]
   },
@@ -34,7 +39,7 @@
     "excitation_hz": null,
     "level": "A1",
     "repetition": 1,
-    "camera": "iphone",
+    "camera": "iphone 17e",
     "notes": "Barra Al 6351-T6 articulada em mancal + mola k1=1500 N/m a 632 mm da articulacao (furo a 88 mm da ponta); acelerometro B&K 4507 001 (5 g) a 300 mm da articulacao. Modelo: elementos finitos (BeamFE). PREENCHER na etapa 1 as massas pesadas da mola e das ferragens (mass_g, hardware_g): sem elas f1 previsto = 11,7 Hz.",
     "checklist": [
       false,
@@ -48,7 +53,7 @@
     ]
   },
   "video": {
-    "path": "../videos/k1_cm_acc.mov",
+    "path": "..\\videos\\k1_cm_acc.mov",
     "fps_override": 240.0,
     "start_s": 1.0,
     "end_s": null,
@@ -64,8 +69,8 @@
       },
       {
         "name": "Acelerometro",
-        "x": 579,
-        "y": 453,
+        "x": 575,
+        "y": 443,
         "w": 24,
         "h": 48,
         "is_reference": false
@@ -106,7 +111,7 @@
     }
   },
   "accel": {
-    "path": "../data/acelerometro/curva_acelerometro_tempo_k1.csv",
+    "path": "..\\data\\acelerometro\\curva_acelerometro_tempo_k1.csv",
     "time_column": 0,
     "channel": 1,
     "fs": null,
@@ -124,7 +129,7 @@
     "f_hp": null,
     "f_lp": null,
     "sync_mode": "impact",
-    "offset_s": -0.032,
+    "offset_s": -0.03,
     "drift_ppm": 0.0,
     "window": null,
     "f_analysis": null,

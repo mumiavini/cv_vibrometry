@@ -1,0 +1,379 @@
+{
+  "gerado_em": "2026-10-25T00:42:58",
+  "versao_codigo": null,
+  "sessao": {
+    "name": "k1_cm_acc",
+    "specimen": {
+      "material": "aluminum_6351_t6",
+      "E_gpa": 69.0,
+      "rho": 2710.0,
+      "L_mm": 720.0,
+      "b_mm": 25.4,
+      "t_mm": 12.7,
+      "tip_mass_g": 0.0,
+      "fps": 240.0,
+      "oversampling": 10.0,
+      "support": "pinned",
+      "root_stiffness": null,
+      "springs": [
+        {
+          "name": "mola k1 (catalogo)",
+          "x_mm": 632.0,
+          "k_n_m": 1500.0,
+          "mass_g": 0.0,
+          "hardware_g": 0.0
+        }
+      ],
+      "masses": [
+        {
+          "name": "acelerometro B&K 4507",
+          "x_mm": 300.0,
+          "mass_g": 5.0
+        },
+        {
+          "name": "ferragem",
+          "x_mm": 632.0,
+          "mass_g": 383.0
+        }
+      ]
+    },
+    "meta": {
+      "date": "20261015",
+      "excitation_hz": null,
+      "level": "A1",
+      "repetition": 1,
+      "camera": "iphone 17e",
+      "notes": "Barra Al 6351-T6 articulada em mancal + mola k1=1500 N/m a 632 mm da articulacao (furo a 88 mm da ponta); acelerometro B&K 4507 001 (5 g) a 300 mm da articulacao. Modelo: elementos finitos (BeamFE). PREENCHER na etapa 1 as massas pesadas da mola e das ferragens (mass_g, hardware_g): sem elas f1 previsto = 11,7 Hz.",
+      "checklist": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    "video": {
+      "path": "C:\\soft\\cv_vibrometry\\Code\\videos\\k1_cm_acc.mov",
+      "fps_override": 240.0,
+      "start_s": 1.0,
+      "end_s": null,
+      "resize_width": null,
+      "rois": [
+        {
+          "name": "Parafuso_de_fixação",
+          "x": 1245,
+          "y": 435,
+          "w": 40,
+          "h": 113,
+          "is_reference": false
+        },
+        {
+          "name": "Acelerometro",
+          "x": 575,
+          "y": 443,
+          "w": 24,
+          "h": 48,
+          "is_reference": false
+        },
+        {
+          "name": "Referência_paraede_",
+          "x": 207,
+          "y": 842,
+          "w": 278,
+          "h": 195,
+          "is_reference": true
+        }
+      ],
+      "scale_mm_per_px": 0.5129948615605857,
+      "calibration": {
+        "p1": [
+          27.671658767772314,
+          512.1554502369669
+        ],
+        "p2": [
+          1430.5728909952604,
+          470.38862559241704
+        ],
+        "length_mm": 720.0,
+        "length_px": 1403.5228302476214
+      },
+      "axis": "auto",
+      "compensate": true,
+      "wavelengths": [
+        8.0,
+        16.0
+      ],
+      "search_margin": 60,
+      "window": null,
+      "roi_positions_mm": {
+        "Parafuso_de_fixação": 632.0,
+        "Acelerometro": 300.0
+      }
+    },
+    "accel": {
+      "path": "C:\\soft\\cv_vibrometry\\Code\\data\\acelerometro\\curva_acelerometro_tempo_k1.csv",
+      "time_column": 0,
+      "channel": 1,
+      "fs": null,
+      "unit": "m/s²",
+      "sensitivity_mv_per_g": 100.0,
+      "invert": false,
+      "integration": "frequency",
+      "f_hp": 7.1,
+      "f_lp": null,
+      "window": null
+    },
+    "compare": {
+      "roi": "Acelerometro",
+      "domain": "displacement",
+      "f_hp": null,
+      "f_lp": null,
+      "sync_mode": "impact",
+      "offset_s": -0.032,
+      "drift_ppm": 0.0,
+      "window": null,
+      "f_analysis": null,
+      "crit_freq_pct": 2.7,
+      "crit_amp_pct": 10.0,
+      "crit_phase_deg": 10.0,
+      "crit_eb_pct": 5.0,
+      "crit_cv_pct": 5.0
+    },
+    "version": 1
+  },
+  "video": {
+    "arquivo": "C:\\soft\\cv_vibrometry\\Code\\videos\\k1_cm_acc.mov",
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "codec": "hevc",
+    "fps": 240.0,
+    "fps_fonte": "override",
+    "fps_declarado": 29.75705287672683,
+    "fps_medido": null,
+    "quadros_processados": 1619,
+    "fator_reducao": 1.0,
+    "inicio_s": 1.0,
+    "unidade": "mm",
+    "eixos": {
+      "Parafuso_de_fixação": "y",
+      "Acelerometro": "y"
+    },
+    "qualidade": {
+      "intervalo_quadros_ms": 33.372476308199424,
+      "jitter_ms": 0.8642866318388652,
+      "quadros_perdidos": 1618,
+      "cintilacao_hz": 119.853515625,
+      "cintilacao_pct": 7.230799268672558,
+      "foco_laplaciano": {
+        "Parafuso_de_fixação": 191.39200754757616,
+        "Acelerometro": 507.5387701340664,
+        "Referência_paraede_": 25.06919257102087
+      },
+      "saturacao_pct": {
+        "Parafuso_de_fixação": 0.0,
+        "Acelerometro": 0.0,
+        "Referência_paraede_": 0.0
+      },
+      "quadros_perdidos_rastreamento": {
+        "Parafuso_de_fixação": 0,
+        "Acelerometro": 0,
+        "Referência_paraede_": 0
+      },
+      "ncc_minimo": {
+        "Parafuso_de_fixação": 0.9064192175865173,
+        "Acelerometro": 0.9257775545120239,
+        "Referência_paraede_": 0.9709885716438293
+      },
+      "avisos": [
+        "1618 quadro(s) perdido(s) (intervalo > 1,5 período)",
+        "cintilação de 7.2% em 119.9 Hz"
+      ]
+    },
+    "modal": {
+      "Parafuso_de_fixação": {
+        "name": "Parafuso_de_fixação",
+        "unit": "mm",
+        "window_s": [
+          0.0,
+          6.741666666666666
+        ],
+        "f_n_hz": 7.762968746991223,
+        "amplitude": 15.502600916911685,
+        "zeta_half_power": 0.013769164981681164,
+        "zeta_log_decrement": 0.001053288784808955,
+        "std": 11.020144671956325,
+        "peak_to_peak": 36.501422665560106,
+        "spectral_peaks": [
+          {
+            "frequency": 7.763671875,
+            "amplitude": 15.453971353417925
+          }
+        ],
+        "f_predicted_hz": 7.592140784793691,
+        "error_predicted_percent": 2.25006315135362
+      },
+      "Acelerometro": {
+        "name": "Acelerometro",
+        "unit": "mm",
+        "window_s": [
+          0.0,
+          6.741666666666666
+        ],
+        "f_n_hz": 7.762936257126006,
+        "amplitude": 7.5375173692085085,
+        "zeta_half_power": 0.01377099740202322,
+        "zeta_log_decrement": 0.0010171430389684646,
+        "std": 5.358049317396145,
+        "peak_to_peak": 17.676480914090803,
+        "spectral_peaks": [
+          {
+            "frequency": 7.763671875,
+            "amplitude": 7.513038820037903
+          }
+        ],
+        "f_predicted_hz": 7.592140784793691,
+        "error_predicted_percent": 2.249635210590419
+      }
+    }
+  },
+  "forma_modal": {
+    "referencia": "Parafuso_de_fixação",
+    "modo_modelo": 1,
+    "f_modelo_hz": 7.592140784793691,
+    "f_medida_hz": 7.762968746991223,
+    "rois": [
+      {
+        "nome": "Parafuso_de_fixação",
+        "x_mm": 632.0,
+        "amplitude": 15.502600916911685,
+        "razao_medida": 1.0,
+        "razao_prevista": 1.0,
+        "erro_pct": 0.0
+      },
+      {
+        "nome": "Acelerometro",
+        "x_mm": 300.0,
+        "amplitude": 7.5375173692085085,
+        "razao_medida": 0.4862098566303078,
+        "razao_prevista": 0.4809104220888836,
+        "erro_pct": 1.101958763631185
+      }
+    ]
+  },
+  "acelerometro": {
+    "canal": "aceleracao_m_s2",
+    "fs_hz": 200.00000000000426,
+    "duracao_s": 19.314999999999998,
+    "reamostrado": false,
+    "jitter_pct": 1.770727003891122e-11,
+    "modal": {
+      "name": "acelerômetro",
+      "unit": "mm",
+      "window_s": [
+        0.03,
+        19.345
+      ],
+      "f_n_hz": 7.555562400096018,
+      "amplitude": 0.4681966741087893,
+      "zeta_half_power": 0.011210872184406006,
+      "zeta_log_decrement": 0.005575669660719981,
+      "std": 0.8097251696473159,
+      "peak_to_peak": 15.194227423424595,
+      "spectral_peaks": [
+        {
+          "frequency": 7.6171875000001625,
+          "amplitude": 0.35884895090153773
+        },
+        {
+          "frequency": 6.134033203125131,
+          "amplitude": 0.051640060541344034
+        },
+        {
+          "frequency": 5.926513671875126,
+          "amplitude": 0.03760099745509015
+        },
+        {
+          "frequency": 7.305908203125155,
+          "amplitude": 0.029992093724824455
+        },
+        {
+          "frequency": 5.590820312500119,
+          "amplitude": 0.028939084568034318
+        }
+      ],
+      "f_predicted_hz": 7.592140784793691,
+      "error_predicted_percent": -0.4817927608894736
+    }
+  },
+  "comparacao": {
+    "roi": "Acelerometro",
+    "dominio": "displacement",
+    "unidade_video": "mm",
+    "unidade_acelerometro": "mm",
+    "offset_s": -0.032,
+    "deriva_ppm": 0.0,
+    "janela_s": [
+      0.0625,
+      6.741666666666666
+    ],
+    "metricas": {
+      "f_ref": 7.564610161103071,
+      "f_test": 7.762969768150945,
+      "freq_error_percent": 2.6222052798944033,
+      "f_common": 7.564610161103071,
+      "amp_ref": 1.3058298050949086,
+      "amp_test": 1.684292037093145,
+      "amp_error_percent": 28.982508327011985,
+      "phase_ref_deg": 66.6398200717549,
+      "phase_test_deg": -112.85926909985704,
+      "phase_diff_deg": -179.49908917161196,
+      "r2_ref": 0.5520022241529452,
+      "r2_test": 0.04952919197073036,
+      "rms_ref": 1.242390176581473,
+      "rms_test": 5.349645217228985,
+      "rms_error_percent": 330.5930067757717,
+      "pearson_r": 0.016739556182634733,
+      "rmse": 5.471720343204213,
+      "nrmse_percent": 440.41883510863306,
+      "gain": 0.07207935828772646,
+      "coherence": 0.02615377368469926
+    }
+  },
+  "criterios": [
+    {
+      "criterio": "Frequência, vídeo × acelerômetro [%]",
+      "valor": 2.6222052798944033,
+      "limite": 2.7,
+      "ok": true
+    },
+    {
+      "criterio": "Amplitude, vídeo × acelerômetro [%]",
+      "valor": 28.982508327011985,
+      "limite": 10.0,
+      "ok": false
+    },
+    {
+      "criterio": "Fase, vídeo × acelerômetro [°]",
+      "valor": 179.49908917161196,
+      "limite": 10.0,
+      "ok": false
+    },
+    {
+      "criterio": "f₁ Parafuso_de_fixação × Euler-Bernoulli [%]",
+      "valor": 2.25006315135362,
+      "limite": 5.0,
+      "ok": true
+    },
+    {
+      "criterio": "f₁ Acelerometro × Euler-Bernoulli [%]",
+      "valor": 2.249635210590419,
+      "limite": 5.0,
+      "ok": true
+    }
+  ]
+}
