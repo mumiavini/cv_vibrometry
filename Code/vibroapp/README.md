@@ -19,7 +19,7 @@ pandas, além das que o pipeline já usava).
 
 | Etapa | O que faz | Planejamento |
 |---|---|---|
-| **1 Planejar** | f₁, f₂, f₃ de Euler-Bernoulli; efeito de massa na ponta; checagem f₁ ≤ fps/10; espessura máx. e comprimento mín. para o fps; nome padronizado dos arquivos; checklist | R1, R2 |
+| **1 Planejar** | f₁, f₂, f₃ de Euler-Bernoulli (viga engastada) **ou, com apoio articulado/mola torsional, molas e massas pontuais, por elementos finitos**; efeito de massa; checagem f₁ ≤ fps/10; espessura máx. e comprimento mín. para o fps; nome padronizado dos arquivos; checklist | R1, R2 |
 | **2 Vídeo** | Metadados e fps real; trecho (início/fim); ROIs de medição e de referência arrastáveis sobre o quadro; calibração mm/px traçando um segmento sobre um objeto conhecido; processamento em segundo plano (cancelável); deslocamento, espectro, espectrograma; f, ζ (meia potência e decremento logarítmico), σ (controle D1), erro frente a E-B; aba Qualidade (quadros perdidos, jitter, cintilação, foco, saturação, perda de rastreamento) | R3, R4, R5, R7 |
 | **3 Acelerômetro** | CSV/TXT com detecção automática de separador, vírgula decimal e cabeçalho; unidades g, m/s², mm/s², mV/V (sensibilidade); inversão de eixo; deslocamento por integração dupla (frequência ou tempo); f e ζ na janela | R3, R6 |
 | **4 Comparar** | Sincronismo por impacto/início da vibração ou correlação (atraso fracionário), deriva de relógio, manual; filtro comum aos dois sinais; comparação em deslocamento ou aceleração; frequência, amplitude, fase, RMS, r, NRMSE, ganho, coerência/FRF; critérios de aceitação editáveis | R6, R7, §11 |
@@ -38,6 +38,21 @@ Menu `···` → **Gerar dados sintéticos de validação**: cria um vídeo e u
 CSV de acelerômetro do *mesmo* movimento, com frequência, amplitude, ζ e
 atraso conhecidos, e abre a sessão pronta. Serve para verificar o software
 (planejamento §10) antes dos dados reais.
+
+## Apoio, molas e massas (etapa 1)
+
+Sem nenhuma mola ou massa em posição e com apoio engastado, a previsão é a viga engastada de forma
+fechada (com massa na ponta). Caso contrário o app usa o modelo de elementos finitos
+(`vibrometry.beam.BeamFE`): apoio **engastado**, **articulado (mancal)** ou **mola torsional**, molas
+lineares e massas pontuais (ex.: acelerômetro) em qualquer posição *x*, medida a partir da raiz. A massa
+efetiva de uma mola é ⅓ da massa dela somada às ferragens (parafuso, porcas, gancho) em *x* — pese-as e
+preencha, senão f₁ fica superestimado (o app avisa). Com apoio articulado e sem mola o modo 1 é a rotação
+de corpo rígido e é ignorado.
+
+Na etapa 2, informe a **posição de cada ROI de medição ao longo da barra**. Com duas ou mais ROIs
+posicionadas, a etapa 6 compara a razão das amplitudes com a forma modal do modelo (tabela na tela, em
+`resultados.json` e em `tabela_forma_modal.tex`) — verificação multiponto independente do acelerômetro e
+da escala.
 
 ## Sessões
 

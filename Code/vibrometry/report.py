@@ -29,6 +29,7 @@ from .workflow import (
     ModalSummary,
     VideoAnalysis,
     accel_displacement_mm,
+    mode_shape_check,
 )
 
 RC = {
@@ -344,6 +345,25 @@ def latex_modal_table(analysis: VideoAnalysis, accel: ModalSummary | None,
     )
 
 
+def latex_mode_shape_table(chk, session: Session) -> str:
+    """Amplitude ratio between ROIs against the model mode shape."""
+    body = "\n".join(
+        f"    {r.name.replace('_', chr(92) + '_')} & {fmt_tex(r.x_mm, 0)} & "
+        f"{fmt_tex(r.measured_ratio, 3)} & {fmt_tex(r.predicted_ratio, 3)} & "
+        f"{fmt_tex(r.error_percent, 1)} \\\\" for r in chk.rows)
+    name = session.name.replace("_", "\\_")
+    ref = chk.reference.replace("_", "\\_")
+    return (
+        "\\begin{table}[htbp]\n  \\centering\n"
+        f"  \\caption{{Razão de amplitudes entre ROIs e forma modal do modelo "
+        f"(modo {chk.mode}, {fmt_tex(chk.f_model, 2)} Hz), referência {ref} — {name}.}}\n"
+        f"  \\label{{tab:forma_modal_{session.name}}}\n"
+        "  \\begin{tabular}{lrrrr}\n    \\toprule\n"
+        "    ROI & $x$ [mm] & medida & prevista & $\\varepsilon$ [\\%] \\\\\n    \\midrule\n"
+        f"{body}\n    \\bottomrule\n  \\end{{tabular}}\n\\end{{table}}\n"
+    )
+
+
 def latex_comparison_table(cmp: ComparisonData, session: Session) -> str:
     m = cmp.metrics
     if m is None:
@@ -470,6 +490,16 @@ def results_dict(session: Session, analysis: VideoAnalysis | None,
             },
             "modal": {n: m.to_dict() for n, m in analysis.modal.items()},
         }
+        chk = mode_shape_check(session, analysis)
+        if chk is not None:
+            d["forma_modal"] = {
+                "referencia": chk.reference, "modo_modelo": chk.mode,
+                "f_modelo_hz": chk.f_model, "f_medida_hz": chk.f_measured,
+                "rois": [{"nome": r.name, "x_mm": r.x_mm, "amplitude": r.amplitude,
+                          "razao_medida": r.measured_ratio,
+                          "razao_prevista": r.predicted_ratio,
+                          "erro_pct": r.error_percent} for r in chk.rows],
+            }
     if accel is not None:
         d["acelerometro"] = {
             "canal": accel.label, "fs_hz": accel.fs, "duracao_s": accel.duration,
@@ -538,6 +568,9 @@ def export_session(
         if opts.latex:
             save_text("tabela_modal.tex",
                       latex_modal_table(analysis, accel_summary, session))
+            chk = mode_shape_check(session, analysis)
+            if chk is not None:
+                save_text("tabela_forma_modal.tex", latex_mode_shape_table(chk, session))
         if opts.pdf or opts.png:
             save_fig(fig_rois(analysis), "fig_rois")
             save_fig(fig_displacement(analysis), "fig_deslocamento")

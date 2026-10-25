@@ -129,7 +129,7 @@ def predicted_frequency(session: Session) -> float | None:
         return None
     try:
         return float(session.specimen.predicted_f1())
-    except (ValueError, ZeroDivisionError):
+    except (ValueError, ZeroDivisionError, np.linalg.LinAlgError):
         return None
 
 
@@ -239,6 +239,63 @@ def analyze_video(session: Session, track: VideoTrack) -> VideoAnalysis:
         for name, x in signals.items()
     }
     return VideoAnalysis(track, unit, signals, axes, modal)
+
+
+@dataclass
+class ModeShapeRow:
+    name: str
+    x_mm: float                 # distance from the root
+    amplitude: float            # sine-fit amplitude of the ROI
+    measured_ratio: float       # amplitude / amplitude of the reference ROI
+    predicted_ratio: float      # |shape(x)| / |shape(x_ref)| of the model
+    error_percent: float        # (measured - predicted) / predicted
+
+
+@dataclass
+class ModeShapeCheck:
+    """Amplitude ratio between measurement ROIs against the mode shape of the
+    analytical model (multi-point check, independent of the accelerometer
+    and of the spatial scale)."""
+    reference: str              # ROI the ratios are relative to
+    mode: int                   # elastic mode of the model that matches f
+    f_model: float              # frequency of that mode [Hz]
+    f_measured: float
+    rows: list[ModeShapeRow]
+
+
+def mode_shape_check(session: Session, analysis: VideoAnalysis) -> ModeShapeCheck | None:
+    """Compare the ROI amplitude ratios with the model mode shape. Needs at
+    least two measurement ROIs with a position along the beam
+    (``session.video.roi_positions_mm``)."""
+    pos = session.video.roi_positions_mm or {}
+    names = [n for n, m in analysis.modal.items()
+             if n in pos and m.amplitude and m.f_n]
+    if len(names) < 2:
+        return None
+    ref = max(names, key=lambda n: analysis.modal[n].amplitude)
+    f_meas = analysis.modal[ref].f_n
+    try:
+        fe = session.specimen.fe_model()
+        modes = range(1, 5)
+        k = min(modes, key=lambda i: abs(fe.elastic_frequency(i) - f_meas))
+        x = np.array([pos[n] / 1e3 for n in names])
+        shape = np.abs(fe.elastic_mode_shape(x, k))
+    except (ValueError, ZeroDivisionError, np.linalg.LinAlgError):
+        return None
+    i_ref = names.index(ref)
+    if shape[i_ref] <= 0:
+        return None
+    rows = []
+    for n, xm, sh in zip(names, x, shape):
+        meas = analysis.modal[n].amplitude / analysis.modal[ref].amplitude
+        pred = sh / shape[i_ref]
+        rows.append(ModeShapeRow(
+            name=n, x_mm=float(xm * 1e3), amplitude=float(analysis.modal[n].amplitude),
+            measured_ratio=float(meas), predicted_ratio=float(pred),
+            error_percent=float(100.0 * (meas - pred) / pred) if pred > 0 else float("nan")))
+    return ModeShapeCheck(reference=ref, mode=int(k),
+                          f_model=float(fe.elastic_frequency(k)),
+                          f_measured=float(f_meas), rows=rows)
 
 
 # --------------------------------------------------------------------------- #

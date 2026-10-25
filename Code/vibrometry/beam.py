@@ -230,7 +230,11 @@ class BeamFE:
         self._cache: tuple[np.ndarray, np.ndarray, list[int]] | None = None
 
     def _node(self, x: float) -> int:
-        return int(round(x / self.beam.length * self.n_elements))
+        if not -1e-9 <= x <= self.beam.length * (1.0 + 1e-6):
+            raise ValueError(f"position {x:.4f} m is outside the beam "
+                             f"(0 .. {self.beam.length:.4f} m)")
+        return min(self.n_elements, max(0, int(round(x / self.beam.length
+                                                     * self.n_elements))))
 
     def _solve(self):
         if self._cache is not None:
@@ -295,6 +299,27 @@ class BeamFE:
         return shape / full[-2]
 
     @property
+    def n_rigid(self) -> int:
+        """Rigid-body modes at ~0 Hz: a pinned (or torsionally free) root with
+        no spring restoring the rotation."""
+        free_root = (self.root == "pinned"
+                     or (self.root == "rotational"
+                         and (self.root_stiffness or 0.0) <= 0.0))
+        return 1 if free_root and not any(k > 0 for _, k in self.springs) else 0
+
+    def elastic_frequency(self, mode: int = 1) -> float:
+        """Frequency [Hz] of the ``mode``-th *elastic* mode (the rigid-body
+        rotation, if any, is skipped)."""
+        return self.natural_frequency(mode + self.n_rigid)
+
+    def elastic_frequencies(self, n: int = 3) -> list[float]:
+        return [self.elastic_frequency(i) for i in range(1, n + 1)]
+
+    def elastic_mode_shape(self, x: np.ndarray, mode: int = 1) -> np.ndarray:
+        """Mode shape of the ``mode``-th elastic mode (tip-normalised)."""
+        return self.mode_shape(x, mode + self.n_rigid)
+
+    @property
     def m_eq(self) -> float:
         """Equivalent tip mass: beam (0.2357 rho A L) + lumped masses [kg]."""
         return self.beam.m_eq + sum(m for _, m in self.masses)
@@ -302,10 +327,8 @@ class BeamFE:
     @property
     def k_eq(self) -> float:
         """Single-DOF stiffness consistent with ``m_eq`` and the first
-        non-rigid-body frequency [N/m] (reporting only)."""
-        freqs, _, _ = self._solve()
-        f1 = freqs[freqs > 0.5][0]
-        return self.m_eq * (2.0 * np.pi * f1) ** 2
+        elastic frequency [N/m] (reporting only)."""
+        return self.m_eq * (2.0 * np.pi * self.elastic_frequency(1)) ** 2
 
 
 @dataclass

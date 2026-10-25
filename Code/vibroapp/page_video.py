@@ -143,6 +143,8 @@ class VideoPage(QWidget):
         self.roi_list = QListWidget()
         self.roi_list.setFixedHeight(84)
         self.roi_list.setEditTriggers(QListWidget.DoubleClicked)
+        self.roi_pos = OptSpin("não informada", 0, 100000, 1, 10, "mm")
+        self.roi_pos.setEnabled(False)
 
         self.scale = OptSpin("sem escala (px)", 0, 1000, 5, 0.001, "mm/px")
         self.cal_btn = QPushButton("Medir na imagem")
@@ -195,6 +197,10 @@ class VideoPage(QWidget):
         p.lay.addWidget(section("Regiões de interesse"))
         p.lay.addLayout(hbox(self.add_meas, self.add_ref, self.del_roi))
         p.lay.addWidget(self.roi_list)
+        p.lay.addLayout(hbox(muted("Posição da ROI na barra", wrap=False), self.roi_pos))
+        p.lay.addWidget(muted("Distância da raiz até a ROI selecionada: com duas ou mais ROIs "
+                              "posicionadas, o relatório compara a razão das amplitudes com a "
+                              "forma modal do modelo."))
         p.lay.addWidget(muted("Desenhe as ROIs no quadro inicial do trecho. A ROI de "
                               "medição deve conter só o alvo (ex.: o marcador); a de "
                               "referência, um ponto fixo com textura."))
@@ -243,6 +249,8 @@ class VideoPage(QWidget):
         self.del_roi.clicked.connect(self._delete_roi)
         self.roi_list.itemChanged.connect(self._roi_renamed)
         self.roi_list.currentRowChanged.connect(self._highlight_roi)
+        self.roi_list.currentRowChanged.connect(self._load_roi_pos)
+        self.roi_pos.valueChanged.connect(self._roi_pos_changed)
         self.cal_btn.toggled.connect(self._toggle_calibration)
         self.cal_len.valueChanged.connect(self._calibration_moved)
         self.cal_apply.clicked.connect(self._apply_calibration)
@@ -387,6 +395,7 @@ class VideoPage(QWidget):
         for d in v.rois:
             self._add_roi_item(d["name"], d["x"], d["y"], d["w"], d["h"],
                                d.get("is_reference", False))
+        self._load_roi_pos(self.roi_list.currentRow())
         self._set_stale(False)
 
     def _params_changed(self) -> None:
@@ -606,6 +615,7 @@ class VideoPage(QWidget):
         if row < 0:
             return
         d = self.roi_items.pop(row)
+        self.state.session.video.roi_positions_mm.pop(d["name"], None)
         self.vb.removeItem(d["item"])
         self.vb.removeItem(d["label"])
         self.roi_list.takeItem(row)
@@ -618,12 +628,37 @@ class VideoPage(QWidget):
         new = re.sub(r"[^\w\-]+", "_", new) or d["name"]
         if new != d["name"]:
             new = self._unique_name(new)
+        pos = self.state.session.video.roi_positions_mm
+        if d["name"] in pos and new != d["name"]:
+            pos[new] = pos.pop(d["name"])
         d["name"] = new
         d["label"].setText(new)
         self.roi_list.blockSignals(True)
         li.setText(new + ("  (referência)" if d["is_ref"] else ""))
         self.roi_list.blockSignals(False)
         self._rois_changed()
+
+    def _load_roi_pos(self, row: int) -> None:
+        """Show the position along the beam of the selected ROI."""
+        ok = 0 <= row < len(self.roi_items) and not self.roi_items[row]["is_ref"]
+        self.roi_pos.blockSignals(True)
+        self.roi_pos.setEnabled(ok)
+        pos = self.state.session.video.roi_positions_mm
+        self.roi_pos.put(pos.get(self.roi_items[row]["name"]) if ok else None)
+        self.roi_pos.blockSignals(False)
+
+    def _roi_pos_changed(self) -> None:
+        row = self.roi_list.currentRow()
+        if self._loading or not 0 <= row < len(self.roi_items):
+            return
+        name = self.roi_items[row]["name"]
+        pos = self.state.session.video.roi_positions_mm
+        v = self.roi_pos.get()
+        if v is None:
+            pos.pop(name, None)
+        else:
+            pos[name] = v
+        self.state.mark_dirty()
 
     def _highlight_roi(self, row: int) -> None:
         for i, d in enumerate(self.roi_items):

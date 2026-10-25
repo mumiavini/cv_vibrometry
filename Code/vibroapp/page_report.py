@@ -22,6 +22,7 @@ from PySide6.QtWidgets import (
 )
 
 from vibrometry.report import ExportOptions, criteria_checks, export_session
+from vibrometry.workflow import mode_shape_check
 
 from . import theme
 from .page_plan import MATERIAL_LABELS
@@ -140,8 +141,20 @@ class ReportPage(QWidget):
                                    f"massa na ponta {fmt(sp.tip_mass_g, 2)} g"),
                 ("Excitação", f"{fmt(s.meta.excitation_hz, 2)} Hz" if s.meta.excitation_hz
                  else "vibração livre")]
+        if sp.uses_fe:
+            from vibrometry.session import SUPPORTS
+            rows.append(("Apoio", SUPPORTS.get(sp.support, sp.support)))
+            for d in sp.springs:
+                rows.append((f"Mola {html.escape(str(d.get('name', '')))}",
+                             f"k = {fmt(d.get('k_n_m'), 1)} N/m em x = {fmt(d.get('x_mm'), 1)} mm · "
+                             f"massa {fmt(d.get('mass_g'), 1)} g + ferragens "
+                             f"{fmt(d.get('hardware_g'), 1)} g"))
+            for d in sp.masses:
+                rows.append((f"Massa {html.escape(str(d.get('name', '')))}",
+                             f"{fmt(d.get('mass_g'), 2)} g em x = {fmt(d.get('x_mm'), 1)} mm"))
         try:
-            rows.append(("f₁ prevista (E-B)", f"{fmt(sp.predicted_f1(), 3)} Hz"))
+            rows.append((f"f₁ prevista ({html.escape(sp.model_label())})",
+                         f"{fmt(sp.predicted_f1(), 3)} Hz"))
         except Exception:
             pass
         h.append(_section("Ensaio", rows))
@@ -163,6 +176,20 @@ class ReportPage(QWidget):
                              f"ζ<sub>mp</sub> = {fmt(ms.zeta_half_power, 4)} · "
                              f"σ = {fmt(ms.std, 4)} {ms.unit}"))
             h.append(_section("Método óptico", rows))
+            try:
+                chk = mode_shape_check(s, a)
+            except Exception:
+                chk = None
+            if chk is not None:
+                rows = [(f"{html.escape(r.name)} (x = {fmt(r.x_mm, 0)} mm)",
+                         f"A = {fmt(r.amplitude, 3)} {a.unit} · razão medida "
+                         f"{fmt(r.measured_ratio, 3)} · prevista {fmt(r.predicted_ratio, 3)} · "
+                         f"erro {fmt(r.error_percent, 1)} %") for r in chk.rows]
+                rows.insert(0, ("Modo comparado",
+                                f"modo {chk.mode} do modelo ({fmt(chk.f_model, 2)} Hz) · "
+                                f"medido {fmt(chk.f_measured, 2)} Hz · referência: "
+                                f"{html.escape(chk.reference)}"))
+                h.append(_section("Forma modal (razão de amplitudes entre ROIs)", rows))
         else:
             h.append(_section("Método óptico", [("", "vídeo não processado")]))
 
