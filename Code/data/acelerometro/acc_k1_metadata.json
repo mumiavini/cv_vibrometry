@@ -1,0 +1,33 @@
+{
+  "fonte": "foto da tela do PULSE LabShop (gravacao 15/10/2026 20:48:57), mola k1 = 1500 N/m",
+  "tipo_dado": "DIGITALIZADO a partir de foto (nao e exportacao do software)",
+  "leitura_direta_pulse": {
+    "f_cursor_hz": 7.6,
+    "amp_cursor_ms2": 1.07,
+    "t_cursor_s": 2.188,
+    "y_cursor_ms2": -0.354
+  },
+  "analisador_inferido": {
+    "linhas": 200,
+    "banda_hz": 10,
+    "T_s": 20,
+    "df_hz": 0.05,
+    "fs_hz": 25.6
+  },
+  "calibracao_vs_cursores": {
+    "f_bias_hz": 0.019,
+    "t_bias_s": 0.001,
+    "amp_bias_ms2": 0.003
+  },
+  "pico_digitalizado_hz": 7.62,
+  "zeta_envolvente": 0.0073,
+  "zeta_faixa": [
+    0.0072,
+    0.0079
+  ],
+  "janela_valida_envelope_s": [
+    1.3,
+    14.0
+  ],
+  "observacao_envelope": "upper/lower = extremos do traco por coluna de pixel; half_p2p = (max-min)/2 em janela deslizante de 0,4 s. Fora da janela valida o traco se confunde com a linha de base/artefatos de grade."
+}

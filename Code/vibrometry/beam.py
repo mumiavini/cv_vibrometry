@@ -99,6 +99,216 @@ class CantileverBeam:
 
 
 @dataclass
+class SpringSupportedBeam:
+    """Clamped-free beam with a linear spring (and optional lumped mass) at
+    the free end — the bench configuration of the TCC.
+
+    Boundary conditions at x = L:  EI w'' = 0  and  EI w''' = (k - M w^2) w,
+    with k the spring stiffness and M the lumped tip mass (e.g. the
+    accelerometer).  Mode shapes are W = A(cos bx - cosh bx) + B(sin bx -
+    sinh bx); the allowed b follow from the roots of the 2x2 determinant,
+    found numerically.  For k = M = 0 this reduces to the plain cantilever
+    (eq:fn_cantilever); for k -> inf, to the clamped-pinned beam.
+
+    Parameters
+    ----------
+    beam : the underlying uniform cantilever.
+    spring_k : tip spring stiffness k [N/m].
+    tip_mass : lumped mass M at the free end [kg].
+    """
+
+    beam: CantileverBeam
+    spring_k: float
+    tip_mass: float = 0.0
+
+    def _determinant(self, beta_l: float) -> float:
+        b = self.beam
+        beta = beta_l / b.length
+        omega2 = beta ** 4 * b.E * b.inertia / (b.rho * b.area)
+        k_e = self.spring_k - self.tip_mass * omega2
+        c, s = np.cos(beta_l), np.sin(beta_l)
+        ch, sh = np.cosh(beta_l), np.sinh(beta_l)
+        w = np.array([c - ch, s - sh])
+        w2 = beta ** 2 * np.array([-c - ch, -s - sh])
+        w3 = beta ** 3 * np.array([s - sh, -c - ch])
+        shear = b.E * b.inertia * w3 - k_e * w
+        return float(w2[0] * shear[1] - w2[1] * shear[0])
+
+    def _roots(self, n_modes: int) -> list[float]:
+        grid = np.linspace(1e-3, 4.0 * n_modes + 4.0, 4000 * n_modes)
+        vals = np.array([self._determinant(x) for x in grid])
+        roots: list[float] = []
+        for i in np.nonzero(vals[:-1] * vals[1:] < 0)[0]:
+            lo, hi = grid[i], grid[i + 1]
+            f_lo = vals[i]
+            for _ in range(60):
+                mid = 0.5 * (lo + hi)
+                f_mid = self._determinant(mid)
+                if f_lo * f_mid <= 0:
+                    hi = mid
+                else:
+                    lo, f_lo = mid, f_mid
+            roots.append(0.5 * (lo + hi))
+            if len(roots) == n_modes:
+                break
+        if len(roots) < n_modes:
+            raise RuntimeError("could not bracket the requested modes")
+        return roots
+
+    def natural_frequency(self, mode: int = 1) -> float:
+        """Natural frequency of bending mode ``mode`` [Hz]."""
+        if mode < 1:
+            raise ValueError("mode must be >= 1")
+        b = self.beam
+        beta_l = self._roots(mode)[mode - 1]
+        return (beta_l ** 2 / (2.0 * np.pi * b.length ** 2)) * np.sqrt(
+            b.E * b.inertia / (b.rho * b.area)
+        )
+
+    def mode_shape(self, x: np.ndarray, mode: int = 1) -> np.ndarray:
+        """Mode shape at positions ``x`` [m] from the clamp, normalised to 1
+        at the free end."""
+        b = self.beam
+        beta_l = self._roots(mode)[mode - 1]
+        beta = beta_l / b.length
+        c, s = np.cos(beta_l), np.sin(beta_l)
+        ch, sh = np.cosh(beta_l), np.sinh(beta_l)
+        # null vector of the W'' = 0 row
+        coef_a, coef_b = -(-s - sh), (-c - ch)
+        bx = beta * np.asarray(x, dtype=float)
+        shape = (coef_a * (np.cos(bx) - np.cosh(bx))
+                 + coef_b * (np.sin(bx) - np.sinh(bx)))
+        tip = (coef_a * (c - ch) + coef_b * (s - sh))
+        return shape / tip
+
+    @property
+    def k_eq(self) -> float:
+        """Equivalent tip stiffness: beam + spring [N/m]."""
+        return self.beam.k_eq + self.spring_k
+
+    @property
+    def m_eq(self) -> float:
+        """Equivalent tip mass: beam (0.2357 rho A L) + lumped mass [kg]."""
+        return self.beam.m_eq + self.tip_mass
+
+    def one_dof_frequency(self) -> float:
+        """Single-degree-of-freedom approximation sqrt(k_eq / m_eq) / 2 pi
+        [Hz], for comparison with the exact result."""
+        return float(np.sqrt(self.k_eq / self.m_eq) / (2.0 * np.pi))
+
+
+@dataclass
+class BeamFE:
+    """Euler-Bernoulli finite-element model of the bench beam, for
+    configurations without a closed form: springs and lumped masses at
+    arbitrary positions and a configurable root condition.
+
+    Parameters
+    ----------
+    beam : the underlying uniform beam (free length L from the root).
+    springs : (x, k) pairs — linear springs at distance x [m] from the
+        root, stiffness k [N/m].
+    masses : (x, m) pairs — lumped masses (e.g. accelerometer) at x [m].
+    root : "clamped" (w = w' = 0), "pinned" (w = 0, free rotation) or
+        "rotational" (w = 0, torsional spring ``root_stiffness`` [N m/rad]).
+    root_stiffness : torsional stiffness for ``root="rotational"``.
+    n_elements : number of beam elements (springs/masses snap to nodes).
+    """
+
+    beam: CantileverBeam
+    springs: tuple[tuple[float, float], ...] = ()
+    masses: tuple[tuple[float, float], ...] = ()
+    root: str = "clamped"
+    root_stiffness: float | None = None
+    n_elements: int = 360
+
+    def __post_init__(self) -> None:
+        if self.root not in ("clamped", "pinned", "rotational"):
+            raise ValueError("root must be clamped, pinned or rotational")
+        if self.root == "rotational" and self.root_stiffness is None:
+            raise ValueError("root='rotational' needs root_stiffness")
+        self._cache: tuple[np.ndarray, np.ndarray, list[int]] | None = None
+
+    def _node(self, x: float) -> int:
+        return int(round(x / self.beam.length * self.n_elements))
+
+    def _solve(self):
+        if self._cache is not None:
+            return self._cache
+        b, n = self.beam, self.n_elements
+        le = b.length / n
+        ei, rho_a = b.E * b.inertia, b.rho * b.area
+        k_e = ei / le ** 3 * np.array([
+            [12, 6 * le, -12, 6 * le], [6 * le, 4 * le ** 2, -6 * le, 2 * le ** 2],
+            [-12, -6 * le, 12, -6 * le], [6 * le, 2 * le ** 2, -6 * le, 4 * le ** 2]])
+        m_e = rho_a * le / 420.0 * np.array([
+            [156, 22 * le, 54, -13 * le], [22 * le, 4 * le ** 2, 13 * le, -3 * le ** 2],
+            [54, 13 * le, 156, -22 * le], [-13 * le, -3 * le ** 2, -22 * le, 4 * le ** 2]])
+        ndof = 2 * (n + 1)
+        K = np.zeros((ndof, ndof))
+        M = np.zeros((ndof, ndof))
+        for e in range(n):
+            s = slice(2 * e, 2 * e + 4)
+            K[s, s] += k_e
+            M[s, s] += m_e
+        for x, k in self.springs:
+            K[2 * self._node(x), 2 * self._node(x)] += k
+        for x, m in self.masses:
+            M[2 * self._node(x), 2 * self._node(x)] += m
+        if self.root == "rotational":
+            K[1, 1] += self.root_stiffness
+        free = list(range(2, ndof)) if self.root == "clamped" else list(range(1, ndof))
+        K, M = K[np.ix_(free, free)], M[np.ix_(free, free)]
+        # symmetric generalised eigenproblem via Cholesky of M
+        chol = np.linalg.cholesky(M)
+        c_inv = np.linalg.solve(chol, np.eye(len(free)))
+        w2, v = np.linalg.eigh(c_inv @ K @ c_inv.T)
+        modes = c_inv.T @ v
+        self._cache = (np.sqrt(np.clip(w2, 0.0, None)) / (2.0 * np.pi),
+                       modes, free)
+        return self._cache
+
+    def natural_frequency(self, mode: int = 1) -> float:
+        """Natural frequency [Hz] of the ``mode``-th mode (sorted ascending;
+        with a pinned root and no restoring spring mode 1 is the rigid-body
+        rotation at ~0 Hz)."""
+        freqs, _, _ = self._solve()
+        if not 1 <= mode <= len(freqs):
+            raise ValueError("mode out of range")
+        return float(freqs[mode - 1])
+
+    def mode_shape(self, x: np.ndarray, mode: int = 1) -> np.ndarray:
+        """Mode shape at positions ``x`` [m] from the root (cubic Hermite
+        interpolation of the nodal solution), normalised to 1 at the free
+        end."""
+        _, modes, free = self._solve()
+        full = np.zeros(2 * (self.n_elements + 1))
+        full[free] = modes[:, mode - 1]
+        le = self.beam.length / self.n_elements
+        x = np.atleast_1d(np.asarray(x, dtype=float))
+        e = np.clip((x / le).astype(int), 0, self.n_elements - 1)
+        s = x / le - e
+        w0, t0 = full[2 * e], full[2 * e + 1] * le
+        w1, t1 = full[2 * e + 2], full[2 * e + 3] * le
+        shape = ((1 - 3 * s ** 2 + 2 * s ** 3) * w0 + (s - 2 * s ** 2 + s ** 3) * t0
+                 + (3 * s ** 2 - 2 * s ** 3) * w1 + (-s ** 2 + s ** 3) * t1)
+        return shape / full[-2]
+
+    @property
+    def m_eq(self) -> float:
+        """Equivalent tip mass: beam (0.2357 rho A L) + lumped masses [kg]."""
+        return self.beam.m_eq + sum(m for _, m in self.masses)
+
+    @property
+    def k_eq(self) -> float:
+        """Single-DOF stiffness consistent with ``m_eq`` and the first
+        non-rigid-body frequency [N/m] (reporting only)."""
+        freqs, _, _ = self._solve()
+        f1 = freqs[freqs > 0.5][0]
+        return self.m_eq * (2.0 * np.pi * f1) ** 2
+
+
+@dataclass
 class ValidationResult:
     f_measured: float    # optically identified frequency [Hz]
     f_analytical: float  # Euler-Bernoulli prediction [Hz]
