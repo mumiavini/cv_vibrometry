@@ -230,6 +230,12 @@ Impacto decrescente. Os pontos 1 e 2 são os que mais elevam o nível do trabalh
       Decidir e alinhar com o orientador: (a) rebaixar SHM a motivação/trabalho futuro (objetivo específico 1,
       subseção de SHM, palavras-chave, justificativa) ou (b) manter um recorte honesto: a troca k₁ → k₂ emula uma
       variação de rigidez e mostra que o método detecta Δf, sem afirmar detecção de dano.
+- [ ] **E10. Teste de afrouxamento da fixação (SHM, recorte honesto).** Mesma mola k₁ com a porca/parafuso de
+      fixação em 4 níveis (torque normal, ≈ 50 %, só dedos, frouxo) × 3 tomadas, mais um reaperto ao torque base
+      (24 tomadas totais no roteiro, seção 5b). Medir f_n, ζ, amplitude e harmônicos (Δζ costuma aparecer antes de
+      Δf); duas amplitudes de liberação; confirmar reversibilidade (A' = A). Prioridade P2: só depois do P1 do
+      roteiro e de E8 (ζ vídeo × PULSE). **Não entra no texto por enquanto** — decidir após ver os dados e alinhar
+      com o orientador (ver E9).
 
 ## Perguntas em aberto
 
