@@ -35,7 +35,7 @@ raiz articulada (`BeamFE`), referência do acelerômetro digitalizada, primeira 
 não são o mesmo ensaio; o app ainda prevê f₁ com viga engastada; vídeo de 91 MB no git.
 
 **Próximos passos (ordem):**
-1. **Gravar vídeo e PULSE ao mesmo tempo** (impacto + LED), mola k₁ e k₂, 3 repetições cada; anotar a posição
+1. **Ir ao laboratório** (roteiro em `docs/roteiro_laboratorio.md`): medir k das molas (estático) e pesar as ferragens; **gravar vídeo e PULSE ao mesmo tempo** (impacto + LED), mola k₁ e k₂, 3 repetições cada; anotar a posição
    da lâmina do amortecedor e se há pré-carga na mola. Sem isso, ζ e fase não fecham.
 2. Explicar a diferença de amortecimento (ζ vídeo ≈ 0,001 × PULSE ≈ 0,007) e de f_n (+2,1 %).
 3. ~~Integrar `BeamFE` ao app~~ — feito (etapa 1: apoio, molas, massas; etapa 2: posição das ROIs; etapa 6: forma modal). Falta **preencher na sessão as massas pesadas** da mola k₁, parafuso, porcas e gancho (hoje 0 → f₁ previsto 11,7 Hz).
