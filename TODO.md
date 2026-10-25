@@ -15,22 +15,17 @@ Ordem sugerida: **A → B → C → D**. Dados e decisões (A) destravam tudo.
 
 ## ⚠ Discrepância modelo × medição (resolver antes de escrever resultados)
 
-O espectro do acelerômetro mostra pico em **≈ 7,6 Hz** (cursor 7,600 Hz). O modelo
-barra Al 6351-T6 (L livre 720 mm, 25,4 × 12,7 mm) **engastada** com mola no furo de
-88 mm da ponta dá **≈ 23,8 Hz (k₁ = 1500) e ≈ 26,0 Hz (k₂ = 2500)** — três vezes maior.
-Candidatos (calculados com `BeamFE`, ver `Code/tests`):
+Confirmado: raiz = **junta com mancal (articulada)**, alumínio 6351-T6, 660 g, molas de
+catálogo k₁ = 1500 e k₂ = 2500 N/m, acelerômetro 5 g a 300 mm do engaste, mola a 632 mm
+do engaste (furo de 88 mm da ponta). Pico do acelerômetro: **7,600 Hz**.
 
-| Hipótese | f₁ (k₁ = 1500) | f₁ (k₂ = 2500) |
-|---|---|---|
-| Alumínio, engaste rígido | 23,8 Hz | 26,0 Hz |
-| Alumínio, raiz articulada (mancal) | 11,8 Hz | 15,1 Hz |
-| Aço (1,9 kg), raiz articulada | 6,9 Hz | 8,9 Hz |
-| Alumínio, raiz com mola torsional ~200–400 N·m/rad | ~5,7–6,4 Hz | ~6,3–7,4 Hz |
-
-Precisa-se saber qual mola gerou a curva de 7,6 Hz, qual é a **condição real na raiz**
-(o lado esquerdo é um conjunto com cilindro/mancal e dial, e há um cilindro de óleo
-com haste ao fundo — amortecedor da bancada?), e o material/massa real da barra
-(a foto de perto parece aço). O modelo analítico do TCC só vale depois disso.
+Modelo `BeamFE` (articulada + mola + 5 g, **sem massa da mola**): **11,7 Hz (k₁)** e
+**15,1 Hz (k₂)**. Falta ≈ 380 g de massa efetiva no ponto da mola (k₁) para chegar a 7,6 Hz
+(k₂ exigiria ≈ 820 g, implausível → provavelmente a curva é da mola k₁, confirmar).
+**A massa da mola interfere muito**: massa efetiva ≈ m_mola/3 (+ parafuso, porcas, gancho);
+uma mola helicoidal dessas facilmente passa de 0,5–1 kg. Ações: **pesar mola + parafuso +
+porcas** (balança), refazer o cálculo; checar k de catálogo (k necessário sem massa extra
+seria 626 N/m); considerar inércia do conjunto cilindro/dial do lado da junta.
 
 ## A. Dados e decisões (bloqueia o resto)
 
@@ -52,11 +47,14 @@ com haste ao fundo — amortecedor da bancada?), e o material/massa real da barr
       ≈ 660 g; **mola k₁ = 1500 N/m e k₂ = 2500 N/m** presas por parafuso no **furo a 88 mm
       da ponta** (outro furo a 250 mm, não usado); acelerômetro de 5 g. Falta: como k₁/k₂
       foram obtidos (incerteza), massa da mola, e a condição real da raiz (ver acima).
-- [ ] **A5. Posições** (medir e confirmar): o enunciado diz acelerômetro a 300 mm "da ponta
-      não engastada", mas no quadro do vídeo ele está a ≈ 430 mm da ponta
-      (≈ 290 mm do engaste) — confirmar de qual extremo se mediu. ROIs: parafuso (88 mm da
-      ponta), acelerômetro, parede (limpeza/compensação).
-- [ ] **A6. Sinal do acelerômetro** (PULSE mostra sinal no tempo, 0–18 s, decaimento a partir
+- [x] **A5. Posições** (confirmadas): acelerômetro a 300 mm do engaste (430 mm da ponta);
+      furo/parafuso da mola a 88 mm da ponta (632 mm do engaste). ROIs: parafuso, acelerômetro,
+      parede (limpeza/compensação).
+- [~] **A6. Sinal do acelerômetro** — digitalização feita (ver `Code/data/acelerometro/README.md`):
+      pico 7,62 Hz (cursor 7,600 → +0,26 %), ζ ≈ 0,0073. **Para o texto**: f_n = 7,600 Hz é
+      leitura direta do PULSE (dado real); ζ e a envolvente vêm da foto e devem ser
+      identificados como tal ou substituídos pela exportação do PULSE. Setup provável:
+      200 linhas, 10 Hz, 20 s, fs = 25,6 Hz (confirmar). (PULSE mostra sinal no tempo, 0–18 s, decaimento a partir
       de ≈ 2 s, pico ±15–20 m/s², e espectro 0–10 Hz): 1ª opção, **exportar do PULSE LabShop**
       (dados do Recorder/Display para ASCII/Excel/MAT) — dado real. 2ª opção (fallback):
       **digitalizar a imagem da curva** (a foto atual é da tela com perspectiva/moiré, serve
@@ -172,11 +170,8 @@ com haste ao fundo — amortecedor da bancada?), e o material/massa real da barr
 
 ## Perguntas em aberto
 
-1. Qual mola gerou a curva de 7,6 Hz (k₁ ou k₂)? Quais são os valores de f_n do acelerômetro de
-   cada gravação?
-2. Condição real na raiz: engaste rígido, mancal articulado ou outro? O que é o conjunto de
-   cilindro/mancal à esquerda e o cilindro de óleo com haste (amortecedor ligado à barra)?
-3. Material e massa da barra desse ensaio (alumínio de 660 g ou aço?).
-4. Distância do acelerômetro: 300 mm da ponta ou do engaste?
-5. Taxa de amostragem e sensibilidade configuradas no PULSE; é possível exportar os dados?
-6. Como k₁ e k₂ foram obtidos? Massa das molas?
+1. Massa da(s) mola(s), do parafuso, das porcas e do gancho (pesar). Qual mola gerou 7,6 Hz?
+2. f_n do acelerômetro nas demais gravações/molas.
+3. Setup do PULSE: banda, linhas, tempo, taxa de amostragem, sensibilidade; exportação dos dados.
+4. A junta (conjunto cilindro/dial à esquerda): distância do centro do mancal à borda da barra
+   e inércia/atrito do conjunto.
