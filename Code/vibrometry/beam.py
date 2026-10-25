@@ -99,6 +99,105 @@ class CantileverBeam:
 
 
 @dataclass
+class SpringSupportedBeam:
+    """Clamped-free beam with a linear spring (and optional lumped mass) at
+    the free end — the bench configuration of the TCC.
+
+    Boundary conditions at x = L:  EI w'' = 0  and  EI w''' = (k - M w^2) w,
+    with k the spring stiffness and M the lumped tip mass (e.g. the
+    accelerometer).  Mode shapes are W = A(cos bx - cosh bx) + B(sin bx -
+    sinh bx); the allowed b follow from the roots of the 2x2 determinant,
+    found numerically.  For k = M = 0 this reduces to the plain cantilever
+    (eq:fn_cantilever); for k -> inf, to the clamped-pinned beam.
+
+    Parameters
+    ----------
+    beam : the underlying uniform cantilever.
+    spring_k : tip spring stiffness k [N/m].
+    tip_mass : lumped mass M at the free end [kg].
+    """
+
+    beam: CantileverBeam
+    spring_k: float
+    tip_mass: float = 0.0
+
+    def _determinant(self, beta_l: float) -> float:
+        b = self.beam
+        beta = beta_l / b.length
+        omega2 = beta ** 4 * b.E * b.inertia / (b.rho * b.area)
+        k_e = self.spring_k - self.tip_mass * omega2
+        c, s = np.cos(beta_l), np.sin(beta_l)
+        ch, sh = np.cosh(beta_l), np.sinh(beta_l)
+        w = np.array([c - ch, s - sh])
+        w2 = beta ** 2 * np.array([-c - ch, -s - sh])
+        w3 = beta ** 3 * np.array([s - sh, -c - ch])
+        shear = b.E * b.inertia * w3 - k_e * w
+        return float(w2[0] * shear[1] - w2[1] * shear[0])
+
+    def _roots(self, n_modes: int) -> list[float]:
+        grid = np.linspace(1e-3, 4.0 * n_modes + 4.0, 4000 * n_modes)
+        vals = np.array([self._determinant(x) for x in grid])
+        roots: list[float] = []
+        for i in np.nonzero(vals[:-1] * vals[1:] < 0)[0]:
+            lo, hi = grid[i], grid[i + 1]
+            f_lo = vals[i]
+            for _ in range(60):
+                mid = 0.5 * (lo + hi)
+                f_mid = self._determinant(mid)
+                if f_lo * f_mid <= 0:
+                    hi = mid
+                else:
+                    lo, f_lo = mid, f_mid
+            roots.append(0.5 * (lo + hi))
+            if len(roots) == n_modes:
+                break
+        if len(roots) < n_modes:
+            raise RuntimeError("could not bracket the requested modes")
+        return roots
+
+    def natural_frequency(self, mode: int = 1) -> float:
+        """Natural frequency of bending mode ``mode`` [Hz]."""
+        if mode < 1:
+            raise ValueError("mode must be >= 1")
+        b = self.beam
+        beta_l = self._roots(mode)[mode - 1]
+        return (beta_l ** 2 / (2.0 * np.pi * b.length ** 2)) * np.sqrt(
+            b.E * b.inertia / (b.rho * b.area)
+        )
+
+    def mode_shape(self, x: np.ndarray, mode: int = 1) -> np.ndarray:
+        """Mode shape at positions ``x`` [m] from the clamp, normalised to 1
+        at the free end."""
+        b = self.beam
+        beta_l = self._roots(mode)[mode - 1]
+        beta = beta_l / b.length
+        c, s = np.cos(beta_l), np.sin(beta_l)
+        ch, sh = np.cosh(beta_l), np.sinh(beta_l)
+        # null vector of the W'' = 0 row
+        coef_a, coef_b = -(-s - sh), (-c - ch)
+        bx = beta * np.asarray(x, dtype=float)
+        shape = (coef_a * (np.cos(bx) - np.cosh(bx))
+                 + coef_b * (np.sin(bx) - np.sinh(bx)))
+        tip = (coef_a * (c - ch) + coef_b * (s - sh))
+        return shape / tip
+
+    @property
+    def k_eq(self) -> float:
+        """Equivalent tip stiffness: beam + spring [N/m]."""
+        return self.beam.k_eq + self.spring_k
+
+    @property
+    def m_eq(self) -> float:
+        """Equivalent tip mass: beam (0.2357 rho A L) + lumped mass [kg]."""
+        return self.beam.m_eq + self.tip_mass
+
+    def one_dof_frequency(self) -> float:
+        """Single-degree-of-freedom approximation sqrt(k_eq / m_eq) / 2 pi
+        [Hz], for comparison with the exact result."""
+        return float(np.sqrt(self.k_eq / self.m_eq) / (2.0 * np.pi))
+
+
+@dataclass
 class ValidationResult:
     f_measured: float    # optically identified frequency [Hz]
     f_analytical: float  # Euler-Bernoulli prediction [Hz]

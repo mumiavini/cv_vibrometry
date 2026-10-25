@@ -20,7 +20,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from .beam import CantileverBeam, MATERIALS
+from .beam import CantileverBeam, SpringSupportedBeam, MATERIALS
 from .pipeline import PipelineConfig, VibrometryPipeline
 from .roi import ROI, load_rois, save_rois, select_rois_interactive
 from .video_io import load_video
@@ -62,6 +62,12 @@ def build_parser() -> argparse.ArgumentParser:
     g.add_argument("--thickness", type=float,
                    help="cross-section thickness h [m]")
 
+    g.add_argument("--spring-k", type=float,
+                   help="stiffness k [N/m] of a spring at the free end "
+                        "(bar + tip spring bench configuration)")
+    g.add_argument("--tip-mass", type=float, default=0.0,
+                   help="lumped mass at the free end, e.g. accelerometer [kg]")
+
     p.add_argument("--synthetic", action="store_true",
                    help="generate a synthetic ground-truth video and run the "
                         "pipeline on it (software verification)")
@@ -83,6 +89,9 @@ def main(argv: list[str] | None = None) -> int:
         beam = CantileverBeam.from_material(
             args.length, args.width, args.thickness, args.material
         )
+        if args.spring_k is not None or args.tip_mass:
+            beam = SpringSupportedBeam(beam, args.spring_k or 0.0,
+                                       args.tip_mass)
 
     if args.synthetic:
         from .synthetic import generate_cantilever_video

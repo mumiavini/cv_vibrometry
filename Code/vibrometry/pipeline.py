@@ -22,7 +22,9 @@ import numpy as np
 import polars as pl
 
 from . import plotting
-from .beam import CantileverBeam, ValidationResult, validate_frequency
+from .beam import (
+    CantileverBeam, SpringSupportedBeam, ValidationResult, validate_frequency,
+)
 from .gabor import GaborBank
 from .roi import ROI
 from .spectral import (
@@ -56,7 +58,7 @@ class PipelineConfig:
     """
 
     scale_mm_per_px: float | None = None
-    beam: CantileverBeam | None = None
+    beam: CantileverBeam | SpringSupportedBeam | None = None
     axis: str = "auto"
     gabor_wavelengths: tuple[float, ...] = (8.0, 16.0)
     gabor_orientations: tuple[float, ...] = (
