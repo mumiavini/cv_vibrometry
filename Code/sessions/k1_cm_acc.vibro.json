@@ -9,7 +9,25 @@
     "t_mm": 12.7,
     "tip_mass_g": 0.0,
     "fps": 240.0,
-    "oversampling": 10.0
+    "oversampling": 10.0,
+    "support": "pinned",
+    "root_stiffness": null,
+    "springs": [
+      {
+        "name": "mola k1 (catalogo)",
+        "x_mm": 632.0,
+        "k_n_m": 1500.0,
+        "mass_g": 0.0,
+        "hardware_g": 0.0
+      }
+    ],
+    "masses": [
+      {
+        "name": "acelerometro B&K 4507",
+        "x_mm": 300.0,
+        "mass_g": 5.0
+      }
+    ]
   },
   "meta": {
     "date": "20261015",
@@ -17,7 +35,7 @@
     "level": "A1",
     "repetition": 1,
     "camera": "iphone",
-    "notes": "Barra Al 6351-T6 articulada em mancal + mola k1=1500 N/m a 632 mm da articulacao (furo a 88 mm da ponta); acelerometro B&K 4507 001 (5 g) a 300 mm da articulacao. O modelo E-B engastado do app NAO se aplica a esta montagem: usar vibrometry.beam.BeamFE. Correcoes feitas na reorganizacao: ver issues.md.",
+    "notes": "Barra Al 6351-T6 articulada em mancal + mola k1=1500 N/m a 632 mm da articulacao (furo a 88 mm da ponta); acelerometro B&K 4507 001 (5 g) a 300 mm da articulacao. Modelo: elementos finitos (BeamFE). PREENCHER na etapa 1 as massas pesadas da mola e das ferragens (mass_g, hardware_g): sem elas f1 previsto = 11,7 Hz.",
     "checklist": [
       false,
       false,
@@ -81,7 +99,11 @@
       16.0
     ],
     "search_margin": 60,
-    "window": null
+    "window": null,
+    "roi_positions_mm": {
+      "Parafuso_de_fixação": 632.0,
+      "Acelerometro": 300.0
+    }
   },
   "accel": {
     "path": "../data/acelerometro/curva_acelerometro_tempo_k1.csv",

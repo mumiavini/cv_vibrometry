@@ -38,8 +38,7 @@ não são o mesmo ensaio; o app ainda prevê f₁ com viga engastada; vídeo de 
 1. **Gravar vídeo e PULSE ao mesmo tempo** (impacto + LED), mola k₁ e k₂, 3 repetições cada; anotar a posição
    da lâmina do amortecedor e se há pré-carga na mola. Sem isso, ζ e fase não fecham.
 2. Explicar a diferença de amortecimento (ζ vídeo ≈ 0,001 × PULSE ≈ 0,007) e de f_n (+2,1 %).
-3. Integrar `BeamFE` ao app (tipo de apoio: engastado / articulado + mola + massas, incluindo massa efetiva da
-   mola ≈ m_mola/3 + parafuso) — `issues.md`.
+3. ~~Integrar `BeamFE` ao app~~ — feito (etapa 1: apoio, molas, massas; etapa 2: posição das ROIs; etapa 6: forma modal). Falta **preencher na sessão as massas pesadas** da mola k₁, parafuso, porcas e gancho (hoje 0 → f₁ previsto 11,7 Hz).
 4. Exportar os dados brutos do PULSE (hoje só há foto/digitalização) ou manter a digitalização rotulada.
 5. Texto do TCC (seção D) com a tabela acima como esqueleto de resultados.
 

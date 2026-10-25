@@ -14,7 +14,7 @@ from dataclasses import asdict, dataclass, field, fields
 from datetime import date
 from pathlib import Path
 
-from .beam import CantileverBeam, MATERIALS
+from .beam import BeamFE, CantileverBeam, MATERIALS
 from .roi import ROI
 
 SESSION_SUFFIX = ".vibro.json"
@@ -41,6 +41,17 @@ CHECKLIST = (
 )
 
 
+SUPPORTS = {
+    "clamped": "Engastado",
+    "pinned": "Articulado (mancal)",
+    "rotational": "Mola torsional",
+}
+
+# a spring fixed at one end and attached to the structure at the other
+# behaves, for the first modes, like 1/3 of its mass added at the attachment
+SPRING_EFFECTIVE_MASS_FACTOR = 1.0 / 3.0
+
+
 @dataclass
 class SpecimenCfg:
     material: str = "steel"
@@ -52,15 +63,73 @@ class SpecimenCfg:
     tip_mass_g: float = 0.0
     fps: float = 240.0
     oversampling: float = 10.0       # rule f_max <= fps / oversampling
+    # --- support and attachments (default: clamped beam, as before) ---
+    support: str = "clamped"         # "clamped" | "pinned" | "rotational"
+    root_stiffness: float | None = None   # torsional spring at the root [N m/rad]
+    # {"name", "x_mm", "k_n_m", "mass_g" (spring body), "hardware_g" (bolt, nuts, hook)}
+    springs: list[dict] = field(default_factory=list)
+    # {"name", "x_mm", "mass_g"}: lumped masses such as the accelerometer
+    masses: list[dict] = field(default_factory=list)
 
     def beam(self) -> CantileverBeam:
         return CantileverBeam(self.L_mm / 1e3, self.b_mm / 1e3, self.t_mm / 1e3,
                               self.E_gpa * 1e9, self.rho)
 
+    @property
+    def uses_fe(self) -> bool:
+        """True when the closed-form clamped-beam model does not apply."""
+        return (self.support != "clamped" or bool(self.springs)
+                or bool(self.masses))
+
+    def fe_model(self, n_elements: int = 160, masses: bool = True) -> BeamFE:
+        """Finite-element model of the configured support, springs and masses
+        (spring effective mass and hardware included). ``masses=False`` leaves
+        out every lumped mass, keeping the springs."""
+        L = self.L_mm / 1e3
+        springs = tuple((float(s["x_mm"]) / 1e3, float(s["k_n_m"]))
+                        for s in self.springs)
+        lumped: list[tuple[float, float]] = []
+        if masses:
+            lumped = [(float(m["x_mm"]) / 1e3, float(m["mass_g"]) / 1e3)
+                      for m in self.masses]
+            if self.tip_mass_g:
+                lumped.append((L, self.tip_mass_g / 1e3))
+            for s in self.springs:
+                eff = (float(s.get("mass_g", 0.0)) * SPRING_EFFECTIVE_MASS_FACTOR
+                       + float(s.get("hardware_g", 0.0))) / 1e3
+                if eff > 0:
+                    lumped.append((float(s["x_mm"]) / 1e3, eff))
+        masses_arg = tuple(lumped)
+        return BeamFE(self.beam(), springs=springs, masses=masses_arg,
+                      root=self.support, root_stiffness=self.root_stiffness,
+                      n_elements=n_elements)
+
     def predicted_f1(self) -> float:
-        """f_n,1 including the tip mass (mass loading)."""
+        """f_n,1 of the configured specimen: the clamped closed form with tip
+        mass (mass loading), or the finite-element model with the support,
+        springs and masses."""
+        if self.uses_fe:
+            return float(self.fe_model().elastic_frequency(1))
+        return self.beam().mass_loaded_frequency(self.tip_mass_g / 1e3)
+
+    def predicted_frequencies(self, n: int = 3) -> list[float]:
+        if self.uses_fe:
+            return self.fe_model().elastic_frequencies(n)
         beam = self.beam()
-        return beam.mass_loaded_frequency(self.tip_mass_g / 1e3)
+        f1 = beam.mass_loaded_frequency(self.tip_mass_g / 1e3)
+        return [f1] + [beam.natural_frequency(i) for i in range(2, n + 1)]
+
+    def model_label(self) -> str:
+        """Short description of the analytical model in use."""
+        if not self.uses_fe:
+            return "Euler-Bernoulli, engastada"
+        parts = [f"E-B, elementos finitos, {SUPPORTS.get(self.support, self.support).lower()}"]
+        if self.springs:
+            parts.append(f"{len(self.springs)} mola(s)")
+        n_m = len(self.masses) + (1 if self.tip_mass_g else 0)
+        if n_m:
+            parts.append(f"{n_m} massa(s)")
+        return ", ".join(parts)
 
 
 @dataclass
@@ -89,6 +158,8 @@ class VideoCfg:
     wavelengths: list[float] = field(default_factory=lambda: [8.0, 16.0])
     search_margin: int = 60
     window: list[float] | None = None    # modal-analysis window [s]
+    # distance of each measurement ROI from the root, along the beam [mm]
+    roi_positions_mm: dict[str, float] = field(default_factory=dict)
 
     def roi_objects(self) -> list[ROI]:
         return [ROI(**d) for d in self.rois]

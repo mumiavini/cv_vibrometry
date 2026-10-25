@@ -51,9 +51,10 @@ Real fix: export the data from PULSE.
 
 ---
 
-## [OPEN] The app's analytical prediction (clamped Euler-Bernoulli) does not apply to the bench
+## [SOLVED] The app's analytical prediction (clamped Euler-Bernoulli) does not apply to the bench
 
 **Date opened:** 2026-10-25
+**Date solved:** 2026-10-25
 **Area:** `Code/vibrometry/session.py` (`SpecimenCfg.predicted_f1`), `vibroapp` step 1 and 2
 
 **Symptom:** predicted f₁ = 8.90 Hz (−12.8 % error) for the session as pushed, from placeholder
@@ -65,6 +66,15 @@ accelerometer at 300 mm (`vibrometry.beam.BeamFE` handles this; the app does not
 
 **Proposed fix:** add a support type (clamped / pinned + springs + point masses, including spring
 effective mass) to `SpecimenCfg` and use `BeamFE` in `predicted_f1`.
+
+**Fix:** `SpecimenCfg` now has `support` (clamped / pinned / rotational), `root_stiffness`, `springs`
+(x, k, spring mass, hardware) and `masses` (x, mass); `predicted_f1()` / `predicted_frequencies()` use the
+finite-element model (`BeamFE`) whenever the closed form does not apply, with the spring effective mass
+(⅓ of its mass + hardware). The planning page edits them (tables for springs and masses, warning when the
+spring mass is missing), the report page and exports show the model and a mode-shape table
+(`workflow.mode_shape_check`; ROI positions are set on the video page). Old sessions load unchanged.
+Not done: the t-max / L-min solver of the planning page stays closed-form only (shown as "—" with
+attachments, to keep the UI responsive).
 
 ---
 
