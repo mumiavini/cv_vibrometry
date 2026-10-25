@@ -7,6 +7,13 @@
 %    - Titulo / autores / afiliacao / resumo / palavras-chave em 1 coluna
 %    - Corpo do artigo em 2 colunas
 %    - Citacoes numericas estilo [1]
+%
+%  PLACEHOLDERS: todo valor que depende da campanha de laboratorio aparece
+%  como \TODO{...} (vermelho, entre colchetes). Procure por "\TODO" para
+%  preencher. Comentarios "% PRELIMINAR:" guardam os valores da primeira
+%  analise (15/10/2026, video e PULSE de tomadas diferentes), so como
+%  referencia. Comentarios "% REVISAR:" marcam afirmacoes que dependem do
+%  resultado final.
 %==============================================================================
 \documentclass[a4paper,10pt,twocolumn]{article}
 
@@ -33,6 +40,15 @@
 \usepackage{tabularx}
 \usepackage{ragged2e}
 \usepackage[font=small,labelfont=bf]{caption}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, decorations.pathmorphing, patterns}
+
+% ----- Placeholders (valores que dependem dos ensaios) ------------------------
+\newcommand{\TODO}[1]{\textcolor{red}{\textbf{[#1]}}}
+\newcommand{\FIGTODO}[1]{%
+  \fbox{\parbox[c][3.2cm][c]{0.93\columnwidth}{\centering\small
+  \textcolor{red}{\textbf{[Figura a gerar]}}\\[2pt]\textcolor{red}{#1}}}}
 
 
 % ----- Cabecalho em todas as paginas (igual ao template) --------------------
@@ -41,7 +57,7 @@
 \fancyhf{}
 \renewcommand{\headrulewidth}{0.4pt}
 \fancyhead[C]{\footnotesize\itshape Concepção e Design de Projeto
-              Transformador -- Engenharia Mecânica -- 1\textsuperscript{o}
+              Transformador -- Engenharia Mecânica -- 2\textsuperscript{o}
               Semestre 2026}
 \fancyfoot[C]{\thepage}
 
@@ -88,13 +104,23 @@
   {\noindent\bfseries\itshape Resumo}
   \par\vspace{0.3em}
   {\small\justifying\noindent
-  Este trabalho explora e valida a aplicação de metodologias não intrusivas de vibrometria óptica para medição
-  de vibrações em testes dinâmicos de bancada, utilizando câmeras de vídeo convencionais e estimativa de movimento baseada em fase com filtros de Gabor, buscando uma alternativa de baixo custo e \textit{full-field} aos métodos tradicionais por contato.\par}
+  Este trabalho desenvolve e valida um sistema de vibrometria óptica de baixo custo para medição sem contato de vibrações em ensaios de bancada, baseado em vídeo de \textit{smartphone} em câmera lenta (1080p a 240 quadros por segundo) e em estimativa de movimento por fase com filtros de Gabor. O processamento foi implementado em Python, como biblioteca e como aplicativo de apoio ao ensaio, que integra planejamento, rastreamento, sincronização com um acelerômetro e geração de tabelas e figuras. Em vídeos sintéticos de movimento conhecido, o sistema recuperou a frequência com erro inferior a 0,1\,\%, a amplitude com erro inferior a 1\,\% e o atraso entre vídeo e acelerômetro com erro inferior a 0,1\,ms. Na bancada, uma barra de alumínio 6351-T6 articulada em um mancal e suspensa por mola foi ensaiada em vibração livre, com duas rigidezes de mola, e comparada a um acelerômetro piezoelétrico e a um modelo de Euler-Bernoulli por elementos finitos. A frequência natural medida pelo vídeo diferiu em \TODO{x,x}\,\% da medida pelo acelerômetro e em \TODO{x,x}\,\% da prevista pelo modelo, com repetibilidade de \TODO{x,x}\,\% entre tomadas, e a razão de amplitudes entre dois pontos da barra concordou com a forma modal prevista dentro de \TODO{x,x}\,\%. Os resultados mostram que um \textit{smartphone}, com as limitações de obturador de rolagem e de taxa de quadros quantificadas, é suficiente para identificar frequências naturais e formas modais de baixa frequência sem acrescentar massa à estrutura.\par}
+  % REVISAR: ultima frase do resumo depende dos resultados finais.
 
   \vspace{0.6em}
   {\noindent\bfseries\itshape Palavras-Chave}{\itshape: vibrometria óptica;
-  visão Computacional; análise modal; SHM;
-  processamento de imagens.\par}
+  visão computacional; estimativa de movimento por fase; \textit{smartphone};
+  análise modal.\par}
+
+  \vspace{0.8em}
+  {\noindent\bfseries\itshape Abstract}
+  \par\vspace{0.3em}
+  {\small\justifying\noindent
+  This work develops and validates a low-cost optical vibrometry system for non-contact vibration measurement in bench tests, based on slow-motion smartphone video (1080p at 240 frames per second) and phase-based motion estimation with Gabor filters. The processing was implemented in Python, as a library and as a test-support application that integrates planning, tracking, synchronisation with an accelerometer and the generation of tables and figures. On synthetic videos with known motion, the system recovered frequency within 0.1\,\%, amplitude within 1\,\% and the video--accelerometer delay within 0.1\,ms. On the test bench, an aluminium 6351-T6 bar pinned at a bearing and supported by a spring was tested in free vibration, with two spring stiffnesses, and compared with a piezoelectric accelerometer and with a finite-element Euler-Bernoulli model. The natural frequency measured from video differed by \TODO{x.x}\,\% from the accelerometer and by \TODO{x.x}\,\% from the model, with \TODO{x.x}\,\% repeatability between runs, and the amplitude ratio between two points of the bar matched the predicted mode shape within \TODO{x.x}\,\%. The results show that a smartphone, with its rolling-shutter and frame-rate limitations quantified, is sufficient to identify low-frequency natural frequencies and mode shapes without adding mass to the structure.\par}
+
+  \vspace{0.6em}
+  {\noindent\bfseries\itshape Keywords}{\itshape: optical vibrometry; computer
+  vision; phase-based motion estimation; smartphone; modal analysis.\par}
 
   \vspace{1.2em}
   \hrule
@@ -103,7 +129,7 @@
 ]
 
 %==============================================================================
-%  CORPO DO ARTIGO 
+%  CORPO DO ARTIGO
 %==============================================================================
 
 \section{Introdução}
@@ -134,7 +160,7 @@ Para contornar as limitações de instrumentação física, técnicas de vibrome
     \label{fig:ldv}
 \end{figure}
 
-Uma alternativa promissora é a vibrometria por imagem, que utiliza câmeras de vídeo convencionais para capturar o movimento vibracional de uma estrutura. Através de técnicas avançadas de processamento digital de imagens (\textit{phase-based} e amplificação de movimento), é possível extrair informações sobre a amplitude e frequência das vibrações, permitindo uma análise detalhada do comportamento dinâmico da estrutura \cite{robotcamera2025}. Essa abordagem tem o potencial de ser uma solução de baixo custo e fácil implementação para monitoramento de vibrações em tempo real, especialmente em ambientes onde a instalação de sensores físicos é inviável.
+Uma alternativa promissora é a vibrometria por imagem, que utiliza câmeras de vídeo convencionais para capturar o movimento vibracional de uma estrutura. Através de técnicas avançadas de processamento digital de imagens (\textit{phase-based} e amplificação de movimento), é possível extrair informações sobre a amplitude e frequência das vibrações, permitindo uma análise detalhada do comportamento dinâmico da estrutura \cite{robotcamera2025}. Essa abordagem tem o potencial de ser uma solução de baixo custo e fácil implementação para monitoramento de vibrações, especialmente em ambientes onde a instalação de sensores físicos é inviável. O custo do equipamento de captura cai ainda mais quando se considera que \textit{smartphones} atuais gravam em câmera lenta a 240 quadros por segundo, taxa suficiente para os primeiros modos de muitas estruturas de bancada.
 
 O maior desafio dessa abordagem se encontra na necessidade de estabilização de vídeo e na capacidade do equipamento de captura de vídeo em lidar com frequências muito altas e de amplitudes muito baixas, o que pode limitar a precisão e a aplicabilidade em certos cenários de teste. No entanto, avanços recentes em algoritmos de processamento de imagens e melhorias na qualidade das câmeras de vídeo estão continuamente expandindo as possibilidades dessa técnica para aplicações industriais e de pesquisa \cite{Phase2022}. Um modelo de como pode ser montado um sistema de vibrometria por câmera baseada em imagem é apresentado na Figura \ref{fig:camerabased_vibrometry}.
 
@@ -159,8 +185,9 @@ O objetivo geral deste trabalho é explorar e validar a aplicação de metodolog
 \noindent\textit{Objetivos Específicos:}
 \begin{itemize}
     \item Desenvolver e implementar rotinas de processamento digital de imagens em ambiente Python, baseadas em filtragem por convolução com filtros de Gabor para estimativa de movimento baseada em fase, aplicadas ao monitoramento da integridade estrutural (\textit{Structural Health Monitoring} -- SHM);
-    \item Propor e validar uma metodologia não intrusiva de baixo custo, baseada no uso de câmeras de vídeo convencionais, para a medição de vibrações;
-    \item Comparar o desempenho da abordagem óptica com os métodos tradicionais de medição por contato, analisando precisão, confiabilidade e limitações.
+    \item Desenvolver um aplicativo de apoio ao ensaio que integre o planejamento, o processamento do vídeo, a sincronização com o acelerômetro e a geração de tabelas e figuras;
+    \item Propor e validar uma metodologia não intrusiva de baixo custo, baseada em uma câmera de \textit{smartphone} em câmera lenta, para a medição de vibrações;
+    \item Comparar o desempenho da abordagem óptica com o método tradicional de medição por contato (acelerômetro) e com um modelo analítico, analisando precisão, repetibilidade e limitações.
 \end{itemize}
 
 \subsection{Justificativa}
@@ -306,19 +333,19 @@ em que $\lambda$ é o comprimento de onda do laser empregado (tipicamente $\lamb
 
 Para detectar um deslocamento de frequência tão pequeno comparado à frequência óptica da luz, utiliza-se um interferômetro, geralmente em configuração do tipo Mach-Zehnder. O feixe original é dividido em dois: um feixe de medição, que incide na peça em teste e retorna modulado pelo efeito Doppler, e um feixe de referência, que percorre um caminho óptico interno conhecido. A recombinação dos dois feixes em um fotodetector gera um padrão de interferência cuja frequência de batimento contém a informação Doppler da peça \cite{LDVpolytec2006}.
 
-Para resolver a ambiguidade de sinal da velocidade isto é, distinguir se a superfície se aproxima ou se afasta do vibrômetro é introduzido um deslocamento de frequência conhecido (tipicamente de 30--40~MHz) em um dos feixes por meio de uma célula de Bragg (modulador acusto-óptico). Esse arranjo, conhecido como \textit{detecção heterodina}, gera um sinal portador no fotodetector cuja modulação em frequência corresponde diretamente à velocidade da peça, permitindo demodulação eletrônica precisa e direcional \cite{LDVpolytec2006}.
+Para resolver a ambiguidade de sinal da velocidade, isto é, distinguir se a superfície se aproxima ou se afasta do vibrômetro, é introduzido um deslocamento de frequência conhecido (tipicamente de 30--40~MHz) em um dos feixes por meio de uma célula de Bragg (modulador acusto-óptico). Esse arranjo, conhecido como \textit{detecção heterodina}, gera um sinal portador no fotodetector cuja modulação em frequência corresponde diretamente à velocidade da peça, permitindo demodulação eletrônica precisa e direcional \cite{LDVpolytec2006}.
 
 \subsubsection{Vantagens e limitações}
 
 A LDV oferece resolução de velocidade da ordem de nanômetros por segundo, banda larga (de DC até a faixa de MHz) e, por ser uma medição sem contato, elimina por completo o efeito de \textit{mass loading} \cite{LDVpolytec2006}. Por essas razões, é considerada o padrão-ouro para validação de outras técnicas de medição vibracional. Suas principais limitações, no entanto, são significativas para aplicações industriais: a medição é \textit{espacialmente discreta} (ponto a ponto), o que torna a reconstrução de modos de vibrar lenta quando feita por varredura sequencial; o custo de aquisição e manutenção de sistemas comerciais é elevado; o setup experimental é complexo, exigindo alinhamento óptico cuidadoso, superfícies com refletividade adequada (frequentemente preparadas com \textit{spray} retrorrefletivo) e estabilidade do caminho óptico; e a técnica é sensível a movimentos de corpo rígido da própria estrutura e a vibrações do suporte do equipamento.
 
-Essas limitações particularmente o custo e a natureza pontual da medição abrem espaço para abordagens alternativas que mantenham a vantagem do não contato, mas com maior cobertura espacial e menor custo de implementação, motivando a investigação da vibrometria por imagem apresentada a seguir.
+Essas limitações, particularmente o custo e a natureza pontual da medição, abrem espaço para abordagens alternativas que mantenham a vantagem do não contato, mas com maior cobertura espacial e menor custo de implementação, motivando a investigação da vibrometria por imagem apresentada a seguir.
 
 \subsection{Vibrometria por Imagem e Processamento Digital de Sinais}
 
 A vibrometria por imagem utiliza câmeras de vídeo convencionais como sensores de vibração, extraindo o movimento de pontos de interesse na cena por meio de algoritmos de processamento digital de imagens. Comparada à LDV, essa abordagem é de baixo custo, de implementação mais simples e, principalmente, capaz de fornecer medições \textit{full-field}: cada região da peça visível no quadro pode ser tratada como um sensor virtual independente \cite{robotcamera2025, Mhatre2026}. Estudos recentes demonstram que sistemas baseados em câmera podem atingir precisão da ordem de micrômetros em frequências de até centenas de hertz, dependendo da configuração óptica e do algoritmo empregado \cite{robotcamera2025}.
 
-A presente seção descreve o pipeline de medição que será implementado neste trabalho, organizado em quatro blocos: aquisição e amostragem do vídeo, estimativa de movimento baseada em fase por meio de filtros de Gabor, conversão dos sinais de deslocamento para o domínio da frequência, e mapeamento dos principais desafios práticos do método.
+A presente seção descreve os fundamentos do pipeline de medição implementado neste trabalho, organizado em quatro blocos: aquisição e amostragem do vídeo, estimativa de movimento baseada em fase por meio de filtros de Gabor, conversão dos sinais de deslocamento para o domínio da frequência, e mapeamento dos principais desafios práticos do método.
 
 \subsubsection{Aquisição de vídeo e amostragem temporal}
 
@@ -331,7 +358,7 @@ A câmera atua como o transdutor primário do sistema, convertendo o movimento f
     \label{fig:nyquist_aliasing}
 \end{figure}
 
-Dois parâmetros adicionais da câmera merecem atenção. O tempo de exposição deve ser curto o suficiente para que cada quadro registre o movimento como praticamente congelado; exposições longas introduzem borramento (\textit{motion blur}) que atenua artificialmente a amplitude medida \cite{LavatelliZappa2017}. A relação $\Delta x_{blur} \approx v \cdot t_{exp}$, em que $v$ é a velocidade instantânea do ponto e $t_{exp}$ o tempo de exposição, fornece uma estimativa direta desse efeito \cite{LavatelliZappa2017}. Já o tipo de obturador é crítico: o obturador global (\textit{global shutter}) captura todo o sensor simultaneamente, enquanto o obturador de rolagem (\textit{rolling shutter}) captura linha a linha, introduzindo distorções geométricas em vibrações rápidas. Para vibrometria, o obturador global é fortemente preferido \cite{robotcamera2025}.
+Dois parâmetros adicionais da câmera merecem atenção. O tempo de exposição deve ser curto o suficiente para que cada quadro registre o movimento como praticamente congelado; exposições longas introduzem borramento (\textit{motion blur}) que atenua artificialmente a amplitude medida \cite{LavatelliZappa2017}. A relação $\Delta x_{blur} \approx v \cdot t_{exp}$, em que $v$ é a velocidade instantânea do ponto e $t_{exp}$ o tempo de exposição, fornece uma estimativa direta desse efeito \cite{LavatelliZappa2017}. Já o tipo de obturador é crítico: o obturador global (\textit{global shutter}) captura todo o sensor simultaneamente, enquanto o obturador de rolagem (\textit{rolling shutter}) captura linha a linha, introduzindo distorções geométricas em vibrações rápidas. Para vibrometria, o obturador global é fortemente preferido \cite{robotcamera2025}. No obturador de rolagem, a linha $y$ de um quadro é lida com atraso $\Delta t = (y/H)\,T_{read}$ em relação à primeira, sendo $H$ a altura da imagem e $T_{read}$ o tempo de leitura do sensor. Esse atraso desloca a \textit{fase} do movimento medido em cada linha em $2\pi f\,\Delta t$, mas não altera a \textit{frequência}, que é a mesma em todas as linhas.
 
 \begin{figure}[htbp]
     \centering
@@ -344,7 +371,7 @@ A calibração espacial converte deslocamentos medidos em pixels para unidades f
 
 \subsubsection{Estimativa de movimento baseada em fase com filtros de Gabor}
 
-O método central a ser implementado neste trabalho é a estimativa de movimento baseada em fase (\textit{Phase-Based Motion Estimation}, PME), obtida por meio da decomposição local da imagem com filtros de Gabor. Diferentemente de abordagens que operam diretamente sobre a intensidade dos pixels como o rastreamento por correspondência de padrões e o \textit{Digital Image Correlation} (DIC) clássico, a abordagem baseada em fase explora a propriedade fundamental de que, em uma vizinhança espacial estreita, pequenas translações de uma estrutura visual se manifestam como variações lineares na fase de coeficientes complexos obtidos por filtragem direcional \cite{Wadhwa2013, Phase2022}. Como a fase local é uma quantidade intrinsecamente robusta a variações de iluminação e a ruído da câmera, essa formulação alcança sensibilidades sub-pixel da ordem de milésimos de pixel, sem exigir marcadores artificiais nem padrões de \textit{speckle} aplicados à superfície \cite{ZhangLogGabor2024, WangLogGabor2022}.
+O método central implementado neste trabalho é a estimativa de movimento baseada em fase (\textit{Phase-Based Motion Estimation}, PME), obtida por meio da decomposição local da imagem com filtros de Gabor. Diferentemente de abordagens que operam diretamente sobre a intensidade dos pixels, como o rastreamento por correspondência de padrões e o \textit{Digital Image Correlation} (DIC) clássico, a abordagem baseada em fase explora a propriedade fundamental de que, em uma vizinhança espacial estreita, pequenas translações de uma estrutura visual se manifestam como variações lineares na fase de coeficientes complexos obtidos por filtragem direcional \cite{Wadhwa2013, Phase2022}. Como a fase local é uma quantidade intrinsecamente robusta a variações de iluminação e a ruído da câmera, essa formulação alcança sensibilidades sub-pixel da ordem de milésimos de pixel, sem exigir marcadores artificiais nem padrões de \textit{speckle} aplicados à superfície \cite{ZhangLogGabor2024, WangLogGabor2022}.
 
 O filtro de Gabor é um filtro de banda passante orientado, definido pelo produto de uma senoide complexa com uma envoltória gaussiana. Em duas dimensões, sua resposta ao impulso pode ser escrita, para uma orientação $\theta$ e uma frequência central $\omega_0$, como \cite{Wadhwa2013}:
 \begin{equation}
@@ -375,90 +402,128 @@ Concluído o rastreamento, cada ROI produz dois sinais discretos no tempo, $x(t_
 
 No domínio do tempo, a inspeção direta dos sinais permite identificar amplitudes, decaimentos exponenciais (com extração da razão de amortecimento $\zeta$ pelo decremento logarítmico) e correlação temporal entre diferentes pontos da estrutura. No domínio da frequência, a Transformada Rápida de Fourier (\textit{Fast Fourier Transform}, FFT) é aplicada para identificar as componentes espectrais dominantes, revelando as frequências naturais da peça e suas respectivas amplitudes modais \cite{Mhatre2026}.
 
-Para ensaios em que a frequência de excitação varia ao longo do tempo (\textit{frequency sweeps}, partidas e paradas de máquinas), a Transformada de Fourier de Tempo Curto (\textit{Short-Time Fourier Transform}, STFT) é mais apropriada, pois fornece um espectrograma representação conjunta tempo-frequência que permite acompanhar a evolução das componentes espectrais ao longo do ensaio \cite{robotcamera2025}. Quando o sinal de excitação aplicado à base é conhecido (por exemplo, a partir de um acelerômetro montado no \textit{shaker}), pode-se ainda calcular a FRF experimental ponto a ponto como a razão entre o espectro de saída em cada ROI e o espectro de entrada na excitação, conforme aplicado em \cite{robotcamera2025} para identificação de ressonâncias estruturais em manipuladores robóticos.
+Para ensaios em que a frequência de excitação varia ao longo do tempo (\textit{frequency sweeps}, partidas e paradas de máquinas), a Transformada de Fourier de Tempo Curto (\textit{Short-Time Fourier Transform}, STFT) é mais apropriada, pois fornece um espectrograma, representação conjunta tempo-frequência que permite acompanhar a evolução das componentes espectrais ao longo do ensaio \cite{robotcamera2025}. Quando o sinal de excitação aplicado à base é conhecido (por exemplo, a partir de um acelerômetro montado no \textit{shaker}), pode-se ainda calcular a FRF experimental ponto a ponto como a razão entre o espectro de saída em cada ROI e o espectro de entrada na excitação, conforme aplicado em \cite{robotcamera2025} para identificação de ressonâncias estruturais em manipuladores robóticos.
 
 \subsubsection{Desafios práticos e fontes de erro}
 
-A vibrometria por imagem não está livre de limitações, e o desempenho do sistema depende de um conjunto de cuidados experimentais. Os principais desafios encontrados na literatura e a serem tratados neste trabalho são:
+A vibrometria por imagem não está livre de limitações, e o desempenho do sistema depende de um conjunto de cuidados experimentais. Os principais desafios encontrados na literatura e tratados neste trabalho são:
 
 \begin{itemize}
-    \item Iluminação: variações temporais na intensidade luminosa podem ser interpretadas pelo algoritmo de correspondência como movimento aparente. A solução é iluminação contínua e estável (LED de qualidade, evitando fontes com modulação PWM) e, quando necessário, pré-processamento dos quadros para normalização de intensidade \cite{robotcamera2025}.
+    \item Iluminação: variações temporais na intensidade luminosa podem ser interpretadas pelo algoritmo de correspondência como movimento aparente. A solução é iluminação contínua e estável (LED de qualidade, evitando fontes com modulação PWM) e, quando necessário, pré-processamento dos quadros para normalização de intensidade \cite{robotcamera2025}. Em uma rede elétrica de 60~Hz, lâmpadas sem filtragem adequada cintilam em 120~Hz; a 240~quadros/s essa componente cai exatamente na frequência de Nyquist e, em taxas menores, é rebatida para frequências mais baixas, podendo se confundir com o movimento.
     \item Movimento da câmera: qualquer vibração do tripé ou do suporte da câmera contamina todas as ROIs simultaneamente. A mitigação envolve fixação rígida do suporte e, como já mencionado, a subtração do movimento de uma ROI de referência fixada ao fundo \cite{Mhatre2026}.
     \item Limite de Nyquist e \textit{aliasing}: vibrações de frequência superior a $F/2$ produzem componentes espectrais espúrias. Esse limite define a escolha da câmera para a aplicação pretendida; em \cite{robotcamera2025}, por exemplo, uma câmera a 1000~fps permitiu análise confiável até cerca de 125~Hz.
+    \item Obturador de rolagem: comum em câmeras de consumo e \textit{smartphones}, introduz o atraso entre linhas descrito anteriormente. Seu efeito é reduzido com ROIs de pequena altura e pode ser quantificado com um corpo rígido com dois marcadores afastados verticalmente.
     \item Textura da superfície: regiões de baixa textura (superfícies lisas e uniformes) produzem amplitude local $A$ próxima de zero na saída do filtro de Gabor, tornando a fase indefinida e contaminando a estimativa de deslocamento. Quando a textura natural da peça é insuficiente, pode-se recorrer à aplicação de um \textit{speckle pattern} artificial ou de marcadores de alto contraste em pontos de medição específicos \cite{robotcamera2025, Mhatre2026}.
     \item Custo computacional: a aplicação de um banco de filtros de Gabor com múltiplas orientações e escalas a cada quadro de um vídeo longo em alta resolução é computacionalmente exigente. As estratégias usuais incluem a restrição do processamento às ROIs de interesse, a implementação das convoluções no domínio da frequência via FFT, e a paralelização em GPU quando disponível \cite{robotcamera2025}.
 \end{itemize}
 
 Mesmo com esses cuidados, a vibrometria por imagem não substitui integralmente os métodos tradicionais. Ela se posiciona como um complemento de alto valor, particularmente em cenários em que o \textit{mass loading} é proibitivo, em que o número de pontos de medição desejado é grande, ou em que se busca informação espacial de modos de vibrar para fins de SHM e análise forense de falhas.
 
+%==============================================================================
 \section{Metodologia}
+%==============================================================================
 
-Com o objetivo de validação de hipóteses, a abordagem realizada começou na criação de um Produto Mínimo Viável e, em sequência, evoluiu para um sistema mais robusto.
+O trabalho foi conduzido em duas etapas. Na primeira, um Produto Mínimo Viável (MVP) com uma régua engastada verificou a cadeia completa de aquisição e processamento em uma estrutura real (Seção~\ref{sec:resultado_regua}). Na segunda, o sistema foi aplicado a uma barra de alumínio montada na bancada de vibrações do laboratório e comparado a um acelerômetro piezoelétrico e a um modelo analítico. Em paralelo, o processamento foi organizado em uma biblioteca Python e em um aplicativo de apoio ao ensaio (Seção~\ref{sec:software}). O MVP seguiu três pilares, Viabilidade, Valor e Capacidade de Aprendizado, com os princípios de reduzir riscos, agilidade e foco no essencial.
 
-\subsection{Produto Mínimo Viável (MVP)}
-\label{sec:mvp}
+\subsection{Equipamentos}
+\label{sec:equipamentos}
 
-O MVP segue três pilares principais: Viabilidade, Valor e Capacidade de Aprendizado, seguindo os princípios de reduzir riscos, agilidade e foco no essencial.
-
-Com o objetivo de simular a oscilação de 1~GDL de uma viga engastada (\textit{cantilever}) validando a aquisição de dados a partir desse movimento, foram selecionados os seguintes equipamentos:
-
-\begin{itemize}
-    \item Câmera DJI Osmo Action 4;
-    \item Régua com marcador na ponta;
-    \item Bancada para teste.
-\end{itemize}
-
-\subsection{Equipamentos Utilizados}
-
-\subsubsection{Câmera de aquisição}
+\subsubsection{Câmeras de aquisição}
 \label{sec:camera}
 
-A câmera selecionada para os ensaios é a DJI Osmo Action 4, equipada com sensor CMOS de 1/1{,}7'' e abertura fixa de $f$/2{,}8. Para as finalidades de vibrometria, os modos de captura relevantes são 4K a 120\,fps e 1080p a 240\,fps, que estabelecem frequências de Nyquist de, respectivamente, 60\,Hz e 120\,Hz. O modo de 240\,fps é preferido sempre que a frequência fundamental da estrutura sob análise estiver abaixo de 100\,Hz, satisfazendo a recomendação prática de operar com taxa de captura ao menos cinco vezes superior à frequência máxima de interesse \cite{robotcamera2025}.
+No MVP foi utilizada a câmera DJI Osmo Action 4, com sensor CMOS de 1/1{,}3'' e abertura fixa de $f$/2{,}8, cujos modos de 4K a 120\,fps e 1080p a 240\,fps estabelecem frequências de Nyquist de 60\,Hz e 120\,Hz. O vídeo analisado foi, porém, o arquivo de baixa resolução gravado automaticamente pela câmera, a 23,98\,fps (Seção~\ref{sec:resultado_regua}).
 
-O sensor da câmera opera com obturador de rolagem (\textit{rolling shutter}), capturando o sensor linha a linha ao invés de instantaneamente. Em oscilações de amplitude elevada, esse mecanismo introduz distorções geométricas entre linhas consecutivas do quadro \cite{robotcamera2025}, constituindo uma limitação relevante para a vibrometria por imagem. A mitigação é realizada mantendo o tempo de exposição suficientemente curto (tipicamente $t_{exp} \leq 1/2000\,\text{s}$), de modo que o deslocamento da estrutura durante cada quadro seja desprezível frente à amplitude total da vibração \cite{LavatelliZappa2017}. A função de estabilização eletrônica RockSteady é desativada durante todos os ensaios, uma vez que esse recurso altera artificialmente o conteúdo de movimento do vídeo e comprometeria a extração de fase.
+Nos ensaios de bancada foi utilizada a câmera principal de um \textit{smartphone} iPhone 17e, no modo câmera lenta em 1080p ($1920 \times 1080$ pixels) a 240\,fps, com codificação HEVC. Nesse modo, o arquivo é gravado com quadros capturados a 240\,fps, mas com marcação de tempo para reprodução a 30\,fps (oito vezes mais lento); a taxa real de captura é, por isso, informada explicitamente ao \textit{software}. Com 240\,fps, a regra de amostragem adotada ($f_{max} \leq F/10$) admite componentes até 24\,Hz, e a frequência de Nyquist é de 120\,Hz.
 
-\subsubsection{Estrutura vibratória do ensaio inicial (régua)}
+Como na maioria das câmeras de consumo, o sensor opera com obturador de rolagem. Em vez de tentar eliminá-lo, o efeito foi tratado como uma fonte de erro a ser quantificada: ele não altera a frequência identificada, apenas a fase entre linhas, e foi reduzido com ROIs de pequena altura (Seção~\ref{sec:controles}). Foco, exposição e balanço de branco foram travados antes de cada sessão, sem \textit{zoom} digital e sem estabilização. A câmera foi fixada em tripé de chão independente da bancada, de lado para a barra, com o eixo óptico perpendicular ao plano de flexão, sob iluminação constante. % TODO: anotar no laboratorio a distancia camera-barra e o tipo de iluminacao.
 
-A estrutura de teste é uma régua graduada fixada por grampo em uma das extremidades, simulando uma viga engastada-livre (\textit{cantilever}). Esse modelo é escolhido por representar, de forma controlada e analiticamente tratável, o comportamento de 1~GDL de interesse. Na extremidade livre, é aplicado um marcador de alto contraste --- ponto preto sobre fundo branco --- que eleva a amplitude local $A$ na saída dos filtros de Gabor, tornando a estimativa de fase mais confiável naquela região de interesse \cite{Wadhwa2013}. O comprimento livre $L$, a largura $b$ e a espessura $h$ da régua são medidos antes de cada ensaio para alimentar o modelo analítico descrito na Seção~\ref{sec:modelagem}.
+\subsubsection{Acelerômetro e sistema de aquisição}
+\label{sec:acelerometro}
 
-A bancada de suporte consiste em uma mesa rígida sobre a qual o grampo é fixado. Uma região estática da bancada é designada como ROI de referência, cujo sinal de deslocamento estimado é subtraído das demais ROIs de medição para compensar eventuais vibrações de corpo rígido da câmera ou do suporte \cite{Mhatre2026}.
+A referência por contato foi um acelerômetro piezoelétrico Brüel \& Kjær Type 4507 001, de aproximadamente 5\,g, fixado na face superior da barra a 300\,mm do centro da articulação, com o eixo de medição na direção vertical (Figura~\ref{fig:acelerometro}). O sinal foi adquirido por um módulo Brüel \& Kjær LAN-XI Type 3160-A-4/2 (quatro entradas e duas saídas de gerador; Figura~\ref{fig:aquisitor}) e registrado no \textit{software} PULSE LabShop, versão 20. A aquisição foi configurada com banda de \TODO{xxx}\,Hz (taxa de amostragem de \TODO{xxx}\,Hz) e registro de \TODO{20}\,s, e a sensibilidade do sensor, \TODO{x,xx}\,mV/(m/s$^2$), foi tomada do certificado de calibração. O sinal no tempo foi exportado em \TODO{formato} para o processamento descrito na Seção~\ref{sec:comparacao}.
+% TODO: citar o datasheet/certificado do acelerometro e do LAN-XI.
+% PRELIMINAR: na primeira medicao (15/10/2026) o PULSE estava com banda de 10 Hz,
+% 200 linhas e 20 s (fs = 25,6 Hz, ~3,4 amostras por ciclo de 7,6 Hz) e o sinal
+% so estava disponivel como imagem da tela (curva digitalizada). A nova campanha
+% usa banda >= 100 Hz e exportacao do sinal.
 
-A calibração espacial é realizada com um objeto de referência de dimensões conhecidas posicionado no plano focal da câmera, imediatamente antes de cada sessão de ensaio. O fator de escala $s$ [mm/pixel] é extraído da razão entre a dimensão física conhecida e o número de pixels correspondente na imagem, sendo utilizado para converter os deslocamentos estimados pelo algoritmo de pixel para milímetro.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.75\columnwidth]{Images/acelerometro_montado.jpg}
+    \caption{Acelerômetro Brüel \& Kjær Type 4507 001 fixado na face superior da barra. Fonte: O autor.}
+    \label{fig:acelerometro}
+\end{figure}
 
-\subsection{Modelagem e Simulação}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.75\columnwidth]{Images/aquisitor_bk_3160.jpg}
+    \caption{Sistema de aquisição Brüel \& Kjær LAN-XI, com o módulo Type 3160-A-4/2. Fonte: O autor.}
+    \label{fig:aquisitor}
+\end{figure}
+
+\subsubsection{Bancada de vibrações e corpo de prova}
+\label{sec:preparacao_ensaio}
+
+A bancada (Figura~\ref{fig:bancada}) é um equipamento didático para ensaios de vibrações livres e forçadas, construído sobre uma estrutura rígida de perfis de aço cuja base possui rasgos para a fixação dos componentes. Seus principais elementos são um excitador de massa desbalanceada acionado por motor elétrico, um braço articulado por mancal de rolamento, molas helicoidais que conectam o braço a uma travessa superior e um amortecedor viscoso. Neste trabalho foram realizados apenas ensaios de vibração livre, com o motor desligado; o excitador permanece disponível para ensaios forçados em trabalhos futuros.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\columnwidth]{Images/bancada_teste.jpg}
+    \caption{Bancada de vibrações do laboratório. Fonte: O autor.}
+    \label{fig:bancada}
+\end{figure}
+
+O corpo de prova é uma barra maciça de alumínio 6351-T6 de seção retangular, com 750\,mm de comprimento, largura de 1\,polegada ($b = 25{,}4$\,mm), espessura de 1/2\,polegada ($h = 12{,}7$\,mm) e massa de aproximadamente 660\,g (Figura~\ref{fig:barra_aluminio}). A liga 6351 pertence à série 6xxx, cujos principais elementos de liga são o magnésio e o silício, que se combinam formando o precipitado endurecedor Mg$_2$Si; a têmpera T6 indica solubilização e envelhecimento artificial, condição que maximiza a resistência mecânica da liga, com limite de escoamento típico da ordem de 280\,MPa \cite{ASM1990}. Para o ensaio dinâmico, as propriedades de interesse são o módulo de elasticidade $E \approx 69$\,GPa e a densidade $\rho \approx 2710$\,kg/m\textsuperscript{3}. A superfície extrudada é lisa e reflexiva; por isso, marcadores de alto contraste foram aplicados nos pontos de medição.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\columnwidth]{Images/barra_aluminio_6351.jpg}
+    \caption{Barras de alumínio 6351-T6 ($1'' \times 1/2''$) utilizadas como corpo de prova, com furos para fixação. Fonte: O autor.}
+    \label{fig:barra_aluminio}
+\end{figure}
+
+Na configuração ensaiada (Figura~\ref{fig:frame_ensaio}), uma extremidade da barra é presa a uma junta com mancal, que permite a rotação no plano vertical, e o comprimento livre até a ponta é $L = 720$\,mm. A barra é suspensa por uma mola helicoidal presa à travessa superior e ligada, por um parafuso, ao furo situado a 88\,mm da ponta, isto é, a $a = 632$\,mm do centro da articulação. Foram utilizadas duas molas, de rigidez nominal de catálogo $k_1 = 1500$\,N/m e $k_2 = 2500$\,N/m, cujas rigidezes e massas foram medidas no laboratório (Seção~\ref{sec:res_parametros}). O acelerômetro fica a $x_a = 300$\,mm da articulação. Cada ensaio consiste em deslocar a ponta da barra até uma marca fixa e soltá-la, registrando a resposta livre simultaneamente pela câmera e pelo acelerômetro.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\columnwidth]{Images/frame_ensaio_mola.jpg}
+    \caption{Quadro do vídeo do ensaio: barra articulada à esquerda, acelerômetro sobre a barra e mola presa ao parafuso próximo à ponta. Fonte: O autor.}
+    \label{fig:frame_ensaio}
+\end{figure}
+
+\subsubsection{Estrutura do ensaio inicial (régua)}
+\label{sec:mvp}
+
+No MVP, a estrutura de teste foi uma régua escolar fixada por grampo em uma das extremidades, simulando uma viga engastada-livre (\textit{cantilever}). Na extremidade livre foi aplicado um marcador de alto contraste, que eleva a amplitude local $A$ na saída dos filtros de Gabor \cite{Wadhwa2013}, e uma região estática foi usada como ROI de referência.
+
+\subsection{Modelagem Analítica}
 \label{sec:modelagem}
 
-\subsubsection{Modelo analítico da viga cantilever}
+\subsubsection{Viga engastada (régua)}
 
-A régua (e, na etapa seguinte, a barra de alumínio descrita na Seção~\ref{sec:preparacao_ensaio}) é modelada como uma viga de Euler-Bernoulli com seção retangular uniforme de largura $b$ e espessura $h$. Para o primeiro modo de flexão de uma viga engastada-livre, a frequência natural é \cite{Rao2010}:
-
+A régua é modelada como uma viga de Euler-Bernoulli com seção retangular uniforme de largura $b$ e espessura $h$. Para o primeiro modo de flexão de uma viga engastada-livre, a frequência natural é \cite{Rao2010}:
 \begin{equation}
     f_{n,1} = \frac{(\beta_1 L)^2}{2\pi L^2}\sqrt{\frac{EI}{\rho A}},
     \label{eq:fn_cantilever}
 \end{equation}
-
 em que $\beta_1 L = 1{,}8751$ é a raiz característica do primeiro modo, $I = bh^3/12$ é o momento de inércia de área, $A = bh$ é a área da seção transversal, $E$ é o módulo de Young e $\rho$ é a densidade do material. Substituindo $I$ e $A$, a Equação~\ref{eq:fn_cantilever} se simplifica para:
-
 \begin{equation}
     f_{n,1} = \frac{(1{,}8751)^2\, h}{2\pi\sqrt{12}\, L^2}\sqrt{\frac{E}{\rho}},
     \label{eq:fn_simplificado}
 \end{equation}
-
-evidenciando que $f_{n,1}$ é proporcional à espessura $h$ e inversamente proporcional a $L^2$, o que permite ajustar a frequência do ensaio simplesmente variando o comprimento livre encastrado. Para o cálculo da resposta temporal, a viga é reduzida a um sistema de 1~GDL com parâmetros equivalentes avaliados na ponta livre \cite{Rao2010, Downey2026}:
-
+evidenciando que $f_{n,1}$ é proporcional à espessura $h$ e inversamente proporcional a $L^2$. Para o cálculo da resposta temporal, a viga é reduzida a um sistema de 1~GDL com parâmetros equivalentes avaliados na ponta livre \cite{Rao2010, Downey2026}:
 \begin{equation}
     k_{eq} = \frac{3EI}{L^3}, \qquad m_{eq} = 0{,}2357\,\rho A L.
     \label{eq:keq_meq}
 \end{equation}
-
-A Tabela~\ref{tab:parametros_materiais} apresenta os parâmetros dos materiais considerados: os mais comuns em réguas de escritório, utilizados como estimativa inicial de $f_{n,1}$ antes da medição geométrica da régua real, e a liga de alumínio 6351-T6 da barra ensaiada na bancada de vibrações.
+A Tabela~\ref{tab:parametros_materiais} apresenta os parâmetros dos materiais considerados.
 
 \begin{table}[htbp]
     \centering
-    \caption{Parâmetros materiais de referência para estimativa de $f_{n,1}$.}
+    \caption{Parâmetros materiais de referência.}
     \label{tab:parametros_materiais}
     \small
-    \begin{tabularx}{\columnwidth}{l c c}
+    \begin{tabularx}{\columnwidth}{X c c}
         \toprule
         \textbf{Material} & \textbf{$E$ (GPa)} & \textbf{$\rho$ (kg/m\textsuperscript{3})} \\
         \midrule
@@ -470,190 +535,362 @@ A Tabela~\ref{tab:parametros_materiais} apresenta os parâmetros dos materiais c
     \end{tabularx}
 \end{table}
 
-\subsection{Preparação do Ensaio: Barra de Alumínio na Bancada de Vibrações}
-\label{sec:preparacao_ensaio}
+\subsubsection{Barra articulada suspensa por mola: modelo de 1 GDL}
+\label{sec:modelo_1gdl}
 
-Concluída a etapa inicial com a régua (MVP), cujos resultados são reunidos na Seção~\ref{sec:resultados_preliminares}, o sistema de vibrometria óptica é aplicado a um corpo de prova de maior porte montado em uma bancada de vibrações do laboratório. O corpo de prova é uma barra maciça de alumínio 6351-T6 de seção retangular, com comprimento de 750~mm, largura de 1~polegada ($b = 25{,}4$~mm) e espessura de 1/2~polegada ($h = 12{,}7$~mm), engastada em uma das extremidades e posta em oscilação pelo mecanismo de excitação da bancada.
-
-\subsubsection{Corpo de prova: barra de alumínio 6351-T6}
-
-A liga 6351 pertence à série 6xxx, cujos principais elementos de liga são o magnésio e o silício, que se combinam formando o precipitado endurecedor Mg$_2$Si. A designação de têmpera T6 indica que o material foi solubilizado e envelhecido artificialmente, condição que maximiza a resistência mecânica da liga \cite{ASM1990}. Trata-se de uma liga estrutural amplamente empregada na forma de perfis extrudados, com boa usinabilidade e boa resistência à corrosão, apresentando limite de escoamento típico da ordem de 280~MPa e limite de resistência à tração da ordem de 310~MPa \cite{ASM1990}.
-
-Para o ensaio dinâmico, as propriedades de interesse são o módulo de elasticidade $E \approx 69$~GPa e a densidade $\rho \approx 2710$~kg/m\textsuperscript{3} (Tabela~\ref{tab:parametros_materiais}). A rigidez específica $E/\rho$ do alumínio é praticamente igual à do aço; pela Equação~\ref{eq:fn_simplificado}, a barra apresenta, portanto, frequências naturais muito próximas às de uma barra de aço de mesma geometria, com cerca de um terço da massa. O baixo amortecimento interno do metal produz picos de ressonância estreitos e decaimentos longos na resposta livre, favoráveis à identificação de $f_{n,1}$; nessas condições, o amortecimento medido tende a ser dominado pela dissipação no engaste. A massa total da barra é $m = \rho\, b\, h\, L \approx 0{,}66$~kg.
-
-A Figura~\ref{fig:barra_aluminio} mostra as barras utilizadas. A superfície extrudada é lisa e reflexiva, com marcas longitudinais do processo de fabricação, e os furos passantes visíveis destinam-se à fixação da barra por parafusos.
+A Figura~\ref{fig:dcl} apresenta a montagem da bancada e o diagrama de corpo livre da barra. Para pequenas rotações $\theta$ em torno da articulação $O$ (positivas no sentido horário, que abaixa a ponta), atuam sobre a barra as reações da articulação ($R_x$, $R_y$), os pesos da barra ($m_b g$, aplicado em $L/2$), do acelerômetro ($m_a g$, em $x_a$) e da massa efetiva da mola e das ferragens ($m_{ef} g$, em $a$), e a força da mola $k(\delta_e + a\theta)$, em que $\delta_e$ é o alongamento da mola na posição de equilíbrio.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=\columnwidth]{Images/barra_aluminio_6351.jpg}
-    \caption{Barras de alumínio 6351-T6 ($1'' \times 1/2''$) utilizadas como corpo de prova, com furos para fixação. Fonte: O autor.}
-    \label{fig:barra_aluminio}
+    \begin{tikzpicture}[>=Latex, font=\footnotesize, x=0.98cm, y=0.98cm]
+        % ---------------- (a) montagem ----------------
+        \node[anchor=west] at (-0.6,2.5) {\textbf{(a)}};
+        \draw[thick] (0,0) -- (-0.22,-0.4) -- (0.22,-0.4) -- cycle;
+        \fill[pattern=north east lines] (-0.4,-0.4) rectangle (0.4,-0.55);
+        \draw (-0.4,-0.4) -- (0.4,-0.4);
+        \filldraw[fill=gray!15] (0,-0.07) rectangle (7.2,0.07);
+        \filldraw[fill=white] (0,0) circle (0.06);
+        \fill[pattern=north east lines] (5.92,2.2) rectangle (6.72,2.35);
+        \draw (5.92,2.2) -- (6.72,2.2);
+        \draw (6.32,2.2) -- (6.32,1.95);
+        \draw[decorate, decoration={coil, aspect=0.45, segment length=1.5mm, amplitude=1.6mm}]
+            (6.32,1.95) -- (6.32,0.4);
+        \draw (6.32,0.4) -- (6.32,0.07);
+        \fill (6.32,0) circle (0.05);
+        \filldraw[fill=black!65] (2.88,0.07) rectangle (3.12,0.27);
+        \node[above] at (3.0,0.27) {acelerômetro, $m_a$};
+        \node[left] at (6.12,1.2) {mola: $k$, $m_s$};
+        \node[below left] at (-0.05,-0.02) {$O$};
+        \draw[|<->|] (0,-0.85) -- (3.0,-0.85) node[midway,below] {$x_a = 300$ mm};
+        \draw[|<->|] (0,-1.35) -- (6.32,-1.35) node[midway,below] {$a = 632$ mm};
+        \draw[|<->|] (0,-1.85) -- (7.2,-1.85) node[midway,below] {$L = 720$ mm};
+        % ---------------- (b) diagrama de corpo livre ----------------
+        \begin{scope}[yshift=-4.9cm]
+            \node[anchor=west] at (-0.6,1.75) {\textbf{(b)}};
+            \filldraw[fill=gray!15] (0,-0.07) rectangle (7.2,0.07);
+            \fill (0,0) circle (0.05);
+            \node[above left] at (-0.05,0.05) {$O$};
+            \draw[->,thick] (-0.95,0) -- (-0.1,0) node[pos=0.35,below] {$R_x$};
+            \draw[->,thick] (0,-0.95) -- (0,-0.12) node[pos=0.3,right] {$R_y$};
+            \draw[->,thick,blue!70!black] (6.32,0.07) -- (6.32,1.15)
+                node[above] {$k(\delta_e + a\theta)$};
+            \draw[->,thick] (3.6,-0.07) -- (3.6,-0.85) node[below] {$m_b g$};
+            \draw[->,thick] (2.8,-0.07) -- (2.8,-0.6) node[below] {$m_a g$};
+            \draw[->,thick] (6.32,-0.07) -- (6.32,-0.85) node[below] {$m_{ef} g$};
+            \draw[->,thick,red!70!black] (0.64,0.45) arc (35:-35:0.78)
+                node[right] {$\theta,\ J_O\ddot{\theta}$};
+            \draw[densely dotted] (3.6,0.07) -- (3.6,0.35) node[above] {$L/2$};
+        \end{scope}
+    \end{tikzpicture}
+    \caption{(a) Montagem da barra articulada suspensa por mola; (b) diagrama de corpo livre da barra para uma rotação $\theta$ (horária) em torno de $O$. Fonte: O autor.}
+    \label{fig:dcl}
 \end{figure}
 
-\subsubsection{Bancada de vibrações e mecanismo de excitação}
-
-A bancada (Figura~\ref{fig:bancada}) é um equipamento didático para ensaios de vibrações livres e forçadas, construído sobre uma estrutura rígida de perfis de aço cuja base possui rasgos para a fixação dos componentes. Seus principais elementos são:
-
-\begin{itemize}
-    \item Excitador de massa desbalanceada: discos com recortes excêntricos (em vermelho na figura), montados em um eixo acionado por motor elétrico por meio de transmissão por polia dentada;
-    \item Braço de aço perfurado, articulado em uma das extremidades por um mancal de rolamento, cuja série de furos permite variar a posição de fixação das molas;
-    \item Molas helicoidais, que conectam o braço a uma travessa superior e à estrutura;
-    \item Amortecedor posicionado sob o braço.
-\end{itemize}
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=\columnwidth]{Images/bancada_teste.jpg}
-    \caption{Bancada de vibrações com a barra de alumínio posicionada junto ao mecanismo de excitação. Fonte: O autor.}
-    \label{fig:bancada}
-\end{figure}
-
-O princípio de excitação é o desbalanceamento rotativo: uma massa excêntrica $m_d$, a uma distância $e$ do eixo de rotação e girando à velocidade angular $\Omega$, gera uma força centrífuga girante cuja componente na direção de interesse é harmônica \cite{Rao2010}:
+Tomando o equilíbrio de momentos em torno de $O$ e considerando, nesta primeira aproximação, a barra como corpo rígido:
 \begin{equation}
-    F(t) = m_d\, e\, \Omega^2 \sin(\Omega t).
-    \label{eq:forca_desbalanceamento}
+    J_O\,\ddot{\theta} = m_b g \frac{L}{2} + m_a g\, x_a + m_{ef} g\, a - k(\delta_e + a\theta)\,a .
+    \label{eq:momentos}
 \end{equation}
-A frequência de excitação $f = \Omega/2\pi = N/60$, com $N$ a rotação do motor em rpm, é controlada diretamente pela velocidade do motor, enquanto a amplitude da força cresce com $\Omega^2$. Essa dependência deve ser considerada ao normalizar a resposta para obtenção da FRF, já que a força aplicada não é constante ao longo de uma varredura de frequência.
+Na posição de equilíbrio ($\theta = 0$, $\ddot{\theta} = 0$), os pesos são equilibrados pela pré-carga da mola, $k\,\delta_e\,a = m_b g L/2 + m_a g x_a + m_{ef} g a$, e a Equação~\ref{eq:momentos} se reduz a
+\begin{equation}
+    J_O\,\ddot{\theta} + k\,a^2\,\theta = 0
+    \;\;\Rightarrow\;\;
+    f_n = \frac{a}{2\pi}\sqrt{\frac{k}{J_O}},
+    \label{eq:fn_rigida}
+\end{equation}
+com o momento de inércia em relação à articulação
+\begin{equation}
+    J_O = \frac{m_b L^2}{3} + m_a x_a^2 + m_{ef}\, a^2 .
+    \label{eq:JO}
+\end{equation}
+A gravidade, portanto, não altera a frequência: ela só define a posição de equilíbrio. A massa da mola não se move como um corpo rígido; pelo método de Rayleigh, considerando o perfil linear de velocidades ao longo das espiras, sua contribuição equivale a um terço da massa $m_s$ concentrada na extremidade móvel \cite{Rao2010}, somada à massa $m_f$ das ferragens (parafuso, porcas e gancho):
+\begin{equation}
+    m_{ef} = \frac{m_s}{3} + m_f .
+    \label{eq:mef}
+\end{equation}
 
-Na configuração proposta, a barra de alumínio é engastada em uma das extremidades à estrutura rígida da bancada, reproduzindo a condição engastada-livre do modelo da Seção~\ref{sec:modelagem}, e o mecanismo de excitação impõe a oscilação. Ajustando-se a rotação do motor, a frequência de excitação pode ser posicionada abaixo, sobre e acima de $f_{n,1}$. A bancada permite, assim, dois tipos de ensaio:
+\subsubsection{Modelo de elementos finitos de Euler-Bernoulli}
+\label{sec:modelo_fe}
 
-\begin{itemize}
-    \item Vibração livre: com o motor desligado, a extremidade livre recebe um deslocamento inicial (ou um impacto) e é liberada; o decaimento registrado fornece $\omega_d$ e $\zeta$ (Equação~\ref{eq:resposta_subamortecida}) e alimenta diretamente a comparação com o modelo analítico (Fase~1);
-    \item Vibração forçada: o motor opera em patamares de rotação constante ou em varredura lenta através da ressonância, permitindo levantar a curva de resposta (Equação~\ref{eq:amplitude_forcada}) e acompanhar a evolução espectral por STFT.
-\end{itemize}
+O modelo de 1~GDL despreza a flexão da barra. Para incluí-la, e para obter a forma modal usada na comparação entre pontos, a barra foi discretizada em $N_e = 160$ elementos de viga de Euler-Bernoulli de comprimento $l = L/N_e$, com dois graus de liberdade por nó (deslocamento transversal $w$ e rotação $w'$) e funções de forma cúbicas de Hermite. As matrizes de rigidez e de massa consistente de cada elemento são \cite{Petyt2010}:
+\begin{equation}
+    \mathbf{K}_e = \frac{EI}{l^3}
+    \begin{bmatrix}
+        12 & 6l & -12 & 6l \\
+        6l & 4l^2 & -6l & 2l^2 \\
+        -12 & -6l & 12 & -6l \\
+        6l & 2l^2 & -6l & 4l^2
+    \end{bmatrix},
+    \label{eq:Ke}
+\end{equation}
+\begin{equation}
+    \mathbf{M}_e = \frac{\rho A l}{420}
+    \begin{bmatrix}
+        156 & 22l & 54 & -13l \\
+        22l & 4l^2 & 13l & -3l^2 \\
+        54 & 13l & 156 & -22l \\
+        -13l & -3l^2 & -22l & 4l^2
+    \end{bmatrix}.
+    \label{eq:Me}
+\end{equation}
+Após a montagem das matrizes globais, a mola é somada à rigidez do grau de liberdade $w$ do nó em $x = a$, as massas $m_a$ e $m_{ef}$ às massas dos nós em $x_a$ e $a$, e a articulação é imposta por $w(0) = 0$ (no engaste, também $w'(0) = 0$). As frequências e os modos resultam do problema de autovalor generalizado
+\begin{equation}
+    \left(\mathbf{K} - \omega_i^2\,\mathbf{M}\right)\boldsymbol{\phi}_i = \mathbf{0}.
+    \label{eq:autovalor}
+\end{equation}
+O modelo foi verificado contra a solução fechada da viga engastada com mola e massa na ponta e contra a viga engastada simples de mesma seção (21,1\,Hz para $L = 700$\,mm), com diferenças inferiores a 0,2\,\% nos três primeiros modos; com articulação e sem mola, ele reproduz o modo de corpo rígido de frequência nula, descartado na análise.
 
-\subsubsection{Relação com o sistema de vibrometria óptica}
-
-Aplicando-se a Equação~\ref{eq:fn_cantilever} à barra, com flexão na direção da espessura e substituindo $\beta_1 L$ pelas raízes $\beta_2 L = 4{,}6941$ e $\beta_3 L = 7{,}8548$ para os modos superiores, obtêm-se as frequências previstas na Tabela~\ref{tab:freq_aluminio}. Como parte do comprimento fica retida no engaste, o comprimento livre efetivo é menor que 750~mm e as frequências aumentam com $1/L^2$; por isso a tabela também apresenta o caso $L = 700$~mm. O comprimento livre real é medido antes de cada ensaio.
+A Tabela~\ref{tab:previsao} resume as previsões. Sem a massa da mola, o modelo prevê 11,70\,Hz para $k_1$ e 15,06\,Hz para $k_2$; a massa efetiva no ponto da mola reduz esses valores de forma acentuada, o que torna a medição de $m_s$ e $m_f$ indispensável. O modelo de 1~GDL (Equação~\ref{eq:fn_rigida}) fica entre 0,2\,\% e 1,1\,\% acima do modelo de elementos finitos, diferença atribuída à flexibilidade da barra. O segundo modo, de flexão, fica entre 77 e 88\,Hz: abaixo da frequência de Nyquist de 120\,Hz, mas acima do limite de $F/10 = 24$\,Hz, e não foi usado nas comparações.
 
 \begin{table}[htbp]
     \centering
-    \caption{Frequências naturais previstas para a barra de alumínio 6351-T6 ($b = 25{,}4$~mm, $h = 12{,}7$~mm).}
-    \label{tab:freq_aluminio}
+    \caption{Frequências previstas para a barra articulada (elementos finitos; acelerômetro de 5\,g a 300\,mm).}
+    \label{tab:previsao}
     \small
-    \begin{tabularx}{\columnwidth}{c c >{\centering\arraybackslash}X >{\centering\arraybackslash}X}
+    \begin{tabularx}{\columnwidth}{X c c}
         \toprule
-        \textbf{Modo} & \textbf{$\beta_i L$} & \textbf{$f_{n,i}$ (Hz) $L = 750$~mm} & \textbf{$f_{n,i}$ (Hz) $L = 700$~mm} \\
+        \textbf{Configuração} & \textbf{$k_1$} & \textbf{$k_2$} \\
         \midrule
-        1 & 1{,}8751 & 18{,}4  & 21{,}1 \\
-        2 & 4{,}6941 & 115{,}3 & 132{,}4 \\
-        3 & 7{,}8548 & 322{,}9 & 370{,}7 \\
+        $k$ de catálogo (N/m) & 1500 & 2500 \\
+        $f_1$ sem massa da mola (Hz) & 11,70 & 15,06 \\
+        $f_1$ com $k$ e $m_{ef}$ medidos (Hz) & \TODO{x,xx} & \TODO{x,xx} \\
+        $f_2$ (Hz) & \TODO{xx} & \TODO{xx} \\
+        $\phi(x_a)/\phi(a)$ (forma modal) & \TODO{0,48} & \TODO{0,49} \\
+        Efeito do acelerômetro em $f_1$ & \TODO{$-$0,1}\,\% & \TODO{$-$0,1}\,\% \\
         \bottomrule
     \end{tabularx}
 \end{table}
-
-Esses valores conectam o corpo de prova diretamente às escolhas do sistema de medição:
-
-\begin{itemize}
-    \item Amostragem: o primeiro modo (cerca de 18 a 21~Hz) é capturado com folga em ambos os modos da câmera, já que 120\,fps e 240\,fps correspondem a mais de cinco vezes $f_{n,1}$; o modo 4K a 120\,fps pode, então, ser preferido pela maior resolução espacial. O segundo modo, por outro lado, fica próximo ou acima do limite de Nyquist de 120\,Hz do modo de 240\,fps, e o terceiro está sempre acima dele. Se excitados, esses modos aparecem rebatidos no espectro em $|f - kF|$ (por exemplo, 322,9\,Hz aparece em cerca de 83\,Hz a 240\,fps). O modelo analítico permite prever essas posições e não confundi-las com frequências naturais reais;
-    \item Medição \textit{full-field}: o comprimento de 750~mm comporta várias ROIs ao longo do vão, permitindo reconstruir a forma de deflexão da barra e compará-la ao modo de vibrar teórico da viga engastada-livre, demonstrando a principal vantagem da técnica frente a um acelerômetro pontual;
-    \item Textura da superfície: a superfície lisa e reflexiva do alumínio (Figura~\ref{fig:barra_aluminio}) produz reflexos especulares e pouca textura, reduzindo a amplitude $A$ na saída dos filtros de Gabor. Por isso, marcadores de alto contraste, como os da régua, são aplicados ao longo da barra;
-    \item ROIs de referência e de entrada: como o excitador desbalanceado também transmite vibração à estrutura da bancada, a ROI de referência para compensação do movimento da câmera é posicionada fora dela, como na parede de tijolos ao fundo, que oferece textura abundante. Uma ROI sobre a região do engaste mede o movimento da base, que pode ser usado como sinal de entrada $\tilde{\Delta}_{in}(f)$ na estimativa da FRF;
-    \item Calibração espacial: as dimensões conhecidas da própria barra (25,4~mm e 12,7~mm), situadas no mesmo plano focal da medição, servem como objeto de referência $d_{ref}$ na Equação~\ref{eq:escala};
-    \item \textit{Mass loading} (Fase~2): a massa equivalente na ponta é $m_{eq} \approx 0{,}155$~kg (Equação~\ref{eq:keq_meq}). Um acelerômetro de 10~g, por exemplo, reduziria $f_{n,1}$ em cerca de 3\,\% pela Equação~\ref{eq:mass_loading}, de 18,4 para 17,8~Hz. O efeito é mensurável, mas menor que na régua, que permanece o corpo de prova mais indicado para evidenciá-lo, enquanto a barra de alumínio é mais adequada para avaliar a acurácia do método.
-\end{itemize}
+% Referencia (calculado com BeamFE): com m_ef = 383 g e k de catalogo,
+% f1 = 7,59 Hz (k1) e 9,80 Hz (k2); f2 = 77,3 Hz; phi(300)/phi(632) = 0,481 (k1)
+% e 0,485 (k2); efeito do acelerometro -0,09 %. Sem massa da mola: razao 0,490
+% (k1), 0,500 (k2); efeito -0,22 %.
 
 \subsection{Calibração Espacial}
+\label{sec:calibracao}
 
-O procedimento de calibração espacial estabelece o fator de escala $s$~[mm/pixel] que converte os deslocamentos medidos em pixels pelo algoritmo de fase para unidade física de comprimento. Antes de cada sessão de ensaio, um objeto de referência de dimensão linear conhecida $d_{ref}$~[mm] é posicionado no mesmo plano focal da régua e fotografado nas condições de aquisição finais (distância câmera-peça, resolução e configuração de zoom). Na imagem de calibração, a extensão do objeto é medida pelo número de pixels $d_{px}$ entre dois pontos de referência de posição conhecida, e o fator de escala é calculado como:
+O procedimento de calibração espacial estabelece o fator de escala $s$~[mm/pixel] que converte os deslocamentos medidos em pixels pelo algoritmo de fase para unidade física de comprimento. Um segmento de comprimento conhecido $d_{ref}$~[mm], situado no mesmo plano do movimento, é medido na imagem em pixels ($d_{px}$), e o fator de escala é calculado como:
 \begin{equation}
     s = \frac{d_{ref}}{d_{px}} \quad \text{[mm/pixel]}.
     \label{eq:escala}
 \end{equation}
-
 Qualquer deslocamento em pixels $\delta_{px}(t)$ extraído pelo algoritmo é então convertido para deslocamento físico por:
 \begin{equation}
     \delta(t) = s \cdot \delta_{px}(t) \quad \text{[mm]}.
     \label{eq:deslocamento_fisico}
 \end{equation}
+Na bancada, o segmento de referência é o próprio comprimento livre da barra, entre marcas aplicadas na articulação e na ponta, e a escala é conferida pelas posições conhecidas do parafuso e do acelerômetro. O fator obtido foi de \TODO{0,5xx}\,mm/pixel. % PRELIMINAR: 0,513 mm/px (1403,5 px para 720 mm).
+Como o objeto de referência deve estar no mesmo plano da peça, a calibração é repetida sempre que a câmera é reposicionada.
 
-Para minimizar erros sistemáticos, o objeto de referência deve estar rigorosamente no mesmo plano focal da peça, pois variações de profundidade alteram $s$ localmente. A calibração é repetida sempre que houver qualquer alteração na posição ou configuração da câmera.
+\subsection{Arquitetura do Software e Aplicativo}
+\label{sec:software}
 
-\subsection{Arquitetura do Software e Pipeline de Processamento}
+O \textit{software} foi implementado em Python em duas camadas: uma biblioteca de processamento, testável sem interface gráfica, e um aplicativo de \textit{desktop} (PySide6) que a utiliza. Cada ensaio é descrito por um arquivo de sessão, com todos os parâmetros necessários para reproduzir o processamento (corpo de prova, apoio, molas e massas, vídeo, ROIs, calibração, acelerômetro, sincronismo e critérios de aceitação). O aplicativo organiza o fluxo em seis etapas (Tabela~\ref{tab:etapas_app}). A biblioteca é coberta por testes automatizados (51 testes), que incluem vídeos e sinais de acelerômetro sintéticos com resposta conhecida.
 
-O software de vibrometria óptica é implementado em Python e organizado em quatro módulos sequenciais.
+\begin{table}[htbp]
+    \centering
+    \caption{Etapas do aplicativo de apoio ao ensaio.}
+    \label{tab:etapas_app}
+    \small
+    \begin{tabularx}{\columnwidth}{l X}
+        \toprule
+        \textbf{Etapa} & \textbf{Função} \\
+        \midrule
+        1 Planejar & Frequências previstas (viga engastada ou elementos finitos, com apoio, molas e massas), regra de amostragem, nome dos arquivos, \textit{checklist} \\
+        2 Vídeo & Trecho, ROIs, posição das ROIs na barra, calibração, rastreamento, espectro e indicadores de qualidade \\
+        3 Acelerômetro & Importação, conversão de unidades, integração para deslocamento \\
+        4 Comparar & Sincronismo, filtro comum e métricas vídeo $\times$ acelerômetro \\
+        5 Lote & Processamento de várias sessões, média, desvio e coeficiente de variação das repetições \\
+        6 Relatório & Tabelas \LaTeX, figuras e arquivo de resultados com os parâmetros e a versão do código \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
 
-\subsubsection{Importação dos quadros}
+\subsubsection{Importação dos quadros e indicadores de qualidade}
 
-O vídeo é importado quadro a quadro e cada quadro é convertido para escala de cinza, armazenado como matriz bidimensional $I(x,y,t_k)$, em que $t_k = k/F$ é o instante de captura do $k$-ésimo quadro à taxa $F$~[fps]. O primeiro quadro $I(x,y,t_0)$ é designado quadro de referência, em relação ao qual todos os deslocamentos subsequentes são calculados.
+O vídeo é lido quadro a quadro, em escala de cinza, como matriz bidimensional $I(x,y,t_k)$, em que $t_k = k/F$ é o instante de captura do $k$-ésimo quadro. Para não manter o vídeo inteiro na memória, cada quadro é processado e descartado. A leitura registra indicadores de qualidade: intervalo entre quadros e quadros perdidos, variação do brilho de uma região estática (cintilação), foco pela variância do Laplaciano, fração de pixels saturados e perda de rastreamento.
 
 \subsubsection{Definição das regiões de interesse}
 
-Sobre o quadro de referência, o usuário define interativamente dois conjuntos de ROIs:
-
+Sobre o quadro de referência, o usuário define dois conjuntos de ROIs:
 \begin{itemize}
-    \item \textbf{ROIs de medição:} regiões retangulares sobre os pontos de interesse da estrutura (tipicamente a ponta livre da viga e pontos intermediários ao longo do comprimento), descritas pelas coordenadas $(x_0, y_0, w, h)$;
-    \item \textbf{ROI de referência:} região fixada a um ponto imóvel do fundo da cena, utilizada para estimar e compensar movimentos de corpo rígido da câmera e do suporte.
+    \item \textbf{ROIs de medição:} regiões retangulares sobre os pontos de interesse da estrutura (na bancada, o acelerômetro e o parafuso da mola), descritas pelas coordenadas $(x_0, y_0, w, h)$ e pela posição ao longo da barra, medida a partir da articulação;
+    \item \textbf{ROI de referência:} região fixada a um ponto imóvel do fundo da cena (na bancada, a parede de tijolos), utilizada para estimar e compensar movimentos de corpo rígido da câmera e do suporte.
 \end{itemize}
+Como as ROIs são definidas sobre o vídeo já gravado, novos pontos de medição podem ser acrescentados sem repetir o ensaio, o que equivale a um arranjo de sensores virtuais.
 
 \subsubsection{Banco de filtros de Gabor e extração de fase}
 
-O núcleo do algoritmo é um banco de $N_\theta \times N_\omega$ filtros de Gabor, com $N_\theta$ orientações $\theta_k$ e $N_\omega$ frequências centrais $\omega_{0,\ell}$. Para cada par $(\theta_k, \omega_{0,\ell})$, o filtro é construído conforme a Equação~\ref{eq:gabor_kernel} e convolvido com o quadro atual:
+O núcleo do algoritmo é um banco de $N_\theta \times N_\omega$ filtros de Gabor, com $N_\theta = 4$ orientações e comprimentos de onda de 8 e 16 pixels. Para cada par $(\theta_k, \omega_{0,\ell})$, o filtro é construído conforme a Equação~\ref{eq:gabor_kernel} e convolvido com o quadro atual:
 \begin{equation}
     C_{\theta_k,\omega_{0,\ell}}(x,y,t) = \bigl(I(\cdot,t)*G_{\theta_k,\omega_{0,\ell}}\bigr)(x,y),
     \label{eq:conv_gabor}
 \end{equation}
-produzindo o coeficiente complexo $C = A\exp(j\varphi)$ para cada pixel. Conforme estabelecido na fundamentação teórica (Equações~\ref{eq:gabor_coef}--\ref{eq:fase_deslocamento}), a variação de fase local entre o quadro atual e o de referência é proporcional ao deslocamento sub-pixel na direção do filtro, permitindo sua recuperação direta. O sinal temporal representativo de cada ROI é então obtido por média ponderada pela amplitude $A$ sobre todos os pixels e filtros do banco \cite{Phase2022, WangLogGabor2022}, de modo que regiões de baixa textura contribuam menos para a estimativa final.
+produzindo o coeficiente complexo $C = A\exp(j\varphi)$ para cada pixel. A variação de fase local entre o quadro atual e o de referência é proporcional ao deslocamento sub-pixel na direção do filtro (Equação~\ref{eq:fase_deslocamento}), e o sinal de cada ROI é obtido por mínimos quadrados ponderados pela amplitude $A$ sobre todos os pixels e filtros do banco \cite{Phase2022, WangLogGabor2022}.
+
+Como a estimativa por fase só resolve deslocamentos menores que meio comprimento de onda do filtro (alguns pixels), e a ponta de uma estrutura em vibração livre percorre dezenas de pixels, cada ROI é primeiro localizada por correlação cruzada normalizada (resolução de um pixel), e a diferença de fase fornece o resíduo sub-pixel. Para pequenas amplitudes, o termo grosseiro permanece nulo e a medição se reduz ao método de fase puro.
 
 \subsection{Extração de Parâmetros Modais e Mitigação de Ruído}
 
 \subsubsection{Subtração da ROI de referência}
 
-O sinal $\bar{\delta}_{ref}(t)$ extraído da ROI de referência captura exclusivamente os movimentos espúrios da câmera e do suporte. O sinal compensado de cada ROI de medição é calculado como:
+O sinal $\bar{\delta}_{ref}(t)$ extraído da ROI de referência captura os movimentos espúrios da câmera e do suporte. O sinal compensado de cada ROI de medição é calculado como:
 \begin{equation}
     \tilde{\delta}(t) = \bar{\delta}_{meas}(t) - \bar{\delta}_{ref}(t),
     \label{eq:compensacao}
 \end{equation}
-eliminando a componente de corpo rígido comum a todas as ROIs e melhorando substancialmente a relação sinal-ruído \cite{Mhatre2026, robotcamera2025}. O offset DC residual é removido por subtração do valor médio de $\tilde{\delta}(t)$ antes da análise espectral.
+eliminando a componente de corpo rígido comum a todas as ROIs \cite{Mhatre2026, robotcamera2025}. O offset DC residual é removido antes da análise espectral.
 
 \subsubsection{Análise espectral e identificação modal}
 
-O sinal compensado $\tilde{\delta}(t)$, com $N$ amostras a taxa $F$, é processado pela Transformada Rápida de Fourier (FFT) para obtenção do espectro de amplitude:
+O sinal compensado $\tilde{\delta}(t)$, com $N$ amostras à taxa $F$, é processado pela FFT para obtenção do espectro de amplitude:
 \begin{equation}
     \tilde{\Delta}(f_n) = \sum_{k=0}^{N-1} \tilde{\delta}(t_k)\,w_k\,e^{-j2\pi f_n t_k},
     \label{eq:fft}
 \end{equation}
-em que $w_k$ é a janela de Hann, aplicada para redução do vazamento espectral, e $f_n = nF/N$ são as frequências discretas. As frequências naturais da estrutura são identificadas pelos picos de $|\tilde{\Delta}(f)|$. Para ensaios com excitação de base conhecida, a FRF é estimada como $H(f) = \tilde{\Delta}_{out}(f)/\tilde{\Delta}_{in}(f)$ \cite{Downey2026}. A razão de amortecimento de cada modo é extraída pelo método da meia potência (\textit{half-power bandwidth}):
+em que $w_k$ é a janela de Hann e $f_n = nF/N$ são as frequências discretas. A frequência dominante é refinada por ajuste senoidal de mínimos quadrados no domínio do tempo, que também fornece a amplitude e a fase. A resolução espectral física é $\Delta f = 1/T$, sendo $T$ a duração do trecho analisado. A razão de amortecimento é estimada por três vias: pela meia potência,
 \begin{equation}
-    \zeta_i \approx \frac{f_{i,2} - f_{i,1}}{2\,f_{n,i}},
+    \zeta \approx \frac{f_{2} - f_{1}}{2\,f_{n}},
     \label{eq:zeta_halfpower}
 \end{equation}
-em que $f_{i,1}$ e $f_{i,2}$ são as frequências para as quais $|H(f)| = |H(f_{n,i})|/\sqrt{2}$ \cite{Ewins2000}.
-
-\subsection{Estratégia de Validação dos Resultados}
-
-A validação dos resultados extraídos pelo algoritmo é estruturada em dois níveis, correspondentes às Fases~1 e~2 do cronograma.
-
-\subsubsection{Comparação com o modelo analítico (Fase~1)}
-
-Na Fase~1, a frequência $f_{n,1}^{opt}$ identificada pelo pico da FFT é comparada ao valor teórico $f_{n,1}^{anl}$ calculado pela Equação~\ref{eq:fn_cantilever} para a geometria e o material reais da régua. O critério de aprovação é:
+em que $f_{1}$ e $f_{2}$ são as frequências em que a amplitude cai a $1/\sqrt{2}$ do pico \cite{Ewins2000}; pelo decremento logarítmico entre picos sucessivos,
 \begin{equation}
-    \varepsilon = \frac{\bigl|f_{n,1}^{opt} - f_{n,1}^{anl}\bigr|}{f_{n,1}^{anl}} \times 100\% < 5\%.
+    \delta = \frac{1}{n}\ln\frac{x_0}{x_n}, \qquad \zeta = \frac{\delta}{\sqrt{4\pi^2 + \delta^2}};
+    \label{eq:decremento}
+\end{equation}
+e pelo ajuste exponencial $A(t) = A_0\,e^{-\sigma t}$ à envoltória do sinal, com $\zeta \approx \sigma/(2\pi f_n)$. Quando o registro é curto, a meia potência é limitada pela resolução espectral e superestima $\zeta$, e as estimativas no domínio do tempo são preferidas.
+
+\subsection{Comparação com o Acelerômetro}
+\label{sec:comparacao}
+
+O sinal do acelerômetro é convertido para deslocamento por integração dupla no domínio da frequência, com filtro passa-altas para suprimir a deriva de baixa frequência:
+\begin{equation}
+    X(f) = -\frac{A(f)}{(2\pi f)^2}.
+    \label{eq:integracao}
+\end{equation}
+O vídeo e o acelerômetro são gravados por relógios independentes. O atraso entre eles é estimado pelo evento de impacto aplicado no início de cada tomada, visível nos dois registros, ou pela correlação cruzada das formas de onda, com interpolação do pico para resolução fracionária; a deriva relativa entre os relógios é verificada em dois eventos. Após um filtro comum aos dois sinais, são calculados o erro de frequência, o erro de amplitude e a diferença de fase do ajuste senoidal na frequência de análise, além da correlação de Pearson e do erro quadrático médio normalizado. Como verificação independente do sincronismo, as envoltórias são comparadas em aceleração, convertendo o deslocamento do vídeo em $\omega_n^2\,x(t)$, e as taxas de decaimento $\sigma$ dos dois sensores são confrontadas.
+
+\subsubsection{Comparação entre pontos e forma modal}
+
+Com duas ou mais ROIs posicionadas ao longo da barra, a razão entre as amplitudes do ajuste senoidal de cada ROI e da ROI de maior amplitude é comparada à razão correspondente da forma modal do modelo, $|\phi(x_i)|/|\phi(x_{ref})|$, no modo de frequência mais próxima da medida. Essa comparação independe do acelerômetro e da calibração espacial, pois a escala se cancela na razão.
+
+\subsection{Estratégia de Validação}
+\label{sec:validacao}
+
+A validação foi estruturada em níveis complementares:
+\begin{enumerate}
+    \item \textbf{Verificação do \textit{software}:} vídeos e sinais de acelerômetro sintéticos do mesmo movimento, com frequência, amplitude, amortecimento e atraso conhecidos;
+    \item \textbf{Modelo analítico:} frequência medida pelo vídeo comparada à do modelo de elementos finitos com os parâmetros medidos;
+    \item \textbf{Acelerômetro:} frequência, amortecimento e, na mesma tomada, amplitude e fase comparados aos do acelerômetro;
+    \item \textbf{Forma modal:} razão de amplitudes entre os dois pontos medidos comparada à do modelo;
+    \item \textbf{Repetibilidade:} três tomadas por condição, com o coeficiente de variação;
+    \item \textbf{\textit{Mass loading}:} frequência medida pelo vídeo com e sem o acelerômetro montado.
+\end{enumerate}
+O erro relativo de uma grandeza medida $q^{opt}$ frente à referência $q^{ref}$ é
+\begin{equation}
+    \varepsilon = \frac{\bigl|q^{opt} - q^{ref}\bigr|}{q^{ref}} \times 100\%,
     \label{eq:criterio_validacao}
 \end{equation}
-Caso o critério não seja atingido, os parâmetros do banco de filtros ($\theta_k$, $\omega_{0,\ell}$, $\sigma$) são ajustados iterativamente e os ensaios são repetidos.
+e os critérios de aceitação adotados estão na Tabela~\ref{tab:criterios}.
+% REVISAR: confirmar os criterios com o orientador ANTES de olhar os resultados finais.
+% (a sessao k1_cm_acc esta com crit_freq_pct = 2,7 %; o planejamento previa 1 %.)
 
-\subsubsection{Ensaio comparativo com acelerômetro piezoelétrico (Fase~2)}
+\begin{table}[htbp]
+    \centering
+    \caption{Critérios de aceitação.}
+    \label{tab:criterios}
+    \small
+    \begin{tabularx}{\columnwidth}{X c}
+        \toprule
+        \textbf{Métrica} & \textbf{Critério} \\
+        \midrule
+        Frequência, vídeo $\times$ acelerômetro & $\leq 1\,\%$ \\
+        Amplitude, vídeo $\times$ acelerômetro & $\leq 10\,\%$ \\
+        Fase, vídeo $\times$ acelerômetro & $\leq 10^\circ$ \\
+        Frequência, vídeo $\times$ modelo & $\leq 5\,\%$ \\
+        Razão de amplitudes $\times$ forma modal & $\leq 5\,\%$ \\
+        Repetibilidade (coeficiente de variação) & $\leq 5\,\%$ \\
+        Escala (segmento de referência) & $\leq 1\,\%$ \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
 
-Na Fase~2, um acelerômetro piezoelétrico é fixado na ponta livre da viga e seus sinais de aceleração são integrados duplamente no domínio da frequência para obtenção do deslocamento equivalente, possibilitando comparação direta com o deslocamento óptico \cite{AgilentAN243-3}. O ensaio persegue dois objetivos simultâneos: (i)~validar a acurácia do método óptico frente ao método de contato em uma configuração controlada; (ii)~evidenciar quantitativamente o efeito de \textit{mass loading} introduzido pelo sensor. Para tanto, a frequência $f_{n,1}$ é identificada em dois cenários: com o acelerômetro fixado ($f_{n,1}^{acc}$) e após sua remoção, utilizando exclusivamente o método óptico ($f_{n,1}^{opt}$). O deslocamento de frequência previsto pela Equação~\ref{eq:mass_loading} é contrastado com o valor medido, fornecendo evidência experimental quantitativa da distorção introduzida pelo método por contato em estruturas leves e fechando o ciclo de validação do sistema proposto.
+\subsection{Procedimento Experimental}
+\label{sec:procedimento}
 
-\section{Resultados Preliminares}
-\label{sec:resultados_preliminares}
+Antes dos ensaios, as massas da mola, das ferragens, do acelerômetro e da barra foram pesadas, e a rigidez de cada mola foi medida estaticamente, pendurando massas conhecidas no mesmo ponto de fixação da bancada e ajustando uma reta à força em função do alongamento. As posições foram medidas a partir do centro do mancal.
 
-Esta seção reúne os resultados dos ensaios iniciais, realizados para verificar o sistema de aquisição e o pipeline de processamento antes do ensaio com a barra de alumínio na bancada de vibrações (Seção~\ref{sec:preparacao_ensaio}).
+Cada tomada seguiu a sequência: início das gravações de vídeo e do acelerômetro; três segundos de linha de base com o sistema parado; impacto de sincronismo na barra, acompanhado de um \textit{flash} visível pela câmera; liberação da ponta a partir de uma marca fixa; e registro do decaimento livre por pelo menos 20\,s. A Tabela~\ref{tab:tomadas} lista as tomadas.
 
-\subsection{Ensaio Inicial com Régua Engastada}
+\begin{table}[htbp]
+    \centering
+    \caption{Tomadas da campanha de bancada.}
+    \label{tab:tomadas}
+    \small
+    \begin{tabularx}{\columnwidth}{c c c X}
+        \toprule
+        \textbf{Tomadas} & \textbf{Mola} & \textbf{Acel.} & \textbf{Objetivo} \\
+        \midrule
+        1--3 & $k_1$ & sim & frequência, amortecimento, forma modal, comparação no tempo \\
+        4--6 & $k_2$ & sim & idem, segunda rigidez \\
+        7--9 & $k_1$ & não & efeito de massa do acelerômetro (só vídeo) \\
+        10--11 & $k_1$ & sim & amortecedor da bancada acoplado \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsubsection{Controles}
+\label{sec:controles}
+
+Foram realizados os controles: (D1) estabilidade, com a barra parada por 10\,s, cujo desvio-padrão do deslocamento medido define o piso de ruído; (D2) escala, com cinco medições do segmento de referência na imagem; cintilação, pelo espectro do brilho médio de uma região estática; e obturador de rolagem, com um corpo rígido com dois marcadores afastados verticalmente $\Delta y$, excitado na bancada, do qual se obtém $T_{read} = \Delta t\,H/\Delta y$, sendo $\Delta t = \Delta\varphi/(2\pi f)$ o atraso associado à diferença de fase $\Delta\varphi$ entre os marcadores.
+
+%==============================================================================
+\section{Resultados}
+\label{sec:resultados}
+%==============================================================================
+
+\subsection{Verificação do Software com Dados Sintéticos}
+\label{sec:res_sintetico}
+
+A Tabela~\ref{tab:sintetico} reúne a verificação do \textit{software} com dados sintéticos. No primeiro conjunto, um vídeo de 12\,s a 30\,fps reproduz uma viga em decaimento livre com $f = 2{,}5$\,Hz e $\zeta = 0{,}012$. No segundo, um vídeo a 240\,fps e um sinal de acelerômetro a 1\,kHz descrevem o mesmo movimento de 8\,Hz e 2\,mm de amplitude, com o acelerômetro iniciando 0,8374\,s antes do vídeo, em regime forçado e em vibração livre com $\zeta = 0{,}01$.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Verificação com dados sintéticos de resposta conhecida.}
+    \label{tab:sintetico}
+    \small
+    \begin{tabularx}{\columnwidth}{X c c}
+        \toprule
+        \textbf{Grandeza} & \textbf{Imposto} & \textbf{Identificado} \\
+        \midrule
+        \multicolumn{3}{l}{\textit{Vídeo de viga (30 fps, 12 s)}} \\
+        Frequência (Hz) & 2,500 & 2,498 \\
+        $\zeta$ (decremento) & 0,0120 & 0,0122 \\
+        Erro RMS de deslocamento & -- & 0,25\,px (amplitude 58,6\,px) \\
+        \midrule
+        \multicolumn{3}{l}{\textit{Vídeo + acelerômetro, regime forçado}} \\
+        Atraso (s) & 0,83740 & 0,83739 \\
+        Erro de frequência & -- & $< 0{,}001$\,\% \\
+        Erro de amplitude & -- & $-0{,}69$\,\% \\
+        Diferença de fase & -- & $0{,}00^\circ$ \\
+        \midrule
+        \multicolumn{3}{l}{\textit{Vídeo + acelerômetro, vibração livre}} \\
+        Atraso (s) & 0,83740 & 0,83738 \\
+        Erro de frequência & -- & $-0{,}013$\,\% \\
+        Erro de amplitude & -- & $-0{,}91$\,\% \\
+        Diferença de fase & -- & $-0{,}25^\circ$ \\
+        $\zeta$ (decremento) & 0,0100 & 0,0100 \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+A cadeia completa, do vídeo às métricas de comparação, recupera a frequência com erro inferior a 0,1\,\%, a amplitude com erro inferior a 1\,\% e o atraso com erro inferior a 0,1\,ms, bem abaixo do intervalo entre quadros (4,17\,ms a 240\,fps). Na vibração livre, o amortecimento imposto é recuperado pelo decremento logarítmico.
+
+\subsection{Ensaio Exploratório com Régua Engastada}
 \label{sec:resultado_regua}
 
-O primeiro ensaio utiliza a régua engastada descrita na Seção~\ref{sec:mvp}, com o objetivo de verificar a cadeia completa de aquisição e processamento em uma estrutura real antes do ensaio na bancada. A frequência $f_{n,1}^{opt}$ identificada pelo algoritmo é comparada ao valor analítico $f_{n,1}^{anl}$ (Equação~\ref{eq:fn_cantilever}) segundo o critério da Equação~\ref{eq:criterio_validacao}.
+O primeiro ensaio utilizou a régua engastada do MVP (Seção~\ref{sec:mvp}), com comprimento livre $L = 300$\,mm, largura $b = 35$\,mm e espessura $h = 3$\,mm. Como o material não foi caracterizado, adotou-se o poliestireno, com $E = 3{,}2$\,GPa e $\rho = 1050$\,kg/m\textsuperscript{3}, dentro das faixas tabeladas para o material \cite{Callister2014}, o que fornece $f_{n,1}^{anl} = 9{,}40$\,Hz, $k_{eq} = 28{,}0$\,N/m e $m_{eq} = 7{,}80$\,g. Na ponta foi fixado um cartão branco com um ponto de caneta, e a régua foi excitada por um toque manual.
 
-\subsubsection{Configuração e procedimento}
-
-A régua escolar utilizada possui comprimento livre $L = 300$~mm, largura $b = 35$~mm e espessura $h = 3$~mm. Como o material não foi caracterizado, adotou-se o poliestireno, polímero usual em réguas escolares, com $E = 3{,}2$~GPa e $\rho = 1050$~kg/m\textsuperscript{3} (Tabela~\ref{tab:parametros_materiais}), valores dentro das faixas tabeladas para o material, que para o módulo vai de 2,28 a 3,28~GPa \cite{Callister2014}. Com esses parâmetros, as Equações~\ref{eq:fn_cantilever} e~\ref{eq:keq_meq} fornecem $f_{n,1}^{anl} = 9{,}40$~Hz, $k_{eq} = 28{,}0$~N/m e $m_{eq} = 7{,}80$~g. Na ponta livre foi fixado um cartão de papel branco com um ponto de caneta, que atua como marcador de alto contraste. A régua foi excitada por um toque manual na ponta e deixada em vibração livre.
-
-O vídeo analisado é o arquivo de baixa resolução (\textit{proxy}) gravado automaticamente pela câmera, com $720 \times 1280$~pixels, 23,98~fps e 34,4~s de duração (825 quadros). Para reduzir o custo computacional, os quadros foram reduzidos a $360 \times 640$~pixels antes do processamento. Essa taxa de captura fixa o limite de Nyquist em 11,99~Hz, bem abaixo da recomendação de operar com taxa ao menos cinco vezes superior à frequência de interesse (Seção~\ref{sec:camera}); o ensaio tem, portanto, caráter exploratório. Não foi realizada calibração espacial, e os deslocamentos são apresentados em pixels.
-
-A Figura~\ref{fig:regua_rois}a mostra as ROIs adotadas: a ROI de medição cobre apenas o interior do cartão, e a ROI de referência foi posicionada sobre uma caixa elétrica fixada à parede, região estática e com textura abundante. Em uma primeira tentativa, a ROI de medição incluía também parte da parede ao lado do cartão. Durante os maiores deslocamentos, o estágio de rastreamento grosseiro passou a seguir o fundo em vez do marcador, e o sinal resultante apresentou um deslocamento permanente espúrio de cerca de 145~pixels. Restringir a ROI ao interior do cartão eliminou o problema. A Figura~\ref{fig:regua_rois}b evidencia o borramento por movimento nos primeiros ciclos, consequência do tempo de exposição longo imposto pela baixa iluminação do ambiente \cite{LavatelliZappa2017}.
+O vídeo analisado foi o arquivo de baixa resolução gravado automaticamente pela câmera, com $720 \times 1280$ pixels, 23,98\,fps e 34,4\,s, reduzido a $360 \times 640$ pixels. Essa taxa fixa o limite de Nyquist em 11,99\,Hz, e o ensaio tem, portanto, caráter exploratório; não foi realizada calibração espacial. A ROI de medição cobre apenas o interior do cartão e a de referência uma caixa elétrica na parede (Figura~\ref{fig:regua_rois}a). Uma primeira ROI que incluía parte da parede levou o rastreamento grosseiro a seguir o fundo, com um deslocamento espúrio de cerca de 145 pixels, eliminado ao restringir a ROI ao cartão. O borramento dos primeiros ciclos (Figura~\ref{fig:regua_rois}b) decorre do tempo de exposição longo imposto pela baixa iluminação \cite{LavatelliZappa2017}.
 
 \begin{figure}[htbp]
     \centering
@@ -662,9 +899,7 @@ A Figura~\ref{fig:regua_rois}a mostra as ROIs adotadas: a ROI de medição cobre
     \label{fig:regua_rois}
 \end{figure}
 
-\subsubsection{Resultados}
-
-A Figura~\ref{fig:regua_deslocamento} apresenta o deslocamento vertical compensado do marcador. Antes da excitação, o sinal permanece em torno de zero, com desvio-padrão de 0,8~pixel. O toque manual ocorre em $t \approx 10{,}5$~s e leva a ponta a cerca de 100~pixels de deslocamento. Segue-se uma vibração livre subamortecida que se extingue por volta de $t = 20$~s. Ao final do registro, a posição de repouso coincide com a inicial, o que confirma que o rastreamento acompanhou o marcador durante todo o ensaio.
+O deslocamento compensado (Figura~\ref{fig:regua_deslocamento}) permanece em torno de zero antes da excitação, com desvio-padrão de 0,8 pixel. Após o toque, em $t \approx 10{,}5$\,s, segue-se uma vibração livre subamortecida que se extingue por volta de $t = 20$\,s, e a posição final de repouso coincide com a inicial, o que confirma que o rastreamento acompanhou o marcador durante todo o registro.
 
 \begin{figure}[htbp]
     \centering
@@ -673,7 +908,7 @@ A Figura~\ref{fig:regua_deslocamento} apresenta o deslocamento vertical compensa
     \label{fig:regua_deslocamento}
 \end{figure}
 
-O espectro de amplitude (Figura~\ref{fig:regua_espectro}) apresenta um pico dominante em $f_{n,1}^{opt} = 10{,}58$~Hz. O conteúdo abaixo de 2~Hz corresponde ao transitório lento do toque manual, que desloca a ponta de forma quase estática antes da liberação, e não a um modo de vibrar. O espectrograma (Figura~\ref{fig:regua_espectrograma}) mostra a faixa larga associada ao toque entre 9 e 14~s e, em seguida, a componente em 10,6~Hz, que decai gradualmente e permanece visível até o fim do registro. Essa componente já é perceptível antes do toque, em amplitudes da ordem de 1~pixel, o que indica que o método detecta também a vibração ambiente da régua. A Tabela~\ref{tab:resultados_regua} resume os resultados.
+O espectro (Figura~\ref{fig:regua_espectro}) apresenta pico dominante em $f_{n,1}^{opt} = 10{,}58$\,Hz, e o espectrograma (Figura~\ref{fig:regua_espectrograma}) mostra a componente em 10,6\,Hz decaindo após o toque e já perceptível antes dele, com amplitude da ordem de 1 pixel, o que indica que o método detecta também a vibração ambiente da régua. A Tabela~\ref{tab:resultados_regua} resume os resultados.
 
 \begin{figure}[htbp]
     \centering
@@ -691,7 +926,7 @@ O espectro de amplitude (Figura~\ref{fig:regua_espectro}) apresenta um pico domi
 
 \begin{table}[htbp]
     \centering
-    \caption{Resultados do ensaio preliminar com a régua engastada.}
+    \caption{Resultados do ensaio exploratório com a régua engastada.}
     \label{tab:resultados_regua}
     \small
     \begin{tabularx}{\columnwidth}{X c}
@@ -708,27 +943,252 @@ O espectro de amplitude (Figura~\ref{fig:regua_espectro}) apresenta um pico domi
     \end{tabularx}
 \end{table}
 
-\subsubsection{Discussão}
+O erro de 12,5\,\% frente ao modelo não atende ao critério de 5\,\%, e a principal fonte está nos dados de entrada, adotados de forma nominal: reproduzir 10,58\,Hz exigiria $E \approx 4{,}05$\,GPa, fora da faixa do poliestireno, enquanto um comprimento livre efetivo de 283\,mm ou uma espessura de 3,4\,mm explicariam sozinhos a diferença, já que $f_{n,1} \propto h/L^2$. A taxa de 23,98\,fps também limita a interpretação: o pico é amostrado com apenas 2,27 quadros por ciclo, e uma componente real em 13,40\,Hz apareceria rebatida na mesma posição. As duas estimativas de amortecimento divergem pelo mesmo motivo, já que os quadros raramente coincidem com os picos da oscilação. O ensaio verificou qualitativamente o pipeline em uma estrutura real e definiu os requisitos adotados na bancada: 240\,fps, iluminação adequada, geometria e parâmetros medidos e calibração espacial.
 
-O erro de 12,5\,\% não atende ao critério de 5\,\% da Equação~\ref{eq:criterio_validacao}. A frequência medida é superior à prevista, e a principal fonte da diferença está nos dados de entrada do modelo, adotados de forma nominal. Mesmo o limite superior da faixa de módulo do poliestireno (3,28~GPa) eleva $f_{n,1}^{anl}$ apenas para 9,52~Hz. Reproduzir 10,58~Hz com a geometria adotada exigiria $E \approx 4{,}05$~GPa, fora da faixa do material. Por outro lado, como $f_{n,1}$ é proporcional a $h/L^2$ (Equação~\ref{eq:fn_simplificado}), um comprimento livre efetivo de 283~mm ou uma espessura de 3,4~mm explicariam sozinhos a diferença. A massa do cartão na ponta reduz a frequência (Equação~\ref{eq:mass_loading}) e, portanto, aumentaria a discrepância. A medição criteriosa de $L$ a partir da borda do engaste, a medição de $h$ com paquímetro e a identificação do material são, assim, pré-requisitos para a validação quantitativa.
+\subsection{Parâmetros Medidos da Montagem}
+\label{sec:res_parametros}
 
-A taxa de 23,98~fps também limita a interpretação. O pico em 10,58~Hz é amostrado com apenas 2,27 quadros por ciclo, próximo ao limite de Nyquist. Uma componente real em $23{,}98 - 10{,}58 = 13{,}40$~Hz apareceria rebatida na mesma posição do espectro (Seção~\ref{sec:camera}). Adotou-se a leitura direta, pois 13,40~Hz distaria 42,5\,\% do valor analítico, contra 12,5\,\% da leitura direta, mas a ambiguidade só é eliminada com taxa de captura maior.
+A Tabela~\ref{tab:parametros_medidos} reúne os parâmetros medidos no laboratório e a frequência prevista com eles.
 
-As duas estimativas de amortecimento divergem (0,0053 e 0,0090), mas ambas indicam um sistema levemente amortecido ($\zeta < 1\,\%$). Com cerca de 2,3 amostras por ciclo, os quadros raramente coincidem com os picos reais da oscilação. As amplitudes amostradas flutuam (Figura~\ref{fig:regua_deslocamento}), e o detector de picos deixa de registrar parte dos ciclos: o espaçamento entre os picos detectados corresponde a 7,35~Hz, e não a 10,58~Hz. O valor obtido pelo decremento logarítmico é, por isso, apenas indicativo. A estimativa por meia potência é menos sensível a esse efeito, mas é limitada pela resolução espectral ($\Delta f = 1/T \approx 0{,}03$~Hz) e pelo alargamento do pico causado pela janela de Hann.
+\begin{table}[htbp]
+    \centering
+    \caption{Parâmetros medidos da montagem da bancada.}
+    \label{tab:parametros_medidos}
+    \small
+    \begin{tabularx}{\columnwidth}{X c c}
+        \toprule
+        \textbf{Grandeza} & \textbf{Mola $k_1$} & \textbf{Mola $k_2$} \\
+        \midrule
+        $k$ de catálogo (N/m) & 1500 & 2500 \\
+        $k$ medido, estático (N/m) & \TODO{xxxx} & \TODO{xxxx} \\
+        Massa da mola $m_s$ (g) & \TODO{xxx} & \TODO{xxx} \\
+        Ferragens $m_f$ (g) & \TODO{xxx} & \TODO{xxx} \\
+        $m_{ef} = m_s/3 + m_f$ (g) & \TODO{xxx} & \TODO{xxx} \\
+        $f_1$ previsto (Hz) & \TODO{x,xx} & \TODO{x,xx} \\
+        \midrule
+        \multicolumn{3}{l}{Barra: \TODO{xxx}\,g; acelerômetro: \TODO{x,x}\,g; $L$ = \TODO{720}\,mm;} \\
+        \multicolumn{3}{l}{$a$ = \TODO{632}\,mm; $x_a$ = \TODO{300}\,mm (do centro do mancal)} \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+% PRELIMINAR: a sessao k1_cm_acc tem uma massa "ferragem" de 383 g a 632 mm,
+% pesada pelo autor; confirmar se e massa efetiva (m_s/3 + m_f) ou massa total.
 
-Em síntese, o ensaio preliminar verificou qualitativamente o pipeline em uma estrutura real. O marcador foi rastreado ao longo de todo o registro, a compensação pela ROI de referência funcionou e a vibração livre e sua frequência dominante foram identificadas. A validação quantitativa depende de ensaios com taxa de 240~fps, tempo de exposição curto com iluminação adequada, geometria medida e calibração espacial. Esses requisitos foram incorporados à preparação do ensaio na bancada (Seção~\ref{sec:preparacao_ensaio}).
+O $k$ medido diferiu do valor de catálogo em \TODO{x}\,\% para $k_1$ e \TODO{x}\,\% para $k_2$. A massa efetiva no ponto da mola, de \TODO{xxx}\,g, é da ordem da contribuição da própria barra para $J_O$, o que explica por que a frequência medida fica bem abaixo dos 11,70\,Hz previstos sem ela.
+
+\subsection{Frequência Natural}
+\label{sec:res_frequencia}
+
+A Tabela~\ref{tab:res_frequencia} compara, para cada tomada, a frequência identificada pelo vídeo na ROI do acelerômetro, a frequência do acelerômetro e a do modelo. A Figura~\ref{fig:res_espectro} mostra os espectros de uma tomada típica.
+
+\begin{table*}[htbp]
+    \centering
+    \caption{Frequência natural por tomada: vídeo (ROI do acelerômetro), acelerômetro e modelo de elementos finitos.}
+    \label{tab:res_frequencia}
+    \small
+    \begin{tabular}{c c c c c c c}
+        \toprule
+        \textbf{Tomada} & \textbf{Mola} & \textbf{$f^{opt}$ (Hz)} & \textbf{$f^{acc}$ (Hz)} & \textbf{$\varepsilon_{acc}$ (\%)} & \textbf{$f^{mod}$ (Hz)} & \textbf{$\varepsilon_{mod}$ (\%)} \\
+        \midrule
+        1 & $k_1$ & \TODO{x,xxx} & \TODO{x,xxx} & \TODO{x,xx} & \TODO{x,xx} & \TODO{x,x} \\
+        2 & $k_1$ & \TODO{x,xxx} & \TODO{x,xxx} & \TODO{x,xx} & \TODO{x,xx} & \TODO{x,x} \\
+        3 & $k_1$ & \TODO{x,xxx} & \TODO{x,xxx} & \TODO{x,xx} & \TODO{x,xx} & \TODO{x,x} \\
+        4 & $k_2$ & \TODO{x,xxx} & \TODO{x,xxx} & \TODO{x,xx} & \TODO{x,xx} & \TODO{x,x} \\
+        5 & $k_2$ & \TODO{x,xxx} & \TODO{x,xxx} & \TODO{x,xx} & \TODO{x,xx} & \TODO{x,x} \\
+        6 & $k_2$ & \TODO{x,xxx} & \TODO{x,xxx} & \TODO{x,xx} & \TODO{x,xx} & \TODO{x,x} \\
+        \midrule
+        \multicolumn{2}{l}{Média $k_1$ (CV)} & \TODO{x,xxx (x,x\,\%)} & \TODO{x,xxx} & \TODO{x,xx} & & \TODO{x,x} \\
+        \multicolumn{2}{l}{Média $k_2$ (CV)} & \TODO{x,xxx (x,x\,\%)} & \TODO{x,xxx} & \TODO{x,xx} & & \TODO{x,x} \\
+        \bottomrule
+    \end{tabular}
+\end{table*}
+% PRELIMINAR (15/10/2026, video e PULSE de tomadas diferentes, mola k1):
+% f_video = 7,763 Hz (ROI do acelerometro e do parafuso, estavel de 1 a 7,5 s);
+% f_PULSE = 7,600 Hz (cursor, resolucao 0,05 Hz) -> +2,1 %; f_modelo = 7,59 Hz
+% com m_ef = 383 g -> +2,25 %.
+
+\begin{figure}[htbp]
+    \centering
+    \FIGTODO{Espectros de amplitude do vídeo (ROI do acelerômetro) e do acelerômetro de uma tomada típica com a mola $k_1$, com a frequência prevista e a resolução $\Delta f$ (exportar do aplicativo: fig\_comparacao\_espectro).}
+    \caption{Espectros do vídeo e do acelerômetro na mesma tomada (mola $k_1$). Fonte: O autor.}
+    \label{fig:res_espectro}
+\end{figure}
+
+A frequência medida pelo vídeo diferiu da do acelerômetro em \TODO{x,xx}\,\% em média, \TODO{dentro} do critério de 1\,\% e da ordem da resolução espectral de \TODO{0,0x}\,Hz dos registros, e da prevista pelo modelo em \TODO{x,x}\,\%, \TODO{dentro} do critério de 5\,\%. O coeficiente de variação entre as três tomadas de cada mola foi de \TODO{x,x}\,\%. A razão entre as frequências medidas com as duas molas, \TODO{x,xxx}, concorda com a prevista, \TODO{x,xxx}, o que mostra que o método acompanha uma variação conhecida de rigidez.
+% REVISAR: os resultados preliminares mostram que a diferenca vídeo x PULSE so pode ser
+% avaliada na mesma tomada; nao reutilizar o +2,1 % preliminar.
+
+\subsection{Forma Modal a Partir de Dois Pontos}
+\label{sec:res_forma_modal}
+
+As ROIs do acelerômetro ($x = 300$\,mm) e do parafuso da mola ($x = 632$\,mm) oscilam em fase, com a razão de amplitudes da Tabela~\ref{tab:res_forma_modal}. O modelo prevê \TODO{0,48} para a mola $k_1$ e \TODO{0,49} para a mola $k_2$; essa razão depende pouco da massa efetiva (entre 0,480 e 0,484 para $m_{ef}$ entre 200 e 500\,g com $k_1$), por ser dominada pela rotação da barra em torno da articulação.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Razão de amplitudes entre a ROI do acelerômetro e a do parafuso.}
+    \label{tab:res_forma_modal}
+    \small
+    \begin{tabularx}{\columnwidth}{X c c c}
+        \toprule
+        \textbf{Mola} & \textbf{Medida} & \textbf{Prevista} & \textbf{$\varepsilon$ (\%)} \\
+        \midrule
+        $k_1$ (média, 3 tomadas) & \TODO{0,4xx} & \TODO{0,48x} & \TODO{x,x} \\
+        $k_2$ (média, 3 tomadas) & \TODO{0,4xx} & \TODO{0,48x} & \TODO{x,x} \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+% PRELIMINAR (k1, 15/10/2026): medida 0,486; prevista 0,481 (m_ef = 383 g) -> 1,1 %.
+
+A concordância de \TODO{x}\,\% confirma que o vídeo mede corretamente a distribuição espacial do movimento, e não apenas a frequência, em dois pontos obtidos do mesmo registro, sem sensores adicionais.
+
+\subsection{Amortecimento}
+\label{sec:res_amortecimento}
+
+A Tabela~\ref{tab:res_amortecimento} compara as razões de amortecimento obtidas na mesma tomada pelo vídeo e pelo acelerômetro.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Razão de amortecimento por tomada (mola $k_1$).}
+    \label{tab:res_amortecimento}
+    \small
+    \begin{tabularx}{\columnwidth}{X c c c}
+        \toprule
+        \textbf{Tomada} & \textbf{$\zeta^{opt}$ (env.)} & \textbf{$\zeta^{opt}$ (decr.)} & \textbf{$\zeta^{acc}$} \\
+        \midrule
+        1 & \TODO{0,00xx} & \TODO{0,00xx} & \TODO{0,00xx} \\
+        2 & \TODO{0,00xx} & \TODO{0,00xx} & \TODO{0,00xx} \\
+        3 & \TODO{0,00xx} & \TODO{0,00xx} & \TODO{0,00xx} \\
+        10--11 (amortecedor) & \TODO{0,0xxx} & \TODO{0,0xxx} & \TODO{0,0xxx} \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+% PRELIMINAR (tomadas diferentes): video zeta ~ 0,0010 (sigma = 0,049 1/s) e
+% PULSE zeta ~ 0,0072 (sigma = 0,345 1/s): diferenca de ~7x ainda sem explicacao.
+% REVISAR este paragrafo conforme os dados.
+
+O vídeo e o acelerômetro forneceram razões de amortecimento de \TODO{0,00xx} e \TODO{0,00xx}, diferença de \TODO{xx}\,\%. Com o amortecedor da bancada acoplado, $\zeta$ aumentou para \TODO{0,0xxx}, e o vídeo acompanhou a variação, o que indica que o método é sensível a mudanças de amortecimento da ordem das que interessam ao monitoramento estrutural.
+
+\subsection{Comparação no Domínio do Tempo}
+\label{sec:res_tempo}
+
+Na mesma tomada, após o sincronismo pelo impacto, o deslocamento do vídeo na ROI do acelerômetro foi comparado ao deslocamento obtido por integração dupla do sinal do acelerômetro (Figura~\ref{fig:res_tempo}). O atraso estimado entre os registros foi de \TODO{x,xxxx}\,s e a deriva entre os relógios de \TODO{xx}\,ppm. A Tabela~\ref{tab:res_tempo} resume as métricas.
+
+\begin{figure}[htbp]
+    \centering
+    \FIGTODO{Deslocamento do vídeo e do acelerômetro integrado, sincronizados, em uma tomada típica (exportar do aplicativo: fig\_comparacao\_tempo), com detalhe de alguns ciclos.}
+    \caption{Deslocamento medido pelo vídeo e pelo acelerômetro na mesma tomada. Fonte: O autor.}
+    \label{fig:res_tempo}
+\end{figure}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Métricas da comparação no tempo, vídeo $\times$ acelerômetro (média das tomadas 1--6).}
+    \label{tab:res_tempo}
+    \small
+    \begin{tabularx}{\columnwidth}{X c c}
+        \toprule
+        \textbf{Métrica} & \textbf{Valor} & \textbf{Critério} \\
+        \midrule
+        Erro de amplitude & \TODO{x,x}\,\% & $\leq 10\,\%$ \\
+        Diferença de fase & \TODO{x,x}$^\circ$ & $\leq 10^\circ$ \\
+        Correlação de Pearson $r$ & \TODO{0,9xx} & -- \\
+        NRMSE & \TODO{x,x}\,\% & -- \\
+        Razão de decaimento $\sigma^{opt}/\sigma^{acc}$ & \TODO{x,xx} & -- \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+A amplitude medida pelo vídeo concordou com a do acelerômetro em \TODO{x,x}\,\%, o que valida também a calibração espacial, e a diferença de fase de \TODO{x,x}$^\circ$ é compatível com o atraso do obturador de rolagem estimado na Seção~\ref{sec:res_controles} e com a incerteza de sincronismo.
+
+\subsection{Efeito de Massa do Acelerômetro}
+\label{sec:res_massa}
+
+Pelo modelo, o acelerômetro de 5\,g a 300\,mm da articulação reduz a frequência em \TODO{0,09}\,\%, ou cerca de \TODO{0,007}\,Hz, valor inferior à resolução espectral de \TODO{0,0x}\,Hz dos registros. As tomadas sem o acelerômetro forneceram $f = $ \TODO{x,xxx}\,Hz, contra \TODO{x,xxx}\,Hz com ele, diferença de \TODO{x,xx}\,\%, \TODO{dentro da resolução}. O resultado confirma que, nesta montagem, a massa do sensor é pequena frente à massa modal, mas o mesmo cálculo mostra que um acelerômetro de 10\,g na ponta de uma barra engastada da mesma seção reduziria a frequência em cerca de 3\,\%, efeito que o método óptico evita por construção.
+
+\subsection{Controles de Qualidade}
+\label{sec:res_controles}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Resultados dos controles.}
+    \label{tab:res_controles}
+    \small
+    \begin{tabularx}{\columnwidth}{X c}
+        \toprule
+        \textbf{Controle} & \textbf{Resultado} \\
+        \midrule
+        D1, ruído com a barra parada (desvio-padrão) & \TODO{0,0xx}\,mm (\TODO{0,0x}\,px) \\
+        D2, erro de escala & \TODO{0,x}\,\% \\
+        Cintilação (frequência e modulação) & \TODO{não detectada / xx Hz, x\,\%} \\
+        Obturador de rolagem, $T_{read}$ & \TODO{xx}\,ms \\
+        Atraso entre as ROIs por rolagem & \TODO{x,x}\,ms ($\approx$ \TODO{x}$^\circ$ a $f_1$) \\
+        Quadros perdidos & \TODO{0} \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+O piso de ruído de \TODO{0,0xx}\,mm corresponde a \TODO{x}\,\% da amplitude típica dos ensaios. A cintilação da iluminação \TODO{não foi detectada} no espectro de brilho de uma região estática e, portanto, não interferiu na banda de interesse. O tempo de leitura do sensor, \TODO{xx}\,ms, introduz entre as ROIs do acelerômetro e do parafuso, separadas verticalmente por \TODO{xx} linhas, um atraso de \TODO{x,x}\,ms, equivalente a \TODO{x}$^\circ$ na frequência fundamental: relevante para comparações de fase, mas sem efeito sobre a frequência e a razão de amplitudes.
+
+%==============================================================================
+\section{Discussão}
+%==============================================================================
+% REVISAR toda a secao apos os dados finais.
+
+\subsection{Desempenho do método}
+
+O vídeo de \textit{smartphone} identificou a frequência natural da barra com diferença de \TODO{x,xx}\,\% em relação ao acelerômetro na mesma tomada e de \TODO{x,x}\,\% em relação ao modelo, com repetibilidade de \TODO{x,x}\,\%, e reproduziu a razão de amplitudes entre dois pontos dentro de \TODO{x,x}\,\%. A verificação com dados sintéticos mostra que o \textit{software} não é o fator limitante: os erros ali ficaram abaixo de 0,1\,\% em frequência e de 1\,\% em amplitude, de modo que as diferenças observadas na bancada se devem principalmente às condições físicas do ensaio e aos parâmetros do modelo.
+
+\subsection{O \textit{smartphone} como sensor}
+
+Três características da câmera afetam a medição. A primeira é o obturador de rolagem, que desloca a fase entre linhas da imagem em \TODO{x}$^\circ$ entre as ROIs usadas, mas não altera a frequência nem a razão de amplitudes; comparações de fase entre pontos distantes verticalmente devem corrigi-lo com o $T_{read}$ medido. A segunda é o modo de câmera lenta, cujo arquivo marca o tempo para reprodução a 30\,fps: a taxa real de 240\,fps precisa ser informada ao \textit{software}, pois todas as grandezas temporais escalam com ela. A terceira é a compressão HEVC, que não impediu a estimativa de fase graças ao alto contraste dos marcadores e da textura da parede. A taxa de 240\,fps limita a faixa útil a cerca de 24\,Hz pela regra de amostragem adotada, adequada ao primeiro modo da montagem, mas não ao segundo, próximo de 80\,Hz.
+
+\subsection{A referência por contato}
+
+O acelerômetro é a referência da validação, mas sua configuração também exigiu cuidado. Em uma medição preliminar, a aquisição com banda de 10\,Hz resultou em apenas 3,4 amostras por ciclo da frequência fundamental, suficiente para a frequência pelo espectro, mas não para a forma de onda nem para a comparação de fase; o sinal estava disponível apenas como imagem da tela do \textit{software} e foi digitalizado, com erro de 0,26\,\% na frequência do pico em relação ao cursor do próprio programa. Na campanha final, a banda de \TODO{xxx}\,Hz e a exportação do sinal eliminaram essas limitações. Outra lição foi a necessidade de gravar o vídeo e o acelerômetro na mesma liberação: medições de tomadas diferentes permitem comparar frequências, mas não amortecimento, amplitude ou fase com rigor.
+
+\subsection{O modelo analítico}
+
+A principal fonte de discrepância entre modelo e medição foi a massa efetiva no ponto da mola. Sem ela, o modelo previa 11,70\,Hz; com $m_s/3$ e as ferragens, \TODO{x,xx}\,Hz. A frequência sozinha não separa a rigidez da mola da massa efetiva, já que diferentes pares $(k, m_{ef})$ produzem a mesma frequência; por isso ambas foram medidas diretamente, e a rigidez de catálogo diferiu da medida em \TODO{x}\,\%. A aproximação de corpo rígido (Equação~\ref{eq:fn_rigida}) ficou a menos de 1,1\,\% do modelo de elementos finitos, o que permite usá-la para dimensionamento rápido, e a junta com mancal se comportou como articulação ideal dentro de \TODO{x}\,\%. O amortecimento \TODO{dependeu fortemente da configuração do ensaio (amortecedor, pré-carga da mola)}, o que reforça a necessidade de comparar $\zeta$ apenas na mesma tomada.
+
+\subsection{Medição multiponto}
+
+As ROIs são definidas sobre o vídeo já gravado, de modo que cada ponto adicional não exige sensor, cabo ou novo ensaio. Com dois pontos, a razão de amplitudes reproduziu a forma modal prevista; com mais pontos ao longo da barra, o mesmo procedimento reconstrói a forma modal completa, o que, com acelerômetros, exigiria um sensor por ponto ou múltiplas montagens, cada uma com seu \textit{mass loading}. Este trabalho demonstrou o princípio com dois pontos; a medição de campo completo propriamente dita fica como extensão direta.
+
+\subsection{Limitações}
+
+As principais limitações são: medição bidimensional, que exige movimento no plano da imagem e câmera perpendicular a ele; faixa de frequência limitada pela taxa de quadros; amplitude mínima definida pelo piso de ruído de \TODO{0,0xx}\,mm; ROIs definidas manualmente; processamento posterior ao ensaio, sem medição em tempo real; e número reduzido de repetições e de configurações (duas molas).
+
+%==============================================================================
+\section{Conclusão}
+%==============================================================================
+% REVISAR apos os dados finais (numeros e afirmacoes marcados).
+
+Este trabalho desenvolveu e validou um sistema de vibrometria óptica de baixo custo baseado em vídeo de \textit{smartphone} em câmera lenta e em estimativa de movimento por fase com filtros de Gabor. O processamento foi implementado em uma biblioteca Python verificada por testes automatizados e em um aplicativo que conduz o ensaio do planejamento ao relatório, incluindo a sincronização com o acelerômetro e um modelo de elementos finitos da montagem.
+
+Em relação aos objetivos específicos:
+\begin{itemize}
+    \item as rotinas de estimativa de movimento por fase recuperaram, em dados sintéticos, a frequência com erro inferior a 0,1\,\%, a amplitude com erro inferior a 1\,\% e o atraso entre vídeo e acelerômetro com erro inferior a 0,1\,ms;
+    \item o aplicativo integrou planejamento, processamento, sincronização e geração de tabelas e figuras, e foi usado em toda a campanha de bancada;
+    \item a metodologia com câmera de \textit{smartphone} identificou a frequência natural da barra articulada com diferença de \TODO{x,xx}\,\% em relação ao acelerômetro e de \TODO{x,x}\,\% em relação ao modelo, com repetibilidade de \TODO{x,x}\,\%, e acompanhou a variação de rigidez entre as duas molas;
+    \item em comparação ao acelerômetro, o método óptico mediu sem contato e sem \textit{mass loading}, obteve dois pontos de medição do mesmo registro, cuja razão de amplitudes concordou com a forma modal prevista em \TODO{x,x}\,\%, e reproduziu \TODO{a amplitude e o amortecimento} dentro de \TODO{x}\,\%; como limitações, apresentou menor faixa de frequência e defasagem por obturador de rolagem, ambas quantificadas.
+\end{itemize}
+
+Conclui-se que uma câmera de \textit{smartphone}, aliada ao processamento por fase e a cuidados experimentais simples (marcadores de contraste, ROI de referência, iluminação constante, calibração no plano do movimento e taxa de quadros informada corretamente), é suficiente para identificar frequências naturais e formas modais de baixa frequência em ensaios de bancada, como complemento de baixo custo aos acelerômetros. A campanha também mostrou que a qualidade da validação depende tanto do método óptico quanto da referência e do modelo: parâmetros de catálogo, a massa efetiva das molas e a gravação simultânea dos dois sensores foram decisivos para a concordância obtida.
+
+Como trabalhos futuros, propõem-se: o uso de câmera com obturador global e maior taxa de quadros, para estender a faixa de frequência e eliminar a defasagem entre linhas; ensaios forçados com o excitador da bancada e estimativa da FRF; a reconstrução de formas modais com muitos pontos ao longo da estrutura (medição de campo completo); a propagação de incertezas dos parâmetros do modelo; a seleção automática de ROIs; e o processamento em tempo real.
 
 \clearpage
 \onecolumn % <-- 1. Switch to a single column layout
 
 \section{Cronograma}
+% TODO: atualizar o cronograma (ou remover a secao na versao final, conforme a coordenacao).
 
 A sequência do projeto é organizada em quatro etapas principais, conforme ilustrado na Figura~\ref{fig:cronograma}:
 
 % 2. Use a standard figure environment (no asterisk)
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=\textwidth]{Images/cronograma.png}
+    \includegraphics[width=\textwidth]{Images/Cronograma.png}
     \caption{Cronograma do projeto. Fonte: O autor.}
     \label{fig:cronograma}
 \end{figure}

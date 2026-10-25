@@ -35,7 +35,7 @@ raiz articulada (`BeamFE`), referência do acelerômetro digitalizada, primeira 
 não são o mesmo ensaio; o app ainda prevê f₁ com viga engastada; vídeo de 91 MB no git.
 
 **Próximos passos (ordem):**
-1. **Gravar vídeo e PULSE ao mesmo tempo** (impacto + LED), mola k₁ e k₂, 3 repetições cada; anotar a posição
+1. **Ir ao laboratório** (roteiro em `docs/roteiro_laboratorio.md`): medir k das molas (estático) e pesar as ferragens; **gravar vídeo e PULSE ao mesmo tempo** (impacto + LED), mola k₁ e k₂, 3 repetições cada; anotar a posição
    da lâmina do amortecedor e se há pré-carga na mola. Sem isso, ζ e fase não fecham.
 2. Explicar a diferença de amortecimento (ζ vídeo ≈ 0,001 × PULSE ≈ 0,007) e de f_n (+2,1 %).
 3. ~~Integrar `BeamFE` ao app~~ — feito (etapa 1: apoio, molas, massas; etapa 2: posição das ROIs; etapa 6: forma modal). Falta **preencher na sessão as massas pesadas** da mola k₁, parafuso, porcas e gancho (hoje 0 → f₁ previsto 11,7 Hz).
@@ -50,8 +50,12 @@ Confirmado: raiz = **junta com mancal (articulada)**, alumínio 6351-T6, 660 g, 
 catálogo k₁ = 1500 e k₂ = 2500 N/m, acelerômetro 5 g a 300 mm do engaste, mola a 632 mm
 do engaste (furo de 88 mm da ponta). Pico do acelerômetro: **7,600 Hz**.
 
-**Confirmado após pesagem:** a massa da mola explica a diferença e a curva de 7,6 Hz é da **mola k₁**
-(registrar as massas medidas em A4 e rodar o `BeamFE` com elas).
+**Não separável com os dados atuais (k × massa):** os 7,6 Hz só dizem que k_total/m_efetiva é o do ajuste; as
+massas pesadas da mola/ferragens não foram registradas (o "383 g" é o valor *necessário* com k = 1500 N/m, não
+uma medida). Com f₁ = 7,60 Hz: k = 1500 N/m exige ≈ 383 g de massa efetiva no ponto da mola; k = 1000 → ≈ 162 g;
+k = 630 → 0 g. A mola 2 (nominal 2500 N/m) **não** distingue as hipóteses (≈ 9,8 Hz em ambas). Resolver
+medindo **k estaticamente** (pendurar massa conhecida no mesmo ponto de fixação, k = m·g/Δx) e registrando a
+massa da mola + parafuso + porcas + gancho.
 
 Modelo `BeamFE` (articulada + mola + 5 g, **sem massa da mola**): **11,7 Hz (k₁)** e
 **15,1 Hz (k₂)**. Falta ≈ 380 g de massa efetiva no ponto da mola (k₁) para chegar a 7,6 Hz
@@ -167,33 +171,37 @@ seria 626 N/m); considerar inércia do conjunto cilindro/dial do lado da junta.
 > **todo número que ainda não saiu do app fica como placeholder marcado** (`\TODO{}`/`??`),
 > nunca valor inventado. Os relatórios exportados pelo app entram como tabelas/figuras.
 
-- [ ] **D1. Equipamentos** (acelerômetro B&K 4507 001, aquisitor LAN-XI 3160-A-4/2, PULSE
+> **Estado (2026-10-25):** texto reescrito com placeholders `\TODO{}` (57) para tudo que depende da
+> campanha de laboratório; comentários `% PRELIMINAR:` guardam os valores da primeira análise e `% REVISAR:`
+> marcam afirmações que dependem do resultado final. D1–D8 e D11 estão em rascunho completo; falta preencher.
+
+- [~] **D1. Equipamentos** (acelerômetro B&K 4507 001, aquisitor LAN-XI 3160-A-4/2, PULSE
       LabShop; fotos já em `Book/Images/acelerometro_montado.jpg`, `aquisitor_bk_3160.jpg`,
       `frame_ensaio_mola.jpg`; a foto da tela `pulse_curva_acelerometro_foto.jpg` é provisória): substituir DJI Osmo Action 4 / RockSteady / exposição ≤ 1/2000 s
       pelo smartphone real (modelo, modo slow-mo, fps real, resolução, exposição se
       conhecida). Reescrever o parágrafo de rolling shutter: não foi mitigado por exposição,
       foi **quantificado** (B6).
-- [ ] **D2. Modelo analítico da mola com DCL**: figura TikZ do diagrama de corpo livre
+- [~] **D2. Modelo analítico da mola com DCL**: figura TikZ do diagrama de corpo livre
       (mola, massa, peso, força elástica, inércia), EOM `m ẍ + c ẋ + k x = 0`, ω_n = √(k/m_ef),
       k da mola helicoidal, massa efetiva da mola, tabela de parâmetros com incerteza.
       Fazer o mesmo DCL/seção para a barra (Euler-Bernoulli já existe; faltam condições de
       contorno e figura).
-- [ ] **D3. Reescrever "Estratégia de Validação"**: referência primária = acelerômetro
+- [~] **D3. Reescrever "Estratégia de Validação"**: referência primária = acelerômetro
       (f_n, ζ e, com o sinal bruto, comparação de forma de onda/deslocamento); secundária =
       teoria; critério de aceitação e como a incerteza entra.
-- [ ] **D4. Seção de iluminação/flicker** (B5) e declaração do fps de captura (240 fps).
-- [ ] **D5. Resultados**: substituir "Resultados Preliminares" (régua a 23,98 fps, erro 12,5 %,
+- [~] **D4. Seção de iluminação/flicker** (B5) e declaração do fps de captura (240 fps).
+- [~] **D5. Resultados**: substituir "Resultados Preliminares" (régua a 23,98 fps, erro 12,5 %,
       Nyquist 11,99 Hz) por: resultados principais (barra, mola) + a régua mantida como ensaio
       exploratório/histórico, com a discussão honesta já escrita.
-- [ ] **D6. Discussão e Limitações** (seção própria): rolling shutter, câmera de celular, fps,
+- [~] **D6. Discussão e Limitações** (seção própria): rolling shutter, câmera de celular, fps,
       flicker, sem sinal bruto do acelerômetro, n de repetições, escala 2D.
-- [ ] **D7. Conclusão + Trabalhos futuros** (global shutter, aquisição sincronizada,
+- [~] **D7. Conclusão + Trabalhos futuros** (global shutter, aquisição sincronizada,
       full-field, tempo real). Não existe seção de conclusão hoje.
-- [ ] **D8. Resumo com resultado numérico + Abstract em inglês + palavras-chave**.
-- [ ] **D9. Cabeçalho** ("1º Semestre 2026" → semestre atual), checar com a coordenação se o
+- [~] **D8. Resumo com resultado numérico + Abstract em inglês + palavras-chave**.
+- [~] **D9. Cabeçalho** ("1º Semestre 2026" → semestre atual), checar com a coordenação se o
       formato artigo 2 colunas é aceito para a entrega final do TCC 2.
 - [ ] **D10. Cronograma** atualizado ao que de fato foi feito.
-- [ ] **D11. Referências**: adicionar fontes para flicker/rolling shutter em vibrometria de
+- [~] **D11. Referências**: adicionar fontes para flicker/rolling shutter em vibrometria de
       baixo custo e para a mola helicoidal (Shigley/Rao).
 
 ## Perguntas em aberto
