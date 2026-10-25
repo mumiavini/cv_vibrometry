@@ -1,26 +1,32 @@
-# Acelerômetro (B&K 4507 001 + LAN-XI 3160-A-4/2, PULSE LabShop)
+# Acelerômetro — mola k₁ = 1500 N/m (B&K 4507 001 + LAN-XI 3160-A-4/2, PULSE LabShop)
 
-Dados disponíveis hoje: foto da tela do PULSE (`Book/Images/pulse_curva_acelerometro_foto.jpg`),
-com o sinal no tempo (0–20 s) e o espectro (0–10 Hz).
+**Os dados desta pasta são DIGITALIZADOS** a partir de uma foto da tela do PULSE
+(`Book/Images/pulse_curva_acelerometro_foto.jpg`); não são uma exportação do software.
+No texto do TCC devem ser identificados como "curva digitalizada a partir da tela do
+PULSE". A leitura direta do cursor (7,600 Hz) é dado medido.
 
-**Leitura direta do software (dado medido):** cursor do espectro `X = 7,600 Hz`, `Y = 1,07 m/s²`;
+| Arquivo | Conteúdo |
+|---|---|
+| `acc_k1_envelope_digitalizado.csv` | envoltória do sinal no tempo, 1,30–14,0 s: `t_s, upper_ms2, lower_ms2, half_p2p_ms2` (`half_p2p` = (máx − mín)/2 em janela de 0,4 s) |
+| `acc_k1_espectro_digitalizado.csv` | espectro 0–10 Hz, passo 0,05 Hz: `f_hz, amplitude_ms2, origem`; só o pico (7,2–8,1 Hz) e o bump DC (< 0,3 Hz) têm valor, o resto é indistinguível do eixo (< 0,01 m/s²); o bin de 7,60 Hz vem da leitura do cursor (1,07 m/s²) |
+| `acc_k1_metadata.json` | proveniência, leituras diretas, calibração e resultados |
+
+**Leitura direta do software (medida):** cursor do espectro `X = 7,600 Hz`, `Y = 1,07 m/s²`;
 cursor do tempo `X = 2,188 s`, `Y = −354 mm/s²`; gravação de 15/10/2026 20:48:57.
 
 **Configuração inferida (confirmar no setup do PULSE):** FFT com 200 linhas, banda 10 Hz,
-T = 20 s ⇒ Δf = 1/T = 0,05 Hz e fs = 2,56·10 Hz = 25,6 Hz (512 amostras/bloco).
-O cursor em 7,600 Hz cai exatamente na linha nº 152 (7,600/0,05).
+T = 20 s ⇒ Δf = 0,05 Hz e fs = 25,6 Hz (512 amostras/bloco), ≈ 3,4 amostras por ciclo de 7,6 Hz.
 
-**Derivado da foto (não é exportação do software)** — `envelope_foto_pulse.csv` e
-`Code/tools/pulse_photo/` (calibração por homografia das grades dos gráficos, validada contra os
-cursores do próprio PULSE):
+## Qualidade da digitalização (validada contra os cursores do próprio PULSE)
 
-| Quantidade | Valor derivado | Referência |
-|---|---|---|
-| f do pico do espectro | 7,62 Hz (centro simétrico dos flancos, 10–50 % da altura) | cursor 7,600 Hz → +0,02 Hz (+0,26 %) |
-| viés de calibração do eixo de frequência | +0,019 Hz (cursor lido como 7,619 Hz) | exato = 7,600 Hz |
-| viés de calibração do eixo de tempo | +0,001 s (cursor lido como 2,189 s) | exato = 2,188 s |
-| ζ (decaimento exponencial da envolvente, 2,5–9 s, R² = 0,998) | 0,0073 (faixa 0,0072–0,0079 conforme a janela) | — |
-| ζ (meia potência do pico) | ≲ 0,0066, limitado pela janela/resolução de 0,05 Hz | — |
+| Quantidade | Digitalizado | Referência | Erro |
+|---|---|---|---|
+| frequência do pico do espectro | 7,62 Hz | 7,600 Hz | +0,02 Hz (+0,26 %) |
+| cursor de frequência relido | 7,619 Hz | 7,600 Hz | +0,019 Hz |
+| cursor de tempo relido | 2,189 s | 2,188 s | +0,001 s |
+| cursor de amplitude relido | 1,073 m/s² | 1,07 m/s² | +0,003 m/s² |
+| ζ pelo decaimento da envolvente (2,5–9 s, R² = 0,998) | 0,0072–0,0079 | — | — |
 
-Substituir por exportação do PULSE (ASCII/Excel/MAT) assim que disponível; o sinal tem só
-≈ 3,4 amostras por ciclo de 7,6 Hz, então forma de onda detalhada não é recuperável da foto.
+A foto tem só ≈ 3,6 px por amostra, então forma de onda amostra a amostra **não** é
+recuperável; a comparação com o vídeo é feita por envoltória, frequência e decaimento
+(`Code/vibrometry/reference.py`). Substituir por exportação do PULSE se ela se tornar possível.

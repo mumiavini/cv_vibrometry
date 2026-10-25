@@ -16,6 +16,10 @@ for a in range(-20,21,4):
     y = int(round(-S_A*a + 20*S_A+30)); mask[y-2:y+3, :] = True
 mask[:40,:]=True; mask[-45:,:]=True; mask[:, :60]=True; mask[:, 60+int(S_T*20):] = True
 tr = dark & ~mask
+# remove leftovers of horizontal grid lines (long horizontal runs); the trace itself is made of steep strokes
+hor = cv2.morphologyEx(tr.astype(np.uint8), cv2.MORPH_OPEN, cv2.getStructuringElement(cv2.MORPH_RECT,(31,1)))
+hor = cv2.dilate(hor, np.ones((5,1),np.uint8)) > 0
+tr = tr & ~hor
 ys, xs = np.nonzero(tr)
 print("trace pixels:", len(xs))
 t_all = (xs-60)/S_T; a_all = (20*S_A+30-ys)/S_A
@@ -34,7 +38,7 @@ for i in range(len(t)):
     j0, j1 = max(0,i-win//2), min(len(t), i+win//2+1)
     u, l = np.nanmax(up[j0:j1]) if np.isfinite(up[j0:j1]).any() else np.nan, np.nanmin(lo[j0:j1]) if np.isfinite(lo[j0:j1]).any() else np.nan
     amp[i] = (u-l)/2; mid[i] = (u+l)/2
-np.savetxt("img/envelope_acc.csv", np.c_[t, up, lo, amp], delimiter=",", header="t_s,upper_ms2,lower_ms2,half_p2p_ms2", comments="")
+np.savetxt("img/envelope_acc_clean.csv", np.c_[t, up, lo, amp], delimiter=",", header="t_s,upper_ms2,lower_ms2,half_p2p_ms2", comments="")
 def fit(t0,t1):
     sel = (t>=t0)&(t<=t1)&np.isfinite(amp)&(amp>0.3)
     p = np.polyfit(t[sel], np.log(amp[sel]), 1)

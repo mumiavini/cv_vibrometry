@@ -19,6 +19,9 @@ Confirmado: raiz = **junta com mancal (articulada)**, alumínio 6351-T6, 660 g, 
 catálogo k₁ = 1500 e k₂ = 2500 N/m, acelerômetro 5 g a 300 mm do engaste, mola a 632 mm
 do engaste (furo de 88 mm da ponta). Pico do acelerômetro: **7,600 Hz**.
 
+**Confirmado após pesagem:** a massa da mola explica a diferença e a curva de 7,6 Hz é da **mola k₁**
+(registrar as massas medidas em A4 e rodar o `BeamFE` com elas).
+
 Modelo `BeamFE` (articulada + mola + 5 g, **sem massa da mola**): **11,7 Hz (k₁)** e
 **15,1 Hz (k₂)**. Falta ≈ 380 g de massa efetiva no ponto da mola (k₁) para chegar a 7,6 Hz
 (k₂ exigiria ≈ 820 g, implausível → provavelmente a curva é da mola k₁, confirmar).
@@ -50,10 +53,9 @@ seria 626 N/m); considerar inércia do conjunto cilindro/dial do lado da junta.
 - [x] **A5. Posições** (confirmadas): acelerômetro a 300 mm do engaste (430 mm da ponta);
       furo/parafuso da mola a 88 mm da ponta (632 mm do engaste). ROIs: parafuso, acelerômetro,
       parede (limpeza/compensação).
-- [~] **A6. Sinal do acelerômetro** — digitalização feita (ver `Code/data/acelerometro/README.md`):
-      pico 7,62 Hz (cursor 7,600 → +0,26 %), ζ ≈ 0,0073. **Para o texto**: f_n = 7,600 Hz é
-      leitura direta do PULSE (dado real); ζ e a envolvente vêm da foto e devem ser
-      identificados como tal ou substituídos pela exportação do PULSE. Setup provável:
+- [x] **A6. Sinal do acelerômetro** — sem exportação possível; decidido usar a curva
+      **digitalizada** como base (CSV em `Code/data/acelerometro/`, rotulada como digitalizada
+      no texto e nos arquivos). f_n = 7,600 Hz é leitura direta do cursor do PULSE. Setup provável:
       200 linhas, 10 Hz, 20 s, fs = 25,6 Hz (confirmar). (PULSE mostra sinal no tempo, 0–18 s, decaimento a partir
       de ≈ 2 s, pico ±15–20 m/s², e espectro 0–10 Hz): 1ª opção, **exportar do PULSE LabShop**
       (dados do Recorder/Display para ASCII/Excel/MAT) — dado real. 2ª opção (fallback):
@@ -71,13 +73,14 @@ seria 626 N/m); considerar inércia do conjunto cilindro/dial do lado da junta.
 - [ ] **B2. Incerteza e repetibilidade** (`uncertainty.py`): resolução Δf = 1/T,
       interpolação parabólica do pico, f_n por janelas/segmentos (média ± desvio),
       bootstrap; agregar N vídeos por caso → média ± desvio.
-- [ ] **B3. Comparação com o acelerômetro** (`reference.py`): erro absoluto/relativo
-      de f_n por vídeo; gráfico f_vídeo × f_acc com reta 1:1 (e regressão / Bland-Altman se
-      n permitir). Quando o sinal bruto do acelerômetro estiver disponível: leitor de CSV,
-      reamostragem, f_n/ζ do acelerômetro pelo mesmo estimador e comparação direta
-      (dupla integração no domínio da frequência, eq. do texto) com o deslocamento óptico.
-      Trocar o critério de aprovação: referência primária = acelerômetro; teoria =
-      secundária (hoje `validate_frequency` só compara com a viga).
+- [~] **B3. Comparação com o acelerômetro** (`vibrometry/reference.py`, CLI
+      `python -m vibrometry.reference`): feito e testado com sinais sintéticos — f_n vídeo ×
+      acelerômetro (erro %), decaimento/ζ de cada envoltória, razão de amplitude
+      (ω²·x do vídeo ÷ envoltória do acelerômetro), figura de sobreposição. Referência
+      **digitalizada** em `Code/data/acelerometro/` (ver README lá). Falta rodar com os dados
+      reais: `displacement_signals.csv` da gravação da mola k₁ (ROI no acelerômetro) —
+      informar qual vídeo corresponde à curva e se foram simultâneos.
+      Para as demais molas/gravações: precisa de f_n (cursor) de cada uma.
 - [x] **B4. Modelos analíticos** (`beam.py`): `SpringSupportedBeam` (forma fechada, mola na
       ponta) e **`BeamFE`** (elementos finitos de Euler-Bernoulli: molas e massas em posições
       quaisquer, raiz engastada/articulada/mola torsional, forma modal). Verificados entre si
