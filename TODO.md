@@ -21,11 +21,8 @@ Ordem sugerida: **A → B → C → D**. Dados e decisões (A) destravam tudo.
       observações (iluminação, fixação, excitação). Hoje o repo só tem o proxy
       `video low res.LRF`; os vídeos reais não estão versionados (guardar fora do
       git + SHA256 no manifesto).
-- [ ] **A2. Confirmar o fps real do slow-mo.** Celular costuma gravar 240 fps mas
-      gravar timestamps de 30 fps no container (ver `issues.md`,
-      "fps trusted the container tag"): `_measure_fps` não detecta isso. Toda
-      frequência medida escala diretamente com o fps — documentar como foi
-      confirmado (app/ficha do modo, `ffprobe`, ou pico conhecido).
+- [x] **A2. fps do slow-mo**: decidido que não entra no TCC como tema; basta declarar na
+      metodologia o fps de captura (240 fps) e passá-lo ao app via `--fps`.
 - [ ] **A3. Descrever o acelerômetro**: modelo, tipo (MEMS/piezo), massa, fixação,
       taxa de amostragem, como o f_n em Hz foi extraído, incerteza do instrumento.
 - [ ] **A4. Descrever a montagem da mola** (dados para o DCL e para o modelo):
@@ -44,10 +41,12 @@ Ordem sugerida: **A → B → C → D**. Dados e decisões (A) destravam tudo.
       interpolação parabólica do pico, f_n por janelas/segmentos (média ± desvio),
       bootstrap; agregar N vídeos por caso → média ± desvio.
 - [ ] **B3. Comparação com o acelerômetro** (`reference.py`): erro absoluto/relativo
-      por vídeo; gráfico f_vídeo × f_acc com reta 1:1 e (se n permitir) regressão /
-      Bland-Altman. **Sem sinal bruto → só comparação de f_n** (declarar).
-      Trocar o critério de aprovação da validação: referência primária = acelerômetro;
-      teoria = referência secundária (hoje `validate_frequency` só compara com a viga).
+      de f_n por vídeo; gráfico f_vídeo × f_acc com reta 1:1 (e regressão / Bland-Altman se
+      n permitir). Quando o sinal bruto do acelerômetro estiver disponível: leitor de CSV,
+      reamostragem, f_n/ζ do acelerômetro pelo mesmo estimador e comparação direta
+      (dupla integração no domínio da frequência, eq. do texto) com o deslocamento óptico.
+      Trocar o critério de aprovação: referência primária = acelerômetro; teoria =
+      secundária (hoje `validate_frequency` só compara com a viga).
 - [ ] **B4. Modelo massa-mola** (`spring_mass.py`): f_n = (1/2π)√(k/(m + m_mola/3)),
       k de mola helicoidal = G d⁴ / (8 D³ N), incerteza propagada; reaproveitar a
       estrutura de `beam.py`. Integrar ao `PipelineConfig` (hoje só `CantileverBeam`).
@@ -68,17 +67,17 @@ Ordem sugerida: **A → B → C → D**. Dados e decisões (A) destravam tudo.
       sem checar).
 - [ ] **B9. Testes** (`pytest`) a partir da verificação sintética já existente
       (f_n 0,09 %, ζ ~2 %) para travar regressões.
-- [ ] **B10. Higiene do repositório**
-  - [ ] `requirements.txt` está em UTF-16/CRLF (quebra `pip install -r` em Linux) e é um
-        `pip freeze` com ipykernel/mypy; reduzir ao necessário (numpy, opencv, polars,
-        matplotlib, pytest).
-  - [ ] Remover `__pycache__` versionado (23 arquivos) e ignorar `**/__pycache__/`.
-  - [ ] Tirar notebooks de rascunho do repo do TCC (`random.ipynb` = IRA, `interesting.ipynb`,
-        `main.ipynb`, `opa main.ipynb`, `Code/EUR_1584.NEF`, `Code/Images/logo volvo.png`).
-  - [ ] README e `demo.ipynb` ainda falam em DJI Osmo e `FPS_OVERRIDE = 30`; atualizar
-        para smartphone/slow-mo e apontar para o manifesto.
-  - [ ] Decidir sobre o issue aberto de desempenho (vídeo inteiro em memória): para o TCC
-        basta recortar o trecho útil; documentar.
+- [x] **B10. Higiene do repositório** (feito)
+  - [x] `__pycache__` removido do git e ignorado (`**/__pycache__/`, `*.pyc`).
+  - [x] Notebooks de rascunho sem valor pro TCC removidos (`random.ipynb` = IRA,
+        `interesting.ipynb`); recuperáveis pelo histórico.
+  - [x] Material antigo movido para `Code/legacy/` (`main.ipynb`, `opa main.ipynb`,
+        `demo.ipynb`, `EUR_1584.NEF`, `Images/`) com README explicando.
+  - [ ] README do pacote ainda cita DJI Osmo / RockSteady / exposição curta: atualizar
+        para smartphone em slow motion (240 fps).
+  - [ ] Issue aberto de desempenho (vídeo inteiro em memória): para o TCC basta recortar
+        o trecho útil; documentar.
+  - (`requirements.txt` em UTF-16 mantido: o ambiente é Windows.)
 
 ## C. Resultados e figuras
 
@@ -89,10 +88,17 @@ Ordem sugerida: **A → B → C → D**. Dados e decisões (A) destravam tudo.
       precisa do acelerômetro para isso.
 - [ ] **C5.** Mapa de sensibilidade: efeito de ROI, resize e fps na f_n (barato de rodar com B1).
 - [ ] **C6.** Se houver vídeo com/sem acelerômetro: mass loading medido × Eq. `mass_loading`.
-- [ ] **C7.** Forma modal da barra com várias ROIs (só se a gravação permitir; senão
-      reduzir o texto sobre full-field para "potencial / trabalho futuro").
+- [ ] **C7. Multiponto / full-field**: ROIs definidas em pós-processamento sobre o mesmo
+      vídeo atuam como uma matriz de sensores virtuais. Para sustentar o termo
+      "full-field" no texto, mostrar N ROIs ao longo da barra (amplitude e fase × posição)
+      e comparar com a forma modal teórica; sem isso, chamar de "medição multiponto
+      sem contato" e deixar full-field como potencial.
 
 ## D. Texto (`Book/TCC - Vinicius Andrade Trento.tex`)
+
+> Regra: o texto é escrito na forma final (incluindo o sinal bruto do acelerômetro), mas
+> **todo número que ainda não saiu do app fica como placeholder marcado** (`\TODO{}`/`??`),
+> nunca valor inventado. Os relatórios exportados pelo app entram como tabelas/figuras.
 
 - [ ] **D1. Equipamentos**: substituir DJI Osmo Action 4 / RockSteady / exposição ≤ 1/2000 s
       pelo smartphone real (modelo, modo slow-mo, fps real, resolução, exposição se
@@ -104,10 +110,9 @@ Ordem sugerida: **A → B → C → D**. Dados e decisões (A) destravam tudo.
       Fazer o mesmo DCL/seção para a barra (Euler-Bernoulli já existe; faltam condições de
       contorno e figura).
 - [ ] **D3. Reescrever "Estratégia de Validação"**: referência primária = acelerômetro
-      (comparação de f_n, sem sinal bruto — declarar); referência secundária = teoria;
-      critério de aceitação e como a incerteza entra. Remover a promessa de dupla integração
-      do sinal do acelerômetro.
-- [ ] **D4. Seção de iluminação/flicker** (B5) e de **fps do slow-mo** (A2).
+      (f_n, ζ e, com o sinal bruto, comparação de forma de onda/deslocamento); secundária =
+      teoria; critério de aceitação e como a incerteza entra.
+- [ ] **D4. Seção de iluminação/flicker** (B5) e declaração do fps de captura (240 fps).
 - [ ] **D5. Resultados**: substituir "Resultados Preliminares" (régua a 23,98 fps, erro 12,5 %,
       Nyquist 11,99 Hz) por: resultados principais (barra, mola) + a régua mantida como ensaio
       exploratório/histórico, com a discussão honesta já escrita.

@@ -66,7 +66,8 @@ auto-rescaled with a warning if loaded against a different `--resize-width`.
 Outputs (PNG figures, `displacement_signals.csv`, `modal_results.json`) go to
 `vibrometry/outputs/` by default.
 
-See `demo.ipynb` for the same workflow as a notebook.
+The old notebook version of this workflow lives in `../legacy/demo.ipynb`
+(outdated; kept for reference only).
 
 ## Verification results (synthetic video, 30 fps, 12 s)
 
