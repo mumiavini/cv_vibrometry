@@ -10,7 +10,7 @@ Lê os resultados exportados por
         --length 0.30 --width 0.035 --thickness 0.003
 
 e gera as versões em português em Book/Images/fig_regua_*.png.
-Executar a partir de Code/:  python figuras_tcc_regua.py
+Executar a partir de Code/:  python -m tools.figuras_tcc_regua
 """
 
 from __future__ import annotations
