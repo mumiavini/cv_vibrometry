@@ -10,6 +10,7 @@ PULSE". A leitura direta do cursor (7,600 Hz) é dado medido.
 | `acc_k1_envelope_digitalizado.csv` | envoltória do sinal no tempo, 1,30–14,0 s: `t_s, upper_ms2, lower_ms2, half_p2p_ms2` (`half_p2p` = (máx − mín)/2 em janela de 0,4 s) |
 | `acc_k1_espectro_digitalizado.csv` | espectro 0–10 Hz, passo 0,05 Hz: `f_hz, amplitude_ms2, origem`; só o pico (7,2–8,1 Hz) e o bump DC (< 0,3 Hz) têm valor, o resto é indistinguível do eixo (< 0,01 m/s²); o bin de 7,60 Hz vem da leitura do cursor (1,07 m/s²) |
 | `acc_k1_metadata.json` | proveniência, leituras diretas, calibração e resultados |
+| `curva_acelerometro_tempo_k1.csv` | série `tempo_s, aceleracao_m_s2` a 200 Hz (0,03–19,345 s) extraída da curva do PULSE por outra digitalização. **Não é uma forma de onda**: 97 % das diferenças sucessivas alternam de sinal e ≈ 47 % da energia está em 50–100 Hz (os extremos de cada traço vertical do gráfico, alternados), então não deve ser integrada nem usada para fase/forma de onda. Serve só pela envoltória (concorda com `acc_k1_envelope_digitalizado.csv` a poucos %) e pela frequência (componente de 6,5–9 Hz em 7,606 Hz) |
 
 **Leitura direta do software (medida):** cursor do espectro `X = 7,600 Hz`, `Y = 1,07 m/s²`;
 cursor do tempo `X = 2,188 s`, `Y = −354 mm/s²`; gravação de 15/10/2026 20:48:57.

@@ -13,6 +13,38 @@ Ordem sugerida: **A → B → C → D**. Dados e decisões (A) destravam tudo.
 
 ---
 
+## Estado atual (2026-10-25) — o que já existe e o que a primeira análise mostrou
+
+**Já feito (em `main`):** aplicativo (`vibroapp`, 6 etapas), núcleo `vibrometry` (rastreamento por fase,
+sincronismo, integração do acelerômetro, lote, relatório LaTeX), modelos analíticos da barra com mola e
+raiz articulada (`BeamFE`), referência do acelerômetro digitalizada, primeira sessão real
+(`Code/sessions/k1_cm_acc.vibro.json`, iPhone 17e, 240 fps, mola k₁), 35 testes.
+
+**Primeira análise (vídeo `k1_cm_acc.mov`, ROI no acelerômetro, escala corrigida 0,513 mm/px):**
+
+| Resultado | Valor | Observação |
+|---|---|---|
+| f_n vídeo | 7,763 Hz (estável de 1 a 7,5 s) | PULSE: 7,600 Hz → +2,1 % (critério do app: 1 %); takes diferentes |
+| amplitude no acelerômetro | 7,58 mm → ω²·A ≈ 18 m/s² | concorda com a envoltória do PULSE (17–19 m/s²) |
+| razão de amplitudes parafuso/acelerômetro | 2,045 | forma modal do `BeamFE` (articulada + mola k₁ + massa efetiva 383 g): 2,079 → −1,7 % |
+| ζ vídeo (envoltória) | ≈ 0,0010 (σ = 0,049 1/s) | PULSE: ≈ 0,0072 (σ = 0,345 1/s) → **não concorda (×7)** |
+| fase/forma de onda vídeo × acelerômetro | sem sentido | takes diferentes (20:22:39 × 20:48:57) e CSV não é forma de onda |
+
+**Problemas encontrados e corrigidos/registrados** (detalhes em `issues.md`): escala 7,2× errada na sessão,
+`f_analysis = 0,79 Hz`, metadados de régua de aço; CSV do acelerômetro é um traço em zigue-zague; vídeo e PULSE
+não são o mesmo ensaio; o app ainda prevê f₁ com viga engastada; vídeo de 91 MB no git.
+
+**Próximos passos (ordem):**
+1. **Gravar vídeo e PULSE ao mesmo tempo** (impacto + LED), mola k₁ e k₂, 3 repetições cada; anotar a posição
+   da lâmina do amortecedor e se há pré-carga na mola. Sem isso, ζ e fase não fecham.
+2. Explicar a diferença de amortecimento (ζ vídeo ≈ 0,001 × PULSE ≈ 0,007) e de f_n (+2,1 %).
+3. Integrar `BeamFE` ao app (tipo de apoio: engastado / articulado + mola + massas, incluindo massa efetiva da
+   mola ≈ m_mola/3 + parafuso) — `issues.md`.
+4. Exportar os dados brutos do PULSE (hoje só há foto/digitalização) ou manter a digitalização rotulada.
+5. Texto do TCC (seção D) com a tabela acima como esqueleto de resultados.
+
+---
+
 ## ⚠ Discrepância modelo × medição (resolver antes de escrever resultados)
 
 Confirmado: raiz = **junta com mancal (articulada)**, alumínio 6351-T6, 660 g, molas de
@@ -32,12 +64,9 @@ seria 626 N/m); considerar inércia do conjunto cilindro/dial do lado da junta.
 
 ## A. Dados e decisões (bloqueia o resto)
 
-- [ ] **A1. Manifesto dos vídeos** (`Code/videos/manifest.csv`): um registro por vídeo
-      com: arquivo, caso (barra / mola-variação X), fps *real de captura*,
-      resolução, duração, escala mm/px, ROIs usadas, f_n do acelerômetro [Hz],
-      observações (iluminação, fixação, excitação). Hoje o repo só tem o proxy
-      `video low res.LRF`; os vídeos reais não estão versionados (guardar fora do
-      git + SHA256 no manifesto).
+- [~] **A1. Manifesto dos vídeos**: as sessões `Code/sessions/*.vibro.json` registram fps, escala, ROIs e
+      acelerômetro de cada ensaio; `Code/videos/README.md` lista os vídeos versionados. Falta registrar
+      SHA-256 dos vídeos guardados fora do git (limite de tamanho, ver `issues.md`).
 - [x] **A2. fps do slow-mo**: decidido que não entra no TCC como tema; basta declarar na
       metodologia o fps de captura (240 fps) e passá-lo ao app via `--fps`.
 - [x] **A3. Instrumentação (identificada nas fotos, conferir no certificado/datasheet)**:
@@ -68,8 +97,8 @@ seria 626 N/m); considerar inércia do conjunto cilindro/dial do lado da junta.
 
 ## B. Código (`Code/vibrometry/`)
 
-- [ ] **B1. Execução em lote** (`batch.py` + CLI `--batch manifest.csv`): processa
-      todos os vídeos e grava `results.csv` (f_n, ζ, pico, SNR, fps, ROI).
+- [x] **B1. Execução em lote**: etapa 5 do app (`workflow.process_session`); falta rodar com as
+      repetições reais (3 vídeos por mola).
 - [ ] **B2. Incerteza e repetibilidade** (`uncertainty.py`): resolução Δf = 1/T,
       interpolação parabólica do pico, f_n por janelas/segmentos (média ± desvio),
       bootstrap; agregar N vídeos por caso → média ± desvio.
@@ -95,11 +124,8 @@ seria 626 N/m); considerar inércia do conjunto cilindro/dial do lado da junta.
       (estimar do fps/modo ou medir com barra horizontal), atraso entre linhas
       Δt_linha, defasagem sobre a altura da ROI = 2π·f_n·Δt. Mostra que afeta a fase,
       não a frequência, e dá um número para a seção de limitações.
-- [ ] **B7. Dois pontos medidos (parafuso e acelerômetro)**: o parafuso foi usado como mais
-      um ponto de medição. Usar as duas ROIs como duas amostras da **forma modal**: razão de
-      amplitudes (e fase 0/180°) medida × `SpringSupportedBeam.mode_shape(x)` nas posições
-      reais (A5). Isso dá um resultado multiponto concreto além da frequência. Se o
-      parafuso estiver muito perto do engaste (amplitude ≈ 0), reportar o SNR dele.
+- [x] **B7. Dois pontos medidos (parafuso e acelerômetro)**: razão de amplitudes medida 2,045 × 2,079 da forma
+      modal do `BeamFE` (−1,7 %), ver "Estado atual". Falta repetir nas demais gravações e conferir a fase 0°/180°.
 - [ ] **B8. Checagem de aliasing automática** no relatório: marcar picos acima de ~0,4·fs
       e listar candidatos de alias `|f − k·fs|` (hoje `f_n = peaks[0]`, o pico mais alto,
       sem checar).

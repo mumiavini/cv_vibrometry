@@ -9,6 +9,100 @@ Newest issue first.
 
 ---
 
+## [OPEN] Video and accelerometer of session `k1_cm_acc` are different takes and disagree on damping
+
+**Date opened:** 2026-10-25
+**Area:** `Code/sessions/k1_cm_acc.vibro.json`, `Code/videos/k1_cm_acc.mov`, `Code/data/acelerometro/`
+
+**Symptom:** app comparison gave phase −117°, r = −0.35, amplitude −38 % (as pushed), and nothing
+better after fixing the scale. With the scale fixed, video f_n = 7.763 Hz vs PULSE 7.600 Hz (+2.1 %,
+above the 1 % criterion), and the decay differs by a factor ~7: video envelope σ = 0.049 1/s
+(ζ ≈ 0.0010; envelope 20.5 → 15.3 m/s²-equivalent between t = 1 and 7 s) vs PULSE σ = 0.345 1/s
+(ζ ≈ 0.0072; 19 → 2.4 m/s² in the same time).
+
+**Root cause (partly established):** the file metadata say the video starts at 15/10/2026 20:22:39
+(−03:00) and the PULSE record is stamped 15/10/2026 20:48:57 — 26 min apart, so they are separate
+releases, not one event seen by two sensors (unless the lab PC clock is off). Phase, waveform overlay
+and `sync_mode = impact` are therefore meaningless for this pair; only f_n, ζ and amplitude trends
+can be compared. The 7× damping difference and the 2 % frequency difference are not explained yet
+(different release, spring preload, damper blade position?).
+
+**Proposed fix:** record video and PULSE simultaneously (impact + LED), and compare envelopes
+(`vibrometry.reference`) before using waveform metrics; confirm the lab-PC clock.
+
+---
+
+## [OPEN] `curva_acelerometro_tempo_k1.csv` is a stroke trace, not a waveform
+
+**Date opened:** 2026-10-25
+**Area:** `Code/data/acelerometro/curva_acelerometro_tempo_k1.csv`, `vibrometry/accelerometer.py`
+
+**Symptom:** double integration of the CSV (app step 3) gives a dominant frequency of 2.76 Hz with
+`f_hp = 2 Hz`, or an amplitude 0.55 mm vs 7.6 mm of the video with `f_hp = 7.1 Hz`.
+
+**Root cause:** 97 % of successive differences alternate in sign and ~47 % of the energy is at 50–100 Hz
+(200 Hz series): the digitizer returned alternating upper/lower extremes of the vertical strokes of the
+PULSE plot (the plot only has ~25.6 samples/s). The 6.5–9 Hz band still carries the right frequency
+(7.606 Hz) but only ~35–55 % of the true amplitude, and the phase is not trustworthy.
+
+**Fix applied:** documented in `Code/data/acelerometro/README.md`; use the envelope/spectrum
+(`acc_k1_envelope_digitalizado.csv`, `vibrometry.reference`) as the reference instead.
+Real fix: export the data from PULSE.
+
+---
+
+## [OPEN] The app's analytical prediction (clamped Euler-Bernoulli) does not apply to the bench
+
+**Date opened:** 2026-10-25
+**Area:** `Code/vibrometry/session.py` (`SpecimenCfg.predicted_f1`), `vibroapp` step 1 and 2
+
+**Symptom:** predicted f₁ = 8.90 Hz (−12.8 % error) for the session as pushed, from placeholder
+parameters (steel, L = 300 mm, t = 1 mm).
+
+**Root cause:** the specimen section held the ruler placeholders, and the model is a clamped cantilever
+with tip mass; the real system is an Al 6351-T6 bar pinned at a bearing, with a spring at 632 mm and the
+accelerometer at 300 mm (`vibrometry.beam.BeamFE` handles this; the app does not use it yet).
+
+**Proposed fix:** add a support type (clamped / pinned + springs + point masses, including spring
+effective mass) to `SpecimenCfg` and use `BeamFE` in `predicted_f1`.
+
+---
+
+## [SOLVED] Session `k1_cm_acc` had a wrong spatial scale, a stray analysis frequency and placeholder metadata
+
+**Date opened:** 2026-10-25
+**Date solved:** 2026-10-25
+**Area:** `Code/sessions/k1_cm_acc.vibro.json`
+
+**Symptom:** video displacement 7.2× too small (A = 1.05 mm, p2p 2.5 mm); comparison evaluated at
+`f_analysis = 0.79 Hz`; predicted f₁ from a steel ruler; camera tagged "osmo", date 20261024.
+
+**Root cause:** the calibration segment (p1 = (27.7, 512.2), p2 = (1430.6, 470.4), 1403.5 px) was the
+whole free length of the bar but was entered as `length_mm = 100` → 0.07125 mm/px instead of
+720 / 1403.5 = **0.5130 mm/px**. Checks that confirm 0.513: the screw hole (88 mm from the tip) falls at
+(1430.6 − 1265) · 0.513 = 85 mm; the accelerometer ROI is 289 mm from p1 and 431 mm from p2 (measured:
+300 and 430 mm); with the corrected scale the video acceleration-equivalent amplitude (ω²·A = 18 m/s²)
+matches the PULSE envelope (17–19 m/s²).
+
+**Fix:** calibration length 720 mm, scale 0.5130 mm/px, `f_analysis = null`, specimen = Al 6351-T6
+720 × 25.4 × 12.7 mm, camera = iphone (iPhone 17e per file metadata), date = 20261015 (file metadata).
+Original values: scale 0.07125, length 100, f_analysis 0.79, steel 300 × 25 × 1 mm.
+
+---
+
+## [OPEN] 91 MB video tracked in git
+
+**Date opened:** 2026-10-25
+**Area:** `Code/videos/k1_cm_acc.mov`
+
+**Symptom:** the file is 91 MB; GitHub warns above 50 MB and rejects above 100 MB, so the next video
+cannot be pushed.
+
+**Mitigation done:** `Code/videos/*` is git-ignored (except the two tracked files); the history still
+carries the 91 MB blob. **Proposed fix:** Git LFS or external storage with SHA-256 in a manifest.
+
+---
+
 ## [OPEN] Full-video batch processing is too slow for real-time use
 
 **Date opened:** 2026-09-03
