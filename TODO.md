@@ -64,12 +64,9 @@ seria 626 N/m); considerar inércia do conjunto cilindro/dial do lado da junta.
 
 ## A. Dados e decisões (bloqueia o resto)
 
-- [~] **A1. Manifesto dos vídeos** (sessões `Code/sessions/*.vibro.json` fazem esse papel; `Code/videos/README.md` lista o que está versionado) (`Code/videos/manifest.csv`): um registro por vídeo
-      com: arquivo, caso (barra / mola-variação X), fps *real de captura*,
-      resolução, duração, escala mm/px, ROIs usadas, f_n do acelerômetro [Hz],
-      observações (iluminação, fixação, excitação). Hoje o repo só tem o proxy
-      `video low res.LRF`; os vídeos reais não estão versionados (guardar fora do
-      git + SHA256 no manifesto).
+- [~] **A1. Manifesto dos vídeos**: as sessões `Code/sessions/*.vibro.json` registram fps, escala, ROIs e
+      acelerômetro de cada ensaio; `Code/videos/README.md` lista os vídeos versionados. Falta registrar
+      SHA-256 dos vídeos guardados fora do git (limite de tamanho, ver `issues.md`).
 - [x] **A2. fps do slow-mo**: decidido que não entra no TCC como tema; basta declarar na
       metodologia o fps de captura (240 fps) e passá-lo ao app via `--fps`.
 - [x] **A3. Instrumentação (identificada nas fotos, conferir no certificado/datasheet)**:
@@ -100,8 +97,8 @@ seria 626 N/m); considerar inércia do conjunto cilindro/dial do lado da junta.
 
 ## B. Código (`Code/vibrometry/`)
 
-- [x] **B1. Execução em lote** (etapa 5 do app, `workflow.process_session`) — (`batch.py` + CLI `--batch manifest.csv`): processa
-      todos os vídeos e grava `results.csv` (f_n, ζ, pico, SNR, fps, ROI).
+- [x] **B1. Execução em lote**: etapa 5 do app (`workflow.process_session`); falta rodar com as
+      repetições reais (3 vídeos por mola).
 - [ ] **B2. Incerteza e repetibilidade** (`uncertainty.py`): resolução Δf = 1/T,
       interpolação parabólica do pico, f_n por janelas/segmentos (média ± desvio),
       bootstrap; agregar N vídeos por caso → média ± desvio.
@@ -127,11 +124,8 @@ seria 626 N/m); considerar inércia do conjunto cilindro/dial do lado da junta.
       (estimar do fps/modo ou medir com barra horizontal), atraso entre linhas
       Δt_linha, defasagem sobre a altura da ROI = 2π·f_n·Δt. Mostra que afeta a fase,
       não a frequência, e dá um número para a seção de limitações.
-- [x] **B7. Dois pontos medidos** (feito: razão 2,045 medida × 2,079 do modelo; ver Estado atual) — (parafuso e acelerômetro)**: o parafuso foi usado como mais
-      um ponto de medição. Usar as duas ROIs como duas amostras da **forma modal**: razão de
-      amplitudes (e fase 0/180°) medida × `SpringSupportedBeam.mode_shape(x)` nas posições
-      reais (A5). Isso dá um resultado multiponto concreto além da frequência. Se o
-      parafuso estiver muito perto do engaste (amplitude ≈ 0), reportar o SNR dele.
+- [x] **B7. Dois pontos medidos (parafuso e acelerômetro)**: razão de amplitudes medida 2,045 × 2,079 da forma
+      modal do `BeamFE` (−1,7 %), ver "Estado atual". Falta repetir nas demais gravações e conferir a fase 0°/180°.
 - [ ] **B8. Checagem de aliasing automática** no relatório: marcar picos acima de ~0,4·fs
       e listar candidatos de alias `|f − k·fs|` (hoje `f_n = peaks[0]`, o pico mais alto,
       sem checar).
