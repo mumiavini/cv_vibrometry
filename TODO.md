@@ -171,33 +171,37 @@ seria 626 N/m); considerar inércia do conjunto cilindro/dial do lado da junta.
 > **todo número que ainda não saiu do app fica como placeholder marcado** (`\TODO{}`/`??`),
 > nunca valor inventado. Os relatórios exportados pelo app entram como tabelas/figuras.
 
-- [ ] **D1. Equipamentos** (acelerômetro B&K 4507 001, aquisitor LAN-XI 3160-A-4/2, PULSE
+> **Estado (2026-10-25):** texto reescrito com placeholders `\TODO{}` (57) para tudo que depende da
+> campanha de laboratório; comentários `% PRELIMINAR:` guardam os valores da primeira análise e `% REVISAR:`
+> marcam afirmações que dependem do resultado final. D1–D8 e D11 estão em rascunho completo; falta preencher.
+
+- [~] **D1. Equipamentos** (acelerômetro B&K 4507 001, aquisitor LAN-XI 3160-A-4/2, PULSE
       LabShop; fotos já em `Book/Images/acelerometro_montado.jpg`, `aquisitor_bk_3160.jpg`,
       `frame_ensaio_mola.jpg`; a foto da tela `pulse_curva_acelerometro_foto.jpg` é provisória): substituir DJI Osmo Action 4 / RockSteady / exposição ≤ 1/2000 s
       pelo smartphone real (modelo, modo slow-mo, fps real, resolução, exposição se
       conhecida). Reescrever o parágrafo de rolling shutter: não foi mitigado por exposição,
       foi **quantificado** (B6).
-- [ ] **D2. Modelo analítico da mola com DCL**: figura TikZ do diagrama de corpo livre
+- [~] **D2. Modelo analítico da mola com DCL**: figura TikZ do diagrama de corpo livre
       (mola, massa, peso, força elástica, inércia), EOM `m ẍ + c ẋ + k x = 0`, ω_n = √(k/m_ef),
       k da mola helicoidal, massa efetiva da mola, tabela de parâmetros com incerteza.
       Fazer o mesmo DCL/seção para a barra (Euler-Bernoulli já existe; faltam condições de
       contorno e figura).
-- [ ] **D3. Reescrever "Estratégia de Validação"**: referência primária = acelerômetro
+- [~] **D3. Reescrever "Estratégia de Validação"**: referência primária = acelerômetro
       (f_n, ζ e, com o sinal bruto, comparação de forma de onda/deslocamento); secundária =
       teoria; critério de aceitação e como a incerteza entra.
-- [ ] **D4. Seção de iluminação/flicker** (B5) e declaração do fps de captura (240 fps).
-- [ ] **D5. Resultados**: substituir "Resultados Preliminares" (régua a 23,98 fps, erro 12,5 %,
+- [~] **D4. Seção de iluminação/flicker** (B5) e declaração do fps de captura (240 fps).
+- [~] **D5. Resultados**: substituir "Resultados Preliminares" (régua a 23,98 fps, erro 12,5 %,
       Nyquist 11,99 Hz) por: resultados principais (barra, mola) + a régua mantida como ensaio
       exploratório/histórico, com a discussão honesta já escrita.
-- [ ] **D6. Discussão e Limitações** (seção própria): rolling shutter, câmera de celular, fps,
+- [~] **D6. Discussão e Limitações** (seção própria): rolling shutter, câmera de celular, fps,
       flicker, sem sinal bruto do acelerômetro, n de repetições, escala 2D.
-- [ ] **D7. Conclusão + Trabalhos futuros** (global shutter, aquisição sincronizada,
+- [~] **D7. Conclusão + Trabalhos futuros** (global shutter, aquisição sincronizada,
       full-field, tempo real). Não existe seção de conclusão hoje.
-- [ ] **D8. Resumo com resultado numérico + Abstract em inglês + palavras-chave**.
-- [ ] **D9. Cabeçalho** ("1º Semestre 2026" → semestre atual), checar com a coordenação se o
+- [~] **D8. Resumo com resultado numérico + Abstract em inglês + palavras-chave**.
+- [~] **D9. Cabeçalho** ("1º Semestre 2026" → semestre atual), checar com a coordenação se o
       formato artigo 2 colunas é aceito para a entrega final do TCC 2.
 - [ ] **D10. Cronograma** atualizado ao que de fato foi feito.
-- [ ] **D11. Referências**: adicionar fontes para flicker/rolling shutter em vibrometria de
+- [~] **D11. Referências**: adicionar fontes para flicker/rolling shutter em vibrometria de
       baixo custo e para a mola helicoidal (Shigley/Rao).
 
 ## Perguntas em aberto
