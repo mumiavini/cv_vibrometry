@@ -22,10 +22,18 @@ def app():
 
 
 def _page(app):
+    """Plan page on the repository session with a fixed bench specimen (the
+    session file itself may be edited by the user)."""
     from vibroapp.page_plan import PlanPage
     from vibroapp.state import AppState
     state = AppState()
     state.session = Session.load(SESSION)
+    sp = state.session.specimen
+    sp.support = "pinned"
+    sp.tip_mass_g = 0.0
+    sp.springs = [{"name": "mola k1", "x_mm": 632.0, "k_n_m": 1500.0,
+                   "mass_g": 0.0, "hardware_g": 0.0}]
+    sp.masses = [{"name": "acelerometro", "x_mm": 300.0, "mass_g": 5.0}]
     return state, PlanPage(state)
 
 

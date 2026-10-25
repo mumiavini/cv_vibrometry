@@ -515,6 +515,13 @@ def results_dict(session: Session, analysis: VideoAnalysis | None,
             "janela_s": list(comparison.window),
             "metricas": comparison.metrics.to_dict() if comparison.metrics else None,
         }
+    if session.specimen.uncertainties:
+        from .uncertainty import model_uncertainty
+        try:
+            d["incerteza_modelo"] = model_uncertainty(
+                session.specimen, session.specimen.uncertainties).to_dict()
+        except (ValueError, KeyError, ZeroDivisionError, np.linalg.LinAlgError) as exc:
+            d["incerteza_modelo"] = {"erro": f"{type(exc).__name__}: {exc}"}
     d["criterios"] = criteria_checks(session, analysis, comparison)
     return _clean(d)
 

@@ -15,7 +15,8 @@ Code/
   sessions/              *.vibro.json: um arquivo por ensaio (parâmetros, ROIs, calibração)
   videos/                vídeos brutos (fora do git, exceto os listados no README da pasta)
   data/acelerometro/     referência do acelerômetro (curvas do PULSE) — ver README da pasta
-  tools/                 scripts auxiliares: digitalização da foto do PULSE, figuras do TCC
+  tools/                 scripts auxiliares: digitalização da foto do PULSE, figuras do TCC,
+                         comparação de métodos, forma modal multiponto, orçamento de incerteza
   legacy/                material antigo/exploratório (notebooks, imagens de teste)
 docs/                    planejamento da campanha de medição
 TODO.md                  plano de fechamento do TCC e estado atual
@@ -33,6 +34,9 @@ cd Code && python -m pytest tests                # testes
 cd Code && python -m vibrometry.run_analysis --synthetic          # verificação com vídeo sintético
 cd Code && python -m vibrometry.reference …      # vídeo × acelerômetro (envoltória, f, ζ, amplitude)
 cd Code && python -m tools.figuras_tcc_regua     # figuras do ensaio preliminar da régua
+cd Code && python -m tools.comparar_metodos sessions/k1_cm_acc.vibro.json        # fase × NCC (E1)
+cd Code && python -m tools.forma_modal_multiponto sessions/k1_cm_acc.vibro.json  # forma modal, MAC (E5)
+cd Code && python -m tools.incerteza sessions/k1_cm_acc.vibro.json               # incerteza de f (B2/E2)
 ```
 
 ## Módulos principais do núcleo (`Code/vibrometry/`)
@@ -44,6 +48,9 @@ cd Code && python -m tools.figuras_tcc_regua     # figuras do ensaio preliminar 
 | `accelerometer` | importação do CSV e integração aceleração → deslocamento |
 | `beam` | Euler-Bernoulli: viga engastada, **mola/massa na ponta (`SpringSupportedBeam`)**, **elementos finitos com mola, massa e raiz articulada (`BeamFE`)** |
 | `reference` | comparação do vídeo com a referência digitalizada do acelerômetro |
+| `baseline` | linha de base: refinamento sub-pixel por fase × NCC com parábola × NCC inteiro (ruído, SNR, ζ) |
+| `modeshape` | ROIs ao longo da barra, forma modal medida (amplitude/fase), MAC × `BeamFE`, centro de rotação |
+| `uncertainty` | incerteza de f (resolução, segmentos), repetibilidade (t-Student), propagação no modelo (linear + Monte Carlo) |
 | `session`, `workflow`, `report`, `render` | sessões, processamento de ponta a ponta, tabelas/figuras para o texto |
 
 ## Ensaio atual (bancada)

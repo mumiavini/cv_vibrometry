@@ -18,7 +18,9 @@ Ordem sugerida: **A → B → C → D**. Dados e decisões (A) destravam tudo.
 **Já feito (em `main`):** aplicativo (`vibroapp`, 6 etapas), núcleo `vibrometry` (rastreamento por fase,
 sincronismo, integração do acelerômetro, lote, relatório LaTeX), modelos analíticos da barra com mola e
 raiz articulada (`BeamFE`), referência do acelerômetro digitalizada, primeira sessão real
-(`Code/sessions/k1_cm_acc.vibro.json`, iPhone 17e, 240 fps, mola k₁), 35 testes.
+(`Code/sessions/k1_cm_acc.vibro.json`, iPhone 17e, 240 fps, mola k₁), 67 testes. Ferramentas de análise da
+sessão em `Code/tools/` (comparação de métodos E1, forma modal multiponto E5, incerteza B2/E2), resultados em
+`Code/sessions/k1_cm_acc_resultados/{comparacao_metodos,forma_modal,incerteza}/`.
 
 **Primeira análise (vídeo `k1_cm_acc.mov`, ROI no acelerômetro, escala corrigida 0,513 mm/px):**
 
@@ -102,9 +104,12 @@ seria 626 N/m); considerar inércia do conjunto cilindro/dial do lado da junta.
 
 - [x] **B1. Execução em lote**: etapa 5 do app (`workflow.process_session`); falta rodar com as
       repetições reais (3 vídeos por mola).
-- [ ] **B2. Incerteza e repetibilidade** (`uncertainty.py`): resolução Δf = 1/T,
-      interpolação parabólica do pico, f_n por janelas/segmentos (média ± desvio),
-      bootstrap; agregar N vídeos por caso → média ± desvio.
+- [~] **B2. Incerteza e repetibilidade** (`vibrometry/uncertainty.py`, CLI `python -m tools.incerteza <sessão>`):
+      feito — resolução 1/T, f_n por segmentos (tipo A, entra em `ModalSummary.f_uncertainty` e no relatório),
+      repetibilidade de N tomadas (média, desvio, IC 95 % t-Student), propagação linear + Monte Carlo dos
+      parâmetros do modelo (`SpecimenCfg.uncertainties`, caminhos tipo `springs[0].k_n_m`), incerteza da escala e
+      do erro relativo. Falta: rodar `repeatability` com as 3 tomadas reais por mola (sem bootstrap: com 4
+      segmentos e n = 3 tomadas o t-Student basta).
 - [~] **B3. Comparação com o acelerômetro** (`vibrometry/reference.py`, CLI
       `python -m vibrometry.reference`): feito e testado com sinais sintéticos — f_n vídeo ×
       acelerômetro (erro %), decaimento/ζ de cada envoltória, razão de amplitude
@@ -117,8 +122,8 @@ seria 626 N/m); considerar inércia do conjunto cilindro/dial do lado da junta.
       ponta) e **`BeamFE`** (elementos finitos de Euler-Bernoulli: molas e massas em posições
       quaisquer, raiz engastada/articulada/mola torsional, forma modal). Verificados entre si
       e contra a tabela do texto (21,1 Hz). CLI: `--spring-k/--spring-pos`,
-      `--tip-mass/--mass-pos`, `--root`, `--root-stiffness`. Falta: incerteza propagada
-      (k, L, h, E).
+      `--tip-mass/--mass-pos`, `--root`, `--root-stiffness`. Incerteza propagada: feita (B2). Molas e
+      massas agora entram pela função de forma do elemento (antes iam para o nó mais próximo, `issues.md`).
 - [ ] **B5. Análise de flicker** (`flicker.py`): espectro do brilho médio de uma região
       estática; checar picos em 100/120 Hz (rede 60 Hz → ripple em 120 Hz) e o
       alias deles dado o fps; reportar razão de modulação e se interfere na banda de
@@ -159,11 +164,12 @@ seria 626 N/m); considerar inércia do conjunto cilindro/dial do lado da junta.
       resolução espectral Δf = 1/T** — o esperado é "diferença não resolvida", e isso vira
       resultado (o efeito é pequeno nessa posição/massa; para 10 g na ponta seria ≈ 3 %).
       Comparar f_n com/sem acelerômetro com a incerteza de cada vídeo.
-- [ ] **C7. Multiponto / full-field**: ROIs definidas em pós-processamento sobre o mesmo
+- [~] **C7. Multiponto / full-field**: ROIs definidas em pós-processamento sobre o mesmo
       vídeo atuam como uma matriz de sensores virtuais. Para sustentar o termo
       "full-field" no texto, mostrar N ROIs ao longo da barra (amplitude e fase × posição)
       e comparar com a forma modal teórica; sem isso, chamar de "medição multiponto
-      sem contato" e deixar full-field como potencial.
+      sem contato" e deixar full-field como potencial. **Feito na sessão k₁ (ver E5)**; falta repetir com
+      marcas ao longo da barra.
 
 ## D. Texto (`Book/TCC - Vinicius Andrade Trento.tex`)
 
@@ -208,16 +214,53 @@ seria 626 N/m); considerar inércia do conjunto cilindro/dial do lado da junta.
 
 Impacto decrescente. Os pontos 1 e 2 são os que mais elevam o nível do trabalho.
 
-- [ ] **E1. Linha de base: fase × correlação simples.** O texto afirma que a estimativa por fase é mais robusta
+- [x] **E1. Linha de base: fase × correlação simples.** O texto afirma que a estimativa por fase é mais robusta
       que a correlação de intensidade, mas isso não foi medido. Rodar os mesmos vídeos só com a correlação
       cruzada normalizada (o estágio grosseiro já existe em `tracking.py`, sem o refinamento por fase) e comparar
       f_n, amplitude, ruído (D1) e ζ com o método completo. Entra em Resultados (nova subseção) e na Discussão.
-- [ ] **E2. Orçamento de incerteza** (junto de B2): propagar a incerteza de k (medido), massas, L, posições, escala
+      **Feito** (`vibrometry/baseline.py`, `python -m tools.comparar_metodos <sessão>`; `RoiTracker(subpixel=
+      "phase"|"parabolic"|"none")`). Sessão k₁, ROIs acelerômetro/parafuso:
+
+      | | fase (ω₀) | fase (ω local) | NCC + parábola | NCC inteiro |
+      |---|---|---|---|---|
+      | f_n [Hz] | 7,7630 | 7,7630 | 7,7630 | 7,7630 |
+      | A acelerômetro [mm] | 7,541 | 7,539 | 7,545 | 7,542 |
+      | ζ (acelerômetro) | 0,00103 | 0,00102 | 0,00103 | 0,00106 |
+      | piso de ruído espectral, acel./parafuso [µm] | 2,7 / 5,3 | 2,7 / 5,0 | 2,9 / 5,2 | 7,0 / 9,0 |
+      | ruído estático, 2 ROIs na parede, σ_y [px] | 0,030 | 0,035 | 0,026 | 0 (quantizado em 1 px) |
+
+      **Conclusão honesta:** a 7,5–15,5 mm de amplitude (15–30 px) os quatro dão a mesma f_n, A (±0,3 %) e ζ; a
+      fase empata com a NCC com interpolação parabólica e as duas têm piso de ruído 1,7–2,6× menor que a NCC
+      inteira. **A frase "fase é mais robusta que correlação de intensidade" não é sustentada por este ensaio**:
+      reescrever como "o refinamento sub-pixel (fase ou parábola) reduz o piso de ruído em relação à correlação
+      inteira; a vantagem da fase deve aparecer em amplitudes sub-pixel" e, se quiser provar, filmar um ensaio de
+      baixa amplitude (toque leve, < 1 px). Achado lateral: a fase com ω₀ tem viés de ganho quando a textura não
+      está centrada no filtro (opção `local_frequency`, `issues.md`).
+- [~] **E2. Orçamento de incerteza** (junto de B2): propagar a incerteza de k (medido), massas, L, posições, escala
       (mm/px), fps e resolução espectral (Δf = 1/T) até f_n previsto e medido, e colocar barras de erro nas
       tabelas e figuras de C1–C2. Reportar também n = 3 como mínimo (média, desvio, intervalo).
-- [ ] **E5. Decidir "full-field".** Ou mostrar a forma modal com ≥ 5 ROIs ao longo da barra (amplitude e fase ×
+      **Feito com tolerâncias de hipótese** (`Code/sessions/k1_cm_acc_resultados/incerteza/`; k de catálogo ±10 %,
+      massa da ferragem ±5 g, posições ±2 mm, L ±2 mm, b/h ±0,05 mm, E ±2 GPa, ρ ±1 %):
+      modelo f₁ = 7,602 ± 0,382 Hz (5,0 %; Monte Carlo 7,576 ± 0,394 Hz), **k responde por 98,6 % da variância**
+      (massa 0,6 %, posição da mola 0,4 %, resto < 0,3 %); vídeo f_n = 7,763 Hz, u tipo A (4 segmentos) =
+      0,007 Hz, 1/T = 0,148 Hz; erro vídeo × modelo = +2,1 ± 5,1 % → **dentro da incerteza do modelo**, ou seja,
+      com k de catálogo o modelo não discrimina 2 %. Escala 0,5130 ± 0,0009 mm/px (0,17 %). Com k medido
+      estaticamente a ±2 %, u(f₁) do modelo cai para ≈ 0,09 Hz. Não incluído: erro de forma do modelo (posição da
+      raiz, ver E5). Falta: k e massas medidos, n = 3 tomadas, barras de erro em C1–C2.
+- [~] **E5. Decidir "full-field".** Ou mostrar a forma modal com ≥ 5 ROIs ao longo da barra (amplitude e fase ×
       posição, comparada ao `BeamFE`; é só pós-processamento do mesmo vídeo) ou trocar "full-field" por
       "medição multiponto" na introdução, na justificativa, no resumo e na discussão. (Ver também C7.)
+      **Forma modal feita** (`vibrometry/modeshape.py`, `python -m tools.forma_modal_multiponto <sessão>`,
+      `Code/sessions/k1_cm_acc_resultados/forma_modal/`): 15 ROIs (13 ao longo da borda inferior da barra +
+      acelerômetro + parafuso), busca só vertical; **9 confiáveis** (NCC ≥ 0,8 e R² ≥ 0,9; falham 250, 350, 400,
+      450, 680 e 710 mm, borda sem textura). Todos os pontos confiáveis em fase (|φ| < 1°).
+      MAC × `BeamFE` (raiz em x = 0) = **0,9988**. Os pontos caem numa reta (corpo quase rígido girando sobre a
+      raiz): ajuste linear dá centro de rotação efetivo **x₀ = −36 mm** (R² = 0,9997), ou seja, 36 mm antes do
+      x = 0 da calibração. Com a raiz do modelo em x₀: MAC = **0,9999**, erros pontuais ≤ 2 % (acelerômetro
+      −4 %), f₁ previsto 7,543 Hz. → medir no laboratório a distância do eixo do mancal ao x = 0 (roteiro, seção 2).
+      **Decisão sugerida (falta confirmar):** 9 pontos não são "full-field"; usar "medição multiponto sem contato"
+      no texto e deixar full-field como trabalho futuro, a não ser que a próxima sessão com marcas a cada 50 mm
+      dê os 15 pontos.
 - [ ] **E6. Enxugar a teoria.** Cortar ou ligar aos resultados o que não é usado: célula de Bragg/heterodinagem,
       rainflow e Palmgren-Miner, detalhes de SHM. Ver também E9 (escopo de SHM).
 - [ ] **E7. Fixar os critérios de aceitação antes de olhar os dados finais.** Hoje o texto usa 1 % para a frequência

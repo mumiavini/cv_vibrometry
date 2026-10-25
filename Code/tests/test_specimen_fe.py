@@ -125,3 +125,16 @@ def test_mode_shape_check_needs_two_positioned_rois():
     s.specimen = bench(900.0, 83.0)
     s.video.roi_positions_mm = {"A": 300.0}
     assert mode_shape_check(s, _analysis({"A": 1.0, "B": 2.0}, 7.6)) is None
+
+
+def test_windows_style_relative_paths_resolve(tmp_path):
+    (tmp_path / "videos").mkdir()
+    (tmp_path / "videos" / "a.mov").write_bytes(b"x")
+    (tmp_path / "sessions").mkdir()
+    p = tmp_path / "sessions" / "w.vibro.json"
+    p.write_text(json.dumps({"name": "w", "video": {"path": "..\\\\videos\\\\a.mov"}}),
+                 encoding="utf-8")
+    s = Session.load(p)
+    assert Path(s.video.path) == (tmp_path / "videos" / "a.mov").resolve()
+    saved = json.loads(Path(s.save(p)).read_text(encoding="utf-8"))
+    assert saved["video"]["path"] == "../videos/a.mov"

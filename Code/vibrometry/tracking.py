@@ -16,6 +16,11 @@ tracked in two stages:
 The total displacement is the sum of the two terms.  For small-amplitude
 vibrations the coarse term stays at zero and the measurement reduces to the
 pure phase-based estimate described in the TCC.
+
+For comparison with intensity-based tracking (baseline of the method), the
+sub-pixel stage can be replaced (``subpixel``): ``"parabolic"`` refines the
+NCC peak by fitting a parabola through its neighbours (the usual sub-pixel
+template matching / DIC step), and ``"none"`` keeps the integer NCC position.
 """
 
 from __future__ import annotations
@@ -44,6 +49,17 @@ def extract_patch(frame: np.ndarray, x: int, y: int, w: int, h: int,
         ((cy0 - y0, y1 - cy1), (cx0 - x0, x1 - cx1)),
         mode="edge",
     )
+
+
+SUBPIXEL_METHODS = ("phase", "parabolic", "none")
+
+
+def _parabolic_offset(left: float, centre: float, right: float) -> float:
+    """Sub-sample position of a peak from three samples (-0.5 .. 0.5)."""
+    den = left - 2.0 * centre + right
+    if den >= 0 or not np.isfinite(den):
+        return 0.0
+    return float(np.clip(0.5 * (left - right) / den, -0.5, 0.5))
 
 
 @dataclass
@@ -82,7 +98,15 @@ class RoiTracker:
         bank: GaborBank | None = None,
         search_margin: int = 60,
         min_score: float = 0.3,
+        subpixel: str = "phase",
+        search_axes: str = "xy",
     ) -> None:
+        if search_axes not in ("xy", "x", "y"):
+            raise ValueError("search_axes must be 'xy', 'x' or 'y'")
+        self.search_axes = search_axes
+        if subpixel not in SUBPIXEL_METHODS:
+            raise ValueError(f"subpixel must be one of {SUBPIXEL_METHODS}")
+        self.subpixel = subpixel
         self.bank = bank if bank is not None else GaborBank()
         self.search_margin = search_margin
         self.min_score = min_score
@@ -107,10 +131,15 @@ class RoiTracker:
         last_xy = self.last_xy
 
         # --- stage 1: integer-pixel template matching in a local window ---
-        wx0 = int(np.clip(last_xy[0] - m, 0, self.width - r.w))
-        wy0 = int(np.clip(last_xy[1] - m, 0, self.height - r.h))
-        wx1 = int(np.clip(last_xy[0] + r.w + m, r.w, self.width))
-        wy1 = int(np.clip(last_xy[1] + r.h + m, r.h, self.height))
+        # (``search_axes`` restricts the search, e.g. "y" for an ROI on a
+        # straight edge, whose position along the edge is undetermined —
+        # the aperture problem)
+        mx = m if "x" in self.search_axes else 0
+        my = m if "y" in self.search_axes else 0
+        wx0 = int(np.clip(last_xy[0] - mx, 0, self.width - r.w))
+        wy0 = int(np.clip(last_xy[1] - my, 0, self.height - r.h))
+        wx1 = int(np.clip(last_xy[0] + r.w + mx, r.w, self.width))
+        wy1 = int(np.clip(last_xy[1] + r.h + my, r.h, self.height))
         window = frame[wy0:wy1, wx0:wx1].astype(np.float32)
 
         ncc = cv2.matchTemplate(window, self.template, cv2.TM_CCOEFF_NORMED)
@@ -120,13 +149,26 @@ class RoiTracker:
         self._score.append(float(max_val))
         self._coarse.append(self.last_xy - np.array([r.x, r.y]))
 
-        # --- stage 2: phase-based sub-pixel residual (Gabor bank) ---
-        cur_patch = extract_patch(frame, self.last_xy[0], self.last_xy[1],
-                                  r.w, r.h, self.bank.pad)
-        cur_responses = self.bank.responses(cur_patch)
-        residual, weight = self.bank.phase_displacement(
-            self.ref_responses, cur_responses
-        )
+        # --- stage 2: sub-pixel residual ---
+        if self.subpixel == "phase":          # Gabor phase (the method)
+            cur_patch = extract_patch(frame, self.last_xy[0], self.last_xy[1],
+                                      r.w, r.h, self.bank.pad)
+            cur_responses = self.bank.responses(cur_patch)
+            residual, weight = self.bank.phase_displacement(
+                self.ref_responses, cur_responses
+            )
+        elif self.subpixel == "parabolic":    # NCC peak interpolation
+            residual, weight = np.zeros(2), float(max_val)
+            ix, iy = max_loc
+            if max_val >= self.min_score:
+                if 0 < ix < ncc.shape[1] - 1:
+                    residual[0] = _parabolic_offset(
+                        ncc[iy, ix - 1], ncc[iy, ix], ncc[iy, ix + 1])
+                if 0 < iy < ncc.shape[0] - 1:
+                    residual[1] = _parabolic_offset(
+                        ncc[iy - 1, ix], ncc[iy, ix], ncc[iy + 1, ix])
+        else:                                 # integer NCC only
+            residual, weight = np.zeros(2), float(max_val)
         self._residual.append(residual)
         self._weight.append(weight)
 
@@ -154,6 +196,7 @@ def track_roi(
     bank: GaborBank | None = None,
     search_margin: int = 60,
     min_score: float = 0.3,
+    subpixel: str = "phase",
 ) -> TrackResult:
     """Track one ROI through the frame stack.
 
@@ -168,7 +211,8 @@ def track_roi(
         (the previous position is kept and a warning is attached).
     """
     tracker = RoiTracker(frames[0], roi, bank=bank,
-                         search_margin=search_margin, min_score=min_score)
+                         search_margin=search_margin, min_score=min_score,
+                         subpixel=subpixel)
     for k in range(1, frames.shape[0]):
         tracker.update(frames[k])
     return tracker.result()

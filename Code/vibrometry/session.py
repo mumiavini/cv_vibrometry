@@ -70,6 +70,10 @@ class SpecimenCfg:
     springs: list[dict] = field(default_factory=list)
     # {"name", "x_mm", "mass_g"}: lumped masses such as the accelerometer
     masses: list[dict] = field(default_factory=list)
+    # standard uncertainties of the parameters above, by path, in their own
+    # units, e.g. {"springs[0].k_n_m": 30, "masses[0].x_mm": 2, "L_mm": 1}
+    # (see vibrometry.uncertainty.model_uncertainty)
+    uncertainties: dict[str, float] = field(default_factory=dict)
 
     def beam(self) -> CantileverBeam:
         return CantileverBeam(self.L_mm / 1e3, self.b_mm / 1e3, self.t_mm / 1e3,
@@ -279,8 +283,11 @@ class Session:
                 : len(CHECKLIST)]
         if base is not None:
             for cfg in (s.video, s.accel):
-                if cfg.path and not os.path.isabs(cfg.path):
-                    cfg.path = str((base / cfg.path).resolve())
+                if cfg.path:
+                    # sessions saved on Windows store "..\\videos\\x.mov"
+                    p = cfg.path.replace("\\", "/") if os.sep == "/" else cfg.path
+                    if not os.path.isabs(p):
+                        cfg.path = str((base / p).resolve())
         return s
 
     @classmethod
@@ -293,7 +300,8 @@ class Session:
 
 
 def _relative(p: str, base: Path) -> str:
+    """Relative path with forward slashes (valid on Windows and POSIX)."""
     try:
-        return os.path.relpath(p, base)
+        return Path(os.path.relpath(p, base)).as_posix()
     except ValueError:              # different drive on Windows
         return p

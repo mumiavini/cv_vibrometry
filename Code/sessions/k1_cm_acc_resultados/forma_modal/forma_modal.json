@@ -1,0 +1,197 @@
+{
+  "sessao": "k1_cm_acc",
+  "unidade": "mm",
+  "frequencia_hz": 7.762968735035982,
+  "referencia": "Parafuso_de_fixação",
+  "modelo": "E-B, elementos finitos, articulado (mancal), 1 mola(s), 2 massa(s)",
+  "criterio_confiavel": {
+    "ncc_min": 0.8,
+    "r2_min": 0.9
+  },
+  "raiz_nominal": {
+    "modo": 1,
+    "f_modelo_hz": 7.602061230114179,
+    "mac": 0.9987984240289672
+  },
+  "centro_rotacao": {
+    "x0_mm": -36.06648637910871,
+    "r2_reta": 0.9997212508329586,
+    "raiz_deslocada_mm": 36.06648637910871,
+    "modo": 1,
+    "f_modelo_hz": 7.542833377520917,
+    "mac": 0.999882749408052
+  },
+  "pontos": [
+    {
+      "roi": "barra_50",
+      "x_mm": 50.0,
+      "amplitude": 2.0633550026462313,
+      "fase_graus": -0.9295175337145452,
+      "r2": 0.9869899906548295,
+      "ncc_min": 0.9637701511383057,
+      "confiavel": true,
+      "prevista_raiz_nominal": 1.2564908584219154,
+      "erro_raiz_nominal_pct": 64.215679629989,
+      "prevista_raiz_ajustada": 2.029431284602176,
+      "erro_raiz_ajustada_pct": 1.6715874196600577
+    },
+    {
+      "roi": "barra_100",
+      "x_mm": 100.0,
+      "amplitude": 3.206755742673519,
+      "fase_graus": -0.35450905873125294,
+      "r2": 0.9876584403452064,
+      "ncc_min": 0.9793651700019836,
+      "confiavel": true,
+      "prevista_raiz_nominal": 2.5116783602382147,
+      "erro_raiz_nominal_pct": 27.67382135542949,
+      "prevista_raiz_ajustada": 3.2057196186969357,
+      "erro_raiz_ajustada_pct": 0.03232110414585863
+    },
+    {
+      "roi": "barra_200",
+      "x_mm": 200.0,
+      "amplitude": 5.444513724455732,
+      "fase_graus": -0.3382396084994923,
+      "r2": 0.9875828895721355,
+      "ncc_min": 0.8906105160713196,
+      "confiavel": true,
+      "prevista_raiz_nominal": 5.013243882916236,
+      "erro_raiz_nominal_pct": 8.602610437707709,
+      "prevista_raiz_ajustada": 5.546554636706438,
+      "erro_raiz_ajustada_pct": -1.8397170664363793
+    },
+    {
+      "roi": "barra_250",
+      "x_mm": 250.0,
+      "amplitude": 16.449035916039,
+      "fase_graus": -179.11210189826102,
+      "r2": 0.7255108246183548,
+      "ncc_min": 0.6654272079467773,
+      "confiavel": false
+    },
+    {
+      "roi": "Acelerometro",
+      "x_mm": 300.0,
+      "amplitude": 7.540953825984316,
+      "fase_graus": -0.12445752750329575,
+      "r2": 0.9879164392019462,
+      "ncc_min": 0.9218801259994507,
+      "confiavel": true,
+      "prevista_raiz_nominal": 7.49625712468816,
+      "erro_raiz_nominal_pct": 0.5962535776547926,
+      "prevista_raiz_ajustada": 7.865284939621002,
+      "erro_raiz_ajustada_pct": -4.123577418065097
+    },
+    {
+      "roi": "barra_350",
+      "x_mm": 350.0,
+      "amplitude": 11.99592759864353,
+      "fase_graus": -178.60025857523345,
+      "r2": 0.5647295556877974,
+      "ncc_min": 0.6617552638053894,
+      "confiavel": false
+    },
+    {
+      "roi": "barra_400",
+      "x_mm": 400.0,
+      "amplitude": 10.397005456984905,
+      "fase_graus": -179.7917996064612,
+      "r2": 0.4479241413060435,
+      "ncc_min": 0.686991274356842,
+      "confiavel": false
+    },
+    {
+      "roi": "barra_450",
+      "x_mm": 450.0,
+      "amplitude": 11.342422373681861,
+      "fase_graus": -0.035421440896016065,
+      "r2": 0.9862203335448331,
+      "ncc_min": 0.7288476824760437,
+      "confiavel": false
+    },
+    {
+      "roi": "barra_500",
+      "x_mm": 500.0,
+      "amplitude": 12.421053458337406,
+      "fase_graus": 0.0020716176174744305,
+      "r2": 0.9874433067371106,
+      "ncc_min": 0.848753809928894,
+      "confiavel": true,
+      "prevista_raiz_nominal": 12.391606317757118,
+      "erro_raiz_nominal_pct": 0.2376377995328213,
+      "prevista_raiz_ajustada": 12.42429788584331,
+      "erro_raiz_ajustada_pct": -0.026113568233113116
+    },
+    {
+      "roi": "barra_550",
+      "x_mm": 550.0,
+      "amplitude": 13.557994944054121,
+      "fase_graus": 0.026915414486381906,
+      "r2": 0.9874988309802367,
+      "ncc_min": 0.8586778044700623,
+      "confiavel": true,
+      "prevista_raiz_nominal": 13.60260143938391,
+      "erro_raiz_nominal_pct": -0.3279262097663127,
+      "prevista_raiz_ajustada": 13.550221952622811,
+      "erro_raiz_ajustada_pct": 0.057364310772821316
+    },
+    {
+      "roi": "barra_600",
+      "x_mm": 600.0,
+      "amplitude": 14.709035104789216,
+      "fase_graus": 0.011754096189349639,
+      "r2": 0.9875516384609919,
+      "ncc_min": 0.844297468662262,
+      "confiavel": true,
+      "prevista_raiz_nominal": 14.810892581879973,
+      "erro_raiz_nominal_pct": -0.6877200447417466,
+      "prevista_raiz_ajustada": 14.673261238369346,
+      "erro_raiz_ajustada_pct": 0.2438031044272847
+    },
+    {
+      "roi": "Parafuso_de_fixação",
+      "x_mm": 632.0,
+      "amplitude": 15.504148978975465,
+      "fase_graus": 0.0,
+      "r2": 0.9878867291231588,
+      "ncc_min": 0.9028424620628357,
+      "confiavel": true,
+      "prevista_raiz_nominal": 15.583750132752362,
+      "erro_raiz_nominal_pct": -0.5107958809580727,
+      "prevista_raiz_ajustada": 15.391505941681476,
+      "erro_raiz_ajustada_pct": 0.7318519560125817
+    },
+    {
+      "roi": "barra_632",
+      "x_mm": 632.0,
+      "amplitude": 15.438355382729474,
+      "fase_graus": -0.002582207718802465,
+      "r2": 0.9880958758644166,
+      "ncc_min": 0.9578986763954163,
+      "confiavel": true,
+      "prevista_raiz_nominal": 15.583750132752362,
+      "erro_raiz_nominal_pct": -0.9329894844586332,
+      "prevista_raiz_ajustada": 15.391505941681476,
+      "erro_raiz_ajustada_pct": 0.3043850369516206
+    },
+    {
+      "roi": "barra_680",
+      "x_mm": 680.0,
+      "amplitude": 15.985285464023397,
+      "fase_graus": 0.011205012317702767,
+      "r2": 0.8978124403775313,
+      "ncc_min": 0.6921071410179138,
+      "confiavel": false
+    },
+    {
+      "roi": "barra_710",
+      "x_mm": 710.0,
+      "amplitude": 14.880716608551314,
+      "fase_graus": 0.13124318862003292,
+      "r2": 0.7472852002748541,
+      "ncc_min": 0.7369747161865234,
+      "confiavel": false
+    }
+  ]
+}

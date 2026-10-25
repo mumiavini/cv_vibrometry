@@ -82,6 +82,11 @@ class GaborBank:
     wavelengths: tuple[float, ...] = (8.0, 16.0)
     orientations: tuple[float, ...] = (0.0, np.pi / 4, np.pi / 2, 3 * np.pi / 4)
     sigma_factor: float = 0.56
+    # divide the phase difference by the local spatial frequency of the
+    # reference response (phase gradient along the filter direction) instead
+    # of the filter centre frequency omega0: removes the gain bias of the
+    # estimate when the texture is not centred in the filter band
+    local_frequency: bool = False
     filters: list[GaborFilter] = field(init=False)
     _fft_cache: dict = field(default_factory=dict, init=False, repr=False)
 
@@ -148,6 +153,23 @@ class GaborBank:
             out.append(real + 1j * imag)
         return out
 
+    @staticmethod
+    def _local_omega(f: GaborFilter, c_ref: np.ndarray, interior) -> float:
+        """Amplitude-weighted local spatial frequency of a response along the
+        filter direction, -sum Im(conj(C) dC/du) / sum |C|^2 [rad/pixel]
+        (the response phase decreases along u, see the sign note below).
+        Falls back to omega0 if the estimate is not usable."""
+        gy, gx = np.gradient(c_ref)
+        du = np.cos(f.theta) * gx + np.sin(f.theta) * gy
+        c = c_ref[interior]
+        den = float(np.sum(np.abs(c) ** 2))
+        if den <= 0.0:
+            return f.omega0
+        omega = -float(np.sum(np.imag(np.conj(c) * du[interior]))) / den
+        if not np.isfinite(omega) or not 0.25 * f.omega0 < omega < 4.0 * f.omega0:
+            return f.omega0
+        return omega
+
     def phase_displacement(
         self,
         ref_responses: list[np.ndarray],
@@ -192,8 +214,9 @@ class GaborBank:
             if w <= 0.0:
                 continue
             d_phi = np.angle(s)
+            omega = self._local_omega(f, c_ref, interior) if self.local_frequency else f.omega0
             directions.append((np.cos(f.theta), np.sin(f.theta)))
-            projections.append(d_phi / f.omega0)
+            projections.append(d_phi / omega)
             weights.append(w)
 
         if len(weights) < 2:

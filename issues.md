@@ -9,6 +9,90 @@ Newest issue first.
 
 ---
 
+## [OPEN] Phase displacement has a gain bias when the ROI texture is not centred in the Gabor band
+
+**Date opened:** 2026-10-25
+**Area:** `Code/vibrometry/gabor.py` (`GaborBank.phase_displacement`), `Code/tests/test_subpixel_baseline.py`
+
+**Symptom:** on synthetic textures with a known sub-pixel shift, the phase estimate had an RMS error of
+≈ 0.045 px while the parabolic NCC peak gave ≈ 0.003 px; the error grows with the shift (a gain, not
+noise). The test that assumed "phase beats NCC" failed and was replaced by honest tests (both beat
+integer NCC by > 5×).
+
+**Root cause:** each filter converts phase to displacement as Δφ / ω₀, with ω₀ the filter centre
+frequency. The response of a broadband texture is dominated by the local spatial frequency of the
+image inside the band, not by ω₀, so the estimate is scaled by ω_local / ω₀ (a few % to tens of %
+depending on the texture).
+
+**Proposed fix (not yet implemented as default):** `GaborBank(local_frequency=True)` (and
+`TrackingParams.local_frequency`) divides by the amplitude-weighted local frequency
+−ΣIm(C̄·∂C/∂u)/Σ|C|² of the reference response (falls back to ω₀ outside 0.25–4 ω₀). It reduces the
+bias to < 0.6× in the synthetic tests (seeds 1–3). On the real video `k1_cm_acc` the amplitudes change
+< 0.1 % and the static noise rises slightly (0.030 → 0.035 px), so it stays off by default; turn it on
+for small-amplitude tests where the gain matters.
+
+---
+
+## [OPEN] ROIs on the smooth edge of the bar slide along the edge (aperture problem)
+
+**Date opened:** 2026-10-25
+**Area:** `Code/vibrometry/tracking.py` (`RoiTracker`), `Code/vibrometry/modeshape.py`,
+`Code/tools/forma_modal_multiponto.py`
+
+**Symptom:** ROIs placed along the bar for the multi-point mode shape (E5) gave nonsense amplitudes
+and phase flips of 180° between neighbours; the automatic axis picked x, and even on y the coarse NCC
+jumped. Final run: 9 of 15 points reliable; 250, 350, 400, 450, 680 and 710 mm fail the gate
+(NCC ≥ 0.8 and sine-fit R² ≥ 0.9; minimum NCC 0.66–0.74, R² down to 0.45).
+
+**Root cause:** a uniform straight edge has gradient only across it; along the edge every position
+matches equally well, so the 2-D NCC search drifts sideways and the Gabor responses along the edge are
+weak. Between ≈ 250 and 450 mm and near the tip the bar edge has no texture at all.
+
+**Proposed fix (partly implemented):** `RoiTracker(search_axes="y")` restricts the coarse search to the
+vertical axis (implemented, used by `track_points`), and the quality gate excludes unreliable points.
+The real fix is in the bench: high-contrast markers every ≈ 50 mm along the bar
+(`docs/roteiro_laboratorio.md`, section 3).
+
+---
+
+## [SOLVED] `BeamFE` snapped springs and masses to the nearest node
+
+**Date opened:** 2026-10-25
+**Date solved:** 2026-10-25
+**Area:** `Code/vibrometry/beam.py` (`BeamFE._solve`), `Code/vibrometry/uncertainty.py`
+
+**Symptom:** in the uncertainty propagation the sensitivities ∂f/∂x of spring and mass positions came
+out exactly 0 (a ±2 mm perturbation does not move the node), and f₁ changed slightly with
+`n_elements`.
+
+**Root cause:** point springs/masses were added to the diagonal of the node closest to x
+(`K[2·node, 2·node] += k`), so a position was only resolved to L / n_elements.
+
+**Fix:** `BeamFE._point(x)` returns the DOFs and Hermite shape functions N of the element containing x,
+and springs/masses enter as k·N·Nᵀ and m·N·Nᵀ. Positions now vary continuously; k₁ session f₁ =
+7.602 Hz independent of the mesh; all `test_beam.py` tests pass unchanged.
+
+---
+
+## [SOLVED] Session saved on Windows does not load on Linux (backslash relative paths)
+
+**Date opened:** 2026-10-25
+**Date solved:** 2026-10-25
+**Area:** `Code/vibrometry/session.py` (`Session.from_dict`, `_relative`)
+
+**Symptom:** `Session.load("sessions/k1_cm_acc.vibro.json")` on Linux could not find the video:
+the file stores `"..\\videos\\k1_cm_acc.mov"`, which POSIX reads as a single file name with
+backslashes.
+
+**Root cause:** relative paths were written with `str(Path)`, which uses `\` on Windows, and read back
+without normalising separators.
+
+**Fix:** `Session.from_dict` replaces `\` with `/` on POSIX before resolving relative paths, and
+`_relative` saves with `Path.as_posix()` (forward slashes work on both systems). Regression test
+`test_windows_style_relative_paths_resolve` in `Code/tests/test_specimen_fe.py`.
+
+---
+
 ## [OPEN] Video and accelerometer of session `k1_cm_acc` are different takes and disagree on damping
 
 **Date opened:** 2026-10-25
