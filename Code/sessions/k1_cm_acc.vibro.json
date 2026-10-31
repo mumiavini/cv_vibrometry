@@ -3,8 +3,8 @@
   "specimen": {
     "material": "aluminum_6351_t6",
     "E_gpa": 69.0,
-    "rho": 2710.0,
-    "L_mm": 720.0,
+    "rho": 2661.9,
+    "L_mm": 735.0,
     "b_mm": 25.4,
     "t_mm": 12.7,
     "tip_mass_g": 0.0,
@@ -14,25 +14,33 @@
     "root_stiffness": null,
     "springs": [
       {
-        "name": "mola k1 (catalogo)",
-        "x_mm": 632.0,
-        "k_n_m": 1500.0,
-        "mass_g": 0.0,
-        "hardware_g": 0.0
+        "name": "mola k1 (k medido, ensaio estatico)",
+        "x_mm": 655.0,
+        "k_n_m": 857.0,
+        "mass_g": 161.0,
+        "hardware_g": 46.0
       }
     ],
     "masses": [
       {
         "name": "acelerometro B&K 4507",
-        "x_mm": 300.0,
+        "x_mm": 305.0,
         "mass_g": 5.0
-      },
-      {
-        "name": "ferragem",
-        "x_mm": 632.0,
-        "mass_g": 383.0
       }
-    ]
+    ],
+    "uncertainties": {
+      "springs[0].k_n_m": 62.0,
+      "springs[0].x_mm": 2.0,
+      "springs[0].mass_g": 1.0,
+      "springs[0].hardware_g": 1.0,
+      "masses[0].x_mm": 2.0,
+      "masses[0].mass_g": 0.5,
+      "L_mm": 2.0,
+      "b_mm": 0.1,
+      "t_mm": 0.1,
+      "rho": 13.3,
+      "E_gpa": 2.0
+    }
   },
   "meta": {
     "date": "20261015",
@@ -40,7 +48,7 @@
     "level": "A1",
     "repetition": 1,
     "camera": "iphone 17e",
-    "notes": "Barra Al 6351-T6 articulada em mancal + mola k1=1500 N/m a 632 mm da articulacao (furo a 88 mm da ponta); acelerometro B&K 4507 001 (5 g) a 300 mm da articulacao. Modelo: elementos finitos (BeamFE). PREENCHER na etapa 1 as massas pesadas da mola e das ferragens (mass_g, hardware_g): sem elas f1 previsto = 11,7 Hz.",
+    "notes": "Barra Al 6351-T6 (750 mm, 644 g) articulada em mancal; L = 735 mm do eixo do mancal a ponta. Mola k1 a 655 mm do eixo: k = 857 +- 62 N/m (ensaio estatico, data/bancada; catalogo 1500), m mola 161 g (1/3 no modelo) + parafuso 36 g + porcas 10 g. Acelerometro B&K 4507 001 (5 g) a 305 mm. rho efetiva 2662 kg/m3 pela massa medida. Calibracao: p1 = face da junta, 15 mm do eixo do mancal (x0_mm), p2 = ponta; 720 mm entre eles. Modelo (BeamFE): f1 = 7,69 +- 0,28 Hz.",
     "checklist": [
       false,
       false,
@@ -95,7 +103,8 @@
         470.38862559241704
       ],
       "length_mm": 720.0,
-      "length_px": 1403.5228302476214
+      "length_px": 1403.5228302476214,
+      "x0_mm": 15.0
     },
     "axis": "auto",
     "compensate": true,
@@ -106,8 +115,8 @@
     "search_margin": 60,
     "window": null,
     "roi_positions_mm": {
-      "Parafuso_de_fixação": 632.0,
-      "Acelerometro": 300.0
+      "Parafuso_de_fixação": 655.0,
+      "Acelerometro": 305.0
     }
   },
   "accel": {

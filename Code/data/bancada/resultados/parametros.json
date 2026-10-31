@@ -1,0 +1,314 @@
+{
+  "leitura_para_m": 0.01,
+  "massas_g": {
+    "mola_k1": 161.0,
+    "mola_k2": 382.0,
+    "parafuso": 36.0,
+    "porcas": 10.0,
+    "barra": 644.0,
+    "acelerometro": 5.0
+  },
+  "geometria_mm": {
+    "mancal_ponta": 735.0,
+    "mancal_parafuso_mola": 655.0,
+    "mancal_acelerometro": 305.0,
+    "barra_comprimento": 750.0,
+    "barra_largura": 25.4,
+    "barra_espessura": 12.7
+  },
+  "molas": {
+    "k1": {
+      "ajuste": {
+        "k": 856.5555581509432,
+        "u_k": 61.77424434290765,
+        "intercept_n": 0.3591133119992526,
+        "r2": 0.984636122802353,
+        "secant": 847.4576271186447,
+        "incremental": [
+          666.6666666666661,
+          1428.5714285714348,
+          1162.790697674419,
+          704.2253521126765
+        ],
+        "n": 5,
+        "rel_u": 0.07211936663660261
+      },
+      "k_catalogo_n_m": 1500.0,
+      "diferenca_catalogo_pct": -42.89629612327045,
+      "m_ef_g": 99.66666666666666,
+      "especime": {
+        "L_mm": 735.0,
+        "rho": 2661.9,
+        "springs": [
+          {
+            "name": "mola k1 (k medido)",
+            "x_mm": 655.0,
+            "k_n_m": 857.0,
+            "mass_g": 161.0,
+            "hardware_g": 46.0
+          }
+        ],
+        "masses": [
+          {
+            "name": "acelerometro B&K 4507",
+            "x_mm": 305.0,
+            "mass_g": 5.0
+          }
+        ]
+      },
+      "f1_hz": 7.691537391726914,
+      "f2_hz": 78.57343750498117,
+      "f1_rigida_1gdl_hz": 7.705047564360178,
+      "f1_sem_acelerometro_hz": 7.703208704944767,
+      "efeito_acelerometro_pct": -0.15151235887404135,
+      "f1_sem_massa_da_mola_hz": 9.004050326753624,
+      "f1_catalogo_sem_massa_da_mola_hz": 11.882196608810569,
+      "f1_se_leitura_em_mm_hz": 23.905067651417713,
+      "razao_forma_modal_xa_sobre_a": 0.4731844630024242,
+      "razao_forma_modal_a_sobre_xa": 2.1133407332414396,
+      "incerteza": {
+        "f_hz": 7.691521926810302,
+        "u_hz": 0.2793187797048599,
+        "u_rel_pct": 3.6315150936674803,
+        "contribuicoes": {
+          "E_gpa": {
+            "valor": 69.0,
+            "u": 2.0,
+            "sensibilidade_hz_por_unidade": 0.00019453728039664497,
+            "u_f_hz": 0.00038907456079328995,
+            "parcela_pct": 0.00019402844347159902
+          },
+          "rho": {
+            "valor": 2661.9,
+            "u": 13.31,
+            "sensibilidade_hz_por_unidade": -0.001049048925750135,
+            "u_f_hz": 0.013962841201734298,
+            "parcela_pct": 0.24988910735066053
+          },
+          "L_mm": {
+            "valor": 735.0,
+            "u": 2.0,
+            "sensibilidade_hz_por_unidade": -0.011231976312347403,
+            "u_f_hz": 0.022463952624694805,
+            "parcela_pct": 0.6468030766667274
+          },
+          "b_mm": {
+            "valor": 25.4,
+            "u": 0.1,
+            "sensibilidade_hz_por_unidade": -0.10940612390027304,
+            "u_f_hz": 0.010940612390027304,
+            "parcela_pct": 0.15342035797097273
+          },
+          "t_mm": {
+            "valor": 12.7,
+            "u": 0.1,
+            "sensibilidade_hz_por_unidade": -0.21678375812843598,
+            "u_f_hz": 0.021678375812843598,
+            "parcela_pct": 0.6023559570909758
+          },
+          "springs[0].x_mm": {
+            "valor": 655.0,
+            "u": 2.0,
+            "sensibilidade_hz_por_unidade": 0.008312959294078048,
+            "u_f_hz": 0.016625918588156097,
+            "parcela_pct": 0.3542998978386195
+          },
+          "springs[0].mass_g": {
+            "valor": 161.0,
+            "u": 1.0,
+            "sensibilidade_hz_por_unidade": -0.003485725177804433,
+            "u_f_hz": 0.003485725177804433,
+            "parcela_pct": 0.015573492382004362
+          },
+          "springs[0].hardware_g": {
+            "valor": 46.0,
+            "u": 1.0,
+            "sensibilidade_hz_por_unidade": -0.010442557593638213,
+            "u_f_hz": 0.010442557593638213,
+            "parcela_pct": 0.1397698459066187
+          },
+          "masses[0].x_mm": {
+            "valor": 305.0,
+            "u": 2.0,
+            "sensibilidade_hz_por_unidade": -7.612971916381994e-05,
+            "u_f_hz": 0.00015225943832763988,
+            "parcela_pct": 2.9714482749058522e-05
+          },
+          "masses[0].mass_g": {
+            "valor": 5.0,
+            "u": 0.5,
+            "sensibilidade_hz_por_unidade": -0.0023417808513848115,
+            "u_f_hz": 0.0011708904256924058,
+            "parcela_pct": 0.0017572446816800512
+          },
+          "springs[0].k_n_m": {
+            "valor": 857.0,
+            "u": 61.77424434290765,
+            "sensibilidade_hz_por_unidade": 0.004472412296216215,
+            "u_f_hz": 0.27627988998868513,
+            "parcela_pct": 97.83590727718553
+          }
+        },
+        "monte_carlo": {
+          "media_hz": 7.687470769947062,
+          "desvio_hz": 0.2532374172601968
+        }
+      },
+      "medido": {
+        "PULSE (cursor)": {
+          "f_hz": 7.6,
+          "erro_modelo_pct": -1.1901052684912263,
+          "erro_em_u_modelo": -0.32771656751342304,
+          "k_que_reproduz_n_m": 836.6580541960858,
+          "ferragens_que_reproduzem_g": 54.92169187877264
+        },
+        "vídeo (k1_cm_acc)": {
+          "f_hz": 7.763,
+          "erro_modelo_pct": 0.9291069474608731,
+          "erro_em_u_modelo": 0.25584605642555086,
+          "k_que_reproduz_n_m": 873.0587057399905,
+          "ferragens_que_reproduzem_g": 39.248916050541226
+        }
+      }
+    },
+    "k2": {
+      "ajuste": {
+        "k": 3290.9505436688783,
+        "u_k": 345.7846104822047,
+        "intercept_n": -1.8804805331462726,
+        "r2": 0.9679418017546499,
+        "secant": 3124.999999999992,
+        "incremental": [
+          1176.4705882352891,
+          4285.714285714248,
+          4166.666666666643,
+          3571.428571428575
+        ],
+        "n": 5,
+        "rel_u": 0.10507134819981546
+      },
+      "k_catalogo_n_m": 2500.0,
+      "diferenca_catalogo_pct": 31.63802174675513,
+      "m_ef_g": 173.33333333333331,
+      "especime": {
+        "L_mm": 735.0,
+        "rho": 2661.9,
+        "springs": [
+          {
+            "name": "mola k2 (k medido)",
+            "x_mm": 655.0,
+            "k_n_m": 3291.0,
+            "mass_g": 382.0,
+            "hardware_g": 46.0
+          }
+        ],
+        "masses": [
+          {
+            "name": "acelerometro B&K 4507",
+            "x_mm": 305.0,
+            "mass_g": 5.0
+          }
+        ]
+      },
+      "f1_hz": 13.709536035069624,
+      "f2_hz": 76.5614111550673,
+      "f1_rigida_1gdl_hz": 13.775050848368174,
+      "f1_sem_acelerometro_hz": 13.727951659281464,
+      "efeito_acelerometro_pct": -0.13414691913916896,
+      "f1_sem_massa_da_mola_hz": 17.473997501582744,
+      "f1_catalogo_sem_massa_da_mola_hz": 15.278807280022553,
+      "f1_se_leitura_em_mm_hz": 40.980000255140936,
+      "razao_forma_modal_xa_sobre_a": 0.4903027525598213,
+      "razao_forma_modal_a_sobre_xa": 2.039556161533054,
+      "incerteza": {
+        "f_hz": 13.709531475474495,
+        "u_hz": 0.7159059242683047,
+        "u_rel_pct": 5.221957625240631,
+        "contribuicoes": {
+          "E_gpa": {
+            "valor": 69.0,
+            "u": 2.0,
+            "sensibilidade_hz_por_unidade": 0.0009732461300933082,
+            "u_f_hz": 0.0019464922601866164,
+            "parcela_pct": 0.0007392536027539779
+          },
+          "rho": {
+            "valor": 2661.9,
+            "u": 13.31,
+            "sensibilidade_hz_por_unidade": -0.0015718487703888196,
+            "u_f_hz": 0.02092130713387519,
+            "parcela_pct": 0.08540154305359739
+          },
+          "L_mm": {
+            "valor": 735.0,
+            "u": 2.0,
+            "sensibilidade_hz_por_unidade": -0.01625989686736773,
+            "u_f_hz": 0.03251979373473546,
+            "parcela_pct": 0.20634010727486266
+          },
+          "b_mm": {
+            "valor": 25.4,
+            "u": 0.1,
+            "sensibilidade_hz_por_unidade": -0.1620667542907661,
+            "u_f_hz": 0.01620667542907661,
+            "parcela_pct": 0.051247886157515105
+          },
+          "t_mm": {
+            "valor": 12.7,
+            "u": 0.1,
+            "sensibilidade_hz_por_unidade": -0.3135496780341285,
+            "u_f_hz": 0.03135496780341285,
+            "parcela_pct": 0.19182305604213878
+          },
+          "springs[0].x_mm": {
+            "valor": 655.0,
+            "u": 2.0,
+            "sensibilidade_hz_por_unidade": 0.011605254562965683,
+            "u_f_hz": 0.023210509125931367,
+            "parcela_pct": 0.10511323956115938
+          },
+          "springs[0].mass_g": {
+            "valor": 382.0,
+            "u": 1.0,
+            "sensibilidade_hz_por_unidade": -0.005101873015586733,
+            "u_f_hz": 0.005101873015586733,
+            "parcela_pct": 0.005078639395674668
+          },
+          "springs[0].hardware_g": {
+            "valor": 46.0,
+            "u": 1.0,
+            "sensibilidade_hz_por_unidade": -0.015305840009984806,
+            "u_f_hz": 0.015305840009984806,
+            "parcela_pct": 0.045709074312427385
+          },
+          "masses[0].x_mm": {
+            "valor": 305.0,
+            "u": 2.0,
+            "sensibilidade_hz_por_unidade": -0.00011575461857304958,
+            "u_f_hz": 0.00023150923714609917,
+            "parcela_pct": 1.0457424438452851e-05
+          },
+          "masses[0].mass_g": {
+            "valor": 5.0,
+            "u": 0.5,
+            "sensibilidade_hz_por_unidade": -0.0036761745652640343,
+            "u_f_hz": 0.0018380872826320171,
+            "parcela_pct": 0.0006592047801051252
+          },
+          "springs[0].k_n_m": {
+            "valor": 3291.0,
+            "u": 345.7846104822047,
+            "sensibilidade_hz_por_unidade": 0.00206320387924319,
+            "u_f_hz": 0.7134241497294801,
+            "parcela_pct": 99.30787753839532
+          }
+        },
+        "monte_carlo": {
+          "media_hz": 13.691451627235715,
+          "desvio_hz": 0.6486426859444825
+        }
+      },
+      "medido": {}
+    }
+  }
+}

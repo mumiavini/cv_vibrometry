@@ -4,6 +4,11 @@ Objetivo da visita: **fechar o que não fecha hoje** (k × massa da mola, amorte
 diferentes) e **coletar os dados que faltam para o TCC**. Tudo aqui tem um motivo; o item entre parênteses diz
 qual dúvida ele resolve. Prioridade: **P1** obrigatório · **P2** muito desejável · **P3** se der tempo.
 
+> **2ª visita (2026-10):** seções 1.1, 1.2 e 2 feitas → `Code/data/bancada/` (k₁ = 857 N/m, k₂ = 3291 N/m;
+> L = 735, a = 655, x_a = 305 mm do eixo do mancal). Numa próxima visita: anotar **a unidade** de cada leitura
+> (as de comprimento da mola vieram como "mm" e eram cm), fazer o ensaio estático **subindo e descendo**,
+> pesar o acelerômetro e localizar o eixo de rotação real da junta (pivô efetivo ≈ 24 mm além do medido, `issues.md`).
+
 ## 0. Levar
 
 - balança com resolução de 0,1 g (ou melhor) e massas conhecidas / garrafas pesadas na própria balança
@@ -49,7 +54,11 @@ superior** onde ela trabalha (inclui a flexibilidade da fixação). Pendure mass
 | ≈ 2,0 | |
 
 Faça **subindo e descendo** a carga (histerese/atrito) e repita para **k₁ e k₂**. O app ajusta k = Δ(m·g)/Δx
-(inclinação); espere dentro de ±5 % do catálogo se estiver certo.
+(inclinação); espere dentro de ±5 % do catálogo se estiver certo. Anote a resolução do instrumento de comprimento.
+
+> Por que esta é a medida que mais vale: no orçamento de incerteza da primeira sessão (`Code/tools/incerteza.py`),
+> com k de catálogo ±10 %, **k responde por ≈ 99 % da incerteza** do f₁ previsto (7,60 ± 0,38 Hz). Com k medido a
+> ±2 %, a incerteza do modelo cai para ≈ 0,09 Hz e o modelo passa a discriminar a diferença de 2 % com o vídeo.
 
 **1.3 Checagem dinâmica da massa efetiva (P2).** Com uma massa conhecida de ≈ 1 kg pendurada na mola, puxe um
 pouco e solte; filme a 240 fps (ou conte 20 ciclos com cronômetro): f = √(k / (m + m_mola/3)) / 2π. Isso
@@ -62,8 +71,9 @@ Meça **a partir do centro do eixo do mancal** (não da borda da barra):
 | Grandeza | Valor |
 |---|---|
 | distância centro do mancal → ponta da barra | |
-| distância centro do mancal → furo/parafuso da mola | (esperado 632 mm) |
-| distância centro do mancal → centro do acelerômetro | (esperado 300 mm) |
+| distância centro do mancal → furo/parafuso da mola | (medido 655 mm na 2ª visita) |
+| distância centro do mancal → centro do acelerômetro | (medido 305 mm na 2ª visita) |
+| distância centro do mancal → face da junta / início da barra visível no vídeo (x = 0 da calibração) | (o vídeo sugere ≈ 36 mm) |
 | largura b e espessura h da barra (3 pontos cada, paquímetro) | |
 | há folga/atrito no mancal? (balançar a barra sem a mola) | sim / não |
 | o que é o cilindro/dial do lado da junta, está preso à barra? | |
@@ -71,10 +81,19 @@ Meça **a partir do centro do eixo do mancal** (não da borda da barra):
 
 Fotografe de lado e de cima, com a trena aparecendo.
 
+> Por quê: a forma modal medida em 9 pontos do vídeo (`Code/sessions/k1_cm_acc_resultados/forma_modal/`) é uma reta
+> que gira em torno de x₀ ≈ −36 mm, ou seja, 36 mm **antes** do ponto usado como x = 0 na calibração. Se o eixo do
+> mancal estiver mesmo lá, o modelo deve usar L e posições medidas a partir dele (f₁ previsto 7,60 → 7,54 Hz).
+
 ## 3. Preparar o ensaio (P1)
 
 1. **Marcas na barra** (fita ou marcador, bem visíveis na câmera): em x = 0 (centro do mancal), 300 (acelerômetro),
    632 (parafuso) e na ponta. Servem de ROI de alto contraste **e** de escala (evita o erro 100 mm × 720 mm).
+   **Mais marcas a cada 50 mm** ao longo de toda a barra (x = 50, 100, …, 700), na face voltada para a câmera:
+   adesivo xadrez preto e branco ou fita preta com borda nítida, ≈ 15 × 15 mm (≥ 30 px na imagem). Na primeira
+   sessão só 9 de 15 pontos ao longo da barra foram confiáveis — a borda lisa entre 250 e 450 mm e perto da ponta
+   não tem textura e o rastreamento escorrega (`issues.md`). Com as marcas, cada uma vira um sensor virtual da
+   forma modal (TODO E5/C7).
 2. **Câmera:** tripé fixo, vista de lado, eixo óptico perpendicular ao plano de flexão, foco/exposição/balanço de
    branco travados (toque longo), 1080p a **240 fps** (slow motion), sem zoom, estabilização desligada, luz
    constante. Enquadre a barra inteira **e uma região de parede com textura** (referência fixa).
@@ -124,7 +143,8 @@ estavam como nas outras. **Fotografe o amortecedor** (lâmina dentro/fora) antes
 ## 5. Controles rápidos (P2)
 
 - **D1, estabilidade (≈ 2 min):** filme a barra parada por 10 s no mesmo enquadramento. O desvio-padrão do
-  deslocamento medido é o piso de ruído do método.
+  deslocamento medido é o piso de ruído do método (referência da primeira sessão, duas regiões da parede:
+  σ ≈ 0,03 px ≈ 15 µm; aqui ele sai com a textura das marcas da barra).
 - **D2, escala:** filme a régua de 100 mm (ou as marcas da barra) no plano do movimento; 5 medidas na imagem.
 - **Cintilação:** filme 10 s de uma região estática/clara com a iluminação do dia; o app (aba Qualidade) mede a
   cintilação. Se a luz for fluorescente, repita com LED DC.
@@ -191,3 +211,5 @@ Regras:
 | f_n sem acelerômetro ≈ com (dentro de Δf = 1/T) | efeito de massa do acelerômetro não resolvido, como previsto |
 | Δζ ou harmônicos com o afrouxamento, e A' volta ao baseline | a técnica detecta a mudança de condição da junta (usar como sensibilidade, sem afirmar SHM completo) |
 | nada muda além do ruído ou A' ≠ A | reportar o limite de detecção; não usar para SHM |
+| todas as marcas da barra rastreadas (NCC ≥ 0,8) | forma modal com 13–15 pontos e MAC × `BeamFE`; sustenta "multiponto" (e, com fase, "campo") |
+| eixo do mancal ≈ 36 mm antes do x = 0 do vídeo | usar a raiz nesse ponto no modelo (MAC 0,9988 → 0,9999 na primeira sessão) |

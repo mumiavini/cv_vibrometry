@@ -371,7 +371,7 @@ A calibração espacial converte deslocamentos medidos em pixels para unidades f
 
 \subsubsection{Estimativa de movimento baseada em fase com filtros de Gabor}
 
-O método central implementado neste trabalho é a estimativa de movimento baseada em fase (\textit{Phase-Based Motion Estimation}, PME), obtida por meio da decomposição local da imagem com filtros de Gabor. Diferentemente de abordagens que operam diretamente sobre a intensidade dos pixels, como o rastreamento por correspondência de padrões e o \textit{Digital Image Correlation} (DIC) clássico, a abordagem baseada em fase explora a propriedade fundamental de que, em uma vizinhança espacial estreita, pequenas translações de uma estrutura visual se manifestam como variações lineares na fase de coeficientes complexos obtidos por filtragem direcional \cite{Wadhwa2013, Phase2022}. Como a fase local é uma quantidade intrinsecamente robusta a variações de iluminação e a ruído da câmera, essa formulação alcança sensibilidades sub-pixel da ordem de milésimos de pixel, sem exigir marcadores artificiais nem padrões de \textit{speckle} aplicados à superfície \cite{ZhangLogGabor2024, WangLogGabor2022}.
+O método central implementado neste trabalho é a estimativa de movimento baseada em fase (\textit{Phase-Based Motion Estimation}, PME), obtida por meio da decomposição local da imagem com filtros de Gabor. Diferentemente de abordagens que operam diretamente sobre a intensidade dos pixels, como o rastreamento por correspondência de padrões e o \textit{Digital Image Correlation} (DIC) clássico, a abordagem baseada em fase explora a propriedade fundamental de que, em uma vizinhança espacial estreita, pequenas translações de uma estrutura visual se manifestam como variações lineares na fase de coeficientes complexos obtidos por filtragem direcional \cite{Wadhwa2013, Phase2022}. Como a fase local é pouco sensível a variações de iluminação e a ruído da câmera, trabalhos com essa formulação reportam sensibilidades sub-pixel da ordem de milésimos de pixel em condições controladas, sobre superfícies com textura suficiente \cite{ZhangLogGabor2024, WangLogGabor2022}; em superfícies lisas, recorre-se a marcadores de alto contraste ou a padrões de \textit{speckle} aplicados à superfície \cite{robotcamera2025, Mhatre2026}.
 
 O filtro de Gabor é um filtro de banda passante orientado, definido pelo produto de uma senoide complexa com uma envoltória gaussiana. Em duas dimensões, sua resposta ao impulso pode ser escrita, para uma orientação $\theta$ e uma frequência central $\omega_0$, como \cite{Wadhwa2013}:
 \begin{equation}
@@ -440,7 +440,7 @@ Como na maioria das câmeras de consumo, o sensor opera com obturador de rolagem
 \subsubsection{Acelerômetro e sistema de aquisição}
 \label{sec:acelerometro}
 
-A referência por contato foi um acelerômetro piezoelétrico Brüel \& Kjær Type 4507 001, de aproximadamente 5\,g, fixado na face superior da barra a 300\,mm do centro da articulação, com o eixo de medição na direção vertical (Figura~\ref{fig:acelerometro}). O sinal foi adquirido por um módulo Brüel \& Kjær LAN-XI Type 3160-A-4/2 (quatro entradas e duas saídas de gerador; Figura~\ref{fig:aquisitor}) e registrado no \textit{software} PULSE LabShop, versão 20. A aquisição foi configurada com banda de \TODO{xxx}\,Hz (taxa de amostragem de \TODO{xxx}\,Hz) e registro de \TODO{20}\,s, e a sensibilidade do sensor, \TODO{x,xx}\,mV/(m/s$^2$), foi tomada do certificado de calibração. O sinal no tempo foi exportado em \TODO{formato} para o processamento descrito na Seção~\ref{sec:comparacao}.
+A referência por contato foi um acelerômetro piezoelétrico Brüel \& Kjær Type 4507 001, de 5\,g (pesado), fixado na face superior da barra a 305\,mm do centro da articulação, com o eixo de medição na direção vertical (Figura~\ref{fig:acelerometro}). O sinal foi adquirido por um módulo Brüel \& Kjær LAN-XI Type 3160-A-4/2 (quatro entradas e duas saídas de gerador; Figura~\ref{fig:aquisitor}) e registrado no \textit{software} PULSE LabShop, versão 20. A aquisição foi configurada com banda de \TODO{xxx}\,Hz (taxa de amostragem de \TODO{xxx}\,Hz) e registro de \TODO{20}\,s, e a sensibilidade do sensor, \TODO{x,xx}\,mV/(m/s$^2$), foi tomada do certificado de calibração. O sinal no tempo foi exportado em \TODO{formato} para o processamento descrito na Seção~\ref{sec:comparacao}.
 % TODO: citar o datasheet/certificado do acelerometro e do LAN-XI.
 % PRELIMINAR: na primeira medicao (15/10/2026) o PULSE estava com banda de 10 Hz,
 % 200 linhas e 20 s (fs = 25,6 Hz, ~3,4 amostras por ciclo de 7,6 Hz) e o sinal
@@ -473,7 +473,7 @@ A bancada (Figura~\ref{fig:bancada}) é um equipamento didático para ensaios de
     \label{fig:bancada}
 \end{figure}
 
-O corpo de prova é uma barra maciça de alumínio 6351-T6 de seção retangular, com 750\,mm de comprimento, largura de 1\,polegada ($b = 25{,}4$\,mm), espessura de 1/2\,polegada ($h = 12{,}7$\,mm) e massa de aproximadamente 660\,g (Figura~\ref{fig:barra_aluminio}). A liga 6351 pertence à série 6xxx, cujos principais elementos de liga são o magnésio e o silício, que se combinam formando o precipitado endurecedor Mg$_2$Si; a têmpera T6 indica solubilização e envelhecimento artificial, condição que maximiza a resistência mecânica da liga, com limite de escoamento típico da ordem de 280\,MPa \cite{ASM1990}. Para o ensaio dinâmico, as propriedades de interesse são o módulo de elasticidade $E \approx 69$\,GPa e a densidade $\rho \approx 2710$\,kg/m\textsuperscript{3}. A superfície extrudada é lisa e reflexiva; por isso, marcadores de alto contraste foram aplicados nos pontos de medição.
+O corpo de prova é uma barra maciça de alumínio 6351-T6 de seção retangular, com 750\,mm de comprimento, largura de 1\,polegada ($b = 25{,}4$\,mm), espessura de 1/2\,polegada ($h = 12{,}7$\,mm) e massa de 644\,g (Figura~\ref{fig:barra_aluminio}). A liga 6351 pertence à série 6xxx, cujos principais elementos de liga são o magnésio e o silício, que se combinam formando o precipitado endurecedor Mg$_2$Si; a têmpera T6 indica solubilização e envelhecimento artificial, condição que maximiza a resistência mecânica da liga, com limite de escoamento típico da ordem de 280\,MPa \cite{ASM1990}. Para o ensaio dinâmico, as propriedades de interesse são o módulo de elasticidade $E \approx 69$\,GPa e a densidade $\rho \approx 2710$\,kg/m\textsuperscript{3}; no modelo, usou-se a densidade efetiva de 2662\,kg/m\textsuperscript{3}, obtida da massa medida e das dimensões nominais da barra, que já inclui o efeito dos furos. A superfície extrudada é lisa e reflexiva; por isso, marcadores de alto contraste foram aplicados nos pontos de medição.
 
 \begin{figure}[htbp]
     \centering
@@ -482,7 +482,7 @@ O corpo de prova é uma barra maciça de alumínio 6351-T6 de seção retangular
     \label{fig:barra_aluminio}
 \end{figure}
 
-Na configuração ensaiada (Figura~\ref{fig:frame_ensaio}), uma extremidade da barra é presa a uma junta com mancal, que permite a rotação no plano vertical, e o comprimento livre até a ponta é $L = 720$\,mm. A barra é suspensa por uma mola helicoidal presa à travessa superior e ligada, por um parafuso, ao furo situado a 88\,mm da ponta, isto é, a $a = 632$\,mm do centro da articulação. Foram utilizadas duas molas, de rigidez nominal de catálogo $k_1 = 1500$\,N/m e $k_2 = 2500$\,N/m, cujas rigidezes e massas foram medidas no laboratório (Seção~\ref{sec:res_parametros}). O acelerômetro fica a $x_a = 300$\,mm da articulação. Cada ensaio consiste em deslocar a ponta da barra até uma marca fixa e soltá-la, registrando a resposta livre simultaneamente pela câmera e pelo acelerômetro.
+Na configuração ensaiada (Figura~\ref{fig:frame_ensaio}), uma extremidade da barra é presa a uma junta com mancal, que permite a rotação no plano vertical, e o comprimento do centro do mancal até a ponta é $L = 735$\,mm. A barra é suspensa por uma mola helicoidal presa à travessa superior e ligada, por um parafuso, ao furo situado a 80\,mm da ponta, isto é, a $a = 655$\,mm do centro da articulação. Foram utilizadas duas molas, de rigidez nominal de catálogo $k_1 = 1500$\,N/m e $k_2 = 2500$\,N/m, cujas rigidezes e massas foram medidas no laboratório (Seção~\ref{sec:res_parametros}). O acelerômetro fica a $x_a = 305$\,mm da articulação. Cada ensaio consiste em excitar a barra com uma batida manual, sem medição da força aplicada, e registrar a resposta livre simultaneamente pela câmera e pelo acelerômetro. Como a análise usa apenas a resposta livre após a batida, a força de excitação não é necessária para identificar a frequência natural e o amortecimento.
 
 \begin{figure}[htbp]
     \centering
@@ -542,44 +542,44 @@ A Figura~\ref{fig:dcl} apresenta a montagem da bancada e o diagrama de corpo liv
 
 \begin{figure}[htbp]
     \centering
-    \begin{tikzpicture}[>=Latex, font=\footnotesize, x=0.98cm, y=0.98cm]
+    \begin{tikzpicture}[>=Latex, font=\footnotesize, x=0.96cm, y=0.98cm]
         % ---------------- (a) montagem ----------------
         \node[anchor=west] at (-0.6,2.5) {\textbf{(a)}};
         \draw[thick] (0,0) -- (-0.22,-0.4) -- (0.22,-0.4) -- cycle;
         \fill[pattern=north east lines] (-0.4,-0.4) rectangle (0.4,-0.55);
         \draw (-0.4,-0.4) -- (0.4,-0.4);
-        \filldraw[fill=gray!15] (0,-0.07) rectangle (7.2,0.07);
+        \filldraw[fill=gray!15] (0,-0.07) rectangle (7.35,0.07);
         \filldraw[fill=white] (0,0) circle (0.06);
-        \fill[pattern=north east lines] (5.92,2.2) rectangle (6.72,2.35);
-        \draw (5.92,2.2) -- (6.72,2.2);
-        \draw (6.32,2.2) -- (6.32,1.95);
+        \fill[pattern=north east lines] (6.15,2.2) rectangle (6.95,2.35);
+        \draw (6.15,2.2) -- (6.95,2.2);
+        \draw (6.55,2.2) -- (6.55,1.95);
         \draw[decorate, decoration={coil, aspect=0.45, segment length=1.5mm, amplitude=1.6mm}]
-            (6.32,1.95) -- (6.32,0.4);
-        \draw (6.32,0.4) -- (6.32,0.07);
-        \fill (6.32,0) circle (0.05);
-        \filldraw[fill=black!65] (2.88,0.07) rectangle (3.12,0.27);
-        \node[above] at (3.0,0.27) {acelerômetro, $m_a$};
-        \node[left] at (6.12,1.2) {mola: $k$, $m_s$};
+            (6.55,1.95) -- (6.55,0.4);
+        \draw (6.55,0.4) -- (6.55,0.07);
+        \fill (6.55,0) circle (0.05);
+        \filldraw[fill=black!65] (2.93,0.07) rectangle (3.17,0.27);
+        \node[above] at (3.05,0.27) {acelerômetro, $m_a$};
+        \node[left] at (6.35,1.2) {mola: $k$, $m_s$};
         \node[below left] at (-0.05,-0.02) {$O$};
-        \draw[|<->|] (0,-0.85) -- (3.0,-0.85) node[midway,below] {$x_a = 300$ mm};
-        \draw[|<->|] (0,-1.35) -- (6.32,-1.35) node[midway,below] {$a = 632$ mm};
-        \draw[|<->|] (0,-1.85) -- (7.2,-1.85) node[midway,below] {$L = 720$ mm};
+        \draw[|<->|] (0,-0.85) -- (3.05,-0.85) node[midway,below] {$x_a = 305$ mm};
+        \draw[|<->|] (0,-1.35) -- (6.55,-1.35) node[midway,below] {$a = 655$ mm};
+        \draw[|<->|] (0,-1.85) -- (7.35,-1.85) node[midway,below] {$L = 735$ mm};
         % ---------------- (b) diagrama de corpo livre ----------------
         \begin{scope}[yshift=-4.9cm]
             \node[anchor=west] at (-0.6,1.75) {\textbf{(b)}};
-            \filldraw[fill=gray!15] (0,-0.07) rectangle (7.2,0.07);
+            \filldraw[fill=gray!15] (0,-0.07) rectangle (7.35,0.07);
             \fill (0,0) circle (0.05);
             \node[above left] at (-0.05,0.05) {$O$};
             \draw[->,thick] (-0.95,0) -- (-0.1,0) node[pos=0.35,below] {$R_x$};
             \draw[->,thick] (0,-0.95) -- (0,-0.12) node[pos=0.3,right] {$R_y$};
-            \draw[->,thick,blue!70!black] (6.32,0.07) -- (6.32,1.15)
+            \draw[->,thick,blue!70!black] (6.55,0.07) -- (6.55,1.15)
                 node[above] {$k(\delta_e + a\theta)$};
-            \draw[->,thick] (3.6,-0.07) -- (3.6,-0.85) node[below] {$m_b g$};
-            \draw[->,thick] (2.8,-0.07) -- (2.8,-0.6) node[below] {$m_a g$};
-            \draw[->,thick] (6.32,-0.07) -- (6.32,-0.85) node[below] {$m_{ef} g$};
+            \draw[->,thick] (3.675,-0.07) -- (3.675,-0.85) node[below] {$m_b g$};
+            \draw[->,thick] (2.85,-0.07) -- (2.85,-0.6) node[below] {$m_a g$};
+            \draw[->,thick] (6.55,-0.07) -- (6.55,-0.85) node[below] {$m_{ef} g$};
             \draw[->,thick,red!70!black] (0.64,0.45) arc (35:-35:0.78)
                 node[right] {$\theta,\ J_O\ddot{\theta}$};
-            \draw[densely dotted] (3.6,0.07) -- (3.6,0.35) node[above] {$L/2$};
+            \draw[densely dotted] (3.675,0.07) -- (3.675,0.35) node[above] {$L/2$};
         \end{scope}
     \end{tikzpicture}
     \caption{(a) Montagem da barra articulada suspensa por mola; (b) diagrama de corpo livre da barra para uma rotação $\theta$ (horária) em torno de $O$. Fonte: O autor.}
@@ -640,11 +640,11 @@ Após a montagem das matrizes globais, a mola é somada à rigidez do grau de li
 \end{equation}
 O modelo foi verificado contra a solução fechada da viga engastada com mola e massa na ponta e contra a viga engastada simples de mesma seção (21,1\,Hz para $L = 700$\,mm), com diferenças inferiores a 0,2\,\% nos três primeiros modos; com articulação e sem mola, ele reproduz o modo de corpo rígido de frequência nula, descartado na análise.
 
-A Tabela~\ref{tab:previsao} resume as previsões. Sem a massa da mola, o modelo prevê 11,70\,Hz para $k_1$ e 15,06\,Hz para $k_2$; a massa efetiva no ponto da mola reduz esses valores de forma acentuada, o que torna a medição de $m_s$ e $m_f$ indispensável. O modelo de 1~GDL (Equação~\ref{eq:fn_rigida}) fica entre 0,2\,\% e 1,1\,\% acima do modelo de elementos finitos, diferença atribuída à flexibilidade da barra. O segundo modo, de flexão, fica entre 77 e 88\,Hz: abaixo da frequência de Nyquist de 120\,Hz, mas acima do limite de $F/10 = 24$\,Hz, e não foi usado nas comparações.
+A Tabela~\ref{tab:previsao} resume as previsões. Com a rigidez de catálogo e sem a massa da mola, o modelo prevê 11,88\,Hz para $k_1$ e 15,28\,Hz para $k_2$; com a rigidez e as massas medidas (Seção~\ref{sec:res_parametros}), 7,69 e 13,71\,Hz. A rigidez real das molas e a massa efetiva no ponto da mola alteram as previsões de forma acentuada, o que torna a medição de $k$, $m_s$ e $m_f$ indispensável. A incerteza das previsões, obtida pela propagação linear das incertezas-padrão dos parâmetros e conferida por Monte Carlo, é de $\pm 0{,}28$\,Hz para $k_1$ e $\pm 0{,}72$\,Hz para $k_2$, dominada (98--99\,\% da variância) pela incerteza de $k$. O modelo de 1~GDL (Equação~\ref{eq:fn_rigida}) fica 0,2\,\% ($k_1$) e 0,5\,\% ($k_2$) acima do modelo de elementos finitos, diferença atribuída à flexibilidade da barra. O segundo modo, de flexão, fica em 78,6\,Hz ($k_1$) e 76,6\,Hz ($k_2$): abaixo da frequência de Nyquist de 120\,Hz, mas acima do limite de $F/10 = 24$\,Hz, e não foi usado nas comparações.
 
 \begin{table}[htbp]
     \centering
-    \caption{Frequências previstas para a barra articulada (elementos finitos; acelerômetro de 5\,g a 300\,mm).}
+    \caption{Frequências previstas para a barra articulada (elementos finitos; acelerômetro de 5\,g a 305\,mm; incerteza-padrão).}
     \label{tab:previsao}
     \small
     \begin{tabularx}{\columnwidth}{X c c}
@@ -652,18 +652,19 @@ A Tabela~\ref{tab:previsao} resume as previsões. Sem a massa da mola, o modelo 
         \textbf{Configuração} & \textbf{$k_1$} & \textbf{$k_2$} \\
         \midrule
         $k$ de catálogo (N/m) & 1500 & 2500 \\
-        $f_1$ sem massa da mola (Hz) & 11,70 & 15,06 \\
-        $f_1$ com $k$ e $m_{ef}$ medidos (Hz) & \TODO{x,xx} & \TODO{x,xx} \\
-        $f_2$ (Hz) & \TODO{xx} & \TODO{xx} \\
-        $\phi(x_a)/\phi(a)$ (forma modal) & \TODO{0,48} & \TODO{0,49} \\
-        Efeito do acelerômetro em $f_1$ & \TODO{$-$0,1}\,\% & \TODO{$-$0,1}\,\% \\
+        $k$ medido (N/m) & 857 $\pm$ 62 & 3291 $\pm$ 346 \\
+        $f_1$, $k$ de catálogo, sem massa da mola (Hz) & 11,88 & 15,28 \\
+        $f_1$, $k$ medido, sem massa da mola (Hz) & 9,00 & 17,47 \\
+        $f_1$ com $k$ e $m_{ef}$ medidos (Hz) & 7,69 $\pm$ 0,28 & 13,71 $\pm$ 0,72 \\
+        $f_2$ (Hz) & 78,6 & 76,6 \\
+        $\phi(x_a)/\phi(a)$ (forma modal) & 0,473 & 0,490 \\
+        Efeito do acelerômetro em $f_1$ & $-$0,15\,\% & $-$0,13\,\% \\
         \bottomrule
     \end{tabularx}
 \end{table}
-% Referencia (calculado com BeamFE): com m_ef = 383 g e k de catalogo,
-% f1 = 7,59 Hz (k1) e 9,80 Hz (k2); f2 = 77,3 Hz; phi(300)/phi(632) = 0,481 (k1)
-% e 0,485 (k2); efeito do acelerometro -0,09 %. Sem massa da mola: razao 0,490
-% (k1), 0,500 (k2); efeito -0,22 %.
+% Fonte: Code/data/bancada/resultados/parametros.md (python -m tools.parametros_bancada),
+% BeamFE com L = 735, a = 655, x_a = 305 mm, rho_ef = 2662 kg/m3, m_ef = m_s/3 + 46 g.
+% 1 GDL rigido: 7,705 Hz (k1) e 13,775 Hz (k2).
 
 \subsection{Calibração Espacial}
 \label{sec:calibracao}
@@ -678,13 +679,14 @@ Qualquer deslocamento em pixels $\delta_{px}(t)$ extraído pelo algoritmo é ent
     \delta(t) = s \cdot \delta_{px}(t) \quad \text{[mm]}.
     \label{eq:deslocamento_fisico}
 \end{equation}
-Na bancada, o segmento de referência é o próprio comprimento livre da barra, entre marcas aplicadas na articulação e na ponta, e a escala é conferida pelas posições conhecidas do parafuso e do acelerômetro. O fator obtido foi de \TODO{0,5xx}\,mm/pixel. % PRELIMINAR: 0,513 mm/px (1403,5 px para 720 mm).
+Na bancada, o segmento de referência é o próprio comprimento livre da barra, entre marcas aplicadas na articulação e na ponta, e a escala é conferida pelas posições conhecidas do parafuso e do acelerômetro. O fator obtido foi de \TODO{0,5xx}\,mm/pixel. % PRELIMINAR: 0,513 mm/px (1403,5 px para 720 mm, da face da junta,
+% 15 mm do eixo do mancal, a ponta; confere com a trena: ponta, parafuso e acelerometro a <= 3 mm).
 Como o objeto de referência deve estar no mesmo plano da peça, a calibração é repetida sempre que a câmera é reposicionada.
 
 \subsection{Arquitetura do Software e Aplicativo}
 \label{sec:software}
 
-O \textit{software} foi implementado em Python em duas camadas: uma biblioteca de processamento, testável sem interface gráfica, e um aplicativo de \textit{desktop} (PySide6) que a utiliza. Cada ensaio é descrito por um arquivo de sessão, com todos os parâmetros necessários para reproduzir o processamento (corpo de prova, apoio, molas e massas, vídeo, ROIs, calibração, acelerômetro, sincronismo e critérios de aceitação). O aplicativo organiza o fluxo em seis etapas (Tabela~\ref{tab:etapas_app}). A biblioteca é coberta por testes automatizados (51 testes), que incluem vídeos e sinais de acelerômetro sintéticos com resposta conhecida.
+O \textit{software} foi implementado em Python em duas camadas: uma biblioteca de processamento, testável sem interface gráfica, e um aplicativo de \textit{desktop} (PySide6) que a utiliza. Cada ensaio é descrito por um arquivo de sessão, com todos os parâmetros necessários para reproduzir o processamento (corpo de prova, apoio, molas e massas, vídeo, ROIs, calibração, acelerômetro, sincronismo e critérios de aceitação). O aplicativo organiza o fluxo em seis etapas (Tabela~\ref{tab:etapas_app}). A biblioteca é coberta por testes automatizados (70 testes), que incluem vídeos e sinais de acelerômetro sintéticos com resposta conhecida.
 
 \begin{table}[htbp]
     \centering
@@ -948,7 +950,7 @@ O erro de 12,5\,\% frente ao modelo não atende ao critério de 5\,\%, e a princ
 \subsection{Parâmetros Medidos da Montagem}
 \label{sec:res_parametros}
 
-A Tabela~\ref{tab:parametros_medidos} reúne os parâmetros medidos no laboratório e a frequência prevista com eles.
+A Tabela~\ref{tab:parametros_medidos} reúne os parâmetros medidos no laboratório e a frequência prevista com eles. As massas foram pesadas em balança e as distâncias, medidas com trena a partir do meio do engaste da barra na peça giratória da junta, que coincide com o eixo de rotação; a barra se estende 15\,mm atrás desse eixo, até o comprimento total de 750\,mm. A rigidez de cada mola foi medida estaticamente, pendurando nela massas conhecidas, identificadas pelo peso em newtons, de 0 a 20\,N, e lendo o comprimento da mola em cada carga com paquímetro; $k$ é a inclinação do ajuste por mínimos quadrados de força $\times$ alongamento, com intercepto livre, e sua incerteza-padrão vem dos resíduos do ajuste (Figura~\ref{fig:rigidez_molas}).
 
 \begin{table}[htbp]
     \centering
@@ -960,21 +962,28 @@ A Tabela~\ref{tab:parametros_medidos} reúne os parâmetros medidos no laborató
         \textbf{Grandeza} & \textbf{Mola $k_1$} & \textbf{Mola $k_2$} \\
         \midrule
         $k$ de catálogo (N/m) & 1500 & 2500 \\
-        $k$ medido, estático (N/m) & \TODO{xxxx} & \TODO{xxxx} \\
-        Massa da mola $m_s$ (g) & \TODO{xxx} & \TODO{xxx} \\
-        Ferragens $m_f$ (g) & \TODO{xxx} & \TODO{xxx} \\
-        $m_{ef} = m_s/3 + m_f$ (g) & \TODO{xxx} & \TODO{xxx} \\
-        $f_1$ previsto (Hz) & \TODO{x,xx} & \TODO{x,xx} \\
+        $k$ medido, estático (N/m) & 857 $\pm$ 62 & 3291 $\pm$ 346 \\
+        Massa da mola $m_s$ (g) & 161 & 382 \\
+        Ferragens $m_f$ (parafuso, porcas e arruelas, g) & 46 & 46 \\
+        $m_{ef} = m_s/3 + m_f$ (g) & 99,7 & 173,3 \\
+        $f_1$ previsto (Hz) & 7,69 $\pm$ 0,28 & 13,71 $\pm$ 0,72 \\
         \midrule
-        \multicolumn{3}{l}{Barra: \TODO{xxx}\,g; acelerômetro: \TODO{x,x}\,g; $L$ = \TODO{720}\,mm;} \\
-        \multicolumn{3}{l}{$a$ = \TODO{632}\,mm; $x_a$ = \TODO{300}\,mm (do centro do mancal)} \\
+        \multicolumn{3}{l}{Barra: 644\,g; acelerômetro: 5\,g; $L$ = 735\,mm;} \\
+        \multicolumn{3}{l}{$a$ = 655\,mm; $x_a$ = 305\,mm (do centro do mancal)} \\
         \bottomrule
     \end{tabularx}
 \end{table}
-% PRELIMINAR: a sessao k1_cm_acc tem uma massa "ferragem" de 383 g a 632 mm,
-% pesada pelo autor; confirmar se e massa efetiva (m_s/3 + m_f) ou massa total.
+% Dados: Code/data/bancada/ (ensaio estatico, massas, geometria). A sessao k1_cm_acc
+% usava antes k = 1500 N/m e uma "ferragem" ajustada de 383 g (nao medida).
 
-O $k$ medido diferiu do valor de catálogo em \TODO{x}\,\% para $k_1$ e \TODO{x}\,\% para $k_2$. A massa efetiva no ponto da mola, de \TODO{xxx}\,g, é da ordem da contribuição da própria barra para $J_O$, o que explica por que a frequência medida fica bem abaixo dos 11,70\,Hz previstos sem ela.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\columnwidth]{Images/fig_rigidez_molas.png}
+    \caption{Ensaio estático das molas: força aplicada $\times$ alongamento e ajuste por mínimos quadrados. Fonte: O autor.}
+    \label{fig:rigidez_molas}
+\end{figure}
+
+O $k$ medido diferiu do valor de catálogo em $-$43\,\% para $k_1$ e $+$32\,\% para $k_2$. A massa efetiva no ponto da mola, de 99,7\,g ($k_1$) e 173,3\,g ($k_2$), responde por 27\,\% e 40\,\% de $J_O$. A frequência medida com $k_1$, cerca de 7,6\,Hz, fica bem abaixo dos 11,88\,Hz previstos com o $k$ de catálogo e sem a massa da mola por dois motivos: a mola é mais macia que o especificado, o que sozinho leva a previsão a 9,00\,Hz, e sua massa efetiva a reduz a 7,69\,Hz. A rigidez de $k_1$ não é perfeitamente linear na faixa ensaiada (inclinações entre leituras consecutivas de 667 a 1429\,N/m; $R^2 = 0{,}985$), e o primeiro trecho de $k_2$ é mais macio que os demais; ambos os efeitos estão contidos na incerteza do ajuste, que é a principal parcela da incerteza da previsão.
 
 \subsection{Frequência Natural}
 \label{sec:res_frequencia}
@@ -990,22 +999,25 @@ A Tabela~\ref{tab:res_frequencia} compara, para cada tomada, a frequência ident
         \toprule
         \textbf{Tomada} & \textbf{Mola} & \textbf{$f^{opt}$ (Hz)} & \textbf{$f^{acc}$ (Hz)} & \textbf{$\varepsilon_{acc}$ (\%)} & \textbf{$f^{mod}$ (Hz)} & \textbf{$\varepsilon_{mod}$ (\%)} \\
         \midrule
-        1 & $k_1$ & \TODO{x,xxx} & \TODO{x,xxx} & \TODO{x,xx} & \TODO{x,xx} & \TODO{x,x} \\
-        2 & $k_1$ & \TODO{x,xxx} & \TODO{x,xxx} & \TODO{x,xx} & \TODO{x,xx} & \TODO{x,x} \\
-        3 & $k_1$ & \TODO{x,xxx} & \TODO{x,xxx} & \TODO{x,xx} & \TODO{x,xx} & \TODO{x,x} \\
-        4 & $k_2$ & \TODO{x,xxx} & \TODO{x,xxx} & \TODO{x,xx} & \TODO{x,xx} & \TODO{x,x} \\
-        5 & $k_2$ & \TODO{x,xxx} & \TODO{x,xxx} & \TODO{x,xx} & \TODO{x,xx} & \TODO{x,x} \\
-        6 & $k_2$ & \TODO{x,xxx} & \TODO{x,xxx} & \TODO{x,xx} & \TODO{x,xx} & \TODO{x,x} \\
+        1 & $k_1$ & \TODO{x,xxx} & 7,816 & \TODO{x,xx} & 7,69 & \TODO{x,x} \\
+        2 & $k_1$ & \TODO{x,xxx} & 7,813 & \TODO{x,xx} & 7,69 & \TODO{x,x} \\
+        3 & $k_1$ & \TODO{x,xxx} & 7,818 & \TODO{x,xx} & 7,69 & \TODO{x,x} \\
+        4 & $k_2$ & \TODO{x,xxx} & 14,659 & \TODO{x,xx} & 13,71 & \TODO{x,x} \\
+        5 & $k_2$ & \TODO{x,xxx} & 14,646 & \TODO{x,xx} & 13,71 & \TODO{x,x} \\
+        6 & $k_2$ & \TODO{x,xxx} & 14,706 & \TODO{x,xx} & 13,71 & \TODO{x,x} \\
         \midrule
-        \multicolumn{2}{l}{Média $k_1$ (CV)} & \TODO{x,xxx (x,x\,\%)} & \TODO{x,xxx} & \TODO{x,xx} & & \TODO{x,x} \\
-        \multicolumn{2}{l}{Média $k_2$ (CV)} & \TODO{x,xxx (x,x\,\%)} & \TODO{x,xxx} & \TODO{x,xx} & & \TODO{x,x} \\
+        \multicolumn{2}{l}{Média $k_1$ (CV)} & \TODO{x,xxx (x,x\,\%)} & 7,816 & \TODO{x,xx} & & \TODO{x,x} \\
+        \multicolumn{2}{l}{Média $k_2$ (CV)} & \TODO{x,xxx (x,x\,\%)} & 14,670 & \TODO{x,xx} & & \TODO{x,x} \\
         \bottomrule
     \end{tabular}
 \end{table*}
 % PRELIMINAR (15/10/2026, video e PULSE de tomadas diferentes, mola k1):
 % f_video = 7,763 Hz (ROI do acelerometro e do parafuso, estavel de 1 a 7,5 s);
-% f_PULSE = 7,600 Hz (cursor, resolucao 0,05 Hz) -> +2,1 %; f_modelo = 7,59 Hz
-% com m_ef = 383 g -> +2,25 %.
+% f_PULSE = 7,600 Hz (cursor, resolucao 0,05 Hz) -> +2,1 %; f_modelo = 7,69 +- 0,28 Hz
+% com k e massas medidos -> video +0,93 %, PULSE -1,2 % (ambos dentro de 0,33 u).
+% Razao prevista k2/k1 = 13,71/7,69 = 1,783; medida pelo acelerometro 14,670/7,816 = 1,877.
+% 2a visita, acelerometro (CSVs de 'last measturements'; CONFIRMAR se exportacao ou digitalizacao):
+% k1 7,816 +- 0,002 Hz (+1,6 % do modelo), k2 14,67 +- 0,03 Hz (+7,0 %; k que fecha 3774 N/m).
 
 \begin{figure}[htbp]
     \centering
@@ -1021,7 +1033,7 @@ A frequência medida pelo vídeo diferiu da do acelerômetro em \TODO{x,xx}\,\% 
 \subsection{Forma Modal a Partir de Dois Pontos}
 \label{sec:res_forma_modal}
 
-As ROIs do acelerômetro ($x = 300$\,mm) e do parafuso da mola ($x = 632$\,mm) oscilam em fase, com a razão de amplitudes da Tabela~\ref{tab:res_forma_modal}. O modelo prevê \TODO{0,48} para a mola $k_1$ e \TODO{0,49} para a mola $k_2$; essa razão depende pouco da massa efetiva (entre 0,480 e 0,484 para $m_{ef}$ entre 200 e 500\,g com $k_1$), por ser dominada pela rotação da barra em torno da articulação.
+As ROIs do acelerômetro ($x = 305$\,mm) e do parafuso da mola ($x = 655$\,mm) oscilam em fase, com a razão de amplitudes da Tabela~\ref{tab:res_forma_modal}. O modelo prevê 0,473 para a mola $k_1$ e 0,490 para a mola $k_2$; essa razão depende pouco da massa efetiva (entre 0,472 e 0,474 para $m_{ef}$ entre 50 e 200\,g com $k_1$) e de $k$ (0,473 $\pm$ 0,001 para $k_1 \pm 62$\,N/m), por ser dominada pela rotação da barra em torno da articulação.
 
 \begin{table}[htbp]
     \centering
@@ -1032,12 +1044,14 @@ As ROIs do acelerômetro ($x = 300$\,mm) e do parafuso da mola ($x = 632$\,mm) o
         \toprule
         \textbf{Mola} & \textbf{Medida} & \textbf{Prevista} & \textbf{$\varepsilon$ (\%)} \\
         \midrule
-        $k_1$ (média, 3 tomadas) & \TODO{0,4xx} & \TODO{0,48x} & \TODO{x,x} \\
-        $k_2$ (média, 3 tomadas) & \TODO{0,4xx} & \TODO{0,48x} & \TODO{x,x} \\
+        $k_1$ (média, 3 tomadas) & \TODO{0,4xx} & 0,473 & \TODO{x,x} \\
+        $k_2$ (média, 3 tomadas) & \TODO{0,4xx} & 0,490 & \TODO{x,x} \\
         \bottomrule
     \end{tabularx}
 \end{table}
-% PRELIMINAR (k1, 15/10/2026): medida 0,486; prevista 0,481 (m_ef = 383 g) -> 1,1 %.
+% PRELIMINAR (k1, 15/10/2026): medida 0,486; prevista 0,473 (parametros medidos) -> +2,8 %.
+% REVISAR: a forma multiponto da mesma sessao (9 pontos) indica pivo efetivo ~24 mm alem do
+% eixo medido (barra perto da junta se move mais que o previsto; carcaca parada) -- ver issues.md.
 
 A concordância de \TODO{x}\,\% confirma que o vídeo mede corretamente a distribuição espacial do movimento, e não apenas a frequência, em dois pontos obtidos do mesmo registro, sem sensores adicionais.
 
@@ -1103,7 +1117,7 @@ A amplitude medida pelo vídeo concordou com a do acelerômetro em \TODO{x,x}\,\
 \subsection{Efeito de Massa do Acelerômetro}
 \label{sec:res_massa}
 
-Pelo modelo, o acelerômetro de 5\,g a 300\,mm da articulação reduz a frequência em \TODO{0,09}\,\%, ou cerca de \TODO{0,007}\,Hz, valor inferior à resolução espectral de \TODO{0,0x}\,Hz dos registros. As tomadas sem o acelerômetro forneceram $f = $ \TODO{x,xxx}\,Hz, contra \TODO{x,xxx}\,Hz com ele, diferença de \TODO{x,xx}\,\%, \TODO{dentro da resolução}. O resultado confirma que, nesta montagem, a massa do sensor é pequena frente à massa modal, mas o mesmo cálculo mostra que um acelerômetro de 10\,g na ponta de uma barra engastada da mesma seção reduziria a frequência em cerca de 3\,\%, efeito que o método óptico evita por construção.
+Pelo modelo, o acelerômetro de 5\,g a 305\,mm da articulação reduz a frequência em 0,15\,\%, ou cerca de 0,012\,Hz, valor inferior à resolução espectral de \TODO{0,0x}\,Hz dos registros. As tomadas sem o acelerômetro forneceram $f = $ \TODO{x,xxx}\,Hz, contra \TODO{x,xxx}\,Hz com ele, diferença de \TODO{x,xx}\,\%, \TODO{dentro da resolução}. O resultado confirma que, nesta montagem, a massa do sensor é pequena frente à massa modal, mas o mesmo cálculo mostra que um acelerômetro de 10\,g na ponta de uma barra engastada da mesma seção reduziria a frequência em cerca de 3\,\%, efeito que o método óptico evita por construção.
 
 \subsection{Controles de Qualidade}
 \label{sec:res_controles}
@@ -1148,7 +1162,10 @@ O acelerômetro é a referência da validação, mas sua configuração também 
 
 \subsection{O modelo analítico}
 
-A principal fonte de discrepância entre modelo e medição foi a massa efetiva no ponto da mola. Sem ela, o modelo previa 11,70\,Hz; com $m_s/3$ e as ferragens, \TODO{x,xx}\,Hz. A frequência sozinha não separa a rigidez da mola da massa efetiva, já que diferentes pares $(k, m_{ef})$ produzem a mesma frequência; por isso ambas foram medidas diretamente, e a rigidez de catálogo diferiu da medida em \TODO{x}\,\%. A aproximação de corpo rígido (Equação~\ref{eq:fn_rigida}) ficou a menos de 1,1\,\% do modelo de elementos finitos, o que permite usá-la para dimensionamento rápido, e a junta com mancal se comportou como articulação ideal dentro de \TODO{x}\,\%. O amortecimento \TODO{dependeu fortemente da configuração do ensaio (amortecedor, pré-carga da mola)}, o que reforça a necessidade de comparar $\zeta$ apenas na mesma tomada.
+A principal fonte de discrepância entre modelo e medição foi a rigidez de catálogo da mola. Com ela e sem a massa da mola, o modelo previa 11,88\,Hz; com a rigidez medida, 43\,\% menor, e a massa efetiva $m_s/3 + m_f$, 7,69\,Hz. A frequência sozinha não separa a rigidez da mola da massa efetiva, já que diferentes pares $(k, m_{ef})$ produzem a mesma frequência; por isso ambas foram medidas diretamente. A aproximação de corpo rígido (Equação~\ref{eq:fn_rigida}) ficou a menos de 0,5\,\% do modelo de elementos finitos, o que permite usá-la para dimensionamento rápido, e a junta com mancal se comportou como articulação ideal dentro de \TODO{x}\,\%. O amortecimento \TODO{dependeu fortemente da configuração do ensaio (amortecedor, pré-carga da mola)}, o que reforça a necessidade de comparar $\zeta$ apenas na mesma tomada.
+% REVISAR: forma multiponto (k1_cm_acc) sugere pivo efetivo ~24 mm alem do eixo; geometria e
+% ausencia de folga confirmadas, entao provavel flexibilidade do eixo/peca giratoria (~0,5 mm) ou
+% efeito de borda da imagem; com a raiz em -24 mm o modelo da 7,62 Hz (dentro da incerteza).
 
 \subsection{Medição multiponto}
 

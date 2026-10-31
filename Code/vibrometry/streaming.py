@@ -37,6 +37,8 @@ class TrackingParams:
     gabor_wavelengths: tuple[float, ...] = (8.0, 16.0)
     search_margin: int = 60               # native pixels
     min_score: float = 0.3
+    subpixel: str = "phase"               # "phase" | "parabolic" | "none"
+    local_frequency: bool = False         # phase stage: local vs centre frequency
 
 
 @dataclass
@@ -235,12 +237,14 @@ def track_video(
             return gray
         return cv2.resize(gray, size, interpolation=cv2.INTER_AREA)
 
-    bank = GaborBank(wavelengths=tuple(params.gabor_wavelengths))
+    bank = GaborBank(wavelengths=tuple(params.gabor_wavelengths),
+                     local_frequency=params.local_frequency)
     margin = max(4, round(params.search_margin * factor))
     ref = prepare(ref_native)
     trackers = {
         r.name: RoiTracker(ref, _scaled_roi(r, factor), bank=bank,
-                           search_margin=margin, min_score=params.min_score)
+                           search_margin=margin, min_score=params.min_score,
+                           subpixel=params.subpixel)
         for r in rois
     }
 

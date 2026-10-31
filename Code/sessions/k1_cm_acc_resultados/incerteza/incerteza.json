@@ -1,0 +1,141 @@
+{
+  "sessao": "k1_cm_acc",
+  "fonte_incertezas_modelo": "sessão",
+  "incertezas_entrada": {
+    "springs[0].k_n_m": 62.0,
+    "springs[0].x_mm": 2.0,
+    "springs[0].mass_g": 1.0,
+    "springs[0].hardware_g": 1.0,
+    "masses[0].x_mm": 2.0,
+    "masses[0].mass_g": 0.5,
+    "L_mm": 2.0,
+    "b_mm": 0.1,
+    "t_mm": 0.1,
+    "rho": 13.3,
+    "E_gpa": 2.0
+  },
+  "modelo": {
+    "f_hz": 7.691521926810302,
+    "u_hz": 0.28030893572503346,
+    "u_rel_pct": 3.644388436935503,
+    "contribuicoes": {
+      "springs[0].k_n_m": {
+        "valor": 857.0,
+        "u": 62.0,
+        "sensibilidade_hz_por_unidade": 0.004472279140500502,
+        "u_f_hz": 0.27728130671103113,
+        "parcela_pct": 97.85145754997704
+      },
+      "springs[0].x_mm": {
+        "valor": 655.0,
+        "u": 2.0,
+        "sensibilidade_hz_por_unidade": 0.008312959294078048,
+        "u_f_hz": 0.016625918588156097,
+        "parcela_pct": 0.35180127912020376
+      },
+      "springs[0].mass_g": {
+        "valor": 161.0,
+        "u": 1.0,
+        "sensibilidade_hz_por_unidade": -0.003485725177804433,
+        "u_f_hz": 0.003485725177804433,
+        "parcela_pct": 0.015463663901064451
+      },
+      "springs[0].hardware_g": {
+        "valor": 46.0,
+        "u": 1.0,
+        "sensibilidade_hz_por_unidade": -0.010442557593638213,
+        "u_f_hz": 0.010442557593638213,
+        "parcela_pct": 0.13878415114525178
+      },
+      "masses[0].x_mm": {
+        "valor": 305.0,
+        "u": 2.0,
+        "sensibilidade_hz_por_unidade": -7.612971916381994e-05,
+        "u_f_hz": 0.00015225943832763988,
+        "parcela_pct": 2.95049281788829e-05
+      },
+      "masses[0].mass_g": {
+        "valor": 5.0,
+        "u": 0.5,
+        "sensibilidade_hz_por_unidade": -0.0023417808513848115,
+        "u_f_hz": 0.0011708904256924058,
+        "parcela_pct": 0.0017448521168465095
+      },
+      "L_mm": {
+        "valor": 735.0,
+        "u": 2.0,
+        "sensibilidade_hz_por_unidade": -0.011231976312347403,
+        "u_f_hz": 0.022463952624694805,
+        "parcela_pct": 0.6422416464084988
+      },
+      "b_mm": {
+        "valor": 25.4,
+        "u": 0.1,
+        "sensibilidade_hz_por_unidade": -0.10940612390027304,
+        "u_f_hz": 0.010940612390027304,
+        "parcela_pct": 0.15233839610603614
+      },
+      "t_mm": {
+        "valor": 12.7,
+        "u": 0.1,
+        "sensibilidade_hz_por_unidade": -0.21678375812843598,
+        "u_f_hz": 0.021678375812843598,
+        "parcela_pct": 0.5981079799430334
+      },
+      "rho": {
+        "valor": 2661.9,
+        "u": 13.3,
+        "sensibilidade_hz_por_unidade": -0.0010492271657802392,
+        "u_f_hz": 0.013954721304877182,
+        "parcela_pct": 0.24783831625148198
+      },
+      "E_gpa": {
+        "valor": 69.0,
+        "u": 2.0,
+        "sensibilidade_hz_por_unidade": 0.00019453728039664497,
+        "u_f_hz": 0.00038907456079328995,
+        "parcela_pct": 0.0001926601024031406
+      }
+    },
+    "monte_carlo": {
+      "media_hz": 7.697050847152601,
+      "desvio_hz": 0.26960518621652857
+    }
+  },
+  "escala": {
+    "s_mm_px": 0.5129948615605857,
+    "u_mm_px": 0.0008802466416649393,
+    "u_rel_pct": 0.17158975803132492,
+    "hipotese": "±1 mm no comprimento, ±1 px por extremidade"
+  },
+  "frequencia_por_roi": {
+    "Parafuso_de_fixação": {
+      "f_hz": 7.762968621161552,
+      "u_hz": 0.006673535772385866,
+      "u_rel_pct": 0.08596628555465322,
+      "resolucao_hz": 0.14833127317676145,
+      "segmentos_hz": [
+        7.7552949425660875,
+        7.782643648785777,
+        7.756221942284186,
+        7.756383345691421
+      ],
+      "erro_vs_modelo_pct": 0.9289019134458781,
+      "u_erro_pct": 3.6792644221063977
+    },
+    "Acelerometro": {
+      "f_hz": 7.76293532697093,
+      "u_hz": 0.006628118182621134,
+      "u_rel_pct": 0.08538159733977074,
+      "resolucao_hz": 0.14833127317676145,
+      "segmentos_hz": [
+        7.755387367210445,
+        7.782697370628899,
+        7.756627713566894,
+        7.7566163157961645
+      ],
+      "erro_vs_modelo_pct": 0.9284690447504617,
+      "u_erro_pct": 3.6792347733975044
+    }
+  }
+}

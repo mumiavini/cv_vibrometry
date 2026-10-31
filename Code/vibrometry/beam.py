@@ -212,7 +212,8 @@ class BeamFE:
     root : "clamped" (w = w' = 0), "pinned" (w = 0, free rotation) or
         "rotational" (w = 0, torsional spring ``root_stiffness`` [N m/rad]).
     root_stiffness : torsional stiffness for ``root="rotational"``.
-    n_elements : number of beam elements (springs/masses snap to nodes).
+    n_elements : number of beam elements (springs and masses are placed at
+        their exact position through the element shape functions).
     """
 
     beam: CantileverBeam
@@ -236,6 +237,18 @@ class BeamFE:
         return min(self.n_elements, max(0, int(round(x / self.beam.length
                                                      * self.n_elements))))
 
+    def _point(self, x: float) -> tuple[list[int], np.ndarray]:
+        """DOFs of the element containing ``x`` and the Hermite shape
+        functions of the transverse displacement there."""
+        self._node(x)                         # range check
+        n = self.n_elements
+        le = self.beam.length / n
+        e = min(n - 1, max(0, int(x // le)))
+        s = x / le - e
+        N = np.array([1 - 3 * s ** 2 + 2 * s ** 3, le * (s - 2 * s ** 2 + s ** 3),
+                      3 * s ** 2 - 2 * s ** 3, le * (-s ** 2 + s ** 3)])
+        return [2 * e, 2 * e + 1, 2 * e + 2, 2 * e + 3], N
+
     def _solve(self):
         if self._cache is not None:
             return self._cache
@@ -255,10 +268,15 @@ class BeamFE:
             s = slice(2 * e, 2 * e + 4)
             K[s, s] += k_e
             M[s, s] += m_e
+        # point springs and masses at their exact position: k N N^T and
+        # m N N^T with the Hermite shape functions of the element containing x
+        # (no snapping to the nearest node, so positions vary continuously)
         for x, k in self.springs:
-            K[2 * self._node(x), 2 * self._node(x)] += k
+            dofs, N = self._point(x)
+            K[np.ix_(dofs, dofs)] += k * np.outer(N, N)
         for x, m in self.masses:
-            M[2 * self._node(x), 2 * self._node(x)] += m
+            dofs, N = self._point(x)
+            M[np.ix_(dofs, dofs)] += m * np.outer(N, N)
         if self.root == "rotational":
             K[1, 1] += self.root_stiffness
         free = list(range(2, ndof)) if self.root == "clamped" else list(range(1, ndof))

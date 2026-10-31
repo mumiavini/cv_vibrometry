@@ -98,8 +98,20 @@ def test_old_session_without_the_new_fields_still_loads(tmp_path):
 def test_repository_session_is_configured_for_the_bench():
     s = Session.load(SESSION)
     assert s.specimen.support == "pinned"
-    assert s.specimen.springs[0]["k_n_m"] == 1500.0
-    assert s.video.roi_positions_mm["Parafuso_de_fixação"] == 632.0
+    # measured in the lab (Code/data/bancada): static k, spring mass, hardware, geometry
+    spring = s.specimen.springs[0]
+    assert spring["k_n_m"] == 857.0 and spring["mass_g"] == 161.0
+    assert spring["hardware_g"] == 46.0 and spring["x_mm"] == 655.0
+    assert s.specimen.L_mm == 735.0
+    assert s.video.roi_positions_mm == {"Parafuso_de_fixação": 655.0, "Acelerometro": 305.0}
+
+
+def test_repository_session_model_matches_the_measured_frequency():
+    """With the measured k and masses the model lands between the PULSE
+    (7.600 Hz) and the video (7.763 Hz) frequencies of the k1 test."""
+    f1 = Session.load(SESSION).specimen.predicted_f1()
+    assert 7.600 < f1 < 7.763
+    assert f1 == pytest.approx(7.69, abs=0.02)
 
 
 def _analysis(amplitudes: dict[str, float], f: float):
@@ -125,3 +137,16 @@ def test_mode_shape_check_needs_two_positioned_rois():
     s.specimen = bench(900.0, 83.0)
     s.video.roi_positions_mm = {"A": 300.0}
     assert mode_shape_check(s, _analysis({"A": 1.0, "B": 2.0}, 7.6)) is None
+
+
+def test_windows_style_relative_paths_resolve(tmp_path):
+    (tmp_path / "videos").mkdir()
+    (tmp_path / "videos" / "a.mov").write_bytes(b"x")
+    (tmp_path / "sessions").mkdir()
+    p = tmp_path / "sessions" / "w.vibro.json"
+    p.write_text(json.dumps({"name": "w", "video": {"path": "..\\\\videos\\\\a.mov"}}),
+                 encoding="utf-8")
+    s = Session.load(p)
+    assert Path(s.video.path) == (tmp_path / "videos" / "a.mov").resolve()
+    saved = json.loads(Path(s.save(p)).read_text(encoding="utf-8"))
+    assert saved["video"]["path"] == "../videos/a.mov"

@@ -9,6 +9,159 @@ Newest issue first.
 
 ---
 
+## [OPEN] Bar near the joint moves as if the pivot were ≈ 24 mm behind the measured bearing axis
+
+**Date opened:** 2026-10-31
+**Area:** bench (joint/bearing), `Code/tools/forma_modal_multiponto.py`, `Code/sessions/k1_cm_acc.vibro.json`
+
+**Symptom:** with the geometry measured from the bearing axis (L = 735, a = 655, x_a = 305 mm; the
+calibration point p1 is the joint face, 15 mm from the axis, `calibration.x0_mm`), the multi-point
+shape of `k1_cm_acc` fits the model well far from the root (≤ 1 % from 515 to 655 mm, MAC 0.9996) but
+reads high close to it: +30 % at 65 mm, +14 % at 115 mm, +4 % at 215 mm. A line through the reliable
+points crosses zero at x0 = −24 mm; the same line through the model's shape at those points crosses at
+−4 mm (bending only). A separate track of the bar just outside the joint (≈ 40 mm) gives 1.45 mm against
+≈ 1.0 mm for a pin at the axis, while the joint housing, the stand knob and the damper rod move
+≤ 0.009 mm (noise floor, ≈ 5 µm).
+
+**Root cause (not established):** the housing does not move, so it is not support motion. Either the
+real rotation axis is ≈ 24 mm further from the tip than the point taken as "centre of the bearing"
+(e.g. the bar is clamped in a fork that turns about a shaft further back), or the bar has play/slip
+inside the joint. The tape positions and the image agree within ≤ 3 mm (scale fit 0.513 mm/px), so it is
+not a calibration error. Effect on f₁: with the root moved to −24 mm the model gives 7.62 Hz instead of
+7.69 Hz, inside the ±0.28 Hz model uncertainty (k dominates).
+
+**Proposed fix (not yet implemented):** in the next takes put an ROI on the bar right at the joint and one
+on the joint housing; photograph/measure the joint to locate the shaft axis; check bearing play (lift the
+bar without the spring). If play is confirmed, model it as a vertical/rotational root spring.
+
+**Update (2026-10-31):** the author confirms **no play**, and the bar **is clamped in a part that rotates**.
+So the most likely cause is the first one: the shaft of that rotating part sits ≈ 24 mm behind the point
+taken as "centre of the bearing". Pending: measure shaft axis → tip (expected ≈ 759 mm if the video is
+right); then L, a and x_a all shift by the same amount (f₁ 7.69 → ≈ 7.62 Hz).
+
+**Update 2 (2026-10-31):** ruled out. The author confirms all distances (735, 655, 305 mm) were measured
+from the **middle of the clamp**, which is the rotation axis, and the bar is 750 mm long (15 mm behind the
+axis, as modelled). So the geometry is right and there is no play. Remaining candidates: elastic compliance
+of the shaft / rotating clamp (≈ 0.5 mm vertical motion at the axis would do it; the tracked disc is the fixed
+housing, not the rotating part), or a tracking/optical effect on the near-root points at the left edge of the
+frame. Camera roll is excluded: the housing and the stand knob, ≈ 150 mm left of the wall reference, move
+≤ 5 µm. Next takes: ROIs on the rotating clamp itself and on the bar right at the clamp.
+
+---
+
+## [SOLVED] Model predicted f₁ = 11.7 Hz for spring k₁ against 7.60 Hz measured
+
+**Date opened:** 2026-10-25
+**Date solved:** 2026-10-31
+**Area:** `Code/sessions/k1_cm_acc.vibro.json` (specimen), `Code/vibrometry/beam.py` (`BeamFE`), bench
+
+**Symptom:** the finite-element model of the pinned bar with the catalog spring (k₁ = 1500 N/m at
+632 mm, 5 g accelerometer, no spring mass) predicted 11.70 Hz; PULSE measured 7.600 Hz and the video
+7.763 Hz. The session carried a lumped "ferragem" of 383 g at 632 mm — the mass that would close the gap
+with k = 1500 N/m — which was a fitted number, not a measurement (logged in `TODO.md`, "Discrepância").
+
+**Root cause:** k and the effective mass are not separable from one frequency. Measured in the lab
+(`Code/data/bancada/`): the **catalog stiffness was wrong** — static test k₁ = 857 ± 62 N/m (−43 %),
+k₂ = 3291 ± 346 N/m (+32 %); spring k₁ 161 g (⅓ = 54 g in the model), bolt 36 g, nuts 10 g, so the
+effective mass at the spring is 99.7 g, not 383 g. The geometry from the bearing axis is L = 735 mm,
+a = 655 mm, x_a = 305 mm (not 720/632/300), and the bar weighs 644 g (ρ_eff = 2662 kg/m³). The spring
+length readings were written as "mm" but are cm (in mm, k₁ ≈ 8.6 kN/m would give f₁ ≈ 24 Hz).
+
+**Fix:** `vibrometry/springs.py` (`fit_spring_stiffness`, least squares with free intercept and standard
+error), data in `Code/data/bancada/*.csv`, `tools/parametros_bancada.py` (fit, model, uncertainty
+budget, figure → `Code/data/bancada/resultados/`). Session `k1_cm_acc` updated with the measured values
+and `specimen.uncertainties`; `calibration.x0_mm = 15` records that p1 is the joint face (the scale
+0.513 mm/px is unchanged). Model now: f₁ = 7.69 ± 0.28 Hz for k₁ (PULSE −1.2 %, video +0.9 %, both
+within ±0.33 u) and 13.71 ± 0.72 Hz for k₂. Exports of `k1_cm_acc` (predicted f, mode-shape table,
+`forma_modal/`, `incerteza/`) regenerated. Tests: `tests/test_springs.py`,
+`tests/test_specimen_fe.py::test_repository_session_model_matches_the_measured_frequency`.
+
+---
+
+## [OPEN] Phase displacement has a gain bias when the ROI texture is not centred in the Gabor band
+
+**Date opened:** 2026-10-25
+**Area:** `Code/vibrometry/gabor.py` (`GaborBank.phase_displacement`), `Code/tests/test_subpixel_baseline.py`
+
+**Symptom:** on synthetic textures with a known sub-pixel shift, the phase estimate had an RMS error of
+≈ 0.045 px while the parabolic NCC peak gave ≈ 0.003 px; the error grows with the shift (a gain, not
+noise). The test that assumed "phase beats NCC" failed and was replaced by honest tests (both beat
+integer NCC by > 5×).
+
+**Root cause:** each filter converts phase to displacement as Δφ / ω₀, with ω₀ the filter centre
+frequency. The response of a broadband texture is dominated by the local spatial frequency of the
+image inside the band, not by ω₀, so the estimate is scaled by ω_local / ω₀ (a few % to tens of %
+depending on the texture).
+
+**Proposed fix (not yet implemented as default):** `GaborBank(local_frequency=True)` (and
+`TrackingParams.local_frequency`) divides by the amplitude-weighted local frequency
+−ΣIm(C̄·∂C/∂u)/Σ|C|² of the reference response (falls back to ω₀ outside 0.25–4 ω₀). It reduces the
+bias to < 0.6× in the synthetic tests (seeds 1–3). On the real video `k1_cm_acc` the amplitudes change
+< 0.1 % and the static noise rises slightly (0.030 → 0.035 px), so it stays off by default; turn it on
+for small-amplitude tests where the gain matters.
+
+---
+
+## [OPEN] ROIs on the smooth edge of the bar slide along the edge (aperture problem)
+
+**Date opened:** 2026-10-25
+**Area:** `Code/vibrometry/tracking.py` (`RoiTracker`), `Code/vibrometry/modeshape.py`,
+`Code/tools/forma_modal_multiponto.py`
+
+**Symptom:** ROIs placed along the bar for the multi-point mode shape (E5) gave nonsense amplitudes
+and phase flips of 180° between neighbours; the automatic axis picked x, and even on y the coarse NCC
+jumped. Final run: 9 of 15 points reliable; 250, 350, 400, 450, 680 and 710 mm fail the gate
+(NCC ≥ 0.8 and sine-fit R² ≥ 0.9; minimum NCC 0.66–0.74, R² down to 0.45).
+
+**Root cause:** a uniform straight edge has gradient only across it; along the edge every position
+matches equally well, so the 2-D NCC search drifts sideways and the Gabor responses along the edge are
+weak. Between ≈ 250 and 450 mm and near the tip the bar edge has no texture at all.
+
+**Proposed fix (partly implemented):** `RoiTracker(search_axes="y")` restricts the coarse search to the
+vertical axis (implemented, used by `track_points`), and the quality gate excludes unreliable points.
+The real fix is in the bench: high-contrast markers every ≈ 50 mm along the bar
+(`docs/roteiro_laboratorio.md`, section 3).
+
+---
+
+## [SOLVED] `BeamFE` snapped springs and masses to the nearest node
+
+**Date opened:** 2026-10-25
+**Date solved:** 2026-10-25
+**Area:** `Code/vibrometry/beam.py` (`BeamFE._solve`), `Code/vibrometry/uncertainty.py`
+
+**Symptom:** in the uncertainty propagation the sensitivities ∂f/∂x of spring and mass positions came
+out exactly 0 (a ±2 mm perturbation does not move the node), and f₁ changed slightly with
+`n_elements`.
+
+**Root cause:** point springs/masses were added to the diagonal of the node closest to x
+(`K[2·node, 2·node] += k`), so a position was only resolved to L / n_elements.
+
+**Fix:** `BeamFE._point(x)` returns the DOFs and Hermite shape functions N of the element containing x,
+and springs/masses enter as k·N·Nᵀ and m·N·Nᵀ. Positions now vary continuously; k₁ session f₁ =
+7.602 Hz independent of the mesh; all `test_beam.py` tests pass unchanged.
+
+---
+
+## [SOLVED] Session saved on Windows does not load on Linux (backslash relative paths)
+
+**Date opened:** 2026-10-25
+**Date solved:** 2026-10-25
+**Area:** `Code/vibrometry/session.py` (`Session.from_dict`, `_relative`)
+
+**Symptom:** `Session.load("sessions/k1_cm_acc.vibro.json")` on Linux could not find the video:
+the file stores `"..\\videos\\k1_cm_acc.mov"`, which POSIX reads as a single file name with
+backslashes.
+
+**Root cause:** relative paths were written with `str(Path)`, which uses `\` on Windows, and read back
+without normalising separators.
+
+**Fix:** `Session.from_dict` replaces `\` with `/` on POSIX before resolving relative paths, and
+`_relative` saves with `Path.as_posix()` (forward slashes work on both systems). Regression test
+`test_windows_style_relative_paths_resolve` in `Code/tests/test_specimen_fe.py`.
+
+---
+
 ## [OPEN] Video and accelerometer of session `k1_cm_acc` are different takes and disagree on damping
 
 **Date opened:** 2026-10-25
@@ -29,6 +182,10 @@ can be compared. The 7× damping difference and the 2 % frequency difference are
 
 **Proposed fix:** record video and PULSE simultaneously (impact + LED), and compare envelopes
 (`vibrometry.reference`) before using waveform metrics; confirm the lab-PC clock.
+
+**Update (2026-10-31):** with the measured spring and masses the model gives 7.69 ± 0.28 Hz, between the
+two takes (PULSE −1.2 %, video +0.9 %); the 2.1 % gap between them is within the model uncertainty and
+is still most likely take-to-take (new simultaneous takes pending). The damping difference is open.
 
 ---
 

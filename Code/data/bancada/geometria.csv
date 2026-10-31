@@ -1,0 +1,7 @@
+grandeza,valor_mm,observacao
+mancal_ponta,735,centro do eixo do mancal -> ponta da barra (L do modelo)
+mancal_parafuso_mola,655,centro do mancal -> furo/parafuso da mola (a)
+mancal_acelerometro,305,centro do mancal -> acelerometro (x_a)
+barra_comprimento,750,comprimento total da barra
+barra_largura,25.4,1 polegada (nominal)
+barra_espessura,12.7,1/2 polegada (nominal; direcao da flexao)

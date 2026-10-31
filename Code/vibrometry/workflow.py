@@ -36,6 +36,7 @@ from .spectral import (
     log_decrement_damping,
 )
 from .streaming import TrackingParams, VideoTrack, track_video
+from .uncertainty import FrequencyUncertainty, frequency_uncertainty
 from .sync import (
     DriftResult,
     SyncResult,
@@ -71,6 +72,7 @@ class ModalSummary:
     spectrum: np.ndarray | None = None
     f_predicted: float | None = None
     error_predicted_percent: float | None = None
+    f_uncertainty: FrequencyUncertainty | None = None
 
     def to_dict(self) -> dict:
         return {
@@ -83,6 +85,8 @@ class ModalSummary:
             "spectral_peaks": [asdict(p) for p in self.peaks],
             "f_predicted_hz": self.f_predicted,
             "error_predicted_percent": self.error_predicted_percent,
+            "f_uncertainty": (self.f_uncertainty.to_dict()
+                              if self.f_uncertainty else None),
         }
 
 
@@ -111,6 +115,7 @@ def modal_summary(
     decay = log_decrement_damping(x, fs, f_n) if f_n else None
     err = (100.0 * (f_n - f_predicted) / f_predicted
            if (f_n and f_predicted) else None)
+    fu = frequency_uncertainty(t, x, fs, f0=f_n) if f_n else None
     return ModalSummary(
         name=name, unit=unit, window=win, f_n=f_n,
         amplitude=fit.amplitude if fit else None,
@@ -119,6 +124,7 @@ def modal_summary(
         std=float(np.std(x)), peak_to_peak=float(np.ptp(x)),
         peaks=peaks, decay=decay, freqs=freqs, spectrum=amp,
         f_predicted=f_predicted, error_predicted_percent=err,
+        f_uncertainty=fu,
     )
 
 

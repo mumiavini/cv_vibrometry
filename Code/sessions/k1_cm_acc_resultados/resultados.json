@@ -6,8 +6,8 @@
     "specimen": {
       "material": "aluminum_6351_t6",
       "E_gpa": 69.0,
-      "rho": 2710.0,
-      "L_mm": 720.0,
+      "rho": 2661.9,
+      "L_mm": 735.0,
       "b_mm": 25.4,
       "t_mm": 12.7,
       "tip_mass_g": 0.0,
@@ -17,25 +17,33 @@
       "root_stiffness": null,
       "springs": [
         {
-          "name": "mola k1 (catalogo)",
-          "x_mm": 632.0,
-          "k_n_m": 1500.0,
-          "mass_g": 0.0,
-          "hardware_g": 0.0
+          "name": "mola k1 (k medido, ensaio estatico)",
+          "x_mm": 655.0,
+          "k_n_m": 857.0,
+          "mass_g": 161.0,
+          "hardware_g": 46.0
         }
       ],
       "masses": [
         {
           "name": "acelerometro B&K 4507",
-          "x_mm": 300.0,
+          "x_mm": 305.0,
           "mass_g": 5.0
-        },
-        {
-          "name": "ferragem",
-          "x_mm": 632.0,
-          "mass_g": 383.0
         }
-      ]
+      ],
+      "uncertainties": {
+        "springs[0].k_n_m": 62.0,
+        "springs[0].x_mm": 2.0,
+        "springs[0].mass_g": 1.0,
+        "springs[0].hardware_g": 1.0,
+        "masses[0].x_mm": 2.0,
+        "masses[0].mass_g": 0.5,
+        "L_mm": 2.0,
+        "b_mm": 0.1,
+        "t_mm": 0.1,
+        "rho": 13.3,
+        "E_gpa": 2.0
+      }
     },
     "meta": {
       "date": "20261015",
@@ -43,7 +51,7 @@
       "level": "A1",
       "repetition": 1,
       "camera": "iphone 17e",
-      "notes": "Barra Al 6351-T6 articulada em mancal + mola k1=1500 N/m a 632 mm da articulacao (furo a 88 mm da ponta); acelerometro B&K 4507 001 (5 g) a 300 mm da articulacao. Modelo: elementos finitos (BeamFE). PREENCHER na etapa 1 as massas pesadas da mola e das ferragens (mass_g, hardware_g): sem elas f1 previsto = 11,7 Hz.",
+      "notes": "Barra Al 6351-T6 (750 mm, 644 g) articulada em mancal; L = 735 mm do eixo do mancal a ponta. Mola k1 a 655 mm do eixo: k = 857 +- 62 N/m (ensaio estatico, data/bancada; catalogo 1500), m mola 161 g (1/3 no modelo) + parafuso 36 g + porcas 10 g. Acelerometro B&K 4507 001 (5 g) a 305 mm. rho efetiva 2662 kg/m3 pela massa medida. Calibracao: p1 = face da junta, 15 mm do eixo do mancal (x0_mm), p2 = ponta; 720 mm entre eles. Modelo (BeamFE): f1 = 7,69 +- 0,28 Hz.",
       "checklist": [
         false,
         false,
@@ -98,7 +106,8 @@
           470.38862559241704
         ],
         "length_mm": 720.0,
-        "length_px": 1403.5228302476214
+        "length_px": 1403.5228302476214,
+        "x0_mm": 15.0
       },
       "axis": "auto",
       "compensate": true,
@@ -109,8 +118,8 @@
       "search_margin": 60,
       "window": null,
       "roi_positions_mm": {
-        "Parafuso_de_fixação": 632.0,
-        "Acelerometro": 300.0
+        "Parafuso_de_fixação": 655.0,
+        "Acelerometro": 305.0
       }
     },
     "accel": {
@@ -214,8 +223,8 @@
             "amplitude": 15.453971353417925
           }
         ],
-        "f_predicted_hz": 7.592140784793691,
-        "error_predicted_percent": 2.25006315135362
+        "f_predicted_hz": 7.691537391726914,
+        "error_predicted_percent": 0.9287004622237369
       },
       "Acelerometro": {
         "name": "Acelerometro",
@@ -236,32 +245,32 @@
             "amplitude": 7.513038820037903
           }
         ],
-        "f_predicted_hz": 7.592140784793691,
-        "error_predicted_percent": 2.249635210590419
+        "f_predicted_hz": 7.691537391726914,
+        "error_predicted_percent": 0.928267554891354
       }
     }
   },
   "forma_modal": {
     "referencia": "Parafuso_de_fixação",
     "modo_modelo": 1,
-    "f_modelo_hz": 7.592140784793691,
-    "f_medida_hz": 7.762968746991223,
+    "f_modelo_hz": 7.691537391726914,
+    "f_medida_hz": 7.762968735035994,
     "rois": [
       {
         "nome": "Parafuso_de_fixação",
-        "x_mm": 632.0,
-        "amplitude": 15.502600916911685,
+        "x_mm": 655.0,
+        "amplitude": 15.504148978980606,
         "razao_medida": 1.0,
         "razao_prevista": 1.0,
         "erro_pct": 0.0
       },
       {
         "nome": "Acelerometro",
-        "x_mm": 300.0,
-        "amplitude": 7.5375173692085085,
-        "razao_medida": 0.4862098566303078,
-        "razao_prevista": 0.4809104220888836,
-        "erro_pct": 1.101958763631185
+        "x_mm": 305.0,
+        "amplitude": 7.540961674445466,
+        "razao_medida": 0.4863834632051686,
+        "razao_prevista": 0.4731844630024242,
+        "erro_pct": 2.7893984766521744
       }
     ]
   },
@@ -306,8 +315,8 @@
           "amplitude": 0.028939084568034318
         }
       ],
-      "f_predicted_hz": 7.592140784793691,
-      "error_predicted_percent": -0.4817927608894736
+      "f_predicted_hz": 7.691537391726914,
+      "error_predicted_percent": -1.76785192225905
     }
   },
   "comparacao": {
@@ -365,15 +374,104 @@
     },
     {
       "criterio": "f₁ Parafuso_de_fixação × Euler-Bernoulli [%]",
-      "valor": 2.25006315135362,
+      "valor": 0.9287004622237369,
       "limite": 5.0,
       "ok": true
     },
     {
       "criterio": "f₁ Acelerometro × Euler-Bernoulli [%]",
-      "valor": 2.249635210590419,
+      "valor": 0.928267554891354,
       "limite": 5.0,
       "ok": true
     }
-  ]
+  ],
+  "incerteza_modelo": {
+    "f_hz": 7.691521926810302,
+    "u_hz": 0.28030893572503346,
+    "u_rel_pct": 3.644388436935503,
+    "contribuicoes": {
+      "springs[0].k_n_m": {
+        "valor": 857.0,
+        "u": 62.0,
+        "sensibilidade_hz_por_unidade": 0.004472279140500502,
+        "u_f_hz": 0.27728130671103113,
+        "parcela_pct": 97.85145754997704
+      },
+      "springs[0].x_mm": {
+        "valor": 655.0,
+        "u": 2.0,
+        "sensibilidade_hz_por_unidade": 0.008312959294078048,
+        "u_f_hz": 0.016625918588156097,
+        "parcela_pct": 0.35180127912020376
+      },
+      "springs[0].mass_g": {
+        "valor": 161.0,
+        "u": 1.0,
+        "sensibilidade_hz_por_unidade": -0.003485725177804433,
+        "u_f_hz": 0.003485725177804433,
+        "parcela_pct": 0.015463663901064451
+      },
+      "springs[0].hardware_g": {
+        "valor": 46.0,
+        "u": 1.0,
+        "sensibilidade_hz_por_unidade": -0.010442557593638213,
+        "u_f_hz": 0.010442557593638213,
+        "parcela_pct": 0.13878415114525178
+      },
+      "masses[0].x_mm": {
+        "valor": 305.0,
+        "u": 2.0,
+        "sensibilidade_hz_por_unidade": -7.612971916381994e-05,
+        "u_f_hz": 0.00015225943832763988,
+        "parcela_pct": 2.95049281788829e-05
+      },
+      "masses[0].mass_g": {
+        "valor": 5.0,
+        "u": 0.5,
+        "sensibilidade_hz_por_unidade": -0.0023417808513848115,
+        "u_f_hz": 0.0011708904256924058,
+        "parcela_pct": 0.0017448521168465095
+      },
+      "L_mm": {
+        "valor": 735.0,
+        "u": 2.0,
+        "sensibilidade_hz_por_unidade": -0.011231976312347403,
+        "u_f_hz": 0.022463952624694805,
+        "parcela_pct": 0.6422416464084988
+      },
+      "b_mm": {
+        "valor": 25.4,
+        "u": 0.1,
+        "sensibilidade_hz_por_unidade": -0.10940612390027304,
+        "u_f_hz": 0.010940612390027304,
+        "parcela_pct": 0.15233839610603614
+      },
+      "t_mm": {
+        "valor": 12.7,
+        "u": 0.1,
+        "sensibilidade_hz_por_unidade": -0.21678375812843598,
+        "u_f_hz": 0.021678375812843598,
+        "parcela_pct": 0.5981079799430334
+      },
+      "rho": {
+        "valor": 2661.9,
+        "u": 13.3,
+        "sensibilidade_hz_por_unidade": -0.0010492271657802392,
+        "u_f_hz": 0.013954721304877182,
+        "parcela_pct": 0.24783831625148198
+      },
+      "E_gpa": {
+        "valor": 69.0,
+        "u": 2.0,
+        "sensibilidade_hz_por_unidade": 0.00019453728039664497,
+        "u_f_hz": 0.00038907456079328995,
+        "parcela_pct": 0.0001926601024031406
+      }
+    },
+    "monte_carlo": null
+  },
+  "modelo_atualizado": {
+    "em": "2026-10-31",
+    "nota": "Previsao do modelo, forma modal e criterios 3-4 recalculados com os parametros medidos (Code/data/bancada: k1 = 857 N/m, mola 161 g, ferragens 46 g, L = 735 mm, a = 655 mm, x_a = 305 mm). Sinais, espectros e comparacao sao os da exportacao original (gerado_em)."
+  }
 }

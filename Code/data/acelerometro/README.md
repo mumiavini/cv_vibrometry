@@ -1,4 +1,4 @@
-# Acelerômetro — mola k₁ = 1500 N/m (B&K 4507 001 + LAN-XI 3160-A-4/2, PULSE LabShop)
+# Acelerômetro — mola k₁ (857 N/m medido; 1500 N/m de catálogo) (B&K 4507 001 + LAN-XI 3160-A-4/2, PULSE LabShop)
 
 **Os dados desta pasta são DIGITALIZADOS** a partir de uma foto da tela do PULSE
 (`Book/Images/pulse_curva_acelerometro_foto.jpg`); não são uma exportação do software.

@@ -1,0 +1,138 @@
+{
+  "sessao": "k1_cm_acc",
+  "unidade": "mm",
+  "linhas": [
+    {
+      "metodo": "phase",
+      "roi": "Parafuso_de_fixação",
+      "f_n": 7.762968735035982,
+      "amplitude": 15.504148978975465,
+      "sigma": 0.05004083112632894,
+      "zeta": 0.0010259278250391037,
+      "noise_floor": 0.005258998348716471,
+      "snr_db": 69.39089796805916,
+      "ruido_referencia_px": 0.10913649093900354,
+      "dif_rms_vs_fase": null
+    },
+    {
+      "metodo": "phase",
+      "roi": "Acelerometro",
+      "f_n": 7.762935437806627,
+      "amplitude": 7.540961674440342,
+      "sigma": 0.050050531944916425,
+      "zeta": 0.0010261311107416541,
+      "noise_floor": 0.002712647930074403,
+      "snr_db": 68.88066604977652,
+      "ruido_referencia_px": 0.10913649093900354,
+      "dif_rms_vs_fase": null
+    },
+    {
+      "metodo": "phase_local",
+      "roi": "Parafuso_de_fixação",
+      "f_n": 7.7629712216791305,
+      "amplitude": 15.510694303748842,
+      "sigma": 0.050161140960107015,
+      "zeta": 0.0010283940654881836,
+      "noise_floor": 0.005020311453761996,
+      "snr_db": 69.79801154942993,
+      "ruido_referencia_px": 0.13158393731818996,
+      "dif_rms_vs_fase": 0.026634304061454003
+    },
+    {
+      "metodo": "phase_local",
+      "roi": "Acelerometro",
+      "f_n": 7.762945218097315,
+      "amplitude": 7.538840980215011,
+      "sigma": 0.0497403485462829,
+      "zeta": 0.0010197704762619716,
+      "noise_floor": 0.0026841146363787223,
+      "snr_db": 68.9700704480102,
+      "ruido_referencia_px": 0.13158393731818996,
+      "dif_rms_vs_fase": 0.01998096592054981
+    },
+    {
+      "metodo": "parabolic",
+      "roi": "Parafuso_de_fixação",
+      "f_n": 7.762967757211644,
+      "amplitude": 15.468958749982907,
+      "sigma": 0.04966091766566416,
+      "zeta": 0.001018139038079557,
+      "noise_floor": 0.005211089605520514,
+      "snr_db": 69.45065080723171,
+      "ruido_referencia_px": 0.11493115507549884,
+      "dif_rms_vs_fase": 0.07289534696249565
+    },
+    {
+      "metodo": "parabolic",
+      "roi": "Acelerometro",
+      "f_n": 7.762921890169854,
+      "amplitude": 7.544932182445003,
+      "sigma": 0.05034590492375285,
+      "zeta": 0.001032188620008714,
+      "noise_floor": 0.002941764399639201,
+      "snr_db": 68.1809490503716,
+      "ruido_referencia_px": 0.11493115507549884,
+      "dif_rms_vs_fase": 0.06358843138094673
+    },
+    {
+      "metodo": "none",
+      "roi": "Parafuso_de_fixação",
+      "f_n": 7.762959703167053,
+      "amplitude": 15.47060672444305,
+      "sigma": 0.049148012644184454,
+      "zeta": 0.0010076245986789974,
+      "noise_floor": 0.009001123859587928,
+      "snr_db": 64.70421216620443,
+      "ruido_referencia_px": 0.0,
+      "dif_rms_vs_fase": 0.180448308763512
+    },
+    {
+      "metodo": "none",
+      "roi": "Acelerometro",
+      "f_n": 7.7628576039883015,
+      "amplitude": 7.541892016471475,
+      "sigma": 0.05181788585341228,
+      "zeta": 0.0010623758794577251,
+      "noise_floor": 0.007014947996565552,
+      "snr_db": 60.62911708217587,
+      "ruido_referencia_px": 0.0,
+      "dif_rms_vs_fase": 0.15202843864414212
+    }
+  ],
+  "ruido_estatico_px": {
+    "rois": [
+      {
+        "name": "parede_A",
+        "x": 700,
+        "y": 600,
+        "w": 150,
+        "h": 110,
+        "is_reference": false
+      },
+      {
+        "name": "parede_B",
+        "x": 1100,
+        "y": 810,
+        "w": 150,
+        "h": 110,
+        "is_reference": false
+      }
+    ],
+    "phase": {
+      "std_x_px": 0.05426801803450596,
+      "std_y_px": 0.029516828171102117
+    },
+    "phase_local": {
+      "std_x_px": 0.06238498898187491,
+      "std_y_px": 0.03526486445466978
+    },
+    "parabolic": {
+      "std_x_px": 0.05591328237799021,
+      "std_y_px": 0.025844527415159083
+    },
+    "none": {
+      "std_x_px": 0.0,
+      "std_y_px": 0.0
+    }
+  }
+}
