@@ -5,12 +5,12 @@ Data a confirmar.
 
 | Arquivo | Conteúdo |
 |---|---|
-| `massas.csv` | massas pesadas [g]: molas k₁ e k₂, parafuso, porcas + arruelas, barra; acelerômetro nominal (não pesado) |
+| `massas.csv` | massas pesadas [g]: molas k₁ e k₂, parafuso, porcas + arruelas, barra, acelerômetro |
 | `rigidez_molas.csv` | ensaio estático: força aplicada [N] × leitura de comprimento da mola, para k₁ e k₂ |
 | `geometria.csv` | distâncias a partir do **centro do eixo do mancal** [mm] e seção da barra |
 | `resultados/` | gerado por `python -m tools.parametros_bancada` (a partir de `Code/`) |
 
-Ensaio estático: massas conhecidas, rotuladas em newtons, penduradas na mola; comprimento lido a cada carga.
+Ensaio estático: massas conhecidas, rotuladas em newtons, penduradas na mola; comprimento lido com paquímetro a cada carga.
 
 ## Unidade das leituras da mola
 
@@ -70,5 +70,5 @@ Tabelas completas, com o orçamento de incerteza, em `resultados/parametros.md`.
   medidas de trena (735/655/305 mm), a escala sai 0,513 mm/px e o eixo do mancal fica ≈ 15–17 mm antes de
   p1, com resíduos ≤ 3 mm. A escala de 720 mm entre p1 e p2 continua correta, e a sessão registra
   `calibration.x0_mm = 15`.
-- **Não pesado:** acelerômetro (5 g nominal) e cabo. "Porcas" inclui as arruelas; não há gancho (confirmado).
+- Acelerômetro pesado: 5 g. Não pesado: o cabo. "Porcas" inclui as arruelas; não há gancho (confirmado).
   O efeito de cada grama em f₁ é ≈ −0,01 Hz no parafuso e desprezível no acelerômetro.

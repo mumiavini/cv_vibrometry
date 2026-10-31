@@ -324,7 +324,7 @@ Impacto decrescente. Os pontos 1 e 2 são os que mais elevam o nível do trabalh
 ## Perguntas em aberto
 
 1. ~~Massa da(s) mola(s), do parafuso, das porcas e do gancho (pesar). Qual mola gerou 7,6 Hz?~~ Pesadas; a
-   curva de 7,6 Hz é da mola k₁ (o modelo dá 7,69 Hz com k₁ e 13,7 Hz com k₂). Não há gancho; "porcas" inclui as arruelas. Acelerômetro não pesado (5 g nominal).
+   curva de 7,6 Hz é da mola k₁ (o modelo dá 7,69 Hz com k₁ e 13,7 Hz com k₂). Não há gancho; "porcas" inclui as arruelas. Acelerômetro: 5 g (pesado).
 2. f_n do acelerômetro nas demais gravações/molas.
 3. Setup do PULSE: banda, linhas, tempo, taxa de amostragem, sensibilidade; exportação dos dados.
 4. A junta (conjunto cilindro/dial à esquerda): ~~distância do centro do mancal à borda da barra~~ (735 mm à
@@ -333,7 +333,7 @@ Impacto decrescente. Os pontos 1 e 2 são os que mais elevam o nível do trabalh
 5. ~~O que é a pasta `Fadiga`~~: teste de afrouxamento improvisado (E10). Faltam os arquivos e quantas meias-voltas
    em cada registro.
 7. Ensaio estático das molas: ~~como foram aplicadas as forças~~ massas penduradas, rotuladas em newtons. Falta
-   o instrumento de leitura do comprimento (`\TODO` no texto).
+   paquímetro. Acelerômetro pesado: 5 g.
 8. ~~Excitação~~: batida manual na barra, sem medir força, em todas as tomadas (vídeo + PULSE e afrouxamento).
    Texto do TCC atualizado.
 6. A barra do amortecedor (haste e placa perto de x ≈ 165 mm) não se move no vídeo (≤ 0,01 mm): não está presa

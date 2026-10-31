@@ -440,7 +440,7 @@ Como na maioria das câmeras de consumo, o sensor opera com obturador de rolagem
 \subsubsection{Acelerômetro e sistema de aquisição}
 \label{sec:acelerometro}
 
-A referência por contato foi um acelerômetro piezoelétrico Brüel \& Kjær Type 4507 001, de aproximadamente 5\,g, fixado na face superior da barra a 305\,mm do centro da articulação, com o eixo de medição na direção vertical (Figura~\ref{fig:acelerometro}). O sinal foi adquirido por um módulo Brüel \& Kjær LAN-XI Type 3160-A-4/2 (quatro entradas e duas saídas de gerador; Figura~\ref{fig:aquisitor}) e registrado no \textit{software} PULSE LabShop, versão 20. A aquisição foi configurada com banda de \TODO{xxx}\,Hz (taxa de amostragem de \TODO{xxx}\,Hz) e registro de \TODO{20}\,s, e a sensibilidade do sensor, \TODO{x,xx}\,mV/(m/s$^2$), foi tomada do certificado de calibração. O sinal no tempo foi exportado em \TODO{formato} para o processamento descrito na Seção~\ref{sec:comparacao}.
+A referência por contato foi um acelerômetro piezoelétrico Brüel \& Kjær Type 4507 001, de 5\,g (pesado), fixado na face superior da barra a 305\,mm do centro da articulação, com o eixo de medição na direção vertical (Figura~\ref{fig:acelerometro}). O sinal foi adquirido por um módulo Brüel \& Kjær LAN-XI Type 3160-A-4/2 (quatro entradas e duas saídas de gerador; Figura~\ref{fig:aquisitor}) e registrado no \textit{software} PULSE LabShop, versão 20. A aquisição foi configurada com banda de \TODO{xxx}\,Hz (taxa de amostragem de \TODO{xxx}\,Hz) e registro de \TODO{20}\,s, e a sensibilidade do sensor, \TODO{x,xx}\,mV/(m/s$^2$), foi tomada do certificado de calibração. O sinal no tempo foi exportado em \TODO{formato} para o processamento descrito na Seção~\ref{sec:comparacao}.
 % TODO: citar o datasheet/certificado do acelerometro e do LAN-XI.
 % PRELIMINAR: na primeira medicao (15/10/2026) o PULSE estava com banda de 10 Hz,
 % 200 linhas e 20 s (fs = 25,6 Hz, ~3,4 amostras por ciclo de 7,6 Hz) e o sinal
@@ -950,7 +950,7 @@ O erro de 12,5\,\% frente ao modelo não atende ao critério de 5\,\%, e a princ
 \subsection{Parâmetros Medidos da Montagem}
 \label{sec:res_parametros}
 
-A Tabela~\ref{tab:parametros_medidos} reúne os parâmetros medidos no laboratório e a frequência prevista com eles. As massas foram pesadas em balança e as distâncias, medidas com trena a partir do meio do engaste da barra na peça giratória da junta, que coincide com o eixo de rotação; a barra se estende 15\,mm atrás desse eixo, até o comprimento total de 750\,mm. A rigidez de cada mola foi medida estaticamente, pendurando nela massas conhecidas, identificadas pelo peso em newtons, de 0 a 20\,N, e lendo o comprimento da mola em cada carga \TODO{(instrumento de leitura)}; $k$ é a inclinação do ajuste por mínimos quadrados de força $\times$ alongamento, com intercepto livre, e sua incerteza-padrão vem dos resíduos do ajuste (Figura~\ref{fig:rigidez_molas}).
+A Tabela~\ref{tab:parametros_medidos} reúne os parâmetros medidos no laboratório e a frequência prevista com eles. As massas foram pesadas em balança e as distâncias, medidas com trena a partir do meio do engaste da barra na peça giratória da junta, que coincide com o eixo de rotação; a barra se estende 15\,mm atrás desse eixo, até o comprimento total de 750\,mm. A rigidez de cada mola foi medida estaticamente, pendurando nela massas conhecidas, identificadas pelo peso em newtons, de 0 a 20\,N, e lendo o comprimento da mola em cada carga com paquímetro; $k$ é a inclinação do ajuste por mínimos quadrados de força $\times$ alongamento, com intercepto livre, e sua incerteza-padrão vem dos resíduos do ajuste (Figura~\ref{fig:rigidez_molas}).
 
 \begin{table}[htbp]
     \centering
@@ -968,7 +968,7 @@ A Tabela~\ref{tab:parametros_medidos} reúne os parâmetros medidos no laborató
         $m_{ef} = m_s/3 + m_f$ (g) & 99,7 & 173,3 \\
         $f_1$ previsto (Hz) & 7,69 $\pm$ 0,28 & 13,71 $\pm$ 0,72 \\
         \midrule
-        \multicolumn{3}{l}{Barra: 644\,g; acelerômetro: \TODO{5}\,g (nominal); $L$ = 735\,mm;} \\
+        \multicolumn{3}{l}{Barra: 644\,g; acelerômetro: 5\,g; $L$ = 735\,mm;} \\
         \multicolumn{3}{l}{$a$ = 655\,mm; $x_a$ = 305\,mm (do centro do mancal)} \\
         \bottomrule
     \end{tabularx}
