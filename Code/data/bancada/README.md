@@ -5,7 +5,7 @@ Data a confirmar.
 
 | Arquivo | Conteúdo |
 |---|---|
-| `massas.csv` | massas pesadas [g]: molas k₁ e k₂, parafuso, porcas, barra; acelerômetro nominal (não pesado) |
+| `massas.csv` | massas pesadas [g]: molas k₁ e k₂, parafuso, porcas + arruelas, barra; acelerômetro nominal (não pesado) |
 | `rigidez_molas.csv` | ensaio estático: força aplicada [N] × leitura de comprimento da mola, para k₁ e k₂ |
 | `geometria.csv` | distâncias a partir do **centro do eixo do mancal** [mm] e seção da barra |
 | `resultados/` | gerado por `python -m tools.parametros_bancada` (a partir de `Code/`) |
@@ -59,10 +59,13 @@ Tabelas completas, com o orçamento de incerteza, em `resultados/parametros.md`.
   dinâmica com k₁. Se nada mais pré-carregar a mola, ela afrouxaria no alto de cada ciclo. O sinal limpo e
   o f estável indicam que isso não ocorre, mas vale conferir o espectro (harmônicos) no início das novas
   tomadas, onde a amplitude é maior.
+- **Junta:** sem folga (confirmado); a barra é presa numa peça que gira. O pivô efetivo ≈ 24 mm além do ponto
+  medido (forma modal do vídeo, `issues.md`) indica que o eixo de giro dessa peça fica atrás do ponto usado como
+  "centro do mancal". Falta medir a distância **eixo de giro → ponta**.
 - **Geometria × calibração do vídeo.** O segmento de calibração da sessão k1_cm_acc (p1 → p2 = 1403,5 px)
   vai da face da junta à ponta. Ajustando as posições da ponta, do parafuso e do acelerômetro na imagem às
   medidas de trena (735/655/305 mm), a escala sai 0,513 mm/px e o eixo do mancal fica ≈ 15–17 mm antes de
   p1, com resíduos ≤ 3 mm. A escala de 720 mm entre p1 e p2 continua correta, e a sessão registra
   `calibration.x0_mm = 15`.
-- **Não pesado:** acelerômetro (5 g nominal) e cabo; gancho (se houver) e arruelas (assumidas em "porcas").
+- **Não pesado:** acelerômetro (5 g nominal) e cabo. "Porcas" inclui as arruelas; não há gancho (confirmado).
   O efeito de cada grama em f₁ é ≈ −0,01 Hz no parafuso e desprezível no acelerômetro.

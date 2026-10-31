@@ -314,15 +314,26 @@ Impacto decrescente. Os pontos 1 e 2 são os que mais elevam o nível do trabalh
       Δf); duas amplitudes de liberação; confirmar reversibilidade (A' = A). Prioridade P2: só depois do P1 do
       roteiro e de E8 (ζ vídeo × PULSE). **Não entra no texto por enquanto** — decidir após ver os dados e alinhar
       com o orientador (ver E9).
+      **Feito em versão improvisada na 2ª visita (pasta `Fadiga`, mola k₁):** sistema completo gravado com o
+      acelerômetro; depois a porca da mola foi afrouxada **meia volta por vez**, com a barra excitada por
+      **batida** (sem shaker, sem medir força) em cada nível; fotos antes e depois de cada batida. Diferenças do
+      roteiro: níveis por meia volta (não por torque), sem reaperto (A') registrado, repetições a confirmar.
+      Falta: subir os arquivos do PULSE/vídeos e anotar o nº de meias-voltas de cada registro.
 
 ## Perguntas em aberto
 
 1. ~~Massa da(s) mola(s), do parafuso, das porcas e do gancho (pesar). Qual mola gerou 7,6 Hz?~~ Pesadas; a
-   curva de 7,6 Hz é da mola k₁ (o modelo dá 7,69 Hz com k₁ e 13,7 Hz com k₂). Gancho: não há / não pesado?
+   curva de 7,6 Hz é da mola k₁ (o modelo dá 7,69 Hz com k₁ e 13,7 Hz com k₂). Não há gancho; "porcas" inclui as arruelas. Acelerômetro não pesado (5 g nominal).
 2. f_n do acelerômetro nas demais gravações/molas.
 3. Setup do PULSE: banda, linhas, tempo, taxa de amostragem, sensibilidade; exportação dos dados.
 4. A junta (conjunto cilindro/dial à esquerda): ~~distância do centro do mancal à borda da barra~~ (735 mm à
-   ponta); onde fica o eixo de rotação de fato (pivô efetivo ≈ 24 mm além do medido) e se há folga/atrito.
-5. O que é a pasta `Fadiga` (dia 2, mola K1) no Drive: o teste de afrouxamento da seção 5b do roteiro (E10)?
+   ponta); **sem folga** (confirmado); a barra é presa numa peça que gira → medir a distância do **eixo de giro
+   dessa peça** à ponta (o vídeo sugere ≈ 24 mm além do ponto medido, ≈ 759 mm).
+5. ~~O que é a pasta `Fadiga`~~: teste de afrouxamento improvisado (E10). Faltam os arquivos e quantas meias-voltas
+   em cada registro.
+7. Ensaio estático das molas: como foram aplicadas as forças de 0–20 N (massas penduradas? dinamômetro?) e com
+   que instrumento foi lido o comprimento (o texto do TCC tem um `\TODO` para isso).
+8. Excitação: nas tomadas de vídeo + PULSE a barra foi **batida** (sem medir força) ou deslocada e solta? O
+   texto do TCC hoje diz "deslocar a ponta até uma marca e soltar".
 6. A barra do amortecedor (haste e placa perto de x ≈ 165 mm) não se move no vídeo (≤ 0,01 mm): não está presa
    à barra e não entra no modelo.

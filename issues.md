@@ -34,6 +34,11 @@ not a calibration error. Effect on f₁: with the root moved to −24 mm the mod
 on the joint housing; photograph/measure the joint to locate the shaft axis; check bearing play (lift the
 bar without the spring). If play is confirmed, model it as a vertical/rotational root spring.
 
+**Update (2026-10-31):** the author confirms **no play**, and the bar **is clamped in a part that rotates**.
+So the most likely cause is the first one: the shaft of that rotating part sits ≈ 24 mm behind the point
+taken as "centre of the bearing". Pending: measure shaft axis → tip (expected ≈ 759 mm if the video is
+right); then L, a and x_a all shift by the same amount (f₁ 7.69 → ≈ 7.62 Hz).
+
 ---
 
 ## [SOLVED] Model predicted f₁ = 11.7 Hz for spring k₁ against 7.60 Hz measured
