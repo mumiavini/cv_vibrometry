@@ -999,15 +999,15 @@ A Tabela~\ref{tab:res_frequencia} compara, para cada tomada, a frequência ident
         \toprule
         \textbf{Tomada} & \textbf{Mola} & \textbf{$f^{opt}$ (Hz)} & \textbf{$f^{acc}$ (Hz)} & \textbf{$\varepsilon_{acc}$ (\%)} & \textbf{$f^{mod}$ (Hz)} & \textbf{$\varepsilon_{mod}$ (\%)} \\
         \midrule
-        1 & $k_1$ & \TODO{x,xxx} & \TODO{x,xxx} & \TODO{x,xx} & 7,69 & \TODO{x,x} \\
-        2 & $k_1$ & \TODO{x,xxx} & \TODO{x,xxx} & \TODO{x,xx} & 7,69 & \TODO{x,x} \\
-        3 & $k_1$ & \TODO{x,xxx} & \TODO{x,xxx} & \TODO{x,xx} & 7,69 & \TODO{x,x} \\
-        4 & $k_2$ & \TODO{x,xxx} & \TODO{x,xxx} & \TODO{x,xx} & 13,71 & \TODO{x,x} \\
-        5 & $k_2$ & \TODO{x,xxx} & \TODO{x,xxx} & \TODO{x,xx} & 13,71 & \TODO{x,x} \\
-        6 & $k_2$ & \TODO{x,xxx} & \TODO{x,xxx} & \TODO{x,xx} & 13,71 & \TODO{x,x} \\
+        1 & $k_1$ & \TODO{x,xxx} & 7,816 & \TODO{x,xx} & 7,69 & \TODO{x,x} \\
+        2 & $k_1$ & \TODO{x,xxx} & 7,813 & \TODO{x,xx} & 7,69 & \TODO{x,x} \\
+        3 & $k_1$ & \TODO{x,xxx} & 7,818 & \TODO{x,xx} & 7,69 & \TODO{x,x} \\
+        4 & $k_2$ & \TODO{x,xxx} & 14,659 & \TODO{x,xx} & 13,71 & \TODO{x,x} \\
+        5 & $k_2$ & \TODO{x,xxx} & 14,646 & \TODO{x,xx} & 13,71 & \TODO{x,x} \\
+        6 & $k_2$ & \TODO{x,xxx} & 14,706 & \TODO{x,xx} & 13,71 & \TODO{x,x} \\
         \midrule
-        \multicolumn{2}{l}{Média $k_1$ (CV)} & \TODO{x,xxx (x,x\,\%)} & \TODO{x,xxx} & \TODO{x,xx} & & \TODO{x,x} \\
-        \multicolumn{2}{l}{Média $k_2$ (CV)} & \TODO{x,xxx (x,x\,\%)} & \TODO{x,xxx} & \TODO{x,xx} & & \TODO{x,x} \\
+        \multicolumn{2}{l}{Média $k_1$ (CV)} & \TODO{x,xxx (x,x\,\%)} & 7,816 & \TODO{x,xx} & & \TODO{x,x} \\
+        \multicolumn{2}{l}{Média $k_2$ (CV)} & \TODO{x,xxx (x,x\,\%)} & 14,670 & \TODO{x,xx} & & \TODO{x,x} \\
         \bottomrule
     \end{tabular}
 \end{table*}
@@ -1015,7 +1015,9 @@ A Tabela~\ref{tab:res_frequencia} compara, para cada tomada, a frequência ident
 % f_video = 7,763 Hz (ROI do acelerometro e do parafuso, estavel de 1 a 7,5 s);
 % f_PULSE = 7,600 Hz (cursor, resolucao 0,05 Hz) -> +2,1 %; f_modelo = 7,69 +- 0,28 Hz
 % com k e massas medidos -> video +0,93 %, PULSE -1,2 % (ambos dentro de 0,33 u).
-% Razao prevista k2/k1 = 13,71/7,69 = 1,783.
+% Razao prevista k2/k1 = 13,71/7,69 = 1,783; medida pelo acelerometro 14,670/7,816 = 1,877.
+% 2a visita, acelerometro (CSVs de 'last measturements'; CONFIRMAR se exportacao ou digitalizacao):
+% k1 7,816 +- 0,002 Hz (+1,6 % do modelo), k2 14,67 +- 0,03 Hz (+7,0 %; k que fecha 3774 N/m).
 
 \begin{figure}[htbp]
     \centering

@@ -1,0 +1,115 @@
+{
+  "name": "20261030_al_L735_k1_afrouxa_c2",
+  "specimen": {
+    "material": "aluminum_6351_t6",
+    "E_gpa": 69.0,
+    "rho": 2661.9,
+    "L_mm": 735.0,
+    "b_mm": 25.4,
+    "t_mm": 12.7,
+    "tip_mass_g": 0.0,
+    "fps": 240.0,
+    "oversampling": 10.0,
+    "support": "pinned",
+    "root_stiffness": null,
+    "springs": [
+      {
+        "name": "mola k1 (k medido, ensaio estatico)",
+        "x_mm": 655.0,
+        "k_n_m": 857.0,
+        "mass_g": 161.0,
+        "hardware_g": 46.0
+      }
+    ],
+    "masses": [
+      {
+        "name": "acelerometro B&K 4507",
+        "x_mm": 305.0,
+        "mass_g": 5.0
+      }
+    ],
+    "uncertainties": {
+      "springs[0].k_n_m": 62.0,
+      "springs[0].x_mm": 2.0,
+      "springs[0].mass_g": 1.0,
+      "springs[0].hardware_g": 1.0,
+      "masses[0].x_mm": 2.0,
+      "masses[0].mass_g": 0.5,
+      "L_mm": 2.0,
+      "b_mm": 0.1,
+      "t_mm": 0.1,
+      "rho": 13.3,
+      "E_gpa": 2.0
+    }
+  },
+  "meta": {
+    "date": "20261030",
+    "excitation_hz": null,
+    "level": "C2",
+    "repetition": 1,
+    "camera": "iphone",
+    "notes": "Teste de afrouxamento improvisado, ciclo 2: porca da mola k1 afrouxada meia volta por ciclo (CONFIRMAR quantas meias-voltas neste ciclo), excitacao por batida. Video no Drive: tcc2/dia 2/Mola K1/Fadiga/Ciclo 2/IMG_7716.MOV -> salvar como videos/20261030_al_L735_k1_afrouxa_c2.mov. Sem CSV do acelerometro.",
+    "checklist": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "video": {
+    "path": "../videos/20261030_al_L735_k1_afrouxa_c2.mov",
+    "fps_override": 240.0,
+    "start_s": 0.0,
+    "end_s": null,
+    "resize_width": null,
+    "rois": [],
+    "scale_mm_per_px": null,
+    "calibration": null,
+    "axis": "auto",
+    "compensate": true,
+    "wavelengths": [
+      8.0,
+      16.0
+    ],
+    "search_margin": 60,
+    "window": null,
+    "roi_positions_mm": {
+      "Parafuso": 655.0,
+      "Acelerometro": 305.0
+    }
+  },
+  "accel": {
+    "path": "",
+    "time_column": 0,
+    "channel": 1,
+    "fs": null,
+    "unit": "g",
+    "sensitivity_mv_per_g": 100.0,
+    "invert": false,
+    "integration": "frequency",
+    "f_hp": 1.0,
+    "f_lp": null,
+    "window": null
+  },
+  "compare": {
+    "roi": "Acelerometro",
+    "domain": "displacement",
+    "f_hp": null,
+    "f_lp": null,
+    "sync_mode": "impact",
+    "offset_s": 0.0,
+    "drift_ppm": 0.0,
+    "window": null,
+    "f_analysis": null,
+    "crit_freq_pct": 1.0,
+    "crit_amp_pct": 10.0,
+    "crit_phase_deg": 10.0,
+    "crit_eb_pct": 5.0,
+    "crit_cv_pct": 5.0
+  },
+  "version": 1
+}

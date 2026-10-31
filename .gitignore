@@ -49,3 +49,6 @@ Book/build/
 
 # ...but do keep the compiled thesis PDF.
 !Book/TCC - Vinicius Andrade Trento.pdf
+
+# local Claude Code worktrees (not project files)
+.claude/worktrees/

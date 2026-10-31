@@ -51,6 +51,20 @@ sessão em `Code/tools/` (comparação de métodos E1, forma modal multiponto E5
 `f_analysis = 0,79 Hz`, metadados de régua de aço; CSV do acelerômetro é um traço em zigue-zague; vídeo e PULSE
 não são o mesmo ensaio; o app ainda prevê f₁ com viga engastada; vídeo de 91 MB no git.
 
+**Acelerômetro da 2ª visita** (`Code/data/acelerometro/last measturements/`, sessões `20261030_*`; f pelo ajuste
+senoidal na janela após a batida):
+
+| Mola | Tomadas | f_acc (Hz) | média ± desvio (CV) | modelo (Hz) | diferença | k que reproduz |
+|---|---|---|---|---|---|---|
+| k₁ | med4, med5, med6 | 7,816 / 7,813 / 7,818 | 7,816 ± 0,002 (0,03 %) | 7,69 ± 0,28 | +1,6 % (0,45 u) | 885 N/m (medido 857 ± 62) |
+| k₂ | med1, m2, m3 | 14,659 / 14,646 / 14,706 | 14,67 ± 0,03 (0,21 %) | 13,71 ± 0,72 | +7,0 % (1,3 u) | 3774 N/m (medido 3291 ± 346) |
+
+k₂: o k que fecha a medição (3774 N/m) coincide com o ajuste do ensaio estático **sem o ponto de 0 N** (3806 N/m),
+reforçando que o 1º trecho (assentamento) viesou k₂ para baixo. ζ (acelerômetro, decremento): k₁ 0,005–0,006,
+k₂ 0,002–0,003. **Confirmar se esses CSVs são exportação do PULSE ou digitalização da tela** (≈ 79 amostras/s,
+degraus de ≈ 0,2 m/s², colunas a_max/a_min): f vale nos dois casos; amplitude e ζ ficam menos confiáveis se for
+digitalização. Pico do k₁ na 1ª visita: 7,600 Hz (cursor) — a 2ª visita dá 7,816 Hz.
+
 **Próximos passos (ordem):**
 1. ~~Ir ao laboratório~~ — feito (2ª visita): k estático e massas medidos (acima). **Falta subir os vídeos e os
    arquivos do PULSE** da visita (pastas `tcc2/dia 2/Mola K1|K2/Medição 1–3` e `Fadiga` no Google Drive, ainda
