@@ -10,6 +10,8 @@ Data a confirmar.
 | `geometria.csv` | distâncias a partir do **centro do eixo do mancal** [mm] e seção da barra |
 | `resultados/` | gerado por `python -m tools.parametros_bancada` (a partir de `Code/`) |
 
+Ensaio estático: massas conhecidas, rotuladas em newtons, penduradas na mola; comprimento lido a cada carga.
+
 ## Unidade das leituras da mola
 
 As leituras foram anotadas como "mm" (12,75 → 15,11 de 0 a 20 N), mas são **cm**:

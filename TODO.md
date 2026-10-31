@@ -331,9 +331,9 @@ Impacto decrescente. Os pontos 1 e 2 são os que mais elevam o nível do trabalh
    dessa peça** à ponta (o vídeo sugere ≈ 24 mm além do ponto medido, ≈ 759 mm).
 5. ~~O que é a pasta `Fadiga`~~: teste de afrouxamento improvisado (E10). Faltam os arquivos e quantas meias-voltas
    em cada registro.
-7. Ensaio estático das molas: como foram aplicadas as forças de 0–20 N (massas penduradas? dinamômetro?) e com
-   que instrumento foi lido o comprimento (o texto do TCC tem um `\TODO` para isso).
-8. Excitação: nas tomadas de vídeo + PULSE a barra foi **batida** (sem medir força) ou deslocada e solta? O
-   texto do TCC hoje diz "deslocar a ponta até uma marca e soltar".
+7. Ensaio estático das molas: ~~como foram aplicadas as forças~~ massas penduradas, rotuladas em newtons. Falta
+   o instrumento de leitura do comprimento (`\TODO` no texto).
+8. ~~Excitação~~: batida manual na barra, sem medir força, em todas as tomadas (vídeo + PULSE e afrouxamento).
+   Texto do TCC atualizado.
 6. A barra do amortecedor (haste e placa perto de x ≈ 165 mm) não se move no vídeo (≤ 0,01 mm): não está presa
    à barra e não entra no modelo.
