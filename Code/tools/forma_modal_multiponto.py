@@ -33,7 +33,9 @@ from vibrometry.modeshape import (  # noqa: E402
 from vibrometry.session import SESSION_SUFFIX, Session  # noqa: E402
 from vibrometry.video_io import probe_video  # noqa: E402
 
-POSITIONS = [50, 100, 200, 250, 350, 400, 450, 500, 550, 600, 632, 680, 710]
+# posições ao longo da barra a partir da raiz do modelo (eixo do mancal) [mm];
+# o ponto p1 da calibração fica em ``calibration["x0_mm"]`` (0 se ausente)
+POSITIONS = [65, 115, 215, 265, 365, 415, 465, 515, 565, 615, 655, 695, 725]
 BAR_HALF_THICKNESS_PX = 12.5      # calibration segment runs on the lower edge
 MIN_NCC, MIN_R2 = 0.8, 0.9
 
@@ -44,9 +46,13 @@ def main(argv: list[str] | None = None) -> int:
     s = Session.load(path)
     v = s.video
     cal = v.calibration
-    bar = rois_along_beam(cal["p1"], cal["p2"], cal["length_mm"], POSITIONS,
+    cal_x0 = float(cal.get("x0_mm", 0.0))      # p1 medido a partir da raiz
+    bar = rois_along_beam(cal["p1"], cal["p2"], cal["length_mm"],
+                          [x - cal_x0 for x in POSITIONS],
                           width_px=30, height_px=41,
                           y_offset_px=-BAR_HALF_THICKNESS_PX, prefix="barra_")
+    for r, x in zip(bar, POSITIONS):              # nome pela posição a partir da raiz
+        r.name = f"barra_{x:g}"
     meas = [r for r in v.roi_objects() if not r.is_reference]
     ref = next((r for r in v.roi_objects() if r.is_reference), None)
     info = probe_video(v.path, fps_override=v.fps_override)
@@ -71,6 +77,10 @@ def main(argv: list[str] | None = None) -> int:
     fe = s.specimen.fe_model()
     cmp_nom = compare_shape(ms, fe)
     x0, slope, r2_line = rotation_centre(ms.positions_mm, ms.signed())
+    # a mesma reta ajustada à forma do próprio modelo nos mesmos pontos: a
+    # flexão da barra também desloca o intercepto, então compare x0 com este
+    x0_model, _, _ = rotation_centre(
+        ms.positions_mm, fe.elastic_mode_shape(ms.positions_mm / 1e3, cmp_nom.mode))
     d = max(0.0, -x0)
     fe_shift = shifted_specimen(s.specimen, d).fe_model()
     ms_shift = measured_shape(t, {n: pts.displacement[n] for n in keep},
@@ -95,7 +105,8 @@ def main(argv: list[str] | None = None) -> int:
         "sessao": s.name, "unidade": unit, "frequencia_hz": f, "referencia": ref_name,
         "modelo": s.specimen.model_label(), "criterio_confiavel": {"ncc_min": MIN_NCC, "r2_min": MIN_R2},
         "raiz_nominal": {"modo": cmp_nom.mode, "f_modelo_hz": cmp_nom.f_model, "mac": cmp_nom.mac},
-        "centro_rotacao": {"x0_mm": x0, "r2_reta": r2_line,
+        "origem_calibracao_x0_mm": cal_x0,
+        "centro_rotacao": {"x0_mm": x0, "r2_reta": r2_line, "x0_modelo_mm": x0_model,
                            "raiz_deslocada_mm": d, "modo": cmp_shift.mode,
                            "f_modelo_hz": cmp_shift.f_model, "mac": cmp_shift.mac},
         "pontos": rows}
@@ -105,7 +116,9 @@ def main(argv: list[str] | None = None) -> int:
     lines = [f"Frequência medida {f:.4f} Hz (referência {ref_name}); {len(keep)} de {len(rows)} pontos confiáveis",
              f"Raiz nominal (x = 0): modo {cmp_nom.mode}, {cmp_nom.f_model:.3f} Hz, MAC = {cmp_nom.mac:.4f}",
              f"Centro de rotação pela reta dos pontos: x0 = {x0:.1f} mm (R² = {r2_line:.4f}); "
+             f"a mesma reta na forma do modelo: x0 = {x0_model:.1f} mm; "
              f"modelo com a raiz em x0: {cmp_shift.f_model:.3f} Hz, MAC = {cmp_shift.mac:.4f}",
+             f"Posições a partir do eixo do mancal; p1 da calibração em x = {cal_x0:g} mm",
              "", f"| ROI | x (mm) | A ({unit}) | fase (°) | R² | NCC mín. | ok | erro raiz nominal (%) | erro raiz em x0 (%) |",
              "|---|---|---|---|---|---|---|---|---|"]
     for r in rows:
@@ -129,7 +142,7 @@ def main(argv: list[str] | None = None) -> int:
         ax.plot(ms_all.positions_mm[~ok], sig[~ok], "o", mfc="none", color="tab:red",
                 label="vídeo (rastreamento duvidoso)")
     ax.axhline(0, color="k", lw=0.6)
-    ax.set_xlabel("posição a partir da face da junta [mm]")
+    ax.set_xlabel("posição a partir do eixo do mancal [mm]")
     ax.set_ylabel(f"amplitude em {f:.2f} Hz [{unit}]")
     ax.set_title("Forma modal: vídeo × modelo de elementos finitos")
     ax.grid(alpha=0.3); ax.legend(fontsize=8)

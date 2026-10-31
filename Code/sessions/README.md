@@ -7,6 +7,6 @@ são relativos a esta pasta (`../videos/…`, `../data/acelerometro/…`). O cac
 
 | Sessão | Ensaio |
 |---|---|
-| `k1_cm_acc.vibro.json` | barra Al 6351-T6 + mola k₁ = 1500 N/m, com acelerômetro; 15/10/2026 |
+| `k1_cm_acc.vibro.json` | barra Al 6351-T6 + mola k₁ (857 N/m medido; catálogo 1500), com acelerômetro; 15/10/2026. Parâmetros do corpo de prova medidos em `../data/bancada/` (2ª visita) |
 
 Nome sugerido pelo app: `AAAAMMDD_<material>_L<mm>_t<mm>_<f>Hz_A<nível>_r<n>`.

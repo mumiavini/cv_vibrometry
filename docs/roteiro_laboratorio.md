@@ -4,6 +4,11 @@ Objetivo da visita: **fechar o que não fecha hoje** (k × massa da mola, amorte
 diferentes) e **coletar os dados que faltam para o TCC**. Tudo aqui tem um motivo; o item entre parênteses diz
 qual dúvida ele resolve. Prioridade: **P1** obrigatório · **P2** muito desejável · **P3** se der tempo.
 
+> **2ª visita (2026-10):** seções 1.1, 1.2 e 2 feitas → `Code/data/bancada/` (k₁ = 857 N/m, k₂ = 3291 N/m;
+> L = 735, a = 655, x_a = 305 mm do eixo do mancal). Numa próxima visita: anotar **a unidade** de cada leitura
+> (as de comprimento da mola vieram como "mm" e eram cm), fazer o ensaio estático **subindo e descendo**,
+> pesar o acelerômetro e localizar o eixo de rotação real da junta (pivô efetivo ≈ 24 mm além do medido, `issues.md`).
+
 ## 0. Levar
 
 - balança com resolução de 0,1 g (ou melhor) e massas conhecidas / garrafas pesadas na própria balança
@@ -66,8 +71,8 @@ Meça **a partir do centro do eixo do mancal** (não da borda da barra):
 | Grandeza | Valor |
 |---|---|
 | distância centro do mancal → ponta da barra | |
-| distância centro do mancal → furo/parafuso da mola | (esperado 632 mm) |
-| distância centro do mancal → centro do acelerômetro | (esperado 300 mm) |
+| distância centro do mancal → furo/parafuso da mola | (medido 655 mm na 2ª visita) |
+| distância centro do mancal → centro do acelerômetro | (medido 305 mm na 2ª visita) |
 | distância centro do mancal → face da junta / início da barra visível no vídeo (x = 0 da calibração) | (o vídeo sugere ≈ 36 mm) |
 | largura b e espessura h da barra (3 pontos cada, paquímetro) | |
 | há folga/atrito no mancal? (balançar a barra sem a mola) | sim / não |

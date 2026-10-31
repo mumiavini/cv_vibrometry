@@ -1,6 +1,6 @@
 # TODO — fechamento do TCC (resultados, validação e texto)
 
-Estado em 2026-10-25. Itens marcados `[ ]` abertos, `[x]` feitos.
+Estado em 2026-10-31. Itens marcados `[ ]` abertos, `[x]` feitos.
 Ordem sugerida: **A → B → C → D**. Dados e decisões (A) destravam tudo.
 
 ## Tese (mensagem central)
@@ -13,7 +13,22 @@ Ordem sugerida: **A → B → C → D**. Dados e decisões (A) destravam tudo.
 
 ---
 
-## Estado atual (2026-10-25) — o que já existe e o que a primeira análise mostrou
+## Estado atual (2026-10-31) — o que já existe e o que a primeira análise mostrou
+
+**Parâmetros medidos no laboratório (2ª visita, roteiro seções 1 e 2; `Code/data/bancada/`,
+`python -m tools.parametros_bancada`):**
+
+| Grandeza | k₁ | k₂ |
+|---|---|---|
+| k estático (N/m) | **857 ± 62** (catálogo 1500, −43 %) | **3291 ± 346** (catálogo 2500, +32 %) |
+| massa da mola (g) | 161 | 382 |
+| m_ef = m_s/3 + parafuso 36 g + porcas 10 g (g) | 99,7 | 173,3 |
+| **f₁ previsto, `BeamFE` (Hz)** | **7,69 ± 0,28** | **13,71 ± 0,72** |
+| f₂ (Hz) | 78,6 | 76,6 |
+
+Geometria a partir do eixo do mancal: L = 735 mm (ponta), a = 655 mm (parafuso da mola), x_a = 305 mm
+(acelerômetro); barra 644 g (ρ efetiva 2662 kg/m³). Leituras da mola anotadas em "mm" são **cm** (em mm daria
+f₁ ≈ 24 Hz). A sessão `k1_cm_acc` foi atualizada e reexportada (previsão, forma modal, incerteza).
 
 **Já feito (em `main`):** aplicativo (`vibroapp`, 6 etapas), núcleo `vibrometry` (rastreamento por fase,
 sincronismo, integração do acelerômetro, lote, relatório LaTeX), modelos analíticos da barra com mola e
@@ -26,9 +41,9 @@ sessão em `Code/tools/` (comparação de métodos E1, forma modal multiponto E5
 
 | Resultado | Valor | Observação |
 |---|---|---|
-| f_n vídeo | 7,763 Hz (estável de 1 a 7,5 s) | PULSE: 7,600 Hz → +2,1 % (critério do app: 1 %); takes diferentes |
+| f_n vídeo | 7,763 Hz (estável de 1 a 7,5 s) | PULSE: 7,600 Hz → +2,1 % (critério do app: 1 %); takes diferentes. **Modelo com k medido: 7,69 ± 0,28 Hz** (vídeo +0,9 %, PULSE −1,2 %) |
 | amplitude no acelerômetro | 7,58 mm → ω²·A ≈ 18 m/s² | concorda com a envoltória do PULSE (17–19 m/s²) |
-| razão de amplitudes parafuso/acelerômetro | 2,045 | forma modal do `BeamFE` (articulada + mola k₁ + massa efetiva 383 g): 2,079 → −1,7 % |
+| razão de amplitudes acelerômetro/parafuso | 0,486 | forma modal do `BeamFE` com os valores medidos (305/655 mm): 0,473 → +2,8 % (antes, com 300/632 mm e 383 g: 0,481, +1,1 %); ver "pivô efetivo" abaixo |
 | ζ vídeo (envoltória) | ≈ 0,0010 (σ = 0,049 1/s) | PULSE: ≈ 0,0072 (σ = 0,345 1/s) → **não concorda (×7)** |
 | fase/forma de onda vídeo × acelerômetro | sem sentido | takes diferentes (20:22:39 × 20:48:57) e CSV não é forma de onda |
 
@@ -37,35 +52,41 @@ sessão em `Code/tools/` (comparação de métodos E1, forma modal multiponto E5
 não são o mesmo ensaio; o app ainda prevê f₁ com viga engastada; vídeo de 91 MB no git.
 
 **Próximos passos (ordem):**
-1. **Ir ao laboratório** (roteiro em `docs/roteiro_laboratorio.md`): medir k das molas (estático) e pesar as ferragens; **gravar vídeo e PULSE ao mesmo tempo** (impacto + LED), mola k₁ e k₂, 3 repetições cada; anotar a posição
-   da lâmina do amortecedor e se há pré-carga na mola. Sem isso, ζ e fase não fecham.
-2. Explicar a diferença de amortecimento (ζ vídeo ≈ 0,001 × PULSE ≈ 0,007) e de f_n (+2,1 %).
-3. ~~Integrar `BeamFE` ao app~~ — feito (etapa 1: apoio, molas, massas; etapa 2: posição das ROIs; etapa 6: forma modal). Falta **preencher na sessão as massas pesadas** da mola k₁, parafuso, porcas e gancho (hoje 0 → f₁ previsto 11,7 Hz).
-4. Exportar os dados brutos do PULSE (hoje só há foto/digitalização) ou manter a digitalização rotulada.
-5. Texto do TCC (seção D) com a tabela acima como esqueleto de resultados.
+1. ~~Ir ao laboratório~~ — feito (2ª visita): k estático e massas medidos (acima). **Falta subir os vídeos e os
+   arquivos do PULSE** da visita (pastas `tcc2/dia 2/Mola K1|K2/Medição 1–3` e `Fadiga` no Google Drive, ainda
+   vazias em 2026-10-31) e as tabelas da seção 4 do roteiro (arquivo de cada tomada, f_n do cursor, lâmina,
+   observações). Vídeos grandes: processar no app (etapas 1–6) e dar push das sessões e `_resultados/`.
+2. Nas sessões novas, usar os parâmetros medidos (copiar o bloco `specimen` de `k1_cm_acc`; para k₂: k = 3291,
+   mola 382 g, ferragens 46 g) e, se as marcas foram feitas no eixo do mancal, `calibration` com p1 no eixo
+   (`x0_mm` = 0). Banda do PULSE ≥ 30 Hz é obrigatória para ver k₂ (f₁ ≈ 13,7 Hz).
+3. Explicar a diferença de amortecimento (ζ vídeo ≈ 0,001 × PULSE ≈ 0,007) e de f_n (+2,1 %) com as tomadas
+   simultâneas.
+4. ~~Integrar `BeamFE` ao app~~ — feito. ~~Preencher as massas pesadas~~ — feito na sessão `k1_cm_acc`.
+5. Texto do TCC (seção D): parâmetros e previsões já preenchidos; resultados das tomadas novas pendentes.
 
 ---
 
-## ⚠ Discrepância modelo × medição (resolver antes de escrever resultados)
+## ✔ Discrepância modelo × medição — resolvida (2026-10-31)
 
-Confirmado: raiz = **junta com mancal (articulada)**, alumínio 6351-T6, 660 g, molas de
-catálogo k₁ = 1500 e k₂ = 2500 N/m, acelerômetro 5 g a 300 mm do engaste, mola a 632 mm
-do engaste (furo de 88 mm da ponta). Pico do acelerômetro: **7,600 Hz**.
+O modelo antigo previa 11,7 Hz (k₁ de catálogo, sem massa da mola) contra 7,60 Hz medidos, e a sessão compensava
+com uma "ferragem" ajustada de 383 g. **A causa era o k de catálogo**: o ensaio estático deu k₁ = 857 ± 62 N/m, e a
+massa efetiva medida no ponto da mola é 99,7 g (161/3 + 36 + 10). Com isso o modelo dá 7,69 ± 0,28 Hz, entre o
+PULSE (7,600) e o vídeo (7,763), ambos a ≤ 0,33 u. Detalhes e histórico em `issues.md` e `Code/data/bancada/README.md`.
 
-**Não separável com os dados atuais (k × massa):** os 7,6 Hz só dizem que k_total/m_efetiva é o do ajuste; as
-massas pesadas da mola/ferragens não foram registradas (o "383 g" é o valor *necessário* com k = 1500 N/m, não
-uma medida). Com f₁ = 7,60 Hz: k = 1500 N/m exige ≈ 383 g de massa efetiva no ponto da mola; k = 1000 → ≈ 162 g;
-k = 630 → 0 g. A mola 2 (nominal 2500 N/m) **não** distingue as hipóteses (≈ 9,8 Hz em ambas). Resolver
-medindo **k estaticamente** (pendurar massa conhecida no mesmo ponto de fixação, k = m·g/Δx) e registrando a
-massa da mola + parafuso + porcas + gancho.
-
-Modelo `BeamFE` (articulada + mola + 5 g, **sem massa da mola**): **11,7 Hz (k₁)** e
-**15,1 Hz (k₂)**. Falta ≈ 380 g de massa efetiva no ponto da mola (k₁) para chegar a 7,6 Hz
-(k₂ exigiria ≈ 820 g, implausível → provavelmente a curva é da mola k₁, confirmar).
-**A massa da mola interfere muito**: massa efetiva ≈ m_mola/3 (+ parafuso, porcas, gancho);
-uma mola helicoidal dessas facilmente passa de 0,5–1 kg. Ações: **pesar mola + parafuso +
-porcas** (balança), refazer o cálculo; checar k de catálogo (k necessário sem massa extra
-seria 626 N/m); considerar inércia do conjunto cilindro/dial do lado da junta.
+**Pontos que ficam (não mudam a conclusão, entram na discussão):**
+- **Pivô efetivo ≈ 24 mm além do eixo medido** (`issues.md`): perto da junta a barra se move mais do que um pino
+  no eixo permitiria (+30 % a 65 mm; 1,45 × 1,0 mm a ≈ 40 mm), e a carcaça da junta fica parada (5 µm). Ou o eixo
+  real está mais para trás (barra presa num garfo?), ou há folga da barra na junta. Com a raiz em −24 mm o modelo
+  dá 7,62 Hz (dentro da incerteza). → fotografar/medir a junta; ROI na barra junto da junta e na carcaça nas
+  tomadas novas; checar folga.
+- **k₁ pouco linear** (k incremental 667–1429 N/m entre leituras; R² = 0,985) e **k₂ com o 1º trecho macio**
+  (assentamento do gancho?). Repetir o ensaio estático subindo e descendo a carga reduziria ±7 % / ±10 % de k,
+  que é ≈ 98 % da incerteza do f₁ previsto.
+- **Pré-carga × amplitude:** o peso da barra dá ≈ 4 N de tração na mola; a ±15,5 mm no parafuso a força dinâmica
+  com k₁ é ±13 N. A mola afrouxaria no alto do ciclo se nada mais a pré-carregar; o sinal limpo indica que não
+  afrouxa, mas conferir harmônicos no início das tomadas novas.
+- **Posição do parafuso:** trena 655 mm (80 mm da ponta) × imagem ≈ 650 mm (≈ 85 mm da ponta); 5 mm em a
+  mudam f₁ em ≈ 0,04 Hz.
 
 ## A. Dados e decisões (bloqueia o resto)
 
@@ -80,12 +101,14 @@ seria 626 N/m); considerar inércia do conjunto cilindro/dial do lado da junta.
       **B&K LAN-XI Type 3160-A-4/2** (4 entradas/2 saídas, 51,2 kHz) ligado ao notebook;
       software **PULSE LabShop 20.0.0.455**, projeto "acelerometro pratica", medições de
       15/10/2026. Falta: sensibilidade/ganho, taxa de amostragem e duração do registro usadas.
-- [ ] **A4. Montagem**: barra de alumínio, 750 mm (720 mm livres), 25,4 × 12,7 mm,
-      ≈ 660 g; **mola k₁ = 1500 N/m e k₂ = 2500 N/m** presas por parafuso no **furo a 88 mm
-      da ponta** (outro furo a 250 mm, não usado); acelerômetro de 5 g. Falta: como k₁/k₂
-      foram obtidos (incerteza), massa da mola, e a condição real da raiz (ver acima).
-- [x] **A5. Posições** (confirmadas): acelerômetro a 300 mm do engaste (430 mm da ponta);
-      furo/parafuso da mola a 88 mm da ponta (632 mm do engaste). ROIs: parafuso, acelerômetro,
+- [x] **A4. Montagem** (medida em 2026-10, `Code/data/bancada/`): barra de alumínio 750 mm, 25,4 × 12,7 mm
+      (nominal), **644 g**; eixo do mancal a **735 mm** da ponta; **k₁ = 857 ± 62 N/m (161 g)** e
+      **k₂ = 3291 ± 346 N/m (382 g)** por ensaio estático (catálogo 1500/2500); parafuso 36 g, porcas 10 g;
+      acelerômetro 5 g (nominal). Falta: pesar o acelerômetro e conferir b/h com paquímetro (efeito pequeno);
+      condição real da raiz (pivô efetivo, ver acima).
+- [x] **A5. Posições** (medidas do eixo do mancal): acelerômetro a **305 mm**; parafuso da mola a **655 mm**
+      (80 mm da ponta). Antes: 300 e 632 mm, medidos de outra referência. No vídeo `k1_cm_acc`, o ponto p1 da
+      calibração é a face da junta, 15 mm do eixo (`calibration.x0_mm`). ROIs: parafuso, acelerômetro,
       parede (limpeza/compensação).
 - [x] **A6. Sinal do acelerômetro** — sem exportação possível; decidido usar a curva
       **digitalizada** como base (CSV em `Code/data/acelerometro/`, rotulada como digitalizada
@@ -132,8 +155,9 @@ seria 626 N/m); considerar inércia do conjunto cilindro/dial do lado da junta.
       (estimar do fps/modo ou medir com barra horizontal), atraso entre linhas
       Δt_linha, defasagem sobre a altura da ROI = 2π·f_n·Δt. Mostra que afeta a fase,
       não a frequência, e dá um número para a seção de limitações.
-- [x] **B7. Dois pontos medidos (parafuso e acelerômetro)**: razão de amplitudes medida 2,045 × 2,079 da forma
-      modal do `BeamFE` (−1,7 %), ver "Estado atual". Falta repetir nas demais gravações e conferir a fase 0°/180°.
+- [x] **B7. Dois pontos medidos (parafuso e acelerômetro)**: razão acelerômetro/parafuso medida 0,486 × 0,473 da
+      forma modal do `BeamFE` com os parâmetros medidos (+2,8 %), ver "Estado atual". Falta repetir nas demais
+      gravações e conferir a fase 0°/180°.
 - [ ] **B8. Checagem de aliasing automática** no relatório: marcar picos acima de ~0,4·fs
       e listar candidatos de alias `|f − k·fs|` (hoje `f_n = peaks[0]`, o pico mais alto,
       sem checar).
@@ -250,6 +274,10 @@ Impacto decrescente. Os pontos 1 e 2 são os que mais elevam o nível do trabalh
       com k de catálogo o modelo não discrimina 2 %. Escala 0,5130 ± 0,0009 mm/px (0,17 %). Com k medido
       estaticamente a ±2 %, u(f₁) do modelo cai para ≈ 0,09 Hz. Não incluído: erro de forma do modelo (posição da
       raiz, ver E5). Falta: k e massas medidos, n = 3 tomadas, barras de erro em C1–C2.
+      **Atualizado (2026-10-31) com k e massas medidos** (`specimen.uncertainties` da sessão: k ± 62 N/m pelo
+      ajuste, massas ± 1 g, posições e L ± 2 mm, b/h ± 0,1 mm, ρ ± 0,5 %, E ± 2 GPa): f₁ = 7,692 ± 0,280 Hz
+      (3,6 %; Monte Carlo 7,697 ± 0,270), k ainda responde por 98 % da variância; erro vídeo × modelo
+      = +0,93 ± 3,7 %. Para k₂: 13,71 ± 0,72 Hz. Falta: n = 3 tomadas e barras de erro em C1–C2.
 - [~] **E5. Decidir "full-field".** Ou mostrar a forma modal com ≥ 5 ROIs ao longo da barra (amplitude e fase ×
       posição, comparada ao `BeamFE`; é só pós-processamento do mesmo vídeo) ou trocar "full-field" por
       "medição multiponto" na introdução, na justificativa, no resumo e na discussão. (Ver também C7.)
@@ -261,6 +289,10 @@ Impacto decrescente. Os pontos 1 e 2 são os que mais elevam o nível do trabalh
       raiz): ajuste linear dá centro de rotação efetivo **x₀ = −36 mm** (R² = 0,9997), ou seja, 36 mm antes do
       x = 0 da calibração. Com a raiz do modelo em x₀: MAC = **0,9999**, erros pontuais ≤ 2 % (acelerômetro
       −4 %), f₁ previsto 7,543 Hz. → medir no laboratório a distância do eixo do mancal ao x = 0 (roteiro, seção 2).
+      **Atualizado (2026-10-31):** com a geometria medida (eixo do mancal 15 mm antes de p1, L = 735 mm) e o k
+      medido, MAC (raiz no eixo) = **0,9996**; a reta pelos pontos cruza zero em **−24 mm** do eixo, contra −4 mm
+      na forma do próprio modelo → o pivô efetivo fica ≈ 20 mm além do eixo medido (ver "Discrepância" e
+      `issues.md`); com a raiz lá, MAC = 1,0000 e f₁ = 7,62 Hz.
       **Decisão sugerida (falta confirmar):** 9 pontos não são "full-field"; usar "medição multiponto sem contato"
       no texto e deixar full-field como trabalho futuro, a não ser que a próxima sessão com marcas a cada 50 mm
       dê os 15 pontos.
@@ -285,8 +317,12 @@ Impacto decrescente. Os pontos 1 e 2 são os que mais elevam o nível do trabalh
 
 ## Perguntas em aberto
 
-1. Massa da(s) mola(s), do parafuso, das porcas e do gancho (pesar). Qual mola gerou 7,6 Hz?
+1. ~~Massa da(s) mola(s), do parafuso, das porcas e do gancho (pesar). Qual mola gerou 7,6 Hz?~~ Pesadas; a
+   curva de 7,6 Hz é da mola k₁ (o modelo dá 7,69 Hz com k₁ e 13,7 Hz com k₂). Gancho: não há / não pesado?
 2. f_n do acelerômetro nas demais gravações/molas.
 3. Setup do PULSE: banda, linhas, tempo, taxa de amostragem, sensibilidade; exportação dos dados.
-4. A junta (conjunto cilindro/dial à esquerda): distância do centro do mancal à borda da barra
-   e inércia/atrito do conjunto.
+4. A junta (conjunto cilindro/dial à esquerda): ~~distância do centro do mancal à borda da barra~~ (735 mm à
+   ponta); onde fica o eixo de rotação de fato (pivô efetivo ≈ 24 mm além do medido) e se há folga/atrito.
+5. O que é a pasta `Fadiga` (dia 2, mola K1) no Drive: o teste de afrouxamento da seção 5b do roteiro (E10)?
+6. A barra do amortecedor (haste e placa perto de x ≈ 165 mm) não se move no vídeo (≤ 0,01 mm): não está presa
+   à barra e não entra no modelo.

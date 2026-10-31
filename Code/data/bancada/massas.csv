@@ -1,0 +1,7 @@
+peca,massa_g,observacao
+mola_k1,161,mola inteira (entra no modelo como 1/3)
+mola_k2,382,mola inteira (entra no modelo como 1/3)
+parafuso,36,parafuso que atravessa a barra e prende a mola
+porcas,10,porcas da montagem (arruelas incluidas se houver; confirmar)
+barra,644,barra Al 6351-T6 inteira (750 mm)
+acelerometro,5,nominal B&K 4507 001 (nao pesado nesta visita)

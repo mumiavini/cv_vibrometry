@@ -9,6 +9,62 @@ Newest issue first.
 
 ---
 
+## [OPEN] Bar near the joint moves as if the pivot were ≈ 24 mm behind the measured bearing axis
+
+**Date opened:** 2026-10-31
+**Area:** bench (joint/bearing), `Code/tools/forma_modal_multiponto.py`, `Code/sessions/k1_cm_acc.vibro.json`
+
+**Symptom:** with the geometry measured from the bearing axis (L = 735, a = 655, x_a = 305 mm; the
+calibration point p1 is the joint face, 15 mm from the axis, `calibration.x0_mm`), the multi-point
+shape of `k1_cm_acc` fits the model well far from the root (≤ 1 % from 515 to 655 mm, MAC 0.9996) but
+reads high close to it: +30 % at 65 mm, +14 % at 115 mm, +4 % at 215 mm. A line through the reliable
+points crosses zero at x0 = −24 mm; the same line through the model's shape at those points crosses at
+−4 mm (bending only). A separate track of the bar just outside the joint (≈ 40 mm) gives 1.45 mm against
+≈ 1.0 mm for a pin at the axis, while the joint housing, the stand knob and the damper rod move
+≤ 0.009 mm (noise floor, ≈ 5 µm).
+
+**Root cause (not established):** the housing does not move, so it is not support motion. Either the
+real rotation axis is ≈ 24 mm further from the tip than the point taken as "centre of the bearing"
+(e.g. the bar is clamped in a fork that turns about a shaft further back), or the bar has play/slip
+inside the joint. The tape positions and the image agree within ≤ 3 mm (scale fit 0.513 mm/px), so it is
+not a calibration error. Effect on f₁: with the root moved to −24 mm the model gives 7.62 Hz instead of
+7.69 Hz, inside the ±0.28 Hz model uncertainty (k dominates).
+
+**Proposed fix (not yet implemented):** in the next takes put an ROI on the bar right at the joint and one
+on the joint housing; photograph/measure the joint to locate the shaft axis; check bearing play (lift the
+bar without the spring). If play is confirmed, model it as a vertical/rotational root spring.
+
+---
+
+## [SOLVED] Model predicted f₁ = 11.7 Hz for spring k₁ against 7.60 Hz measured
+
+**Date opened:** 2026-10-25
+**Date solved:** 2026-10-31
+**Area:** `Code/sessions/k1_cm_acc.vibro.json` (specimen), `Code/vibrometry/beam.py` (`BeamFE`), bench
+
+**Symptom:** the finite-element model of the pinned bar with the catalog spring (k₁ = 1500 N/m at
+632 mm, 5 g accelerometer, no spring mass) predicted 11.70 Hz; PULSE measured 7.600 Hz and the video
+7.763 Hz. The session carried a lumped "ferragem" of 383 g at 632 mm — the mass that would close the gap
+with k = 1500 N/m — which was a fitted number, not a measurement (logged in `TODO.md`, "Discrepância").
+
+**Root cause:** k and the effective mass are not separable from one frequency. Measured in the lab
+(`Code/data/bancada/`): the **catalog stiffness was wrong** — static test k₁ = 857 ± 62 N/m (−43 %),
+k₂ = 3291 ± 346 N/m (+32 %); spring k₁ 161 g (⅓ = 54 g in the model), bolt 36 g, nuts 10 g, so the
+effective mass at the spring is 99.7 g, not 383 g. The geometry from the bearing axis is L = 735 mm,
+a = 655 mm, x_a = 305 mm (not 720/632/300), and the bar weighs 644 g (ρ_eff = 2662 kg/m³). The spring
+length readings were written as "mm" but are cm (in mm, k₁ ≈ 8.6 kN/m would give f₁ ≈ 24 Hz).
+
+**Fix:** `vibrometry/springs.py` (`fit_spring_stiffness`, least squares with free intercept and standard
+error), data in `Code/data/bancada/*.csv`, `tools/parametros_bancada.py` (fit, model, uncertainty
+budget, figure → `Code/data/bancada/resultados/`). Session `k1_cm_acc` updated with the measured values
+and `specimen.uncertainties`; `calibration.x0_mm = 15` records that p1 is the joint face (the scale
+0.513 mm/px is unchanged). Model now: f₁ = 7.69 ± 0.28 Hz for k₁ (PULSE −1.2 %, video +0.9 %, both
+within ±0.33 u) and 13.71 ± 0.72 Hz for k₂. Exports of `k1_cm_acc` (predicted f, mode-shape table,
+`forma_modal/`, `incerteza/`) regenerated. Tests: `tests/test_springs.py`,
+`tests/test_specimen_fe.py::test_repository_session_model_matches_the_measured_frequency`.
+
+---
+
 ## [OPEN] Phase displacement has a gain bias when the ROI texture is not centred in the Gabor band
 
 **Date opened:** 2026-10-25
@@ -113,6 +169,10 @@ can be compared. The 7× damping difference and the 2 % frequency difference are
 
 **Proposed fix:** record video and PULSE simultaneously (impact + LED), and compare envelopes
 (`vibrometry.reference`) before using waveform metrics; confirm the lab-PC clock.
+
+**Update (2026-10-31):** with the measured spring and masses the model gives 7.69 ± 0.28 Hz, between the
+two takes (PULSE −1.2 %, video +0.9 %); the 2.1 % gap between them is within the model uncertainty and
+is still most likely take-to-take (new simultaneous takes pending). The damping difference is open.
 
 ---
 
