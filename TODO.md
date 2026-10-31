@@ -308,9 +308,10 @@ Impacto decrescente. Os pontos 1 e 2 são os que mais elevam o nível do trabalh
       medido, MAC (raiz no eixo) = **0,9996**; a reta pelos pontos cruza zero em **−24 mm** do eixo, contra −4 mm
       na forma do próprio modelo → o pivô efetivo fica ≈ 20 mm além do eixo medido (ver "Discrepância" e
       `issues.md`); com a raiz lá, MAC = 1,0000 e f₁ = 7,62 Hz.
-      **Decisão sugerida (falta confirmar):** 9 pontos não são "full-field"; usar "medição multiponto sem contato"
-      no texto e deixar full-field como trabalho futuro, a não ser que a próxima sessão com marcas a cada 50 mm
-      dê os 15 pontos.
+      **Decisão (2026-10-31): multiponto.** Usar "medição multiponto sem contato" no texto, com pontos igualmente
+      espaçados ao longo da barra (≈ 50 mm) + acelerômetro e parafuso, MAC × `BeamFE` e os pontos excluídos pelo
+      critério de qualidade mostrados. Full-field (linha densa ao longo da barra) fica como trabalho futuro: viável
+      offline (minutos por vídeo), mas com ganho pequeno para o 1º modo, que é quase uma reta.
 - [ ] **E6. Enxugar a teoria.** Cortar ou ligar aos resultados o que não é usado: célula de Bragg/heterodinagem,
       rainflow e Palmgren-Miner, detalhes de SHM. Ver também E9 (escopo de SHM).
 - [ ] **E7. Fixar os critérios de aceitação antes de olhar os dados finais.** Hoje o texto usa 1 % para a frequência
