@@ -39,6 +39,14 @@ So the most likely cause is the first one: the shaft of that rotating part sits 
 taken as "centre of the bearing". Pending: measure shaft axis → tip (expected ≈ 759 mm if the video is
 right); then L, a and x_a all shift by the same amount (f₁ 7.69 → ≈ 7.62 Hz).
 
+**Update 2 (2026-10-31):** ruled out. The author confirms all distances (735, 655, 305 mm) were measured
+from the **middle of the clamp**, which is the rotation axis, and the bar is 750 mm long (15 mm behind the
+axis, as modelled). So the geometry is right and there is no play. Remaining candidates: elastic compliance
+of the shaft / rotating clamp (≈ 0.5 mm vertical motion at the axis would do it; the tracked disc is the fixed
+housing, not the rotating part), or a tracking/optical effect on the near-root points at the left edge of the
+frame. Camera roll is excluded: the housing and the stand knob, ≈ 150 mm left of the wall reference, move
+≤ 5 µm. Next takes: ROIs on the rotating clamp itself and on the bar right at the clamp.
+
 ---
 
 ## [SOLVED] Model predicted f₁ = 11.7 Hz for spring k₁ against 7.60 Hz measured

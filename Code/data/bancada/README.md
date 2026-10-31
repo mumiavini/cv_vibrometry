@@ -61,9 +61,10 @@ Tabelas completas, com o orçamento de incerteza, em `resultados/parametros.md`.
   dinâmica com k₁. Se nada mais pré-carregar a mola, ela afrouxaria no alto de cada ciclo. O sinal limpo e
   o f estável indicam que isso não ocorre, mas vale conferir o espectro (harmônicos) no início das novas
   tomadas, onde a amplitude é maior.
-- **Junta:** sem folga (confirmado); a barra é presa numa peça que gira. O pivô efetivo ≈ 24 mm além do ponto
-  medido (forma modal do vídeo, `issues.md`) indica que o eixo de giro dessa peça fica atrás do ponto usado como
-  "centro do mancal". Falta medir a distância **eixo de giro → ponta**.
+- **Junta e referência das medidas (confirmado):** todas as distâncias foram medidas a partir do **meio do
+  engaste** da barra, na peça que gira, que é o eixo de rotação; 735 mm até a ponta, e a barra tem 750 mm (15 mm
+  atrás do eixo, como no modelo). Sem folga. O pivô efetivo ≈ 24 mm além do eixo que o vídeo sugere
+  (`issues.md`) **não** vem, portanto, da posição do eixo.
 - **Geometria × calibração do vídeo.** O segmento de calibração da sessão k1_cm_acc (p1 → p2 = 1403,5 px)
   vai da face da junta à ponta. Ajustando as posições da ponta, do parafuso e do acelerômetro na imagem às
   medidas de trena (735/655/305 mm), a escala sai 0,513 mm/px e o eixo do mancal fica ≈ 15–17 mm antes de

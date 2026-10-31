@@ -75,10 +75,11 @@ PULSE (7,600) e o vídeo (7,763), ambos a ≤ 0,33 u. Detalhes e histórico em `
 
 **Pontos que ficam (não mudam a conclusão, entram na discussão):**
 - **Pivô efetivo ≈ 24 mm além do eixo medido** (`issues.md`): perto da junta a barra se move mais do que um pino
-  no eixo permitiria (+30 % a 65 mm; 1,45 × 1,0 mm a ≈ 40 mm), e a carcaça da junta fica parada (5 µm). Ou o eixo
-  real está mais para trás (barra presa num garfo?), ou há folga da barra na junta. Com a raiz em −24 mm o modelo
-  dá 7,62 Hz (dentro da incerteza). → fotografar/medir a junta; ROI na barra junto da junta e na carcaça nas
-  tomadas novas; checar folga.
+  no eixo permitiria (+30 % a 65 mm; 1,45 × 1,0 mm a ≈ 40 mm), e a carcaça da junta fica parada (5 µm). Eixo e
+  folga já descartados (medidas do meio do engaste, sem folga); resta flexibilidade elástica do eixo/peça que gira
+  (≈ 0,5 mm na raiz) ou erro dos pontos perto da borda da imagem. Com a raiz em −24 mm o modelo dá 7,62 Hz (dentro
+  da incerteza). → nas tomadas novas, ROI na peça que gira e na barra junto do engaste; se não se resolver, entra
+  como limitação na discussão.
 - **k₁ pouco linear** (k incremental 667–1429 N/m entre leituras; R² = 0,985) e **k₂ com o 1º trecho macio**
   (assentamento do gancho?). Repetir o ensaio estático subindo e descendo a carga reduziria ±7 % / ±10 % de k,
   que é ≈ 98 % da incerteza do f₁ previsto.
@@ -327,8 +328,8 @@ Impacto decrescente. Os pontos 1 e 2 são os que mais elevam o nível do trabalh
 2. f_n do acelerômetro nas demais gravações/molas.
 3. Setup do PULSE: banda, linhas, tempo, taxa de amostragem, sensibilidade; exportação dos dados.
 4. A junta (conjunto cilindro/dial à esquerda): ~~distância do centro do mancal à borda da barra~~ (735 mm à
-   ponta); **sem folga** (confirmado); a barra é presa numa peça que gira → medir a distância do **eixo de giro
-   dessa peça** à ponta (o vídeo sugere ≈ 24 mm além do ponto medido, ≈ 759 mm).
+   ponta, medido do **meio do engaste**, que é o eixo; barra de 750 mm); **sem folga** (confirmado). Geometria do
+   modelo confirmada. O pivô efetivo do vídeo (−24 mm) segue sem explicação: ver `issues.md`.
 5. ~~O que é a pasta `Fadiga`~~: teste de afrouxamento improvisado (E10). Faltam os arquivos e quantas meias-voltas
    em cada registro.
 7. Ensaio estático das molas: ~~como foram aplicadas as forças~~ massas penduradas, rotuladas em newtons. Falta
