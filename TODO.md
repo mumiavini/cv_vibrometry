@@ -105,7 +105,7 @@ PULSE (7,600) e o vídeo (7,763), ambos a ≤ 0,33 u. Detalhes e histórico em `
 - [x] **A4. Montagem** (medida em 2026-10, `Code/data/bancada/`): barra de alumínio 750 mm, 25,4 × 12,7 mm
       (nominal), **644 g**; eixo do mancal a **735 mm** da ponta; **k₁ = 857 ± 62 N/m (161 g)** e
       **k₂ = 3291 ± 346 N/m (382 g)** por ensaio estático (catálogo 1500/2500); parafuso 36 g, porcas 10 g;
-      acelerômetro 5 g (nominal). Falta: pesar o acelerômetro e conferir b/h com paquímetro (efeito pequeno);
+      acelerômetro 5 g (pesado). Falta: conferir b/h com paquímetro (efeito pequeno);
       condição real da raiz (pivô efetivo, ver acima).
 - [x] **A5. Posições** (medidas do eixo do mancal): acelerômetro a **305 mm**; parafuso da mola a **655 mm**
       (80 mm da ponta). Antes: 300 e 632 mm, medidos de outra referência. No vídeo `k1_cm_acc`, o ponto p1 da
