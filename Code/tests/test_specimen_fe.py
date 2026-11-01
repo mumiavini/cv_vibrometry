@@ -150,3 +150,21 @@ def test_windows_style_relative_paths_resolve(tmp_path):
     assert Path(s.video.path) == (tmp_path / "videos" / "a.mov").resolve()
     saved = json.loads(Path(s.save(p)).read_text(encoding="utf-8"))
     assert saved["video"]["path"] == "../videos/a.mov"
+
+
+def test_roi_positions_ignore_accents_and_case():
+    from vibrometry.session import roi_key, roi_position
+
+    pos = {"Acelerometro": 305.0, "Parafuso": 655.0}
+    assert roi_key("Acelerômetro") == roi_key("acelerometro") == roi_key("Acelero_metro")
+    assert roi_position(pos, "Acelerômetro") == 305.0
+    assert roi_position(pos, "parafuso") == 655.0
+    assert roi_position(pos, "Ponta") is None
+    s = Session()
+    s.specimen = bench(900.0, 83.0)
+    s.video.roi_positions_mm = pos
+    fe = s.specimen.fe_model()
+    sh = np.abs(fe.elastic_mode_shape(np.array([0.305, 0.655]), 1))
+    chk = mode_shape_check(s, _analysis({"Acelerômetro": sh[0], "Parafuso": sh[1]},
+                                        fe.elastic_frequency(1)))
+    assert chk is not None and {r.name for r in chk.rows} == {"Acelerômetro", "Parafuso"}

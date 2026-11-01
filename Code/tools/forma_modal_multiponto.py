@@ -30,7 +30,7 @@ from vibrometry.analysis import dominant_frequency, fit_sine  # noqa: E402
 from vibrometry.modeshape import (  # noqa: E402
     compare_shape, measured_shape, rois_along_beam, rotation_centre,
     shifted_specimen, track_points)
-from vibrometry.session import SESSION_SUFFIX, Session  # noqa: E402
+from vibrometry.session import SESSION_SUFFIX, Session, roi_position  # noqa: E402
 from vibrometry.video_io import probe_video  # noqa: E402
 
 # posições ao longo da barra a partir da raiz do modelo (eixo do mancal) [mm];
@@ -63,9 +63,10 @@ def main(argv: list[str] | None = None) -> int:
     t, unit = pts.times, ("mm" if v.scale_mm_per_px else "px")
 
     pos = {r.name: float(r.name.split("_")[1]) for r in bar}
-    pos.update({n: float(x) for n, x in v.roi_positions_mm.items() if n in pts.displacement})
-    ref_name = max((n for n in v.roi_positions_mm if n in pts.displacement),
-                   key=lambda n: v.roi_positions_mm[n])
+    known = {n: roi_position(v.roi_positions_mm, n) for n in pts.displacement}
+    known = {n: x for n, x in known.items() if x is not None and not n.startswith("barra_")}
+    pos.update(known)
+    ref_name = max(known, key=known.get)
     xr = pts.displacement[ref_name]
     f = fit_sine(t, xr - xr.mean(), dominant_frequency(xr, info.fps)).frequency
     ms_all = measured_shape(t, pts.displacement, pos, f, reference=ref_name)

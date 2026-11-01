@@ -32,6 +32,7 @@ from PySide6.QtWidgets import (
 )
 
 from vibrometry.report import spectrum_xmax
+from vibrometry.session import roi_key, roi_position
 from vibrometry.spectral import stft_spectrogram
 from vibrometry.video_io import FrameReader, probe_video
 from vibrometry.workflow import load_track_cache, run_video, save_track_cache
@@ -644,7 +645,7 @@ class VideoPage(QWidget):
         self.roi_pos.blockSignals(True)
         self.roi_pos.setEnabled(ok)
         pos = self.state.session.video.roi_positions_mm
-        self.roi_pos.put(pos.get(self.roi_items[row]["name"]) if ok else None)
+        self.roi_pos.put(roi_position(pos, self.roi_items[row]["name"]) if ok else None)
         self.roi_pos.blockSignals(False)
 
     def _roi_pos_changed(self) -> None:
@@ -654,6 +655,9 @@ class VideoPage(QWidget):
         name = self.roi_items[row]["name"]
         pos = self.state.session.video.roi_positions_mm
         v = self.roi_pos.get()
+        # drop entries that refer to this ROI under another spelling
+        for other in [n for n in pos if n != name and roi_key(n) == roi_key(name)]:
+            pos.pop(other)
         if v is None:
             pos.pop(name, None)
         else:

@@ -48,7 +48,7 @@
     "level": "k1",
     "repetition": 3,
     "camera": "iphone",
-    "notes": "2a visita. Mola k1, tomada 3; excitacao por batida na barra (sem medir forca); video e PULSE simultaneos. Video no Drive: tcc2/dia 2/Mola K1/Medição 3 Mola 1/IMG_7710.mov -> salvar como videos/20261030_al_L735_k1_r3.mov. Acelerometro: med6_1.csv (curva com colunas t, a, a_max, a_min). Modelo: f1 = 7,69 +- 0,28 Hz.",
+    "notes": "2a visita. Mola k1, tomada 3; excitacao por batida na barra (sem medir forca); video e PULSE simultaneos. Video no Drive: tcc2/dia 2/Mola K1/Medição 3 Mola 1/IMG_7710.mov -> salvar como videos/20261030_al_L735_k1_r3.mov. Acelerometro: med6_1.csv (curva com colunas t, a, a_max, a_min). Modelo: f1 = 7,69 +- 0,28 Hz. Posicoes de Ponto_aleatorio_marcado/liso estimadas pela imagem (interpolacao entre acelerometro 305 mm e parafuso 655 mm); medir na barra se possivel.",
     "checklist": [
       false,
       false,
@@ -130,8 +130,10 @@
     "search_margin": 60,
     "window": null,
     "roi_positions_mm": {
+      "Acelerômetro": 305.0,
       "Parafuso": 655.0,
-      "Acelerometro": 305.0
+      "Ponto_aleatorio_marcado": 347.0,
+      "Ponto_aleatorio_liso": 531.0
     }
   },
   "accel": {

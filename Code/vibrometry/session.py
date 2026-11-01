@@ -10,6 +10,7 @@ from __future__ import annotations
 import json
 import os
 import re
+import unicodedata
 from dataclasses import asdict, dataclass, field, fields
 from datetime import date
 from pathlib import Path
@@ -145,6 +146,28 @@ class MetaCfg:
     camera: str = "osmo"
     notes: str = ""
     checklist: list[bool] = field(default_factory=lambda: [False] * len(CHECKLIST))
+
+
+def roi_key(name: str) -> str:
+    """ROI name for matching positions: no accents, case, spaces or
+    underscores ("Acelerômetro" == "acelerometro" == "Acelero metro")."""
+    s = unicodedata.normalize("NFKD", str(name))
+    s = "".join(c for c in s if not unicodedata.combining(c))
+    return re.sub(r"[\s_\-]+", "", s).casefold()
+
+
+def roi_position(positions: dict[str, float] | None, name: str) -> float | None:
+    """Position along the beam [mm] of ROI ``name`` in ``positions``, matched
+    by exact name first and then by ``roi_key``."""
+    if not positions:
+        return None
+    if name in positions:
+        return float(positions[name])
+    k = roi_key(name)
+    for n, x in positions.items():
+        if roi_key(n) == k:
+            return float(x)
+    return None
 
 
 @dataclass

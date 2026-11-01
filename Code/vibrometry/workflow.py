@@ -26,7 +26,7 @@ from .accelerometer import (
     read_table,
 )
 from .analysis import Comparison, compare_signals, dominant_frequency, fit_sine
-from .session import SESSION_SUFFIX, Session
+from .session import SESSION_SUFFIX, Session, roi_position
 from .spectral import (
     LogDecrementResult,
     SpectralPeak,
@@ -273,7 +273,9 @@ def mode_shape_check(session: Session, analysis: VideoAnalysis) -> ModeShapeChec
     """Compare the ROI amplitude ratios with the model mode shape. Needs at
     least two measurement ROIs with a position along the beam
     (``session.video.roi_positions_mm``)."""
-    pos = session.video.roi_positions_mm or {}
+    raw = session.video.roi_positions_mm or {}
+    pos = {n: roi_position(raw, n) for n in analysis.modal}
+    pos = {n: x for n, x in pos.items() if x is not None}
     names = [n for n, m in analysis.modal.items()
              if n in pos and m.amplitude and m.f_n]
     if len(names) < 2:
