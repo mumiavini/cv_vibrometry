@@ -61,15 +61,67 @@
     ]
   },
   "video": {
-    "path": "../videos/20261030_al_L735_k1_r3.mov",
+    "path": "../../../../../Users/a565998/OneDrive - Volvo Group/My Pictures/TCC/IMG_7710.MOV",
     "fps_override": 240.0,
-    "start_s": 0.0,
-    "end_s": null,
+    "start_s": 427.0,
+    "end_s": 440.0,
     "resize_width": null,
-    "rois": [],
-    "scale_mm_per_px": null,
-    "calibration": null,
-    "axis": "auto",
+    "rois": [
+      {
+        "name": "Acelerômetro",
+        "x": 903,
+        "y": 470,
+        "w": 26,
+        "h": 44,
+        "is_reference": false
+      },
+      {
+        "name": "Parafuso",
+        "x": 1342,
+        "y": 470,
+        "w": 38,
+        "h": 92,
+        "is_reference": false
+      },
+      {
+        "name": "Parede",
+        "x": 636,
+        "y": 723,
+        "w": 286,
+        "h": 188,
+        "is_reference": true
+      },
+      {
+        "name": "Ponto_aleatorio_marcado",
+        "x": 963,
+        "y": 493,
+        "w": 14,
+        "h": 17,
+        "is_reference": false
+      },
+      {
+        "name": "Ponto_aleatorio_liso",
+        "x": 1190,
+        "y": 487,
+        "w": 26,
+        "h": 22,
+        "is_reference": false
+      }
+    ],
+    "scale_mm_per_px": 0.57238,
+    "calibration": {
+      "p1": [
+        1360.3841086281743,
+        484.7200145410146
+      ],
+      "p2": [
+        1473.9396080706415,
+        483.569827701676
+      ],
+      "length_mm": 65.0,
+      "length_px": 113.5613243291639
+    },
+    "axis": "y",
     "compensate": true,
     "wavelengths": [
       8.0,
@@ -99,14 +151,17 @@
     ]
   },
   "compare": {
-    "roi": "Acelerometro",
+    "roi": "Acelerômetro",
     "domain": "displacement",
-    "f_hp": null,
+    "f_hp": 0.6,
     "f_lp": null,
     "sync_mode": "impact",
-    "offset_s": 0.0,
+    "offset_s": -1.574,
     "drift_ppm": 0.0,
-    "window": null,
+    "window": [
+      1.5791666666666666,
+      5.575
+    ],
     "f_analysis": null,
     "crit_freq_pct": 1.0,
     "crit_amp_pct": 10.0,
