@@ -65,6 +65,11 @@ k₂ 0,002–0,003. **Confirmar se esses CSVs são exportação do PULSE ou digi
 degraus de ≈ 0,2 m/s², colunas a_max/a_min): f vale nos dois casos; amplitude e ζ ficam menos confiáveis se for
 digitalização. Pico do k₁ na 1ª visita: 7,600 Hz (cursor) — a 2ª visita dá 7,816 Hz.
 
+**Vídeos da 2ª visita (2026-11-01):** usar o **original** do iPhone (cabo/DCIM); o corte no app Fotos
+re-renderiza a câmera lenta e estraga a base de tempo. O original perde ≈ 17 % dos quadros (intervalos de
+2/240 s); o app agora usa o tempo real de cada quadro e reamostra os sinais (`issues.md`). Recortar a tomada
+pelo início/fim do trecho no próprio app. `k1_cm_acc`: 1 quadro perdido → f_n 7,763 → 7,752 Hz.
+
 **Próximos passos (ordem):**
 1. ~~Ir ao laboratório~~ — feito (2ª visita): k estático e massas medidos (acima). **Falta subir os vídeos e os
    arquivos do PULSE** da visita (pastas `tcc2/dia 2/Mola K1|K2/Medição 1–3` e `Fadiga` no Google Drive, ainda
@@ -308,9 +313,10 @@ Impacto decrescente. Os pontos 1 e 2 são os que mais elevam o nível do trabalh
       medido, MAC (raiz no eixo) = **0,9996**; a reta pelos pontos cruza zero em **−24 mm** do eixo, contra −4 mm
       na forma do próprio modelo → o pivô efetivo fica ≈ 20 mm além do eixo medido (ver "Discrepância" e
       `issues.md`); com a raiz lá, MAC = 1,0000 e f₁ = 7,62 Hz.
-      **Decisão sugerida (falta confirmar):** 9 pontos não são "full-field"; usar "medição multiponto sem contato"
-      no texto e deixar full-field como trabalho futuro, a não ser que a próxima sessão com marcas a cada 50 mm
-      dê os 15 pontos.
+      **Decisão (2026-10-31): multiponto.** Usar "medição multiponto sem contato" no texto, com pontos igualmente
+      espaçados ao longo da barra (≈ 50 mm) + acelerômetro e parafuso, MAC × `BeamFE` e os pontos excluídos pelo
+      critério de qualidade mostrados. Full-field (linha densa ao longo da barra) fica como trabalho futuro: viável
+      offline (minutos por vídeo), mas com ganho pequeno para o 1º modo, que é quase uma reta.
 - [ ] **E6. Enxugar a teoria.** Cortar ou ligar aos resultados o que não é usado: célula de Bragg/heterodinagem,
       rainflow e Palmgren-Miner, detalhes de SHM. Ver também E9 (escopo de SHM).
 - [ ] **E7. Fixar os critérios de aceitação antes de olhar os dados finais.** Hoje o texto usa 1 % para a frequência

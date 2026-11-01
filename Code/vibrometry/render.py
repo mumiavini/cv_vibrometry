@@ -74,7 +74,8 @@ def render_side_by_side(
     clip at 30 fps, stride 1 -> 1/8x slow motion).
     """
     out_path = Path(out_path)
-    t = track.times
+    t = track.times                      # analysis grid of the series
+    tf = track.frame_times               # real time of each video frame
     n = track.n_frames
     start = track.params.start_frame
     h0, w0 = track.reference_frame.shape
@@ -137,13 +138,14 @@ def render_side_by_side(
             left = cv2.resize(frame, (vid_w, height), interpolation=cv2.INTER_AREA)
 
             canvas.restore_region(background)
+            j = track.frame_index(k)
             for ln, dot, y in zip(lines, dots, values):
-                ln.set_data(t[: k + 1], y[: k + 1])
-                dot.set_data([t[k]], [y[k]])
+                ln.set_data(t[: j + 1], y[: j + 1])
+                dot.set_data([t[j]], [y[j]])
                 ax.draw_artist(ln)
                 ax.draw_artist(dot)
-            cursor.set_xdata([t[k], t[k]])
-            clock.set_text(f"t = {t[k]:.3f} s".replace(".", ","))
+            cursor.set_xdata([tf[k], tf[k]])
+            clock.set_text(f"t = {tf[k]:.3f} s".replace(".", ","))
             ax.draw_artist(cursor)
             ax.draw_artist(clock)
             right = cv2.cvtColor(np.asarray(canvas.buffer_rgba()), cv2.COLOR_RGBA2BGR)

@@ -239,15 +239,17 @@ class PlaybackPanel(QWidget):
             r = res.roi
             dx, dy = res.displacement[k]
             self.rects[name].setRect(r.x + dx, r.y + dy, r.w, r.h)
+        tk = float(tr.frame_times[k])           # real time of frame k
         for (label, t, y, color), c, dot in zip(self.series, self.curves, self.dots):
-            c.setData(t[: k + 1], y[: k + 1])
-            dot.setData([t[k]], [y[k]] if np.isfinite(y[k]) else [np.nan])
-        t = tr.times
-        self.cursor.setPos(t[k])
+            j = int(min(len(t) - 1, np.searchsorted(t, tk + 1e-9) - 1)) if len(t) else 0
+            j = max(j, 0)
+            c.setData(t[: j + 1], y[: j + 1])
+            dot.setData([t[j]], [y[j]] if np.isfinite(y[j]) else [np.nan])
+        self.cursor.setPos(tk)
         self.slider.blockSignals(True)
         self.slider.setValue(k)
         self.slider.blockSignals(False)
-        self.time_label.setText(f"{fmt(t[k], 3)} s · quadro {tr.params.start_frame + k}")
+        self.time_label.setText(f"{fmt(tk, 3)} s · quadro {tr.params.start_frame + k}")
 
     def _slider_moved(self, k: int) -> None:
         self.pause()

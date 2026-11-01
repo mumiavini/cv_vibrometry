@@ -478,6 +478,9 @@ def results_dict(session: Session, analysis: VideoAnalysis | None,
             "codec": tr.info.codec, "fps": tr.fps, "fps_fonte": tr.fps_source,
             "fps_declarado": tr.info.declared_fps, "fps_medido": tr.info.measured_fps,
             "quadros_processados": tr.n_frames, "fator_reducao": tr.resize_factor,
+            "quadros_perdidos": tr.dropped_frames,
+            "duracao_real_s": float(tr.frame_times[-1]) if tr.n_frames else 0.0,
+            "reamostrado": tr.irregular,
             "inicio_s": tr.t0, "unidade": analysis.unit,
             "eixos": analysis.axes,
             "qualidade": {
@@ -566,10 +569,19 @@ def export_session(
             cols = {"tempo_s": analysis.times}
             for n, x in analysis.signals.items():
                 cols[f"{n}_{u}"] = x
+            raw = {"tempo_quadro_s": analysis.track.frame_times}
             for n, tr in analysis.track.tracks.items():
-                cols[f"{n}_dx_px"] = tr.displacement[:, 0]
-                cols[f"{n}_dy_px"] = tr.displacement[:, 1]
-                cols[f"{n}_ncc"] = tr.score
+                raw[f"{n}_dx_px"] = tr.displacement[:, 0]
+                raw[f"{n}_dy_px"] = tr.displacement[:, 1]
+                raw[f"{n}_ncc"] = tr.score
+            if analysis.track.irregular:
+                # signals were resampled to a uniform grid (dropped frames):
+                # the per-frame tracking goes to its own file, on real time
+                pl.DataFrame(raw).write_csv(out / "deslocamento_video_quadros.csv")
+                written.append(out / "deslocamento_video_quadros.csv")
+            else:
+                raw.pop("tempo_quadro_s")
+                cols.update(raw)
             pl.DataFrame(cols).write_csv(out / "deslocamento_video.csv")
             written.append(out / "deslocamento_video.csv")
         if opts.latex:

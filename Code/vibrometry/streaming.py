@@ -59,8 +59,9 @@ class QualityReport:
     def warnings(self) -> list[str]:
         out = []
         if self.dropped_frames:
-            out.append(f"{self.dropped_frames} quadro(s) perdido(s) "
-                       f"(intervalo > 1,5 período)")
+            out.append(f"{self.dropped_frames} intervalo(s) com quadro perdido "
+                       f"(> 1,5 intervalo típico): sinais reamostrados no tempo "
+                       f"real de cada quadro")
         if self.flicker_percent > 1.0 and self.flicker_hz:
             out.append(f"cintilação de {self.flicker_percent:.1f}% "
                        f"em {self.flicker_hz:.1f} Hz")
@@ -92,10 +93,54 @@ class VideoTrack:
         return len(self.timestamps)
 
     @property
+    def frame_times(self) -> np.ndarray:
+        """Real time of every tracked frame from the first one [s].
+
+        Taken from the container timestamps, rescaled so that the typical
+        (median) frame interval is 1 / ``fps``: a slow-motion file whose
+        container plays at 30 fps but was captured at ``fps`` = 240 keeps its
+        real time base, and frames the camera dropped (an interval of 2/F or
+        more) keep their true position instead of being packed at k / F.
+        Falls back to k / F when the timestamps are unusable."""
+        n = self.n_frames
+        uniform = np.arange(n) / self.fps
+        ts = np.asarray(self.timestamps, dtype=float)
+        if ts.size != n or n < 3 or not np.all(np.isfinite(ts)):
+            return uniform
+        d = np.diff(ts)
+        if np.any(d <= 0):
+            return uniform
+        return (ts - ts[0]) * ((1.0 / self.fps) / typical_interval(d))
+
+    @property
+    def dropped_frames(self) -> int:
+        """Frames missing between tracked frames (intervals longer than 1.5
+        typical intervals count the frames that fit in them)."""
+        d = np.diff(self.frame_times) * self.fps
+        return int(np.sum(np.round(d[d > 1.5]) - 1)) if d.size else 0
+
+    @property
+    def irregular(self) -> bool:
+        """True when frames were dropped: the signals are then resampled
+        onto the uniform grid ``times`` before any analysis."""
+        return self.dropped_frames > 0
+
+    @property
     def times(self) -> np.ndarray:
-        """Uniform analysis time base t_k = k / F, from the first tracked
-        frame [s]."""
-        return np.arange(self.n_frames) / self.fps
+        """Uniform analysis time base t_k = k / F from the first tracked
+        frame [s]. With dropped frames it spans the real duration
+        (``frame_times``), so it has more samples than frames."""
+        if not self.irregular:
+            return np.arange(self.n_frames) / self.fps
+        n = int(np.floor(self.frame_times[-1] * self.fps + 1e-6)) + 1
+        return np.arange(n) / self.fps
+
+    def frame_index(self, k: int) -> int:
+        """Index in ``times`` (analysis grid) of tracked frame ``k``."""
+        if not self.irregular:
+            return int(k)
+        n = len(self.times)
+        return int(min(n - 1, max(0, round(self.frame_times[k] * self.fps))))
 
     @property
     def t0(self) -> float:
@@ -125,9 +170,38 @@ class VideoTrack:
 
         Returns (signals, axis_used) keyed by ROI name.
         """
-        return compose_signals(
+        sig, axes = compose_signals(
             {n: t.displacement for n, t in self.tracks.items()},
             self.reference_name, axis, scale_mm_per_px, compensate)
+        if self.irregular:
+            tf, tu = self.frame_times, self.times
+            sig = {n: resample(tf, x, tu) for n, x in sig.items()}
+        return sig, axes
+
+
+def typical_interval(d: np.ndarray) -> float:
+    """Interval between consecutive captured frames: the median of the
+    shortest cluster of intervals (robust when many intervals are 2x, 3x
+    long because the camera dropped frames)."""
+    d = np.asarray(d, dtype=float)
+    d = d[d > 0]
+    base = float(np.percentile(d, 5))
+    return float(np.median(d[d < 1.5 * base]))
+
+
+def resample(t_src: np.ndarray, x: np.ndarray, t_dst: np.ndarray) -> np.ndarray:
+    """``x`` sampled at the (possibly irregular) instants ``t_src`` onto
+    ``t_dst``: cubic spline through the samples (linear where values are
+    missing)."""
+    x = np.asarray(x, dtype=float)
+    ok = np.isfinite(x)
+    if ok.all() and x.size >= 4:
+        from scipy.interpolate import CubicSpline
+
+        return CubicSpline(t_src, x, bc_type="natural")(t_dst)
+    if ok.sum() < 2:
+        return np.full(len(t_dst), np.nan)
+    return np.interp(t_dst, t_src[ok], x[ok])
 
 
 def compose_signals(
@@ -298,7 +372,9 @@ def track_video(
     ts = np.asarray(timestamps)
     dts = np.diff(ts)
     dts = dts[dts > 0]
-    nominal = 1.0 / fps
+    # typical container interval (a slow-motion file plays at e.g. 30 fps
+    # while ``fps`` is the capture rate): drops are relative to it
+    nominal = typical_interval(dts) if dts.size else 1.0 / fps
     bright = np.asarray(brightness)
     flicker_hz, flicker_pct = _flicker(bright, fps)
     quality = QualityReport(
