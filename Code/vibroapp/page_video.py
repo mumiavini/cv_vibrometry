@@ -995,8 +995,10 @@ class VideoPage(QWidget):
             ["Intervalo entre quadros", f"{fmt(q.frame_interval_ms, 3)} ms "
                                         f"(nominal {fmt(nominal, 3)} ms)"],
             ["Jitter de tempo", f"{fmt(q.frame_jitter_ms, 3)} ms"],
-            ["Quadros perdidos", (str(q.dropped_frames),
-                                  theme.BAD if q.dropped_frames else theme.OK)],
+            ["Quadros perdidos", (f"{tr.dropped_frames} — sinais reamostrados no tempo real "
+                                  f"({fmt(float(tr.frame_times[-1]), 3)} s)"
+                                  if tr.irregular else "0",
+                                  theme.WARN if tr.irregular else theme.OK)],
             ["Cintilação de brilho", (f"{fmt(q.flicker_percent, 2)} % em "
                                       f"{fmt(q.flicker_hz, 2)} Hz",
                                       theme.WARN if q.flicker_percent > 1 else theme.OK)],

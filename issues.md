@@ -9,6 +9,36 @@ Newest issue first.
 
 ---
 
+## [SOLVED] Dropped frames in iPhone slow-motion videos inflated the measured frequency
+
+**Date opened:** 2026-11-01
+**Date solved:** 2026-11-01
+**Area:** `Code/vibrometry/streaming.py` (`VideoTrack`), `vibroapp/playback.py`, `vibrometry/render.py`, `vibrometry/report.py`
+
+**Symptom:** second-visit videos gave f_n 8.3–9.1 Hz where the accelerometer gave 7.82 Hz (k1). Videos
+trimmed in the iPhone Photos app had two frame intervals (16.7 and 33.3 ms, "51.55 fps"); the original
+copied by cable ("205.98 fps", 11203 frames) had 2489 intervals of 4.17 ms and 493 of 8.33 ms in the
+first 3000 frames.
+
+**Root cause:** two separate problems. (1) Trimming or exporting a slow-motion clip in Photos re-renders it
+with the speed ramp baked in (slow middle, real-time ends), so frames no longer represent 1/240 s: such
+files are unusable for timing. (2) Even the original drops frames (≈ 17 % of intervals are 2/240 s), and
+the analysis used t_k = k / 240, packing the frames together: 14.6 s of real time read as 12.5 s, so every
+frequency came out ≈ 16 % high (9.08 / 7.816 = 1.162). The tracker already stored the container
+timestamps but nothing used them. The quality report also counted drops against 1/fps_override, so a
+30 fps slow-motion container showed every frame as dropped.
+
+**Fix:** `VideoTrack.frame_times` gives the real time of each frame from the container timestamps, scaled
+so the typical interval (`typical_interval`, the shortest cluster) is 1/F; with dropped frames, `signals()`
+resamples every ROI onto the uniform grid `times` (cubic spline) before any analysis, `frame_index(k)` maps
+frames onto that grid (playback and side-by-side render use it), the CSV export writes the per-frame
+tracking to `deslocamento_video_quadros.csv` on real time, and the results/quality tab report the dropped
+frames. Clips without drops are unchanged. The first-visit video `k1_cm_acc` had one dropped frame: its
+f_n goes from 7.763 to 7.752 Hz. Tests: `tests/test_frame_timing.py`. Rendered (Photos-trimmed) files
+still cannot be fixed: use the original and set the excerpt in the app.
+
+---
+
 ## [OPEN] Bar near the joint moves as if the pivot were ≈ 24 mm behind the measured bearing axis
 
 **Date opened:** 2026-10-31
