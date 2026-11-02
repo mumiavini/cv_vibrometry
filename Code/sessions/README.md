@@ -9,7 +9,7 @@ são relativos a esta pasta (`../videos/…`, `../data/acelerometro/…`). O cac
 |---|---|
 | `k1_cm_acc.vibro.json` | barra Al 6351-T6 + mola k₁ (857 N/m medido; catálogo 1500), com acelerômetro; 15/10/2026. Parâmetros do corpo de prova medidos em `../data/bancada/` (2ª visita) |
 
-| `20261030_al_L735_k{1,2}_r{1,2,3}.vibro.json` | 2ª visita: molas k₁ e k₂, 3 tomadas cada, vídeo + acelerômetro simultâneos (batida). Corpo de prova e acelerômetro já configurados; **falta o vídeo**, as ROIs e a calibração |
+| `20261030_al_L735_k{1,2}_r{1,2,3}.vibro.json` | 2ª visita: molas k₁ e k₂, 3 tomadas cada, vídeo (original do iPhone, trecho de cada tomada) + acelerômetro simultâneos (batida). Processadas e exportadas (`*_resultados/`); resumo em `resumo_dia2.md`/`.csv` (`python -m tools.resumo_tomadas`) |
 | `20261030_al_L735_k1_afrouxa_c{1..5}.vibro.json` | teste de afrouxamento improvisado (ciclos 1–5), só vídeo |
 
 ### Sessões da 2ª visita: como usar
@@ -22,7 +22,10 @@ são relativos a esta pasta (`../videos/…`, `../data/acelerometro/…`). O cac
    de distância conhecida e informe o comprimento real.
 3. Rode, sincronize pelo impacto (etapa 4) e exporte o relatório (etapa 6). Dê push da sessão e de `_resultados/`.
 
-O acelerômetro já está configurado (CSV, janela após a batida, passa-alta de 4 Hz para k₁ e 8 Hz para k₂; com
+Depois de mudar um parâmetro do modelo (k, massas, posições das ROIs), as saídas que dependem dele podem
+ser refeitas sem o vídeo: `python -m tools.reexportar_modelo <sessões>` (usa `deslocamento_video.csv`).
+
+O acelerômetro já está configurado (CSV em `../data/acelerometro/dia2/`, janela após a batida, passa-alta de 4 Hz para k₁ e 8 Hz para k₂; com
 1 Hz a integração para deslocamento amplifica a deriva de ≈ 0,7 Hz da curva e o app acha o pico errado).
 
 Nome sugerido pelo app: `AAAAMMDD_<material>_L<mm>_t<mm>_<f>Hz_A<nível>_r<n>`.

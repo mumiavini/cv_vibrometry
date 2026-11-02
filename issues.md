@@ -9,6 +9,42 @@ Newest issue first.
 
 ---
 
+## [OPEN] Second-visit sessions calibrated on a short 65 mm segment (amplitudes ≈ 27 % low)
+
+**Date opened:** 2026-11-02
+**Area:** `Code/sessions/20261030_al_L735_k?_r?.vibro.json` (`video.calibration`)
+
+**Symptom:** all six second-visit sessions use a scale of ≈ 0.55–0.60 mm/px from a 65 mm segment of
+≈ 109–117 px near the tip. In the same frames the accelerometer and bolt ROIs (305 and 655 mm from the axis,
+350 mm apart) are ≈ 445 px apart, i.e. ≈ 0.79 mm/px; the tape gives 80 mm (not 65) from the bolt to the tip.
+
+**Root cause:** short reference segment with a length that does not match the measured geometry (a 1 px click
+error is already ≈ 1 % on 113 px).
+
+**Proposed fix (not yet implemented):** recalibrate each session with a long segment (axis → tip = 735 mm, or
+accelerometer → bolt = 350 mm) and re-export. Only absolute amplitudes change (× ≈ 1.37); frequency, damping,
+phase and mode-shape ratios are scale-independent. The author chose to report amplitude vs accelerometer as
+not validated (reference uncertainty), so this was left as is.
+
+---
+
+## [SOLVED] Mode-shape check took a ROI that lost its target as the reference
+
+**Date opened:** 2026-11-02
+**Date solved:** 2026-11-02
+**Area:** `Code/vibrometry/workflow.py` (`mode_shape_check`)
+
+**Symptom:** in `20261030_al_L735_k1_r1` the smooth-edge ROI lost tracking (f = 0.45 Hz, large noise
+amplitude) and, being the largest amplitude, became the reference: every ratio came out ≈ −51 %.
+
+**Root cause:** the reference is the largest-amplitude ROI with a position, with no check that it oscillates
+at the structure's frequency.
+
+**Fix:** ROIs whose frequency is non-positive or more than 5 % from the median of the positioned ROIs are left
+out of the mode-shape table (test `test_mode_shape_check_skips_a_roi_that_lost_its_target`).
+
+---
+
 ## [SOLVED] Dropped frames in iPhone slow-motion videos inflated the measured frequency
 
 **Date opened:** 2026-11-01

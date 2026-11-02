@@ -277,7 +277,13 @@ def mode_shape_check(session: Session, analysis: VideoAnalysis) -> ModeShapeChec
     pos = {n: roi_position(raw, n) for n in analysis.modal}
     pos = {n: x for n, x in pos.items() if x is not None}
     names = [n for n, m in analysis.modal.items()
-             if n in pos and m.amplitude and m.f_n]
+             if n in pos and m.amplitude and m.f_n and m.f_n > 0]
+    if len(names) < 2:
+        return None
+    # a ROI that lost its target oscillates at some other frequency (or at
+    # none): keep the ROIs that agree with the common one within 5 %
+    f_med = float(np.median([analysis.modal[n].f_n for n in names]))
+    names = [n for n in names if abs(analysis.modal[n].f_n - f_med) <= 0.05 * f_med]
     if len(names) < 2:
         return None
     ref = max(names, key=lambda n: analysis.modal[n].amplitude)

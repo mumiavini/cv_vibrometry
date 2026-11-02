@@ -51,7 +51,23 @@ sessão em `Code/tools/` (comparação de métodos E1, forma modal multiponto E5
 `f_analysis = 0,79 Hz`, metadados de régua de aço; CSV do acelerômetro é um traço em zigue-zague; vídeo e PULSE
 não são o mesmo ensaio; o app ainda prevê f₁ com viga engastada; vídeo de 91 MB no git.
 
-**Acelerômetro da 2ª visita** (`Code/data/acelerometro/last measturements/`, sessões `20261030_*`; f pelo ajuste
+**Resultados da 2ª visita (vídeo + acelerômetro simultâneos, 2026-11-02)** — `Code/sessions/resumo_dia2.md`:
+
+| Mola | f vídeo (3 tomadas) | CV | f acel. | vídeo × acel. | vídeo × modelo | ζ vídeo | ζ acel. | razão acel./parafuso (modelo) |
+|---|---|---|---|---|---|---|---|---|
+| k₁ | 7,827 ± 0,011 Hz | 0,14 % | 7,816 Hz | +0,14 % | +1,8 % | 0,0051 | 0,0052 | 0,476 (0,473) |
+| k₂ | 14,710 ± 0,008 Hz | 0,05 % | 14,670 Hz | +0,27 % | +7,3 % | 0,0027 | 0,0024 | 0,486 (0,490) |
+
+Frequência dentro de 1 % nas 6 tomadas; ζ concorda (a diferença de 7× da 1ª visita era de tomadas diferentes);
+forma modal com 3–4 pontos, erros ≤ 6 % nos pontos rastreados (o ponto na borda lisa erra 4–43 % e perde o
+rastreamento em 2 tomadas: limitação sem textura). **Amplitude × acelerômetro não validada** (−20 % a +35 %):
+incerteza da referência (CSV digitalizado da tela, banda de 20 Hz, ver `Code/data/acelerometro/dia2/README.md`).
+**Pendente: escala das sessões** calibrada com 65 mm em ≈ 113 px perto da ponta (≈ 0,57 mm/px); a geometria
+(acelerômetro → parafuso = 350 mm em ≈ 445 px) dá ≈ 0,79 mm/px → amplitudes absolutas ≈ 27 % baixas (não afeta
+f, ζ, fase nem forma modal). k₂ do modelo = 3291 N/m (medido); o vídeo pede ≈ 3770 N/m (+7 %), coerente com o
+ajuste estático sem o ponto de 0 N (3806 N/m).
+
+**Acelerômetro da 2ª visita** (`Code/data/acelerometro/dia2/`, sessões `20261030_*`; f pelo ajuste
 senoidal na janela após a batida):
 
 | Mola | Tomadas | f_acc (Hz) | média ± desvio (CV) | modelo (Hz) | diferença | k que reproduz |

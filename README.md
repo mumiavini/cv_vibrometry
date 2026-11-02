@@ -39,6 +39,8 @@ cd Code && python -m tools.comparar_metodos sessions/k1_cm_acc.vibro.json       
 cd Code && python -m tools.forma_modal_multiponto sessions/k1_cm_acc.vibro.json  # forma modal, MAC (E5)
 cd Code && python -m tools.incerteza sessions/k1_cm_acc.vibro.json               # incerteza de f (B2/E2)
 cd Code && python -m tools.parametros_bancada    # k das molas (ensaio estático), massas, f previsto (data/bancada)
+cd Code && python -m tools.reexportar_modelo sessions/<sessão>.vibro.json   # refaz saídas do modelo sem o vídeo
+cd Code && python -m tools.resumo_tomadas sessions/resumo_dia2 sessions/20261030_*_r?.vibro.json  # tabela das tomadas
 ```
 
 ## Módulos principais do núcleo (`Code/vibrometry/`)
