@@ -28,3 +28,14 @@ da tela do PULSE".
 - **Frequência e amortecimento não são afetados** e concordam com o vídeo (`sessions/resumo_dia2.md`).
 - Nas sessões, o passa-alta da integração para deslocamento é 4 Hz (k₁) e 8 Hz (k₂): com 1 Hz a deriva de
   ≈ 0,7 Hz da curva digitalizada domina o espectro.
+
+## Conferência da associação vídeo ↔ CSV (2026-11-02)
+
+Horário de cada medição na tela do PULSE ("Status"): med1 22:40:59.1, m2 22:43:36.5, m3 22:45:07.0, med4
+22:50:20.2, med5 22:52:10.3, med6 22:53:22.6. O vídeo `IMG_7710.MOV` contém, nessa ordem, as batidas de k₂ r3 e
+k₁ r1–r3; os intervalos entre elas no vídeo (em tempo real, corrigindo os quadros perdidos) são 310,1 / 426,0 /
+494,5 s e no PULSE 313,2 / 425,6 / 495,6 s (diferenças ≤ 3 s, dentro do erro da estimativa). A razão entre as
+envoltórias vídeo/acelerômetro fica aproximadamente constante ao longo de cada decaimento: os pares são o mesmo
+evento. A razão muda entre tomadas: ≈ 1,1 em k₁ r2 e nas três de k₂, e ≈ 1,5 em k₁ r1 e r3. k₁ r1 e r3 são
+justamente os registros do PULSE que começam na própria batida (sem trecho antes; `med6` com 4 s); a causa da
+diferença de escala nesses dois registros não foi identificada a partir das telas.
