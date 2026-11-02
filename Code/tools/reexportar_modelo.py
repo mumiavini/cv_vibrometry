@@ -14,13 +14,23 @@ e regrava ``tabela_modal.tex``, ``tabela_forma_modal.tex``,
 ``fig_espectro.{pdf,png}`` e os campos correspondentes de ``resultados.json``.
 Sincronismo, comparação com o acelerômetro e demais figuras ficam como estavam.
 
-Uso (a partir de Code/):  python -m tools.reexportar_modelo sessions/<sessão>.vibro.json [...]
+Com ``--escala-rois A B`` a escala espacial é refeita pela distância entre os
+centros das ROIs ``A`` e ``B`` (posições ao longo da barra na sessão ÷
+distância em pixels no quadro): os deslocamentos exportados são multiplicados
+pelo fator novo/antigo e a comparação com o acelerômetro é refeita com o mesmo
+sincronismo da sessão (``deslocamento_video.csv``, ``comparacao.csv``,
+``tabela_comparacao.tex`` e as figuras de deslocamento e comparação também são
+regravados).
+
+Uso (a partir de Code/):
+    python -m tools.reexportar_modelo sessions/<sessão>.vibro.json [...]
+    python -m tools.reexportar_modelo --escala-rois Acelerometro Parafuso sessions/<sessão>.vibro.json
 """
 
 from __future__ import annotations
 
+import argparse
 import json
-import sys
 from datetime import datetime
 from pathlib import Path
 from types import SimpleNamespace
@@ -32,12 +42,14 @@ import numpy as np  # noqa: E402
 import polars as pl  # noqa: E402
 
 from vibrometry.report import (  # noqa: E402
-    _clean, code_version, criteria_checks, fig_spectrum, latex_modal_table,
-    latex_mode_shape_table)
-from vibrometry.session import SESSION_SUFFIX, Session  # noqa: E402
+    _clean, code_version, criteria_checks, fig_coherence, fig_comparison_spectrum,
+    fig_comparison_time, fig_displacement, fig_scatter, fig_spectrum,
+    latex_comparison_table, latex_modal_table, latex_mode_shape_table)
+from vibrometry.session import SESSION_SUFFIX, Session, roi_key, roi_position  # noqa: E402
 from vibrometry.uncertainty import model_uncertainty  # noqa: E402
 from vibrometry.workflow import (  # noqa: E402
-    accel_modal, load_accel, mode_shape_check, modal_summary, predicted_frequency)
+    accel_modal, build_comparison, load_accel, mode_shape_check, modal_summary,
+    predicted_frequency)
 
 
 def _write(path: Path, text: str, crlf: bool) -> None:
@@ -66,15 +78,54 @@ def rebuild_analysis(session: Session, res: dict, out: Path) -> SimpleNamespace:
                            unit=unit, axes=v.get("eixos", {}))
 
 
-def reexport(session_path: Path) -> dict:
+def _roi_centre(session: Session, name: str) -> tuple[float, float]:
+    r = next(r for r in session.video.rois if roi_key(r["name"]) == roi_key(name))
+    return r["x"] + r["w"] / 2.0, r["y"] + r["h"] / 2.0
+
+
+def rescale(session_path: Path, s: Session, out: Path, roi_a: str, roi_b: str) -> float:
+    """Scale from two positioned ROIs; rescales the exported displacement
+    signals and stores the new calibration in the session file. Returns the
+    factor new / old."""
+    pa, pb = _roi_centre(s, roi_a), _roi_centre(s, roi_b)
+    xa = roi_position(s.video.roi_positions_mm, roi_a)
+    xb = roi_position(s.video.roi_positions_mm, roi_b)
+    d_px = float(np.hypot(pb[0] - pa[0], pb[1] - pa[1]))
+    new = abs(xb - xa) / d_px
+    old = float(s.video.scale_mm_per_px)
+    factor = new / old
+    csv = out / "deslocamento_video.csv"
+    crlf = _is_crlf(csv)
+    df = pl.read_csv(csv)
+    df = df.with_columns([pl.col(c) * factor for c in df.columns if c.endswith("_mm")])
+    text = df.write_csv()
+    _write(csv, text, crlf)
+    # session file: new scale and calibration (same JSON layout and line endings)
+    raw = session_path.read_bytes().decode("utf-8")
+    d = json.loads(raw)
+    d["video"]["scale_mm_per_px"] = new
+    d["video"]["calibration"] = {
+        "p1": list(pa), "p2": list(pb), "length_mm": abs(xb - xa), "length_px": d_px,
+        "origem": f"centros das ROIs {roi_a} e {roi_b} (posições da sessão); "
+                  f"escala anterior {old:.5f} mm/px"}
+    txt = json.dumps(d, indent=2, ensure_ascii=False)
+    _write(session_path, txt, "\r\n" in raw)
+    s.video.scale_mm_per_px = new
+    return factor
+
+
+def reexport(session_path: Path, scale_rois: tuple[str, str] | None = None) -> dict:
     s = Session.load(session_path)
     out = session_path.parent / f"{session_path.name.removesuffix(SESSION_SUFFIX)}_resultados"
     res_path = out / "resultados.json"
     crlf = _is_crlf(res_path)
     res = json.loads(res_path.read_text(encoding="utf-8"))
+    factor = rescale(session_path, Session.load(session_path), out, *scale_rois) if scale_rois else None
+    if factor is not None:
+        s = Session.load(session_path)
 
     analysis = rebuild_analysis(s, res, out)
-    accel_summary = None
+    accel_summary = rec = None
     if s.accel.path and Path(s.accel.path).exists():
         _, rec = load_accel(s)
         accel_summary = accel_modal(s, rec)
@@ -85,10 +136,14 @@ def reexport(session_path: Path) -> dict:
         sess[key]["path"] = res["sessao"][key]["path"]
     res["sessao"] = sess
     # the signals are the exported ones, so only the model fields change
+    # (with a new scale the amplitudes change too: replace the summaries)
     model_keys = ("f_predicted_hz", "error_predicted_percent")
     for n, m in analysis.modal.items():
         new = m.to_dict()
-        res["video"]["modal"][n].update({k: new[k] for k in model_keys})
+        if factor is not None:
+            res["video"]["modal"][n] = new
+        else:
+            res["video"]["modal"][n].update({k: new[k] for k in model_keys})
     if accel_summary is not None and (res.get("acelerometro") or {}).get("modal"):
         new = accel_summary.to_dict()
         res["acelerometro"]["modal"].update({k: new[k] for k in model_keys})
@@ -104,9 +159,18 @@ def reexport(session_path: Path) -> dict:
         res.pop("forma_modal", None)
     if s.specimen.uncertainties:
         res["incerteza_modelo"] = model_uncertainty(s.specimen, s.specimen.uncertainties).to_dict()
+    comparison = None
+    if factor is not None and rec is not None and res.get("comparacao"):
+        comparison = build_comparison(s, analysis, rec)      # same sync as exported
+        res["comparacao"]["metricas"] = (comparison.metrics.to_dict()
+                                         if comparison.metrics else None)
+        res["video"]["escala_mm_px"] = s.video.scale_mm_per_px
     # criteria: keep the comparison ones, recompute the model ones
-    kept = [c for c in res.get("criterios", []) if "Euler-Bernoulli" not in c["criterio"]]
-    res["criterios"] = kept + [c for c in criteria_checks(s, analysis, None)]
+    if comparison is not None:
+        res["criterios"] = criteria_checks(s, analysis, comparison)
+    else:
+        kept = [c for c in res.get("criterios", []) if "Euler-Bernoulli" not in c["criterio"]]
+        res["criterios"] = kept + [c for c in criteria_checks(s, analysis, None)]
     res["modelo_atualizado"] = {
         "em": datetime.now().isoformat(timespec="seconds"), "versao_codigo": code_version(),
         "nota": "previsão do modelo, forma modal, incerteza e critérios × modelo recalculados "
@@ -120,20 +184,44 @@ def reexport(session_path: Path) -> dict:
     p = out / "tabela_forma_modal.tex"
     if chk is not None:
         _write(p, latex_mode_shape_table(chk, s), _is_crlf(p))
-    fig = fig_spectrum(analysis)
-    for ext, kw in (("pdf", {}), ("png", {"dpi": 200})):
-        if (out / f"fig_espectro.{ext}").exists():
-            fig.savefig(out / f"fig_espectro.{ext}", **kw)
+    figs = {"fig_espectro": fig_spectrum(analysis)}
+    if factor is not None:
+        figs["fig_deslocamento"] = fig_displacement(analysis)
+        if comparison is not None and comparison.metrics is not None:
+            p = out / "tabela_comparacao.tex"
+            _write(p, latex_comparison_table(comparison, s), _is_crlf(p))
+            p = out / "comparacao.csv"
+            df = pl.DataFrame({"tempo_s": comparison.t,
+                               f"video_{comparison.unit_video}": comparison.video,
+                               f"acelerometro_{comparison.unit_accel}": comparison.accel})
+            _write(p, df.write_csv(), _is_crlf(p))
+            figs.update({"fig_comparacao_tempo": fig_comparison_time(comparison),
+                         "fig_comparacao_espectro": fig_comparison_spectrum(comparison),
+                         "fig_dispersao": fig_scatter(comparison),
+                         "fig_coerencia": fig_coherence(comparison)})
+    for stem, fig in figs.items():
+        for ext, kw in (("pdf", {}), ("png", {"dpi": 200})):
+            if (out / f"{stem}.{ext}").exists():
+                fig.savefig(out / f"{stem}.{ext}", **kw)
     return res
 
 
 def main(argv: list[str] | None = None) -> int:
-    argv = argv or sys.argv[1:]
-    for a in argv:
-        res = reexport(Path(a))
+    ap = argparse.ArgumentParser(description=__doc__.split("\n")[1])
+    ap.add_argument("sessoes", nargs="+")
+    ap.add_argument("--escala-rois", nargs=2, metavar=("ROI_A", "ROI_B"),
+                    help="refaz a escala pela distância entre estas duas ROIs posicionadas")
+    args = ap.parse_args(argv)
+    for a in args.sessoes:
+        res = reexport(Path(a), tuple(args.escala_rois) if args.escala_rois else None)
         f_pred = next(iter(res["video"]["modal"].values()))["f_predicted_hz"]
-        print(f"{Path(a).name}: modelo {f_pred:.3f} Hz; forma modal "
-              f"{'ok' if res.get('forma_modal') else '—'}")
+        msg = f"{Path(a).name}: modelo {f_pred:.3f} Hz; forma modal {'ok' if res.get('forma_modal') else '—'}"
+        if args.escala_rois:
+            m = (res.get("comparacao") or {}).get("metricas") or {}
+            msg += (f"; escala {res['video'].get('escala_mm_px', float('nan')):.4f} mm/px; "
+                    f"A vídeo {m.get('amp_test', float('nan')):.3f} × acel. {m.get('amp_ref', float('nan')):.3f} mm "
+                    f"({m.get('amp_error_percent', float('nan')):+.1f} %)")
+        print(msg)
     return 0
 
 

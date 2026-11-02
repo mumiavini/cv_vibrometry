@@ -111,18 +111,19 @@
           "is_reference": false
         }
       ],
-      "scale_mm_per_px": 0.57238,
+      "scale_mm_per_px": 0.785375463236974,
       "calibration": {
         "p1": [
-          1360.3841086281743,
-          484.7200145410146
+          916.0,
+          492.0
         ],
         "p2": [
-          1473.9396080706415,
-          483.569827701676
+          1361.0,
+          516.0
         ],
-        "length_mm": 65.0,
-        "length_px": 113.5613243291639
+        "length_mm": 350.0,
+        "length_px": 445.64672106950366,
+        "origem": "centros das ROIs Acelerometro e Parafuso (posições da sessão); escala anterior 0.57238 mm/px"
       },
       "axis": "y",
       "compensate": true,
@@ -248,38 +249,38 @@
           0.0,
           15.104166666666666
         ],
-        "f_n_hz": 7.837246425004212,
-        "amplitude": 1.550374516796388,
-        "zeta_half_power": 0.007862358830700508,
-        "zeta_log_decrement": 0.005942555190736451,
-        "std": 1.7517323461199146,
-        "peak_to_peak": 13.153756224895812,
+        "f_n_hz": 7.837246425004197,
+        "amplitude": 2.1273037218626807,
+        "zeta_half_power": 0.007862358830700524,
+        "zeta_log_decrement": 0.005942555190736456,
+        "std": 2.4035913253452588,
+        "peak_to_peak": 18.04856456975048,
         "spectral_peaks": [
           {
             "frequency": 7.84423828125,
-            "amplitude": 1.6978925528715114
+            "amplitude": 2.3297165348860407
           },
           {
             "frequency": 8.02734375,
-            "amplitude": 0.13856793956280788
+            "amplitude": 0.1901321844298076
           },
           {
             "frequency": 7.52197265625,
-            "amplitude": 0.08594848532177496
+            "amplitude": 0.1179318485518454
           }
         ],
         "f_predicted_hz": 7.691537391726914,
-        "error_predicted_percent": 1.8944071367845021,
+        "error_predicted_percent": 1.8944071367839708,
         "f_uncertainty": {
-          "f_hz": 7.837246429476756,
-          "u_hz": 0.022650190731084523,
-          "u_rel_pct": 0.28900699926819495,
+          "f_hz": 7.83724642947676,
+          "u_hz": 0.02265019073271327,
+          "u_rel_pct": 0.2890069992889769,
           "resolucao_hz": 0.06620689655172414,
           "segmentos_hz": [
-            7.802574253282856,
-            7.83361628158592,
-            7.879324159037561,
-            7.903571549027191
+            7.802574253283009,
+            7.833616281585917,
+            7.879324159037552,
+            7.90357154903643
           ]
         }
       },
@@ -290,34 +291,34 @@
           0.0,
           15.104166666666666
         ],
-        "f_n_hz": 7.840092409227003,
-        "amplitude": 3.213648562649817,
-        "zeta_half_power": 0.0077770412597448,
-        "zeta_log_decrement": 0.006190505128878362,
-        "std": 3.628385193978301,
-        "peak_to_peak": 28.18229561312846,
+        "f_n_hz": 7.840092409227013,
+        "amplitude": 4.409519425157997,
+        "zeta_half_power": 0.0077770412597448465,
+        "zeta_log_decrement": 0.006190505128878359,
+        "std": 4.97858887893163,
+        "peak_to_peak": 38.6695612569309,
         "spectral_peaks": [
           {
             "frequency": 7.84423828125,
-            "amplitude": 3.5114085539633533
+            "amplitude": 4.8180826019134875
           },
           {
             "frequency": 8.02734375,
-            "amplitude": 0.24169748957718168
+            "amplitude": 0.3316385580207078
           }
         ],
         "f_predicted_hz": 7.691537391726914,
-        "error_predicted_percent": 1.9314086369765413,
+        "error_predicted_percent": 1.931408636976599,
         "f_uncertainty": {
-          "f_hz": 7.840092420578813,
-          "u_hz": 0.025182513981200808,
-          "u_rel_pct": 0.3212017490393519,
+          "f_hz": 7.840092420578816,
+          "u_hz": 0.02518251398255216,
+          "u_rel_pct": 0.3212017490565882,
           "resolucao_hz": 0.06620689655172414,
           "segmentos_hz": [
-            7.803098577433913,
+            7.803098577433957,
             7.837889081841277,
-            7.879843154295217,
-            7.919071948710908
+            7.879843154295212,
+            7.919071948717861
           ]
         }
       },
@@ -328,34 +329,34 @@
           0.0,
           15.104166666666666
         ],
-        "f_n_hz": 7.839329248271232,
-        "amplitude": 1.7958405008142,
-        "zeta_half_power": 0.007923722000684747,
-        "zeta_log_decrement": 0.00592795794210398,
-        "std": 1.99226232832397,
-        "peak_to_peak": 14.397399213344643,
+        "f_n_hz": 7.839329248271167,
+        "amplitude": 2.4641131158088534,
+        "zeta_half_power": 0.007923722000684813,
+        "zeta_log_decrement": 0.005927957942103979,
+        "std": 2.7336279202575393,
+        "peak_to_peak": 19.754995067242383,
         "spectral_peaks": [
           {
             "frequency": 7.84423828125,
-            "amplitude": 2.0143543747132515
+            "amplitude": 2.763940913665475
           },
           {
             "frequency": 8.03466796875,
-            "amplitude": 0.1327356143681829
+            "amplitude": 0.18212951993860022
           }
         ],
         "f_predicted_hz": 7.691537391726914,
-        "error_predicted_percent": 1.9214865509629344,
+        "error_predicted_percent": 1.9214865509620913,
         "f_uncertainty": {
-          "f_hz": 7.839329246242873,
-          "u_hz": 0.023364814455635173,
-          "u_rel_pct": 0.298046091976978,
+          "f_hz": 7.83932924624292,
+          "u_hz": 0.023364814467757473,
+          "u_rel_pct": 0.29804609213161065,
           "resolucao_hz": 0.06620689655172414,
           "segmentos_hz": [
-            7.802963725559811,
-            7.832947760456352,
-            7.8814190829666,
-            7.9066023106933265
+            7.802963725560003,
+            7.832947760456351,
+            7.88141908296676,
+            7.906602310760592
           ]
         }
       },
@@ -366,50 +367,51 @@
           0.0,
           15.104166666666666
         ],
-        "f_n_hz": 7.8329733998942865,
-        "amplitude": 2.145579224037141,
-        "zeta_half_power": 0.008386371604659701,
-        "zeta_log_decrement": 0.005386760838221026,
-        "std": 2.6376845427263724,
-        "peak_to_peak": 18.8295464250992,
+        "f_n_hz": 7.832973399894302,
+        "amplitude": 2.94399747892973,
+        "zeta_half_power": 0.008386371604659684,
+        "zeta_log_decrement": 0.005386760838221027,
+        "std": 3.61922624762698,
+        "peak_to_peak": 25.836443876715457,
         "spectral_peaks": [
           {
             "frequency": 7.8369140625,
-            "amplitude": 2.235904582009167
+            "amplitude": 3.0679349328228147
           },
           {
             "frequency": 0.3662109375,
-            "amplitude": 0.2831206685252853
+            "amplitude": 0.38847623291346256
           },
           {
             "frequency": 8.13720703125,
-            "amplitude": 0.21032521246210129
+            "amplitude": 0.2885919514445609
           },
           {
             "frequency": 7.37548828125,
-            "amplitude": 0.1883834875396122
+            "amplitude": 0.25848521749994713
           },
           {
             "frequency": 15.59326171875,
-            "amplitude": 0.16138867051309472
+            "amplitude": 0.22144502230235358
           }
         ],
         "f_predicted_hz": 7.691537391726914,
-        "error_predicted_percent": 1.8388522471398507,
+        "error_predicted_percent": 1.838852247140047,
         "f_uncertainty": {
-          "f_hz": 7.83297314551373,
-          "u_hz": 0.017997850023488537,
-          "u_rel_pct": 0.2297703527018557,
+          "f_hz": 7.83297314551367,
+          "u_hz": 0.017997850019440303,
+          "u_rel_pct": 0.22977035265017548,
           "resolucao_hz": 0.06620689655172414,
           "segmentos_hz": [
-            7.8014792968088456,
-            7.839632546032257,
-            7.887768175649788,
-            7.8289325106203025
+            7.801479296808791,
+            7.8396325460318925,
+            7.887768175648036,
+            7.828932510695549
           ]
         }
       }
-    }
+    },
+    "escala_mm_px": 0.785375463236974
   },
   "acelerometro": {
     "canal": "a_m_s2",
@@ -464,26 +466,26 @@
       5.575
     ],
     "metricas": {
-      "f_ref": 7.817313010262016,
-      "f_test": 7.812543627808723,
-      "freq_error_percent": -0.06101050894382387,
-      "f_common": 7.817313010262016,
-      "amp_ref": 4.040662565300791,
-      "amp_test": 4.347446301469382,
-      "amp_error_percent": 7.592411670380425,
-      "phase_ref_deg": -17.20465762821709,
-      "phase_test_deg": -15.116992665954134,
-      "phase_diff_deg": 2.0876649622629486,
+      "f_ref": 7.817313010262027,
+      "f_test": 7.812543627808885,
+      "freq_error_percent": -0.06101050894190366,
+      "f_common": 7.817313010262027,
+      "amp_ref": 4.040662565300793,
+      "amp_test": 5.9652287866703535,
+      "amp_error_percent": 47.62996637969181,
+      "phase_ref_deg": -17.2046576282302,
+      "phase_test_deg": -15.116992665967528,
+      "phase_diff_deg": 2.0876649622626644,
       "r2_ref": 0.900194518435842,
-      "r2_test": 0.9139333489645882,
-      "rms_ref": 3.0149977088143443,
-      "rms_test": 3.2199376661923074,
-      "rms_error_percent": 6.797350352168469,
-      "pearson_r": 0.9890117660981956,
-      "rmse": 0.5053219134354882,
-      "nrmse_percent": 16.76027520545637,
-      "gain": 1.056238360864059,
-      "coherence": 0.9962872400318714
+      "r2_test": 0.9139333489645836,
+      "rms_ref": 3.0149977088143456,
+      "rms_test": 4.4181488454872015,
+      "rms_error_percent": 46.53904487458627,
+      "pearson_r": 0.9890117660981957,
+      "rmse": 1.503853462619935,
+      "nrmse_percent": 49.87909139112841,
+      "gain": 1.4492883957375735,
+      "coherence": 0.9962872400318711
     }
   },
   "incerteza_modelo": {
@@ -574,43 +576,43 @@
   "criterios": [
     {
       "criterio": "Frequência, vídeo × acelerômetro [%]",
-      "valor": 0.06101050894382387,
+      "valor": 0.06101050894190366,
       "limite": 1.0,
       "ok": true
     },
     {
       "criterio": "Amplitude, vídeo × acelerômetro [%]",
-      "valor": 7.592411670380425,
+      "valor": 47.62996637969181,
       "limite": 10.0,
-      "ok": true
+      "ok": false
     },
     {
       "criterio": "Fase, vídeo × acelerômetro [°]",
-      "valor": 2.0876649622629486,
+      "valor": 2.0876649622626644,
       "limite": 10.0,
       "ok": true
     },
     {
       "criterio": "f₁ Acelerômetro × Euler-Bernoulli [%]",
-      "valor": 1.8944071367845021,
+      "valor": 1.8944071367839708,
       "limite": 5.0,
       "ok": true
     },
     {
       "criterio": "f₁ Parafuso × Euler-Bernoulli [%]",
-      "valor": 1.9314086369765413,
+      "valor": 1.931408636976599,
       "limite": 5.0,
       "ok": true
     },
     {
       "criterio": "f₁ Ponto_aleatorio_marcado × Euler-Bernoulli [%]",
-      "valor": 1.9214865509629344,
+      "valor": 1.9214865509620913,
       "limite": 5.0,
       "ok": true
     },
     {
       "criterio": "f₁ Ponto_aleatorio_liso × Euler-Bernoulli [%]",
-      "valor": 1.8388522471398507,
+      "valor": 1.838852247140047,
       "limite": 5.0,
       "ok": true
     }
@@ -619,20 +621,20 @@
     "referencia": "Parafuso",
     "modo_modelo": 1,
     "f_modelo_hz": 7.691537391726914,
-    "f_medida_hz": 7.840092409227008,
+    "f_medida_hz": 7.840092409227013,
     "rois": [
       {
         "nome": "Acelerômetro",
         "x_mm": 305.0,
-        "amplitude": 1.5503745167963863,
-        "razao_medida": 0.482434369089202,
+        "amplitude": 2.1273037218626807,
+        "razao_medida": 0.48243436908920234,
         "razao_prevista": 0.4731844630024242,
-        "erro_pct": 1.9548203311845411
+        "erro_pct": 1.9548203311846115
       },
       {
         "nome": "Parafuso",
         "x_mm": 655.0,
-        "amplitude": 3.213648562649819,
+        "amplitude": 4.409519425157997,
         "razao_medida": 1.0,
         "razao_prevista": 1.0,
         "erro_pct": 0.0
@@ -640,24 +642,24 @@
       {
         "nome": "Ponto_aleatorio_marcado",
         "x_mm": 347.0,
-        "amplitude": 1.7958405008142004,
-        "razao_medida": 0.5588167050019426,
+        "amplitude": 2.4641131158088534,
+        "razao_medida": 0.5588167050019429,
         "razao_prevista": 0.5373858679012433,
-        "erro_pct": 3.987979286540832
+        "erro_pct": 3.9879792865408943
       },
       {
         "nome": "Ponto_aleatorio_liso",
         "x_mm": 531.0,
-        "amplitude": 2.145579224037143,
-        "razao_medida": 0.6676458804406424,
+        "amplitude": 2.94399747892973,
+        "razao_medida": 0.6676458804406432,
         "razao_prevista": 0.8151273869334895,
-        "erro_pct": -18.0930623675488
+        "erro_pct": -18.093062367548704
       }
     ]
   },
   "modelo_atualizado": {
-    "em": "2026-11-02T19:58:48",
-    "versao_codigo": "d3e543e",
+    "em": "2026-11-02T20:07:12",
+    "versao_codigo": "a8e4532",
     "nota": "previsão do modelo, forma modal, incerteza e critérios × modelo recalculados com a sessão atual (tools/reexportar_modelo.py); sinais, sincronismo e comparação são os da exportação original (gerado_em)"
   }
 }

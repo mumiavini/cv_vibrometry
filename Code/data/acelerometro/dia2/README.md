@@ -20,8 +20,11 @@ da tela do PULSE".
 **Limitações (entram como incerteza da referência):**
 - A aquisição usou banda de 20 Hz (≈ 51 amostras/s): ≈ 6,5 pontos por ciclo na k₁ (7,8 Hz) e ≈ 3,5 na k₂
   (14,7 Hz). A tela liga as amostras com retas, o que achata os picos (≈ −8 % na k₁, mais na k₂).
-- Amplitude vídeo × acelerômetro não fecha (diferenças de −20 % a +35 % entre tomadas): tratada como
-  incerteza da referência (calibração/aquisição/digitalização), não como validação de amplitude.
+- Amplitude vídeo × acelerômetro não fecha: com a escala da geometria o vídeo dá +14 a +82 % (k₁) e +23 a
+  +30 % (k₂) a mais. A interpolação linear da tela a 51,2 Hz atenua a curva em sinc²(f/fs) ≈ 0,92 (k₁) e
+  ≈ 0,76 (k₂), o que cobre quase toda a diferença da k₂; a dispersão da k₁ fica sem explicação (registros
+  `med4`/`med6` começam na própria batida; conferir o passa-alta da entrada do LAN-XI). Tratada como
+  incerteza da referência, não como validação de amplitude.
 - **Frequência e amortecimento não são afetados** e concordam com o vídeo (`sessions/resumo_dia2.md`).
 - Nas sessões, o passa-alta da integração para deslocamento é 4 Hz (k₁) e 8 Hz (k₂): com 1 Hz a deriva de
   ≈ 0,7 Hz da curva digitalizada domina o espectro.

@@ -62,9 +62,12 @@ Frequência dentro de 1 % nas 6 tomadas; ζ concorda (a diferença de 7× da 1ª
 forma modal com 3–4 pontos, erros ≤ 6 % nos pontos rastreados (o ponto na borda lisa erra 4–43 % e perde o
 rastreamento em 2 tomadas: limitação sem textura). **Amplitude × acelerômetro não validada** (−20 % a +35 %):
 incerteza da referência (CSV digitalizado da tela, banda de 20 Hz, ver `Code/data/acelerometro/dia2/README.md`).
-**Pendente: escala das sessões** calibrada com 65 mm em ≈ 113 px perto da ponta (≈ 0,57 mm/px); a geometria
-(acelerômetro → parafuso = 350 mm em ≈ 445 px) dá ≈ 0,79 mm/px → amplitudes absolutas ≈ 27 % baixas (não afeta
-f, ζ, fase nem forma modal). k₂ do modelo = 3291 N/m (medido); o vídeo pede ≈ 3770 N/m (+7 %), coerente com o
+**Escala corrigida (2026-11-02):** 0,780–0,789 mm/px pela distância acelerômetro → parafuso (350 mm), no lugar
+dos 65 mm em ≈ 113 px. Com ela o vídeo dá **mais** amplitude que o acelerômetro em todas as tomadas: k₁ +82 / +14 /
++48 %, k₂ +24 / +23 / +30 % (sincronismo conferido: as batidas alinham em ≤ 0,06 s). Lado da referência: a tela do
+PULSE (≈ 51 amostras/s) liga as amostras com retas, o que atenua a senoide por sinc²(f/fs) ≈ 0,92 (k₁) e ≈ 0,76
+(k₂) — explica quase toda a diferença da k₂, não a dispersão da k₁; conferir também o passa-alta da entrada do
+LAN-XI (0,7 / 7 / 22,4 Hz). A amplitude do vídeo é sustentada pela forma modal. k₂ do modelo = 3291 N/m (medido); o vídeo pede ≈ 3770 N/m (+7 %), coerente com o
 ajuste estático sem o ponto de 0 N (3806 N/m).
 
 **Acelerômetro da 2ª visita** (`Code/data/acelerometro/dia2/`, sessões `20261030_*`; f pelo ajuste

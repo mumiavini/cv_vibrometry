@@ -9,9 +9,10 @@ Newest issue first.
 
 ---
 
-## [OPEN] Second-visit sessions calibrated on a short 65 mm segment (amplitudes ≈ 27 % low)
+## [SOLVED] Second-visit sessions calibrated on a short 65 mm segment (amplitudes ≈ 27 % low)
 
 **Date opened:** 2026-11-02
+**Date solved:** 2026-11-02
 **Area:** `Code/sessions/20261030_al_L735_k?_r?.vibro.json` (`video.calibration`)
 
 **Symptom:** all six second-visit sessions use a scale of ≈ 0.55–0.60 mm/px from a 65 mm segment of
@@ -25,6 +26,13 @@ error is already ≈ 1 % on 113 px).
 accelerometer → bolt = 350 mm) and re-export. Only absolute amplitudes change (× ≈ 1.37); frequency, damping,
 phase and mode-shape ratios are scale-independent. The author chose to report amplitude vs accelerometer as
 not validated (reference uncertainty), so this was left as is.
+
+**Fix:** `python -m tools.reexportar_modelo --escala-rois Acelerometro Parafuso` sets the scale from the two ROI
+centres (350 mm apart along the bar): 0.780–0.789 mm/px in the six takes. The exported displacements were
+multiplied by new/old, and the comparison with the accelerometer was rebuilt with the same sync; the rebuild
+reproduces the app's metrics exactly before rescaling. The sessions store the new calibration. Amplitude
+vs accelerometer after the fix: k1 +82/+14/+48 %, k2 +24/+23/+30 % (video higher in every take): see the
+accelerometer README for the reference-side causes.
 
 ---
 
