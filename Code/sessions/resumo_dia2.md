@@ -11,6 +11,17 @@ Gerado por `python -m tools.resumo_tomadas` a partir de 6 `resultados.json`.
 | 20261030_al_L735_k2_r2 | 14.705 | 14.647 | 0.28 | 13.71 | 7.3 | 0.0027 | 0.0023 | 4.0 | 0.499 | 0.490 | 1.8 | 791 |
 | 20261030_al_L735_k2_r3 | 14.719 | 14.706 | 0.06 | 13.71 | 7.4 | 0.0029 | 0.0025 | 5.6 | 0.460 | 0.490 | -6.2 | 899 |
 
+## Amplitude na janela de comparação (ROI do acelerômetro)
+
+| Tomada | escala (mm/px) | A vídeo (mm) | A acel. (mm) | diferença (%) | r |
+|---|---|---|---|---|---|
+| 20261030_al_L735_k1_r1 | 0.7797 | 8.057 | 4.414 | 82.5 | 0.954 |
+| 20261030_al_L735_k1_r2 | 0.7843 | 4.768 | 4.196 | 13.6 | 0.978 |
+| 20261030_al_L735_k1_r3 | 0.7854 | 5.965 | 4.041 | 47.6 | 0.989 |
+| 20261030_al_L735_k2_r1 | 0.7885 | 2.923 | 2.368 | 23.5 | 0.831 |
+| 20261030_al_L735_k2_r2 | 0.7868 | 3.235 | 2.623 | 23.3 | 0.845 |
+| 20261030_al_L735_k2_r3 | 0.7879 | 1.911 | 1.473 | 29.7 | 0.883 |
+
 ## Por grupo (média ± desvio, CV)
 
 | Grupo | n | f vídeo (Hz) | CV (%) | f acel. (Hz) | vídeo × acel. (%) | vídeo × modelo (%) | ζ vídeo | ζ acel. | razão acel./parafuso |

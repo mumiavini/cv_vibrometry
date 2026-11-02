@@ -44,6 +44,8 @@ def take_row(session_path: Path) -> dict:
         "f_modelo_hz": mv["f_predicted_hz"], "erro_modelo_pct": mv["error_predicted_percent"],
         "zeta_video": mv["zeta_log_decrement"], "zeta_acel": ma.get("zeta_log_decrement"),
         "fase_graus": met.get("phase_diff_deg"), "r": met.get("pearson_r"),
+        "A_video_mm": met.get("amp_test"), "A_acel_mm": met.get("amp_ref"),
+        "dif_A_pct": met.get("amp_error_percent"), "escala_mm_px": v.get("escala_mm_px"),
         "razao_acel_parafuso": ratio, "razao_modelo": ratio_pred,
         "erro_forma_pct": None if ratio is None else 100 * (ratio - ratio_pred) / ratio_pred,
         "quadros_perdidos": v.get("quadros_perdidos"),
@@ -72,6 +74,12 @@ def main(argv: list[str] | None = None) -> int:
             f"{fmt(r['erro_modelo_pct'], 1)} | {fmt(r['zeta_video'], 4)} | {fmt(r['zeta_acel'], 4)} | "
             f"{fmt(r['fase_graus'], 1)} | {fmt(r['razao_acel_parafuso'])} | {fmt(r['razao_modelo'])} | "
             f"{fmt(r['erro_forma_pct'], 1)} | {r['quadros_perdidos']} |")
+    lines += ["", "## Amplitude na janela de comparação (ROI do acelerômetro)", "",
+              "| Tomada | escala (mm/px) | A vídeo (mm) | A acel. (mm) | diferença (%) | r |",
+              "|---|---|---|---|---|---|"]
+    for r in rows:
+        lines.append(f"| {r['tomada']} | {fmt(r['escala_mm_px'], 4)} | {fmt(r['A_video_mm'])} | "
+                     f"{fmt(r['A_acel_mm'])} | {fmt(r['dif_A_pct'], 1)} | {fmt(r['r'], 3)} |")
     lines += ["", "## Por grupo (média ± desvio, CV)", "",
               "| Grupo | n | f vídeo (Hz) | CV (%) | f acel. (Hz) | vídeo × acel. (%) | vídeo × modelo (%) "
               "| ζ vídeo | ζ acel. | razão acel./parafuso |", "|---|---|---|---|---|---|---|---|---|---|"]

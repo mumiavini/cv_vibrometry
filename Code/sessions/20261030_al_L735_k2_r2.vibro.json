@@ -108,18 +108,19 @@
         "is_reference": true
       }
     ],
-    "scale_mm_per_px": 0.57499,
+    "scale_mm_per_px": 0.7867567614330694,
     "calibration": {
       "p1": [
-        1359.2337061814887,
-        491.0961456589196
+        914.5,
+        491.0
       ],
       "p2": [
-        1472.23770984776,
-        488.00014555847383
+        1359.0,
+        509.0
       ],
-      "length_mm": 65.0,
-      "length_px": 113.04640667101548
+      "length_mm": 350.0,
+      "length_px": 444.86430515383,
+      "origem": "centros das ROIs Acelerometro e Parafuso (posições da sessão); escala anterior 0.57499 mm/px"
     },
     "axis": "y",
     "compensate": true,
