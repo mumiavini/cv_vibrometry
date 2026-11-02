@@ -240,6 +240,10 @@ PULSE (7,600) e o vídeo (7,763), ambos a ≤ 0,33 u. Detalhes e histórico em `
 > **todo número que ainda não saiu do app fica como placeholder marcado** (`\TODO{}`/`??`),
 > nunca valor inventado. Os relatórios exportados pelo app entram como tabelas/figuras.
 
+> **Estado (2026-11-02):** resultados da 2ª visita preenchidos (frequência, forma modal multiponto, amortecimento,
+> comparação no tempo, controles, discussão, conclusão, resumo/abstract); figuras da tomada k₁ r2. Sem `\TODO{}` no
+> texto. Pendente: confirmar critérios com o orientador (comentário `% REVISAR` na Estratégia de Validação).
+
 > **Estado (2026-10-25):** texto reescrito com placeholders `\TODO{}` (57) para tudo que depende da
 > campanha de laboratório; comentários `% PRELIMINAR:` guardam os valores da primeira análise e `% REVISAR:`
 > marcam afirmações que dependem do resultado final. D1–D8 e D11 estão em rascunho completo; falta preencher.
