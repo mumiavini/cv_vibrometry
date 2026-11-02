@@ -3,7 +3,7 @@
   "specimen": {
     "material": "aluminum_6351_t6",
     "E_gpa": 69.0,
-    "rho": 2661.9,
+    "rho": 2662.0,
     "L_mm": 735.0,
     "b_mm": 25.4,
     "t_mm": 12.7,
@@ -16,7 +16,7 @@
       {
         "name": "mola k2 (k medido, ensaio estatico)",
         "x_mm": 655.0,
-        "k_n_m": 3291.0,
+        "k_n_m": 3500.0,
         "mass_g": 382.0,
         "hardware_g": 46.0
       }
@@ -61,14 +61,58 @@
     ]
   },
   "video": {
-    "path": "../videos/20261030_al_L735_k2_r3.mov",
+    "path": "../../../../../Users/a565998/OneDrive - Volvo Group/My Pictures/TCC/IMG_7710.MOV",
     "fps_override": 240.0,
     "start_s": 0.0,
-    "end_s": null,
+    "end_s": 23.0,
     "resize_width": null,
-    "rois": [],
-    "scale_mm_per_px": null,
-    "calibration": null,
+    "rois": [
+      {
+        "name": "Acelerometro",
+        "x": 901,
+        "y": 466,
+        "w": 28,
+        "h": 51,
+        "is_reference": false
+      },
+      {
+        "name": "Ponto_aleatorio_liso",
+        "x": 1134,
+        "y": 490,
+        "w": 29,
+        "h": 13,
+        "is_reference": false
+      },
+      {
+        "name": "Parafuso",
+        "x": 1346,
+        "y": 468,
+        "w": 26,
+        "h": 76,
+        "is_reference": false
+      },
+      {
+        "name": "Ponto_aleatorio_marcado",
+        "x": 964,
+        "y": 492,
+        "w": 12,
+        "h": 16,
+        "is_reference": false
+      }
+    ],
+    "scale_mm_per_px": 0.59749,
+    "calibration": {
+      "p1": [
+        1363.6578121762966,
+        491.06709572713316
+      ],
+      "p2": [
+        1472.4409355844148,
+        489.91690888779465
+      ],
+      "length_mm": 65.0,
+      "length_px": 108.78920382184647
+    },
     "axis": "auto",
     "compensate": true,
     "wavelengths": [
@@ -104,9 +148,12 @@
     "f_hp": null,
     "f_lp": null,
     "sync_mode": "impact",
-    "offset_s": 0.0,
+    "offset_s": -3.496,
     "drift_ppm": 0.0,
-    "window": null,
+    "window": [
+      4.65,
+      9.81
+    ],
     "f_analysis": null,
     "crit_freq_pct": 1.0,
     "crit_amp_pct": 10.0,

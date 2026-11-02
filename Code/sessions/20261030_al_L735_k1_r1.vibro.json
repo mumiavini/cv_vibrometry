@@ -61,15 +61,67 @@
     ]
   },
   "video": {
-    "path": "../videos/20261030_al_L735_k1_r1.mov",
+    "path": "../../../../../Users/a565998/OneDrive - Volvo Group/My Pictures/TCC/IMG_7710.MOV",
     "fps_override": 240.0,
-    "start_s": 0.0,
-    "end_s": null,
+    "start_s": 269.0,
+    "end_s": 290.0,
     "resize_width": null,
-    "rois": [],
-    "scale_mm_per_px": null,
-    "calibration": null,
-    "axis": "auto",
+    "rois": [
+      {
+        "name": "Acelerômetro",
+        "x": 903,
+        "y": 468,
+        "w": 23,
+        "h": 43,
+        "is_reference": false
+      },
+      {
+        "name": "Parafuso",
+        "x": 1341,
+        "y": 459,
+        "w": 44,
+        "h": 99,
+        "is_reference": false
+      },
+      {
+        "name": "Ponto_aleatorio_marcado",
+        "x": 961,
+        "y": 491,
+        "w": 17,
+        "h": 19,
+        "is_reference": false
+      },
+      {
+        "name": "Ponto_aleatorio_liso",
+        "x": 1147,
+        "y": 490,
+        "w": 36,
+        "h": 15,
+        "is_reference": false
+      },
+      {
+        "name": "Parede",
+        "x": 637,
+        "y": 766,
+        "w": 159,
+        "h": 159,
+        "is_reference": true
+      }
+    ],
+    "scale_mm_per_px": 0.57452,
+    "calibration": {
+      "p1": [
+        1360.4270752195937,
+        486.16706461142195
+      ],
+      "p2": [
+        1473.554477470396,
+        484.57657804437844
+      ],
+      "length_mm": 65.0,
+      "length_px": 113.13858222346073
+    },
+    "axis": "y",
     "compensate": true,
     "wavelengths": [
       8.0,
@@ -99,12 +151,12 @@
     ]
   },
   "compare": {
-    "roi": "Acelerometro",
+    "roi": "Acelerômetro",
     "domain": "displacement",
     "f_hp": null,
     "f_lp": null,
     "sync_mode": "impact",
-    "offset_s": 0.0,
+    "offset_s": -0.94,
     "drift_ppm": 0.0,
     "window": null,
     "f_analysis": null,

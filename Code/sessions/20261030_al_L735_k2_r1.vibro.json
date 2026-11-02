@@ -3,7 +3,7 @@
   "specimen": {
     "material": "aluminum_6351_t6",
     "E_gpa": 69.0,
-    "rho": 2661.9,
+    "rho": 2662.0,
     "L_mm": 735.0,
     "b_mm": 25.4,
     "t_mm": 12.7,
@@ -16,7 +16,7 @@
       {
         "name": "mola k2 (k medido, ensaio estatico)",
         "x_mm": 655.0,
-        "k_n_m": 3291.0,
+        "k_n_m": 3500.0,
         "mass_g": 382.0,
         "hardware_g": 46.0
       }
@@ -61,15 +61,67 @@
     ]
   },
   "video": {
-    "path": "../videos/20261030_al_L735_k2_r1.mov",
+    "path": "../../../../../Users/a565998/OneDrive - Volvo Group/My Pictures/Screenshots/IMG_7708.MOV",
     "fps_override": 240.0,
-    "start_s": 0.0,
-    "end_s": null,
+    "start_s": 51.0,
+    "end_s": 75.0,
     "resize_width": null,
-    "rois": [],
-    "scale_mm_per_px": null,
-    "calibration": null,
-    "axis": "auto",
+    "rois": [
+      {
+        "name": "Acelerometro",
+        "x": 906,
+        "y": 469,
+        "w": 17,
+        "h": 42,
+        "is_reference": false
+      },
+      {
+        "name": "Ponto_aleatorio_marcado",
+        "x": 963,
+        "y": 494,
+        "w": 17,
+        "h": 15,
+        "is_reference": false
+      },
+      {
+        "name": "Ponto_aleatorio_liso",
+        "x": 1120,
+        "y": 489,
+        "w": 29,
+        "h": 15,
+        "is_reference": false
+      },
+      {
+        "name": "Parafuso",
+        "x": 1344,
+        "y": 461,
+        "w": 28,
+        "h": 94,
+        "is_reference": false
+      },
+      {
+        "name": "Parede",
+        "x": 662,
+        "y": 718,
+        "w": 192,
+        "h": 192,
+        "is_reference": true
+      }
+    ],
+    "scale_mm_per_px": 0.57905,
+    "calibration": {
+      "p1": [
+        1358.9189352241347,
+        489.4885064047322
+      ],
+      "p2": [
+        1471.170807286133,
+        489.01501253336227
+      ],
+      "length_mm": 65.0,
+      "length_px": 112.2528706887688
+    },
+    "axis": "y",
     "compensate": true,
     "wavelengths": [
       8.0,
@@ -104,9 +156,12 @@
     "f_hp": null,
     "f_lp": null,
     "sync_mode": "impact",
-    "offset_s": 0.0,
+    "offset_s": 0.656,
     "drift_ppm": 0.0,
-    "window": null,
+    "window": [
+      1.9818770027558035,
+      7.108194358923262
+    ],
     "f_analysis": null,
     "crit_freq_pct": 1.0,
     "crit_amp_pct": 10.0,

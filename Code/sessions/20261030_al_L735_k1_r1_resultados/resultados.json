@@ -1,0 +1,632 @@
+{
+  "gerado_em": "2026-11-01T17:17:52",
+  "versao_codigo": null,
+  "sessao": {
+    "name": "20261030_al_L735_k1_r1",
+    "specimen": {
+      "material": "aluminum_6351_t6",
+      "E_gpa": 69.0,
+      "rho": 2661.9,
+      "L_mm": 735.0,
+      "b_mm": 25.4,
+      "t_mm": 12.7,
+      "tip_mass_g": 0.0,
+      "fps": 240.0,
+      "oversampling": 10.0,
+      "support": "pinned",
+      "root_stiffness": null,
+      "springs": [
+        {
+          "name": "mola k1 (k medido, ensaio estatico)",
+          "x_mm": 655.0,
+          "k_n_m": 857.0,
+          "mass_g": 161.0,
+          "hardware_g": 46.0
+        }
+      ],
+      "masses": [
+        {
+          "name": "acelerometro B&K 4507",
+          "x_mm": 305.0,
+          "mass_g": 5.0
+        }
+      ],
+      "uncertainties": {
+        "springs[0].k_n_m": 62.0,
+        "springs[0].x_mm": 2.0,
+        "springs[0].mass_g": 1.0,
+        "springs[0].hardware_g": 1.0,
+        "masses[0].x_mm": 2.0,
+        "masses[0].mass_g": 0.5,
+        "L_mm": 2.0,
+        "b_mm": 0.1,
+        "t_mm": 0.1,
+        "rho": 13.3,
+        "E_gpa": 2.0
+      }
+    },
+    "meta": {
+      "date": "20261030",
+      "excitation_hz": null,
+      "level": "k1",
+      "repetition": 1,
+      "camera": "iphone",
+      "notes": "2a visita. Mola k1, tomada 1; excitacao por batida na barra (sem medir forca); video e PULSE simultaneos. Video no Drive: tcc2/dia 2/Mola K1/Medição 1 Mola 1/IMG_7710.mov -> salvar como videos/20261030_al_L735_k1_r1.mov. Acelerometro: med4_1.csv (curva com colunas t, a, a_max, a_min). Modelo: f1 = 7,69 +- 0,28 Hz.",
+      "checklist": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    "video": {
+      "path": "C:/Users/a565998/OneDrive - Volvo Group/My Pictures/TCC/IMG_7710.MOV",
+      "fps_override": 240.0,
+      "start_s": 269.0,
+      "end_s": 290.0,
+      "resize_width": null,
+      "rois": [
+        {
+          "name": "Acelerômetro",
+          "x": 903,
+          "y": 468,
+          "w": 23,
+          "h": 43,
+          "is_reference": false
+        },
+        {
+          "name": "Parafuso",
+          "x": 1341,
+          "y": 459,
+          "w": 44,
+          "h": 99,
+          "is_reference": false
+        },
+        {
+          "name": "Ponto_aleatorio_marcado",
+          "x": 961,
+          "y": 491,
+          "w": 17,
+          "h": 19,
+          "is_reference": false
+        },
+        {
+          "name": "Ponto_aleatorio_liso",
+          "x": 1147,
+          "y": 490,
+          "w": 36,
+          "h": 15,
+          "is_reference": false
+        },
+        {
+          "name": "Parede",
+          "x": 637,
+          "y": 766,
+          "w": 159,
+          "h": 159,
+          "is_reference": true
+        }
+      ],
+      "scale_mm_per_px": 0.57452,
+      "calibration": {
+        "p1": [
+          1360.4270752195937,
+          486.16706461142195
+        ],
+        "p2": [
+          1473.554477470396,
+          484.57657804437844
+        ],
+        "length_mm": 65.0,
+        "length_px": 113.13858222346073
+      },
+      "axis": "y",
+      "compensate": true,
+      "wavelengths": [
+        8.0,
+        16.0
+      ],
+      "search_margin": 60,
+      "window": null,
+      "roi_positions_mm": {
+        "Parafuso": 655.0,
+        "Acelerometro": 305.0
+      }
+    },
+    "accel": {
+      "path": "C:\\soft\\Personal\\cv_vibrometry\\Code\\data\\acelerometro\\last measturements\\med4_1.csv",
+      "time_column": 0,
+      "channel": 1,
+      "fs": null,
+      "unit": "m/s²",
+      "sensitivity_mv_per_g": 100.0,
+      "invert": false,
+      "integration": "frequency",
+      "f_hp": 4.0,
+      "f_lp": null,
+      "window": [
+        0.13,
+        10.0125
+      ]
+    },
+    "compare": {
+      "roi": "Acelerômetro",
+      "domain": "displacement",
+      "f_hp": null,
+      "f_lp": null,
+      "sync_mode": "impact",
+      "offset_s": -0.94,
+      "drift_ppm": 0.0,
+      "window": null,
+      "f_analysis": null,
+      "crit_freq_pct": 1.0,
+      "crit_amp_pct": 10.0,
+      "crit_phase_deg": 10.0,
+      "crit_eb_pct": 5.0,
+      "crit_cv_pct": 5.0
+    },
+    "version": 1
+  },
+  "video": {
+    "arquivo": "C:/Users/a565998/OneDrive - Volvo Group/My Pictures/TCC/IMG_7710.MOV",
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "codec": "hevc",
+    "fps": 240.0,
+    "fps_fonte": "override",
+    "fps_declarado": 206.35896117253793,
+    "fps_medido": 206.35869084831293,
+    "quadros_processados": 5040,
+    "fator_reducao": 1.0,
+    "quadros_perdidos": 814,
+    "duracao_real_s": 24.39958333335553,
+    "reamostrado": true,
+    "inicio_s": 269.0,
+    "unidade": "mm",
+    "eixos": {
+      "Acelerômetro": "y",
+      "Parafuso": "y",
+      "Ponto_aleatorio_marcado": "y",
+      "Ponto_aleatorio_liso": "y"
+    },
+    "qualidade": {
+      "intervalo_quadros_ms": 4.842147912945692,
+      "jitter_ms": 1.5370546393614422,
+      "quadros_perdidos": 813,
+      "cintilacao_hz": 118.201904296875,
+      "cintilacao_pct": 1.1897844689960015,
+      "foco_laplaciano": {
+        "Acelerômetro": 268.44079413487697,
+        "Parafuso": 562.9263937058203,
+        "Ponto_aleatorio_marcado": 1213.0553920769871,
+        "Ponto_aleatorio_liso": 25.703648834019205,
+        "Parede": 73.71670418796748
+      },
+      "saturacao_pct": {
+        "Acelerômetro": 0.0,
+        "Parafuso": 0.0,
+        "Ponto_aleatorio_marcado": 0.0,
+        "Ponto_aleatorio_liso": 0.0,
+        "Parede": 0.0
+      },
+      "quadros_perdidos_rastreamento": {
+        "Acelerômetro": 0,
+        "Parafuso": 0,
+        "Ponto_aleatorio_marcado": 0,
+        "Ponto_aleatorio_liso": 0,
+        "Parede": 0
+      },
+      "ncc_minimo": {
+        "Acelerômetro": 0.8700263500213623,
+        "Parafuso": 0.8558207154273987,
+        "Ponto_aleatorio_marcado": 0.8360488414764404,
+        "Ponto_aleatorio_liso": 0.561945915222168,
+        "Parede": 0.9746856093406677
+      },
+      "avisos": [
+        "813 intervalo(s) com quadro perdido (> 1,5 intervalo típico): sinais reamostrados no tempo real de cada quadro",
+        "cintilação de 1.2% em 118.2 Hz"
+      ]
+    },
+    "modal": {
+      "Acelerômetro": {
+        "name": "Acelerômetro",
+        "unit": "mm",
+        "window_s": [
+          0.0,
+          24.395833333333332
+        ],
+        "f_n_hz": 7.814987168186367,
+        "amplitude": 2.6318500246087146,
+        "zeta_half_power": 0.005516705972112831,
+        "zeta_log_decrement": 0.003945367145740325,
+        "std": 2.995596624226808,
+        "peak_to_peak": 23.57576053449712,
+        "spectral_peaks": [
+          {
+            "frequency": 7.822265625,
+            "amplitude": 2.1715160295055957
+          }
+        ],
+        "f_predicted_hz": 7.691528401902635,
+        "error_predicted_percent": 1.6051265734544133,
+        "f_uncertainty": {
+          "f_hz": 7.81498740480855,
+          "u_hz": 0.017193640720317514,
+          "u_rel_pct": 0.22000855317742793,
+          "resolucao_hz": 0.04099060631938514,
+          "segmentos_hz": [
+            7.798766265478225,
+            7.822554960720966,
+            7.869751901190038,
+            7.865697032115735
+          ]
+        }
+      },
+      "Parafuso": {
+        "name": "Parafuso",
+        "unit": "mm",
+        "window_s": [
+          0.0,
+          24.395833333333332
+        ],
+        "f_n_hz": 7.815843299755119,
+        "amplitude": 5.607948775941987,
+        "zeta_half_power": 0.005578600308928814,
+        "zeta_log_decrement": 0.004085321878959273,
+        "std": 6.455258311808035,
+        "peak_to_peak": 49.154886875420786,
+        "spectral_peaks": [
+          {
+            "frequency": 7.825927734375,
+            "amplitude": 4.550399317789833
+          }
+        ],
+        "f_predicted_hz": 7.691528401902635,
+        "error_predicted_percent": 1.6162574114883652,
+        "f_uncertainty": {
+          "f_hz": 7.815843093514315,
+          "u_hz": 0.019273662623642083,
+          "u_rel_pct": 0.2465973586347404,
+          "resolucao_hz": 0.04099060631938514,
+          "segmentos_hz": [
+            7.798856774375638,
+            7.823861771055053,
+            7.875323521358351,
+            7.87615400925961
+          ]
+        }
+      },
+      "Ponto_aleatorio_marcado": {
+        "name": "Ponto_aleatorio_marcado",
+        "unit": "mm",
+        "window_s": [
+          0.0,
+          24.395833333333332
+        ],
+        "f_n_hz": 7.815263162759243,
+        "amplitude": 3.0277555339650295,
+        "zeta_half_power": 0.005458591778217215,
+        "zeta_log_decrement": 0.0037709580511314164,
+        "std": 3.4279250939499395,
+        "peak_to_peak": 27.322849362215344,
+        "spectral_peaks": [
+          {
+            "frequency": 7.822265625,
+            "amplitude": 2.528695118560181
+          },
+          {
+            "frequency": 7.943115234375,
+            "amplitude": 0.13364877398012842
+          }
+        ],
+        "f_predicted_hz": 7.691528401902635,
+        "error_predicted_percent": 1.608714866423696,
+        "f_uncertainty": {
+          "f_hz": 7.8152631563214845,
+          "u_hz": 0.01608015639501526,
+          "u_rel_pct": 0.2057532302288324,
+          "resolucao_hz": 0.04099060631938514,
+          "segmentos_hz": [
+            7.798714448285514,
+            7.8227103149664226,
+            7.867384624640409,
+            7.7996299354547585
+          ]
+        }
+      },
+      "Ponto_aleatorio_liso": {
+        "name": "Ponto_aleatorio_liso",
+        "unit": "mm",
+        "window_s": [
+          0.0,
+          24.395833333333332
+        ],
+        "f_n_hz": 0.45174833164002237,
+        "amplitude": 8.737279649745137,
+        "zeta_half_power": null,
+        "zeta_log_decrement": null,
+        "std": 39.375806872753635,
+        "peak_to_peak": 245.33707619394175,
+        "spectral_peaks": [
+          {
+            "frequency": 0.35888671875,
+            "amplitude": 7.999466230528654
+          },
+          {
+            "frequency": 0.391845703125,
+            "amplitude": 7.870037792006983
+          },
+          {
+            "frequency": 0.772705078125,
+            "amplitude": 5.500781471694574
+          },
+          {
+            "frequency": 0.91552734375,
+            "amplitude": 4.026622650550667
+          },
+          {
+            "frequency": 0.963134765625,
+            "amplitude": 3.9977637325064452
+          }
+        ],
+        "f_predicted_hz": 7.691528401902635,
+        "error_predicted_percent": -94.12667667549307,
+        "f_uncertainty": {
+          "f_hz": 0.45630588551791784,
+          "u_hz": 0.008629058454926106,
+          "u_rel_pct": 1.8910688485054106,
+          "resolucao_hz": 0.04099060631938514,
+          "segmentos_hz": [
+            0.46845847161879395,
+            0.455368202569923,
+            0.43349063092593626,
+            0.43349063092593626
+          ]
+        }
+      }
+    }
+  },
+  "forma_modal": {
+    "referencia": "Parafuso",
+    "modo_modelo": 1,
+    "f_modelo_hz": 7.691528401902635,
+    "f_medida_hz": 7.815843299755119,
+    "rois": [
+      {
+        "nome": "Acelerômetro",
+        "x_mm": 305.0,
+        "amplitude": 2.6318500246087146,
+        "razao_medida": 0.4693070728283594,
+        "razao_prevista": 0.473184505305923,
+        "erro_pct": -0.8194335262640898
+      },
+      {
+        "nome": "Parafuso",
+        "x_mm": 655.0,
+        "amplitude": 5.607948775941987,
+        "razao_medida": 1.0,
+        "razao_prevista": 1.0,
+        "erro_pct": 0.0
+      }
+    ]
+  },
+  "acelerometro": {
+    "canal": "a_m_s2",
+    "fs_hz": 79.36507936507971,
+    "duracao_s": 10.008199999999999,
+    "reamostrado": false,
+    "jitter_pct": 0.16935449201853742,
+    "modal": {
+      "name": "acelerômetro",
+      "unit": "mm",
+      "window_s": [
+        0.1303,
+        10.0125
+      ],
+      "f_n_hz": 7.816254834101277,
+      "amplitude": 4.536892465582155,
+      "zeta_half_power": 0.009906204990545812,
+      "zeta_log_decrement": 0.004483222450774467,
+      "std": 3.7595895603087004,
+      "peak_to_peak": 22.668746698026204,
+      "spectral_peaks": [
+        {
+          "frequency": 7.818312872023843,
+          "amplitude": 4.300947710645484
+        },
+        {
+          "frequency": 2.6545448908730274,
+          "amplitude": 0.30089929952564504
+        },
+        {
+          "frequency": 4.814995659722243,
+          "amplitude": 0.22241950908304348
+        }
+      ],
+      "f_predicted_hz": 7.691528401902635,
+      "error_predicted_percent": 1.6216079000343915,
+      "f_uncertainty": {
+        "f_hz": 7.8162548324717385,
+        "u_hz": 0.013043782224129238,
+        "u_rel_pct": 0.16688020674479975,
+        "resolucao_hz": 0.10119204225779685,
+        "segmentos_hz": [
+          7.797575506206465,
+          7.810575882457428,
+          7.828403190158935,
+          7.85783025800854
+        ]
+      }
+    }
+  },
+  "comparacao": {
+    "roi": "Acelerômetro",
+    "dominio": "displacement",
+    "unidade_video": "mm",
+    "unidade_acelerometro": "mm",
+    "offset_s": -0.94,
+    "deriva_ppm": 0.0,
+    "janela_s": [
+      0.9458333333333333,
+      10.95
+    ],
+    "metricas": {
+      "f_ref": 7.816607679325513,
+      "f_test": 7.806715338590872,
+      "freq_error_percent": -0.12655542072048692,
+      "f_common": 7.816607679325513,
+      "amp_ref": 4.41393485951904,
+      "amp_test": 5.937259908150357,
+      "amp_error_percent": 34.51172473345708,
+      "phase_ref_deg": -67.9149227178884,
+      "phase_test_deg": -62.609253642486394,
+      "phase_diff_deg": 5.305669075402022,
+      "r2_ref": 0.7236807257861014,
+      "r2_test": 0.8190227301757149,
+      "rms_ref": 3.666000067138146,
+      "rms_test": 4.635908630934756,
+      "rms_error_percent": 26.456861593943348,
+      "pearson_r": 0.9538595247418298,
+      "rmse": 1.5840011516304364,
+      "nrmse_percent": 43.20788659633013,
+      "gain": 1.206220819003421,
+      "coherence": 0.967385976425478
+    }
+  },
+  "incerteza_modelo": {
+    "f_hz": 7.691520462903187,
+    "u_hz": 0.28030705139505935,
+    "u_rel_pct": 3.644364631765624,
+    "contribuicoes": {
+      "springs[0].k_n_m": {
+        "valor": 857.0,
+        "u": 62.0,
+        "sensibilidade_hz_por_unidade": 0.004472256402970922,
+        "u_f_hz": 0.2772798969841972,
+        "parcela_pct": 97.85177815867917
+      },
+      "springs[0].x_mm": {
+        "valor": 655.0,
+        "u": 2.0,
+        "sensibilidade_hz_por_unidade": 0.008314793322638181,
+        "u_f_hz": 0.016629586645276362,
+        "parcela_pct": 0.35196125901329617
+      },
+      "springs[0].mass_g": {
+        "valor": 161.0,
+        "u": 1.0,
+        "sensibilidade_hz_por_unidade": -0.0034762979336493416,
+        "u_f_hz": 0.0034762979336493416,
+        "parcela_pct": 0.015380339943548108
+      },
+      "springs[0].hardware_g": {
+        "valor": 46.0,
+        "u": 1.0,
+        "sensibilidade_hz_por_unidade": -0.010441756149669246,
+        "u_f_hz": 0.010441756149669246,
+        "parcela_pct": 0.13876471482790564
+      },
+      "masses[0].x_mm": {
+        "valor": 305.0,
+        "u": 2.0,
+        "sensibilidade_hz_por_unidade": -7.693749583026488e-05,
+        "u_f_hz": 0.00015387499166052976,
+        "parcela_pct": 3.0134780942258417e-05
+      },
+      "masses[0].mass_g": {
+        "valor": 5.0,
+        "u": 0.5,
+        "sensibilidade_hz_por_unidade": -0.0023422278708000732,
+        "u_f_hz": 0.0011711139354000366,
+        "parcela_pct": 0.0017455417935480539
+      },
+      "L_mm": {
+        "valor": 735.0,
+        "u": 2.0,
+        "sensibilidade_hz_por_unidade": -0.011229907363256242,
+        "u_f_hz": 0.022459814726512484,
+        "parcela_pct": 0.6420136958288727
+      },
+      "b_mm": {
+        "valor": 25.4,
+        "u": 0.1,
+        "sensibilidade_hz_por_unidade": -0.10943158603456737,
+        "u_f_hz": 0.010943158603456737,
+        "parcela_pct": 0.15241136103108646
+      },
+      "t_mm": {
+        "valor": 12.7,
+        "u": 0.1,
+        "sensibilidade_hz_por_unidade": -0.2167394364983899,
+        "u_f_hz": 0.02167394364983899,
+        "parcela_pct": 0.5978714756939137
+      },
+      "rho": {
+        "valor": 2661.9,
+        "u": 13.3,
+        "sensibilidade_hz_por_unidade": -0.0010492336377929394,
+        "u_f_hz": 0.013954807382646095,
+        "parcela_pct": 0.24784470595171446
+      },
+      "E_gpa": {
+        "valor": 69.0,
+        "u": 2.0,
+        "sensibilidade_hz_por_unidade": 0.0001975182677784737,
+        "u_f_hz": 0.0003950365355569474,
+        "parcela_pct": 0.00019861245596236804
+      }
+    },
+    "monte_carlo": null
+  },
+  "criterios": [
+    {
+      "criterio": "Frequência, vídeo × acelerômetro [%]",
+      "valor": 0.12655542072048692,
+      "limite": 1.0,
+      "ok": true
+    },
+    {
+      "criterio": "Amplitude, vídeo × acelerômetro [%]",
+      "valor": 34.51172473345708,
+      "limite": 10.0,
+      "ok": false
+    },
+    {
+      "criterio": "Fase, vídeo × acelerômetro [°]",
+      "valor": 5.305669075402022,
+      "limite": 10.0,
+      "ok": true
+    },
+    {
+      "criterio": "f₁ Acelerômetro × Euler-Bernoulli [%]",
+      "valor": 1.6051265734544133,
+      "limite": 5.0,
+      "ok": true
+    },
+    {
+      "criterio": "f₁ Parafuso × Euler-Bernoulli [%]",
+      "valor": 1.6162574114883652,
+      "limite": 5.0,
+      "ok": true
+    },
+    {
+      "criterio": "f₁ Ponto_aleatorio_marcado × Euler-Bernoulli [%]",
+      "valor": 1.608714866423696,
+      "limite": 5.0,
+      "ok": true
+    },
+    {
+      "criterio": "f₁ Ponto_aleatorio_liso × Euler-Bernoulli [%]",
+      "valor": 94.12667667549307,
+      "limite": 5.0,
+      "ok": false
+    }
+  ]
+}
