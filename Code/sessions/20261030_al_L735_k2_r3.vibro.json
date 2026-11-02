@@ -16,7 +16,7 @@
       {
         "name": "mola k2 (k medido, ensaio estatico)",
         "x_mm": 655.0,
-        "k_n_m": 3500.0,
+        "k_n_m": 3291.0,
         "mass_g": 382.0,
         "hardware_g": 46.0
       }
@@ -48,7 +48,7 @@
     "level": "k2",
     "repetition": 3,
     "camera": "iphone",
-    "notes": "2a visita. Mola k2, tomada 3; excitacao por batida na barra (sem medir forca); video e PULSE simultaneos. Video no Drive: tcc2/dia 2/Mola K2/Medição 3 Mola 2/IMG_7710.mov -> salvar como videos/20261030_al_L735_k2_r3.mov. Acelerometro: m3_1.csv (curva com colunas t, a, a_max, a_min). Modelo: f1 = 13,71 +- 0,72 Hz.",
+    "notes": "2a visita. Mola k2, tomada 3; excitacao por batida na barra (sem medir forca); video e PULSE simultaneos. Video no Drive: tcc2/dia 2/Mola K2/Medição 3 Mola 2/IMG_7710.mov -> salvar como videos/20261030_al_L735_k2_r3.mov. Acelerometro: m3_1.csv (curva com colunas t, a, a_max, a_min). Modelo: f1 = 13,71 +- 0,72 Hz. Posicoes de Ponto_aleatorio_liso/Ponto_aleatorio_marcado estimadas pela imagem (interpolacao entre acelerometro 305 mm e parafuso 655 mm).",
     "checklist": [
       false,
       false,
@@ -122,12 +122,14 @@
     "search_margin": 60,
     "window": null,
     "roi_positions_mm": {
+      "Acelerometro": 305.0,
+      "Ponto_aleatorio_liso": 489.0,
       "Parafuso": 655.0,
-      "Acelerometro": 305.0
+      "Ponto_aleatorio_marcado": 348.0
     }
   },
   "accel": {
-    "path": "../data/acelerometro/last measturements/m3_1.csv",
+    "path": "../data/acelerometro/dia2/m3_1.csv",
     "time_column": 0,
     "channel": 1,
     "fs": null,

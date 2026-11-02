@@ -168,3 +168,17 @@ def test_roi_positions_ignore_accents_and_case():
     chk = mode_shape_check(s, _analysis({"Acelerômetro": sh[0], "Parafuso": sh[1]},
                                         fe.elastic_frequency(1)))
     assert chk is not None and {r.name for r in chk.rows} == {"Acelerômetro", "Parafuso"}
+
+
+def test_mode_shape_check_skips_a_roi_that_lost_its_target():
+    s = Session()
+    s.specimen = bench(900.0, 83.0)
+    s.video.roi_positions_mm = {"A": 300.0, "B": 632.0, "lost": 500.0}
+    fe = s.specimen.fe_model()
+    f = fe.elastic_frequency(1)
+    sh = np.abs(fe.elastic_mode_shape(np.array([0.300, 0.632]), 1))
+    modal = {"A": SimpleNamespace(amplitude=sh[0], f_n=f),
+             "B": SimpleNamespace(amplitude=sh[1], f_n=f),
+             "lost": SimpleNamespace(amplitude=50.0, f_n=0.45)}
+    chk = mode_shape_check(s, SimpleNamespace(modal=modal))
+    assert chk.reference == "B" and {r.name for r in chk.rows} == {"A", "B"}

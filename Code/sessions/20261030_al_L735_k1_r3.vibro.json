@@ -137,7 +137,7 @@
     }
   },
   "accel": {
-    "path": "../data/acelerometro/last measturements/med6_1.csv",
+    "path": "../data/acelerometro/dia2/med6_1.csv",
     "time_column": 0,
     "channel": 1,
     "fs": null,
