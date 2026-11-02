@@ -348,11 +348,16 @@ Impacto decrescente. Os pontos 1 e 2 são os que mais elevam o nível do trabalh
 - [ ] **E8. Explicar o amortecimento.** Vídeo ζ ≈ 0,001 × PULSE ζ ≈ 0,007 (≈ 7×) na primeira análise, em tomadas
       diferentes. Na campanha, comparar na mesma liberação; testar configuração (lâmina do amortecedor, pré-carga,
       cabo do acelerômetro) e o método (janela, ROI, taxa). Se persistir, discutir como limitação, não esconder.
-- [ ] **E9. Escopo de SHM.** O trabalho valida uma técnica de **medição** de vibração; nenhum ensaio detecta dano.
+- [x] **E9. Escopo de SHM.** **Decisão (2026-11-02): (a).** SHM é motivação na introdução e contexto na fundamentação;
+      objetivos, justificativa e conclusão falam em medir frequência, amortecimento e forma modal. A troca k₁ → k₂ é citada
+      como variação controlada de rigidez. Texto antigo do item: O trabalho valida uma técnica de **medição** de vibração; nenhum ensaio detecta dano.
       Decidir e alinhar com o orientador: (a) rebaixar SHM a motivação/trabalho futuro (objetivo específico 1,
       subseção de SHM, palavras-chave, justificativa) ou (b) manter um recorte honesto: a troca k₁ → k₂ emula uma
       variação de rigidez e mostra que o método detecta Δf, sem afirmar detecção de dano.
-- [ ] **E10. Teste de afrouxamento da fixação (SHM, recorte honesto).** Mesma mola k₁ com a porca/parafuso de
+- [x] **E10. Teste de afrouxamento da fixação.** **Decisão (2026-11-02): não entra no TCC** (sem torque, sem reaperto, uma
+      tomada por nível, sem referência: frágil). Vídeos e sessões `20261030_al_L735_k1_afrouxa_c*` ficam como material
+      preliminar; nos trabalhos futuros, sistema de medição contínua em bancada de teste vibratório por longos períodos
+      para identificar afrouxamento e falha. Texto antigo do item: Mesma mola k₁ com a porca/parafuso de
       fixação em 4 níveis (torque normal, ≈ 50 %, só dedos, frouxo) × 3 tomadas, mais um reaperto ao torque base
       (24 tomadas totais no roteiro, seção 5b). Medir f_n, ζ, amplitude e harmônicos (Δζ costuma aparecer antes de
       Δf); duas amplitudes de liberação; confirmar reversibilidade (A' = A). Prioridade P2: só depois do P1 do

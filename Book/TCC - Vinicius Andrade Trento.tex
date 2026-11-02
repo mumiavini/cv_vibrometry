@@ -171,10 +171,10 @@ O maior desafio dessa abordagem se encontra na necessidade de estabilização de
     \label{fig:camerabased_vibrometry}
 \end{figure}
 
-O grande diferencial desta técnica em relação aos métodos tradicionais de contato (e até mesmo ao LDV pontual) é a capacidade de obter um histórico visual contínuo da propagação de falhas mecânicas. Isso é particularmente valioso para a compreensão espacial dos modos de falha ao longo de todo o componente em teste, otimizando a segurança operacional e a análise forense.
+O grande diferencial desta técnica em relação aos métodos tradicionais de contato (e até mesmo ao LDV pontual) é medir, a partir de um único registro e sem acrescentar massa à estrutura, o movimento de quantos pontos estiverem visíveis na imagem, escolhidos depois do ensaio. Essa característica a torna atraente, a longo prazo, para o monitoramento da integridade estrutural (\textit{Structural Health Monitoring}, SHM), em que mudanças nas frequências naturais, no amortecimento e nos modos de vibrar indicam alterações de rigidez, folgas ou danos; este trabalho se concentra no passo anterior, que é validar a medição desses parâmetros com uma câmera de \textit{smartphone}.
 
 \subsection{Problema}
-Apesar da ampla utilização e eficácia dos acelerômetros em medições vibracionais, os sistemas tradicionais de testes em bancada baseiam-se, em geral, em medições pontuais e discretas, limitadas ao monitoramento de regiões específicas da estrutura. Essa abordagem pode não capturar de forma completa o comportamento dinâmico global do sistema, além de, em alguns casos, exigir ensaios destrutivos que acarretam prejuízos devido à perda ou danificação do equipamento testado.
+Apesar da ampla utilização e eficácia dos acelerômetros em medições vibracionais, os sistemas tradicionais de testes em bancada baseiam-se, em geral, em medições pontuais e discretas, limitadas ao monitoramento de regiões específicas da estrutura. Essa abordagem pode não capturar de forma completa o comportamento dinâmico global do sistema. Além disso, cada sensor acrescenta massa à estrutura e exige montagem, cabo e um canal de aquisição, o que limita o número de pontos medidos em cada ensaio.
 
 Nesse contexto, a aplicação da vibrometria óptica por câmeras e visão computacional surge como uma boa alternativa, não para substituir os métodos tradicionais, mas para complementá-los, por possibilitar medições sem contato e com maior resolução espacial. Contudo, sua implementação em testes dinâmicos de bancada ainda apresenta desafios relevantes, tais como a necessidade de condições controladas de iluminação, a elevada sensibilidade a ruídos ambientais e a complexidade computacional envolvida na aquisição, processamento e interpretação dos dados obtidos \cite{Phase2022}.
 
@@ -184,14 +184,14 @@ O objetivo geral deste trabalho é explorar e validar a aplicação de metodolog
 
 \noindent\textit{Objetivos Específicos:}
 \begin{itemize}
-    \item Desenvolver e implementar rotinas de processamento digital de imagens em ambiente Python, baseadas em filtragem por convolução com filtros de Gabor para estimativa de movimento baseada em fase, aplicadas ao monitoramento da integridade estrutural (\textit{Structural Health Monitoring} -- SHM);
+    \item Desenvolver e implementar rotinas de processamento digital de imagens em ambiente Python, baseadas em filtragem por convolução com filtros de Gabor para estimativa de movimento baseada em fase, capazes de extrair frequência natural, amortecimento e forma modal a partir de vídeo;
     \item Desenvolver um aplicativo de apoio ao ensaio que integre o planejamento, o processamento do vídeo, a sincronização com o acelerômetro e a geração de tabelas e figuras;
     \item Propor e validar uma metodologia não intrusiva de baixo custo, baseada em uma câmera de \textit{smartphone} em câmera lenta, para a medição de vibrações;
     \item Comparar o desempenho da abordagem óptica com o método tradicional de medição por contato (acelerômetro) e com um modelo analítico, analisando precisão, repetibilidade e limitações.
 \end{itemize}
 
 \subsection{Justificativa}
-O desenvolvimento e a validação de um sistema de medição sem contato e de baixo custo justificam-se pela necessidade contínua de segurança operacional (\textit{safety margin}) em ensaios de durabilidade. Ao contornar as limitações físicas dos sensores tradicionais, a abordagem óptica viabiliza a criação de um histórico visual e contínuo da iniciação e propagação de falhas mecânicas. Dessa forma, demonstra-se não apenas as vantagens dessa abordagem em comparação aos métodos tradicionais, mas também garante-se uma alta viabilidade econômica e mais ferramentas de análise forense para compreensão de modos de falha ao longo de todo o componente em teste.
+O desenvolvimento e a validação de um sistema de medição sem contato e de baixo custo justificam-se pelo custo e pelas limitações práticas dos métodos usuais: acelerômetros exigem montagem e acrescentam massa a cada ponto medido, e vibrômetros a laser têm custo elevado e medem um ponto por vez. Uma câmera de \textit{smartphone}, se validada, permite medir frequências naturais, amortecimento e formas modais de baixa frequência em vários pontos ao mesmo tempo, com equipamento disponível em qualquer laboratório, o que amplia o acesso à análise modal experimental em ensino, pesquisa e ensaios de bancada e prepara o terreno para aplicações de monitoramento estrutural.
 
 \section{Fundamentação Teórica}
 
@@ -285,7 +285,7 @@ Considerando o sistema de 1~GDL, uma perda localizada de rigidez $\Delta k < 0$ 
     \label{fig:perda_rigidez}
 \end{figure}
 
-Como aplicação a jusante dessa cadeia, os históricos temporais de deslocamento obtidos por qualquer método de medição (incluindo a vibrometria óptica investigada neste trabalho) podem alimentar análises clássicas de fadiga, em que ciclos de carregamento são contabilizados pelo método de \textit{rainflow counting} \cite{ASTM_E1049} e convertidos em dano acumulado por meio da regra linear de Palmgren-Miner \cite{Miner1945}. Essa ponte conecta a medição de vibrações a estimativas de vida útil, ampliando o escopo de aplicação da técnica em ensaios de durabilidade.
+Neste trabalho, esses conceitos aparecem de forma controlada: a troca da mola $k_1$ pela mola $k_2$ é uma variação conhecida de rigidez, e a capacidade do método de acompanhá-la na frequência, no amortecimento e na forma modal é o pré-requisito para qualquer aplicação de monitoramento, que fica fora do escopo.
 
 \subsection{Instrumentação Tradicional por Contato: Acelerômetros}
 
@@ -417,7 +417,7 @@ A vibrometria por imagem não está livre de limitações, e o desempenho do sis
     \item Custo computacional: a aplicação de um banco de filtros de Gabor com múltiplas orientações e escalas a cada quadro de um vídeo longo em alta resolução é computacionalmente exigente. As estratégias usuais incluem a restrição do processamento às ROIs de interesse, a implementação das convoluções no domínio da frequência via FFT, e a paralelização em GPU quando disponível \cite{robotcamera2025}.
 \end{itemize}
 
-Mesmo com esses cuidados, a vibrometria por imagem não substitui integralmente os métodos tradicionais. Ela se posiciona como um complemento de alto valor, particularmente em cenários em que o \textit{mass loading} é proibitivo, em que o número de pontos de medição desejado é grande, ou em que se busca informação espacial de modos de vibrar para fins de SHM e análise forense de falhas.
+Mesmo com esses cuidados, a vibrometria por imagem não substitui integralmente os métodos tradicionais. Ela se posiciona como um complemento de alto valor, particularmente em cenários em que o \textit{mass loading} é proibitivo, em que o número de pontos de medição desejado é grande, ou em que se busca informação espacial dos modos de vibrar.
 
 %==============================================================================
 \section{Metodologia}
@@ -785,7 +785,7 @@ A validação foi estruturada em níveis complementares:
     \item \textbf{Acelerômetro:} frequência, amortecimento e, na mesma tomada, amplitude e fase comparados aos do acelerômetro;
     \item \textbf{Forma modal:} razão entre as amplitudes de vários pontos da barra medidos no mesmo vídeo comparada à do modelo;
     \item \textbf{Repetibilidade:} três tomadas por condição, com o coeficiente de variação;
-    \item \textbf{\textit{Mass loading}:} frequência medida pelo vídeo com e sem o acelerômetro montado.
+    \item \textbf{\textit{Mass loading}:} efeito do acelerômetro sobre a frequência, estimado pelo modelo e comparado à repetibilidade entre tomadas.
 \end{enumerate}
 O erro relativo de uma grandeza medida $q^{opt}$ frente à referência $q^{ref}$ é
 \begin{equation}
@@ -821,7 +821,7 @@ e os critérios de aceitação adotados estão na Tabela~\ref{tab:criterios}.
 
 Antes dos ensaios, as massas da mola, das ferragens, do acelerômetro e da barra foram pesadas, e a rigidez de cada mola foi medida estaticamente, pendurando massas conhecidas no mesmo ponto de fixação da bancada e ajustando uma reta à força em função do alongamento. As posições foram medidas a partir do centro do mancal.
 
-Cada tomada seguiu a sequência: início das gravações de vídeo e do acelerômetro; três segundos de linha de base com o sistema parado; impacto de sincronismo na barra, acompanhado de um \textit{flash} visível pela câmera; liberação da ponta a partir de uma marca fixa; e registro do decaimento livre por pelo menos 20\,s. A Tabela~\ref{tab:tomadas} lista as tomadas.
+Em cada tomada, a gravação do vídeo e a aquisição do acelerômetro foram iniciadas, e a barra foi excitada por uma batida manual, sem medição da força, registrando-se o decaimento livre simultaneamente pelos dois sensores; a própria batida serve de evento de sincronismo entre os registros. O vídeo foi gravado continuamente ao longo de várias tomadas, e cada tomada foi recortada no \textit{software}, do instante logo anterior à batida até o fim da oscilação (15 a 28\,s); os registros do acelerômetro têm 10\,s (4\,s em uma tomada). Foram feitas três tomadas com cada mola, em 29/10/2026 (Tabela~\ref{tab:tomadas}).
 
 \begin{table}[htbp]
     \centering
@@ -834,8 +834,6 @@ Cada tomada seguiu a sequência: início das gravações de vídeo e do acelerô
         \midrule
         1--3 & $k_1$ & sim & frequência, amortecimento, forma modal, comparação no tempo \\
         4--6 & $k_2$ & sim & idem, segunda rigidez \\
-        7--9 & $k_1$ & não & efeito de massa do acelerômetro (só vídeo) \\
-        10--11 & $k_1$ & sim & amortecedor da bancada acoplado \\
         \bottomrule
     \end{tabularx}
 \end{table}
@@ -1192,7 +1190,7 @@ Em relação aos objetivos específicos:
 
 Conclui-se que uma câmera de \textit{smartphone}, aliada ao processamento por fase e a cuidados experimentais simples (marcadores de contraste, ROI de referência, iluminação constante, calibração no plano do movimento e uso do instante real de cada quadro do arquivo original), é suficiente para identificar frequências naturais e formas modais de baixa frequência em ensaios de bancada, como complemento de baixo custo aos acelerômetros. A campanha também mostrou que a qualidade da validação depende tanto do método óptico quanto da referência e do modelo: parâmetros de catálogo, a massa efetiva das molas, a base de tempo da câmera lenta e a gravação simultânea dos dois sensores foram decisivos para a concordância obtida.
 
-Como trabalhos futuros, propõem-se: o uso de câmera com obturador global e maior taxa de quadros, para estender a faixa de frequência e eliminar a defasagem entre linhas; ensaios forçados com o excitador da bancada e estimativa da FRF; a reconstrução de formas modais com muitos pontos ao longo da estrutura (medição de campo completo); a aquisição do acelerômetro com banda de ao menos 100\,Hz e exportação do sinal, para validar a amplitude; a medição do tempo de leitura do sensor; a seleção automática de ROIs; e o processamento em tempo real.
+Como trabalhos futuros, propõem-se: o uso de câmera com obturador global e maior taxa de quadros, para estender a faixa de frequência e eliminar a defasagem entre linhas; ensaios forçados com o excitador da bancada e estimativa da FRF; a reconstrução de formas modais com muitos pontos ao longo da estrutura (medição de campo completo); a aquisição do acelerômetro com banda de ao menos 100\,Hz e exportação do sinal, para validar a amplitude; a medição do tempo de leitura do sensor; a seleção automática de ROIs; o processamento em tempo real; e um sistema de medição contínua em bancada de teste vibratório, por longos períodos, para identificar o afrouxamento de fixações e o surgimento de falhas durante o ensaio.
 
 \clearpage
 \onecolumn % <-- 1. Switch to a single column layout
