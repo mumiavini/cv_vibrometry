@@ -698,7 +698,7 @@ Como o objeto de referência deve estar no mesmo plano da peça, a calibração 
 \subsection{Arquitetura do Software e Aplicativo}
 \label{sec:software}
 
-O \textit{software} foi implementado em Python em duas camadas: uma biblioteca de processamento, testável sem interface gráfica, e um aplicativo de \textit{desktop} (PySide6) que a utiliza. Cada ensaio é descrito por um arquivo de sessão, com todos os parâmetros necessários para reproduzir o processamento (corpo de prova, apoio, molas e massas, vídeo, ROIs, calibração, acelerômetro, sincronismo e critérios de aceitação). O aplicativo organiza o fluxo em seis etapas (Tabela~\ref{tab:etapas_app} e Figura~\ref{fig:app_visao}). A biblioteca é coberta por testes automatizados (77 testes), que incluem vídeos e sinais de acelerômetro sintéticos com resposta conhecida.
+O \textit{software} foi implementado em Python em duas camadas: uma biblioteca de processamento, testável sem interface gráfica, e um aplicativo de \textit{desktop} (PySide6) que a utiliza. Cada ensaio é descrito por um arquivo de sessão, com todos os parâmetros necessários para reproduzir o processamento (corpo de prova, apoio, molas e massas, vídeo, ROIs, calibração, acelerômetro, sincronismo e critérios de aceitação). O aplicativo organiza o fluxo em seis etapas (Tabela~\ref{tab:etapas_app}; a interface aparece na Figura~\ref{fig:app_rois}). A biblioteca é coberta por testes automatizados (77 testes), que incluem vídeos e sinais de acelerômetro sintéticos com resposta conhecida.
 
 \begin{table}[htbp]
     \centering
@@ -719,13 +719,6 @@ O \textit{software} foi implementado em Python em duas camadas: uma biblioteca d
     \end{tabularx}
 \end{table}
 
-\begin{figure}[htbp]
-    \centering
-    \FIGTODO{Captura de tela do aplicativo: visão geral, com as abas das seis etapas}
-    \caption{Interface do aplicativo de apoio ao ensaio. Fonte: O autor.}
-    \label{fig:app_visao}
-\end{figure}
-
 \subsubsection{Importação dos quadros e indicadores de qualidade}
 
 O vídeo é lido quadro a quadro, em escala de cinza, como matriz bidimensional $I(x,y,t_k)$, em que $t_k = k/F$ é o instante de captura do $k$-ésimo quadro. Para não manter o vídeo inteiro na memória, cada quadro é processado e descartado. A leitura registra indicadores de qualidade: intervalo entre quadros e quadros perdidos, variação do brilho de uma região estática (cintilação), foco pela variância do Laplaciano, fração de pixels saturados e perda de rastreamento.
@@ -739,12 +732,12 @@ Sobre o quadro de referência, o usuário define dois conjuntos de ROIs:
 \end{itemize}
 Como as ROIs são definidas sobre o vídeo já gravado, novos pontos de medição podem ser acrescentados sem repetir o ensaio, o que equivale a um arranjo de sensores virtuais. A Figura~\ref{fig:app_rois} mostra a definição das ROIs no aplicativo.
 
-\begin{figure}[htbp]
+\begin{figure*}[t]
     \centering
-    \FIGTODO{Captura de tela do aplicativo: etapa Vídeo, com as ROIs de medição e de referência desenhadas sobre o quadro}
-    \caption{Definição das ROIs de medição e de referência no aplicativo. Fonte: O autor.}
+    \includegraphics[width=\textwidth]{Images/app_rois.png}
+    \caption{Interface do aplicativo na etapa Vídeo: etapas do ensaio à esquerda, trecho e amostragem do vídeo e definição das ROIs de medição e de referência sobre o quadro. Fonte: O autor.}
     \label{fig:app_rois}
-\end{figure}
+\end{figure*}
 
 \subsubsection{Banco de filtros de Gabor e extração de fase}
 
@@ -799,8 +792,8 @@ O vídeo e o acelerômetro são gravados por relógios independentes. O atraso e
 
 \begin{figure}[htbp]
     \centering
-    \FIGTODO{Captura de tela do aplicativo: etapa Comparar, com o vídeo e o acelerômetro sincronizados}
-    \caption{Vídeo e acelerômetro sincronizados no aplicativo. Fonte: O autor.}
+    \includegraphics[width=\columnwidth]{Images/app_sincronismo.png}
+    \caption{Vídeo e acelerômetro sincronizados pelo impacto no aplicativo (etapa Comparar), com a janela de análise destacada e o detalhe de alguns ciclos. Fonte: O autor.}
     \label{fig:app_sinc}
 \end{figure}
 
@@ -1021,7 +1014,7 @@ A Tabela~\ref{tab:res_frequencia} compara, para cada tomada, a frequência ident
 
 \begin{table}[H]
     \centering
-    \caption{Frequência natural por tomada (29/10/2026): vídeo (ROI do acelerômetro), acelerômetro (curva digitalizada) e diferença ao modelo de elementos finitos ($f^{mod}$ = 7,69\,Hz com $k_1 = 857$\,N/m e 13,71\,Hz com $k_2 = 3291$\,N/m).}
+    \caption{Frequência natural por tomada (29/10/2026): vídeo (ROI do acelerômetro), acelerômetro e diferença ao modelo de elementos finitos ($f^{mod}$ = 7,69\,Hz com $k_1 = 857$\,N/m e 13,71\,Hz com $k_2 = 3291$\,N/m).}
     \label{tab:res_frequencia}
     \small
     \setlength{\tabcolsep}{4pt}
@@ -1138,7 +1131,7 @@ Na mesma tomada, após o sincronismo pelo impacto, o deslocamento do vídeo na R
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=\columnwidth]{Images/fig_res_comparacao_tempo.png}
-    \caption{Deslocamento medido pelo vídeo e pelo acelerômetro (curva digitalizada, integrada) na mesma tomada (mola $k_1$, tomada 2), com detalhe de alguns ciclos. Fonte: O autor.}
+    \caption{Deslocamento medido pelo vídeo e pelo acelerômetro (integrado) na mesma tomada (mola $k_1$, tomada 2), com detalhe de alguns ciclos. Fonte: O autor.}
     \label{fig:res_tempo}
 \end{figure}
 
