@@ -20,7 +20,7 @@ Ordem sugerida: **A → B → C → D**. Dados e decisões (A) destravam tudo.
 
 | Grandeza | k₁ | k₂ |
 |---|---|---|
-| k estático (N/m) | **857 ± 62** (catálogo 1500, −43 %) | **3291 ± 346** (catálogo 2500, +32 %) |
+| k estático (N/m) | **857 ± 62** (catálogo 1000, −14 %) | **3291 ± 346** (catálogo 3500, −6 %) |
 | massa da mola (g) | 161 | 382 |
 | m_ef = m_s/3 + parafuso 36 g + porcas 10 g (g) | 99,7 | 173,3 |
 | **f₁ previsto, `BeamFE` (Hz)** | **7,69 ± 0,28** | **13,71 ± 0,72** |
@@ -110,6 +110,9 @@ O modelo antigo previa 11,7 Hz (k₁ de catálogo, sem massa da mola) contra 7,6
 com uma "ferragem" ajustada de 383 g. **A causa era o k de catálogo**: o ensaio estático deu k₁ = 857 ± 62 N/m, e a
 massa efetiva medida no ponto da mola é 99,7 g (161/3 + 36 + 10). Com isso o modelo dá 7,69 ± 0,28 Hz, entre o
 PULSE (7,600) e o vídeo (7,763), ambos a ≤ 0,33 u. Detalhes e histórico em `issues.md` e `Code/data/bancada/README.md`.
+**Atualização (03/11/2026):** os valores de catálogo corretos são k₁ = 1000 e k₂ = 3500 N/m (anotação do autor no
+texto; antes 1500/2500). Com eles, o modelo sem massa da mola dá 9,72 / 18,00 Hz, e a maior parte da diferença vem
+da **massa efetiva da mola e das ferragens**, não do k (que difere −14 % / −6 % do catálogo).
 
 **Pontos que ficam (não mudam a conclusão, entram na discussão):**
 - **Pivô efetivo ≈ 24 mm além do eixo medido** (`issues.md`): perto da junta a barra se move mais do que um pino
@@ -142,7 +145,7 @@ PULSE (7,600) e o vídeo (7,763), ambos a ≤ 0,33 u. Detalhes e histórico em `
       15/10/2026. Falta: sensibilidade/ganho, taxa de amostragem e duração do registro usadas.
 - [x] **A4. Montagem** (medida em 2026-10, `Code/data/bancada/`): barra de alumínio 750 mm, 25,4 × 12,7 mm
       (nominal), **644 g**; eixo do mancal a **735 mm** da ponta; **k₁ = 857 ± 62 N/m (161 g)** e
-      **k₂ = 3291 ± 346 N/m (382 g)** por ensaio estático (catálogo 1500/2500); parafuso 36 g, porcas 10 g;
+      **k₂ = 3291 ± 346 N/m (382 g)** por ensaio estático (catálogo 1000/3500, corrigido); parafuso 36 g, porcas 10 g;
       acelerômetro 5 g (pesado). Falta: conferir b/h com paquímetro (efeito pequeno);
       condição real da raiz (pivô efetivo, ver acima).
 - [x] **A5. Posições** (medidas do eixo do mancal): acelerômetro a **305 mm**; parafuso da mola a **655 mm**

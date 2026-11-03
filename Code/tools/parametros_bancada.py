@@ -42,7 +42,7 @@ OUT = DATA / "resultados"
 # daria f₁ ≈ 24 Hz, contra 7,6 Hz medidos (ver README da pasta).
 READING_TO_M = 1e-2
 
-CATALOG_K = {"k1": 1500.0, "k2": 2500.0}
+CATALOG_K = {"k1": 1000.0, "k2": 3500.0}
 # frequências já medidas com a mola k1 (sessão k1_cm_acc, 15/10/2026)
 MEASURED_F = {"k1": {"PULSE (cursor)": 7.600, "vídeo (k1_cm_acc)": 7.763}}
 

@@ -31,8 +31,9 @@ acelerômetro de 5 g a 305 mm. A densidade efetiva, 2662 kg/m³, vem da massa me
 
 | | k₁ | k₂ |
 |---|---|---|
-| k de catálogo (N/m) | 1500 | 2500 |
-| **k medido (N/m)** | **857 ± 62** (−43 % do catálogo) | **3291 ± 346** (+32 %) |
+| k de catálogo (N/m) | 1000 | 3500 |
+| **k medido (N/m)** | **857 ± 62** (−14 % do catálogo) | **3291 ± 346** (−6 %) |
+| f₁ com k de catálogo, sem massa da mola (Hz) | 9,72 | 18,00 |
 | massa efetiva m_s/3 + m_f (g) | 99,7 | 173,3 |
 | **f₁ previsto (Hz)** | **7,69 ± 0,28** | **13,71 ± 0,72** |
 | f₂ (Hz) | 78,6 | 76,6 |
@@ -41,9 +42,11 @@ acelerômetro de 5 g a 305 mm. A densidade efetiva, 2662 kg/m³, vem da massa me
 
 Com k₁ as frequências já medidas ficam dentro da incerteza do modelo: PULSE 7,600 Hz (−1,2 %, −0,33 u) e
 vídeo 7,763 Hz (+0,9 %, +0,26 u). O k reproduziria cada uma com 837 e 873 N/m, respectivamente; ambos estão
-dentro de ±1 u de 857. A diferença entre o modelo antigo (11,7 Hz) e a medição vinha do **k de catálogo**,
-não de massa ausente. Com k medido, a mola e as ferragens baixam f₁ de 9,00 para 7,69 Hz. O "383 g" da
-sessão antiga era apenas o valor que fechava a conta com k = 1500 N/m.
+dentro de ±1 u de 857. Com os valores de catálogo corrigidos (k₁ = 1000, k₂ = 3500 N/m; antes anotados como
+1500 e 2500), o k medido fica 14 % e 6 % abaixo do catálogo, e a maior parte da diferença entre o modelo sem
+massa da mola (9,72 e 18,00 Hz) e a medição vem da **massa efetiva da mola e das ferragens**: com k medido,
+elas baixam f₁ de 9,00 para 7,69 Hz (k₁) e de 17,47 para 13,71 Hz (k₂). O "383 g" da sessão antiga era apenas
+o valor que fechava a conta com k = 1500 N/m.
 
 Tabelas completas, com o orçamento de incerteza, em `resultados/parametros.md`. A figura é
 `resultados/fig_rigidez_molas.{png,pdf}`.
