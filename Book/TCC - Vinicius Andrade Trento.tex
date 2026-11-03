@@ -126,7 +126,7 @@
   {\noindent\bfseries\itshape Resumo}
   \par\vspace{0.3em}
   {\small\justifying\noindent
-  Este trabalho desenvolve e valida um sistema de vibrometria óptica de baixo custo para medição sem contato de vibrações em ensaios de bancada, baseado em vídeo de \textit{smartphone} em câmera lenta (1080p a 240 quadros por segundo) e em estimativa de movimento por fase com filtros de Gabor. O processamento foi implementado em Python, como biblioteca e como aplicativo de apoio ao ensaio, que integra planejamento, rastreamento, sincronização com um acelerômetro e geração de tabelas e figuras. A implementação foi verificada previamente com vídeos sintéticos de movimento conhecido. Experimentalmente, uma barra de alumínio 6351-T6 articulada em um mancal e suspensa por mola foi ensaiada em vibração livre, com duas rigidezes de mola, e comparada a um acelerômetro piezoelétrico e a um modelo de Euler-Bernoulli por elementos finitos. A frequência natural medida pelo vídeo diferiu da medida pelo acelerômetro na mesma tomada em 0,21\,\%, em média dos valores absolutos, e em 1,8\,\% e 7,3\,\% da prevista pelo modelo para as duas molas, com repetibilidade melhor que 0,15\,\% entre três tomadas. O amortecimento médio diferiu 2\,\% e 12\,\% do medido pelo acelerômetro, e a razão de amplitudes entre dois pontos da barra concordou com a forma modal prevista dentro de 1\,\% na média das tomadas; a amplitude absoluta diferiu de 13 a 30\,\% da do acelerômetro, diferença atribuída principalmente à baixa taxa de amostragem da referência, e não foi tomada como validação. O aparelho descartou cerca de 14\,\% dos quadros em câmera lenta, o que foi corrigido usando o instante real de cada quadro. Os resultados indicam que um \textit{smartphone}, consideradas as limitações de obturador de rolagem e de taxa de quadros, permite identificar frequências naturais e amortecimento e medir razões de amplitude entre pontos em vibrações de baixa frequência, sem acrescentar massa à estrutura.\par}
+  Este trabalho desenvolve e valida um sistema de vibrometria óptica de baixo custo para medição sem contato de vibrações em ensaios de bancada, baseado em vídeo de \textit{smartphone} em câmera lenta (240 quadros por segundo) e em estimativa de movimento por fase com filtros de Gabor. O processamento foi implementado em Python, como biblioteca e aplicativo de apoio ao ensaio, e verificado previamente com vídeos sintéticos de movimento conhecido. Experimentalmente, uma barra de alumínio 6351-T6 articulada e suspensa por mola foi ensaiada em vibração livre, com duas molas, e comparada a um acelerômetro piezoelétrico e a um modelo de elementos finitos. A frequência natural medida pelo vídeo diferiu da do acelerômetro na mesma tomada em 0,21\,\% (média dos valores absolutos) e da do modelo em 1,8\,\% e 7,3\,\%, com repetibilidade melhor que 0,15\,\% entre três tomadas. O amortecimento médio diferiu 2\,\% e 12\,\% do medido pelo acelerômetro, e a razão de amplitudes entre dois pontos da barra concordou com a forma modal prevista dentro de 1\,\% na média; a amplitude absoluta diferiu de 13 a 30\,\%, principalmente pela baixa taxa de amostragem da referência, e não foi tomada como validação. O aparelho descartou cerca de 14\,\% dos quadros, o que foi corrigido usando o instante real de cada quadro. Os resultados indicam que um \textit{smartphone}, consideradas suas limitações de obturador e de taxa de quadros, permite identificar frequências naturais e amortecimento e medir razões de amplitude entre pontos em vibrações de baixa frequência, sem acrescentar massa à estrutura.\par}
 
 
   \vspace{0.6em}
@@ -138,7 +138,7 @@
   {\noindent\bfseries\itshape Abstract}
   \par\vspace{0.3em}
   {\small\justifying\noindent
-  This work develops and validates a low-cost optical vibrometry system for non-contact vibration measurement in bench tests, based on slow-motion smartphone video (1080p at 240 frames per second) and phase-based motion estimation with Gabor filters. The processing was implemented in Python, as a library and as a test-support application that integrates planning, tracking, synchronisation with an accelerometer and the generation of tables and figures. The implementation was first verified on synthetic videos with known motion. Experimentally, an aluminium 6351-T6 bar pinned at a bearing and supported by a spring was tested in free vibration, with two spring stiffnesses, and compared with a piezoelectric accelerometer and with a finite-element Euler-Bernoulli model. The natural frequency measured from video differed from the accelerometer in the same run by 0.21\,\% (mean absolute value) and by 1.8\,\% and 7.3\,\% from the model for the two springs, with repeatability better than 0.15\,\% over three runs. The mean damping ratio differed by 2\,\% and 12\,\% from the accelerometer, and the amplitude ratio between two points of the bar matched the predicted mode shape within 1\,\% on average; the absolute amplitude differed by 13 to 30\,\% from the accelerometer, mainly because of the low sampling rate of the reference, and was not taken as validated. The phone dropped about 14\,\% of the slow-motion frames, which was corrected by using the actual time stamp of every frame. The results indicate that a smartphone, within its rolling-shutter and frame-rate limitations, can identify natural frequencies and damping and measure amplitude ratios between points in low-frequency vibration, without adding mass to the structure.\par}
+  This work develops and validates a low-cost optical vibrometry system for non-contact vibration measurement in bench tests, based on slow-motion smartphone video (240 frames per second) and phase-based motion estimation with Gabor filters. The processing was implemented in Python, as a library and a test-support application, and first verified on synthetic videos with known motion. Experimentally, an aluminium 6351-T6 bar, pinned and supported by a spring, was tested in free vibration with two springs and compared with a piezoelectric accelerometer and a finite-element model. The natural frequency measured from video differed from the accelerometer in the same run by 0.21\,\% (mean absolute value) and from the model by 1.8\,\% and 7.3\,\%, with repeatability better than 0.15\,\% over three runs. The mean damping ratio differed by 2\,\% and 12\,\% from the accelerometer, and the amplitude ratio between two points of the bar matched the predicted mode shape within 1\,\% on average; the absolute amplitude differed by 13 to 30\,\%, mainly because of the low sampling rate of the reference, and was not taken as validated. The phone dropped about 14\,\% of the frames, which was corrected by using the actual time stamp of every frame. The results indicate that a smartphone, within its shutter and frame-rate limitations, can identify natural frequencies and damping and measure amplitude ratios between points in low-frequency vibration, without adding mass to the structure.\par}
 
   \vspace{0.6em}
   {\noindent\bfseries\itshape Keywords}{\itshape: optical vibrometry; computer
@@ -166,10 +166,10 @@ Contudo, uma vez que é necessário fazer a montagem física dos sensores nas pe
     \item Componentes que trabalham em altas temperaturas.
 \end{itemize}
 
-\begin{figure}[tb]
+\begin{figure}[H]
     \centering
-    \includegraphics[height=5cm,trim=150 50 85 85,clip]{Images/acelerometro_dewesoft traduzido.jpg}
-    \caption{Acelerômetro de compressão piezoelétrico da Dewesoft. Fonte: \cite{aceletrometroDewesoft2025}.}
+    \includegraphics[height=4.6cm,trim=150 50 85 85,clip]{Images/acelerometro_dewesoft traduzido.jpg}
+    \caption{Acelerômetro de compressão piezoelétrico da Dewesoft. Fonte: adaptado de \cite{aceletrometroDewesoft2025}.}
     \label{fig:acelerometro_dewesoft}
 \end{figure}
 
@@ -179,7 +179,7 @@ Para contornar as limitações de instrumentação física, técnicas de vibrome
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=\columnwidth]{Images/LDV traduzido.jpg}
-    \caption{Vibrometria por Laser Doppler. Fonte: \cite{LDVpolytec2006}.}
+    \caption{Vibrometria por Laser Doppler. Fonte: adaptado de \cite{LDVpolytec2006}.}
     \label{fig:ldv}
 \end{figure}
 
@@ -190,7 +190,7 @@ O maior desafio dessa abordagem se encontra na necessidade de estabilização de
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=\columnwidth]{Images/camerabased vibrometry traduzido.jpg}
-    \caption{Vibrometria por câmera baseada em imagem. Fonte: \cite{robotcamera2025}.}
+    \caption{Vibrometria por câmera baseada em imagem. Fonte: adaptado de \cite{robotcamera2025}.}
     \label{fig:camerabased_vibrometry}
 \end{figure}
 
@@ -282,7 +282,7 @@ A condição de ressonância ocorre quando $\omega$ se aproxima de $\omega_n$ ($
     \label{fig:ressonancia}
 \end{figure}
 
-No contexto deste trabalho, o caso da excitação de base é particularmente relevante, pois corresponde ao cenário dos ensaios dinâmicos de bancada com excitadores eletromagnéticos (\textit{shakers}) e atuadores hidráulicos (\textit{rigs}), nos quais o componente sob análise é montado sobre uma plataforma com aceleração controlada \cite{Downey2026}.
+Em ensaios forçados de bancada, a excitação costuma ser aplicada pela base, por excitadores eletromagnéticos (\textit{shakers}) ou atuadores hidráulicos (\textit{rigs}), e a resposta é descrita pela FRF \cite{Downey2026}. Este trabalho tratou apenas de vibração livre; a ressonância interessa aqui porque as frequências naturais que a medição deve identificar são as mesmas que, em um ensaio forçado, concentram a resposta da estrutura.
 
 \subsubsection{Sistemas de múltiplos graus de liberdade e análise modal}
 
@@ -388,13 +388,6 @@ A câmera atua como o transdutor primário do sistema, convertendo o movimento f
 
 Dois parâmetros adicionais da câmera merecem atenção. O tempo de exposição deve ser curto o suficiente para que cada quadro registre o movimento como praticamente congelado; exposições longas introduzem borramento (\textit{motion blur}) que atenua artificialmente a amplitude medida \cite{LavatelliZappa2017}. A relação $\Delta x_{blur} \approx v \cdot t_{exp}$, em que $v$ é a velocidade instantânea do ponto e $t_{exp}$ o tempo de exposição, fornece uma estimativa direta desse efeito \cite{LavatelliZappa2017}. Já o tipo de obturador é crítico: o obturador global (\textit{global shutter}) captura todo o sensor simultaneamente, enquanto o obturador de rolagem (\textit{rolling shutter}) captura linha a linha, introduzindo distorções geométricas em vibrações rápidas. Para vibrometria, o obturador global é preferível \cite{robotcamera2025}. No obturador de rolagem, a linha $y$ de um quadro é lida com atraso $\Delta t = (y/H)\,T_{read}$ em relação à primeira, sendo $H$ a altura da imagem e $T_{read}$ o tempo de leitura do sensor. Esse atraso desloca a \textit{fase} do movimento medido em cada linha em $2\pi f\,\Delta t$, mas não altera a \textit{frequência}, que é a mesma em todas as linhas.
 
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=\columnwidth]{Images/fig_motion_blur.png}
-    \caption{Efeito de borramento por movimento. Fonte: O autor.}
-    \label{fig:motion_blur}
-\end{figure}
-
 A calibração espacial converte deslocamentos medidos em pixels para unidades físicas (mm/pixel), tipicamente por meio de um objeto de referência de dimensões conhecidas posicionado no mesmo plano da peça. Em \cite{robotcamera2025}, por exemplo, foi obtida resolução espacial de 0,6~mm/pixel com câmera a 1,2~m da peça e lente de 20~mm de distância focal.
 
 \subsubsection{Estimativa de movimento baseada em fase com filtros de Gabor}
@@ -476,13 +469,12 @@ No MVP foi utilizada a câmera DJI Osmo Action 4, com sensor CMOS de 1/1{,}3'' e
 
 Nos ensaios de bancada foi utilizada a câmera principal de um \textit{smartphone} iPhone 17e, no modo câmera lenta em 1080p ($1920 \times 1080$ pixels) a 240\,fps, com codificação HEVC. A regra de amostragem adotada ($f_{max} \leq F/10$) admite componentes até 24\,Hz, e a frequência de Nyquist é de 120\,Hz. Dois cuidados com a base de tempo se mostraram necessários. Primeiro, os vídeos foram transferidos para o computador como gravados (por cabo, sem edição): o recorte no aplicativo de fotos do aparelho reprocessa a câmera lenta, com trechos em velocidade normal no início e no fim, e altera o tempo de cada quadro; cada tomada foi recortada no próprio \textit{software}. Segundo, o arquivo original registra o instante de captura de cada quadro, e o aparelho descartou cerca de 14\,\% dos quadros (intervalos de $2/240$\,s em vez de $1/240$\,s). Supor quadros igualmente espaçados comprimiria o eixo do tempo e superestimaria as frequências em cerca de 16\,\%; por isso, a análise usa o instante real de cada quadro e reamostra os deslocamentos em uma grade uniforme de 240\,Hz (\textit{spline} cúbica) antes da análise espectral.
 
-Como na maioria das câmeras de consumo, o sensor opera com obturador de rolagem. Como esse efeito não pode ser eliminado no aparelho, ele foi tratado como uma fonte de erro a ser avaliada: não altera a frequência identificada, apenas a fase entre linhas, e foi reduzido com ROIs de pequena altura (Seção~\ref{sec:controles}). Foco, exposição e balanço de branco foram travados antes de cada sessão, sem \textit{zoom} digital e sem estabilização. A câmera foi fixada em tripé de chão independente da bancada, voltada para a face lateral da barra, com o eixo óptico perpendicular ao plano de flexão, sob iluminação constante. % TODO: anotar no laboratorio a distancia camera-barra e o tipo de iluminacao.
+Como na maioria das câmeras de consumo, o sensor opera com obturador de rolagem. Como esse efeito não pode ser eliminado no aparelho, ele foi tratado como uma fonte de erro a ser avaliada: não altera a frequência identificada, apenas a fase entre linhas, e foi reduzido com ROIs de pequena altura (Seção~\ref{sec:controles}). Foco, exposição e balanço de branco foram travados antes de cada sessão, sem \textit{zoom} digital e sem estabilização. A câmera foi fixada em tripé de chão independente da bancada, voltada para a face lateral da barra, com o eixo óptico perpendicular ao plano de flexão, sob iluminação constante. O quadro cobriu cerca de 1,5\,m na direção da barra (0,78\,mm/pixel; Seção~\ref{sec:calibracao}), o que, com a lente principal do aparelho, corresponde a uma distância de cerca de 1,1\,m entre a câmera e a barra. % Distancia estimada pela escala e pelo campo de visao (26 mm equiv.); o autor lembra ~80 cm. TODO: tipo de iluminacao.
 
 \subsubsection{Acelerômetro e sistema de aquisição}
 \label{sec:acelerometro}
 
-A referência por contato foi um acelerômetro piezoelétrico Brüel \& Kjær Type 4507 001, de 5\,g, fixado na face superior da barra a 305\,mm do centro da articulação, com o eixo de medição na direção vertical (Figura~\ref{fig:acelerometro}). O sinal foi adquirido por um módulo Brüel \& Kjær LAN-XI Type 3160-A-4/2 (quatro entradas e duas saídas de gerador; Figura~\ref{fig:aquisitor}) e registrado no \textit{software} PULSE LabShop, versão 20. A aquisição foi configurada com banda de 20\,Hz e registros de 10\,s (4\,s em uma tomada), com sensibilidade de 10,10\,mV/(m/s$^2$) configurada no \textit{software}.
-% TODO: citar o datasheet/certificado do acelerometro e do LAN-XI.
+A referência por contato foi um acelerômetro piezoelétrico Brüel \& Kjær Type 4507 001 \cite{BK4507}, de 5\,g, fixado na face superior da barra a 305\,mm do centro da articulação, com o eixo de medição na direção vertical (Figura~\ref{fig:acelerometro}). O sinal foi adquirido por um módulo Brüel \& Kjær LAN-XI Type 3160-A-4/2 \cite{BK3160} (quatro entradas e duas saídas de gerador; Figura~\ref{fig:aquisitor}) e registrado no \textit{software} PULSE LabShop, versão 20. A aquisição foi configurada com banda de 20\,Hz e registros de 10\,s (4\,s em uma tomada), com sensibilidade de 10,10\,mV/(m/s$^2$) configurada no \textit{software}, próxima da nominal de 10\,mV/(m/s$^2$) da versão CCLD do sensor \cite{BK4507}.
 % 1a visita (15/10/2026): banda de 10 Hz (fs = 25,6 Hz) e curva digitalizada de uma foto da tela.
 % 2a visita (29/10/2026): banda de 20 Hz (fs = 51,2 Hz), curvas digitalizadas das capturas de tela
 % (Code/data/acelerometro/dia2). A recomendacao de banda >= 100 Hz e exportacao do sinal continua valendo.
@@ -558,19 +550,17 @@ evidenciando que $f_{n,1}$ é proporcional à espessura $h$ e inversamente propo
     k_{eq} = \frac{3EI}{L^3}, \qquad m_{eq} = 0{,}2357\,\rho A L.
     \label{eq:keq_meq}
 \end{equation}
-A Tabela~\ref{tab:parametros_materiais} apresenta os parâmetros dos materiais considerados.
+A Tabela~\ref{tab:parametros_materiais} apresenta os parâmetros dos materiais considerados: o poliestireno, adotado para a régua do ensaio exploratório, e o alumínio da barra ensaiada na bancada.
 
 \begin{table}[H]
     \centering
-    \caption{Parâmetros materiais de referência.}
+    \caption{Parâmetros materiais de referência \cite{Callister2014, ASM1990}.}
     \label{tab:parametros_materiais}
     \small
     \begin{tabularx}{\columnwidth}{X c c}
         \toprule
         \textbf{Material} & \textbf{$E$ (GPa)} & \textbf{$\rho$ (kg/m\textsuperscript{3})} \\
         \midrule
-        Aço inox      & 193 & 7850 \\
-        Polipropileno & 1{,}5 & 900 \\
         Poliestireno  & 3{,}2 & 1050 \\
         Alumínio 6351-T6 & 69 & 2710 \\
         \bottomrule
@@ -1188,7 +1178,7 @@ Na mesma tomada, após o sincronismo pelo impacto, o deslocamento do vídeo na R
     \end{tabularx}
 \end{table}
 
-A fase concordou dentro do critério em todas as tomadas (1,9 a 9,4$^\circ$, menos de um período de quadro), e o decaimento dos dois sinais é o mesmo. A concordância de fase, porém, não basta para verificar o sincronismo em vibração livre: com o erro de 24 e 8 períodos das tomadas 1 e 3, a fase também concordava, mas cada sensor era avaliado em um trecho diferente do decaimento, e o vídeo indicava amplitudes 83 e 48\,\% maiores que as do acelerômetro. Com o sincronismo corrigido, o vídeo indicou de 13 a 16\,\% a mais que o acelerômetro com $k_1$ e de 23 a 30\,\% a mais com $k_2$, e a razão entre os dois se manteve aproximadamente constante ao longo de cada decaimento, de modo que a diferença é de escala, e não de evento. As amplitudes relativas do vídeo são sustentadas pela forma modal (Tabela~\ref{tab:res_forma_modal}), que não depende do acelerômetro, e a absoluta, pela escala obtida da geometria medida. A referência, por sua vez, foi adquirida com banda de 20\,Hz (51,2 amostras por segundo), e a reconstrução linear entre amostras tão espaçadas atenua uma senoide pelo fator $\mathrm{sinc}^2(f/f_s)$, cerca de 0,93 a 7,8\,Hz e 0,76 a 14,7\,Hz. Esse efeito explica a maior parte da diferença e o fato de ela ser maior com $k_2$: descontado o fator, a diferença fica entre $+$4 e $+$8\,\% com $k_1$ e entre $-$7 e $-$2\,\% com $k_2$. Como a calibração do acelerômetro não foi verificada e a correção depende de como a curva de referência foi reconstruída, a comparação de amplitude foi tratada como indicativa, e não como validação.
+A fase concordou dentro do critério em todas as tomadas (1,9 a 9,4$^\circ$, menos de um período de quadro), e o decaimento dos dois sinais é o mesmo. A concordância de fase, porém, não basta para verificar o sincronismo em vibração livre: com o erro de 24 e 8 períodos das tomadas 1 e 3, a fase também concordava, mas cada sensor era avaliado em um trecho diferente do decaimento, e o vídeo indicava amplitudes 83 e 48\,\% maiores que as do acelerômetro. Com o sincronismo corrigido, o vídeo indicou de 13 a 16\,\% a mais que o acelerômetro com $k_1$ e de 23 a 30\,\% a mais com $k_2$, e a razão entre os dois se manteve aproximadamente constante ao longo de cada decaimento, de modo que a diferença é de escala, e não de evento. As amplitudes relativas do vídeo são sustentadas pela forma modal (Tabela~\ref{tab:res_forma_modal}), que não depende do acelerômetro, e a absoluta, pela escala obtida da geometria medida. A referência, por sua vez, foi adquirida com banda de 20\,Hz (51,2 amostras por segundo), e a reconstrução linear entre amostras tão espaçadas atenua uma senoide pelo fator $\mathrm{sinc}^2(f/f_s)$, cerca de 0,93 a 7,8\,Hz e 0,76 a 14,7\,Hz. Esse efeito explica a maior parte da diferença e o fato de ela ser maior com $k_2$: descontado o fator, a diferença fica entre $+$4 e $+$8\,\% com $k_1$ e entre $-$7 e $-$2\,\% com $k_2$. Como a calibração do acelerômetro não foi verificada e a correção depende de como a curva de referência foi reconstruída, a comparação de amplitude foi tratada como indicativa, e não como validação. A correlação e o NRMSE da Tabela~\ref{tab:res_tempo} refletem as mesmas limitações da referência: com $k_1$, $r$ ficou entre 0,978 e 0,996 e o NRMSE entre 19 e 26\,\%; com $k_2$, cuja frequência tem apenas 3,5 amostras por ciclo no acelerômetro, $r$ caiu para 0,83 a 0,88 e o NRMSE subiu para 54 a 64\,\%, valor que inclui também a diferença de escala entre os sinais.
 
 \subsection{Efeito de Massa do Acelerômetro}
 \label{sec:res_massa}
@@ -1277,7 +1267,7 @@ Ao Prof. Key Fonseca, pelo apoio no laboratório, na montagem da bancada e na aq
 %==============================================================================
 %  REFERENCIAS
 %==============================================================================
-\bibliographystyle{unsrt}
+\bibliographystyle{unsrt-pt}
 \bibliography{referencias.bib}
 
 \end{document}
