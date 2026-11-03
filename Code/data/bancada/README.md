@@ -33,7 +33,7 @@ acelerômetro de 5 g a 305 mm. A densidade efetiva, 2662 kg/m³, vem da massa me
 |---|---|---|
 | k de catálogo (N/m) | 1000 | 3500 |
 | **k medido (N/m)** | **857 ± 62** (−14 % do catálogo) | **3291 ± 346** (−6 %) |
-| f₁ com k de catálogo, sem massa da mola (Hz) | 9,72 | 18,00 |
+| f₁ com k de catálogo, sem m_ef (mola e ferragens) (Hz) | 9,72 | 18,00 |
 | massa efetiva m_s/3 + m_f (g) | 99,7 | 173,3 |
 | **f₁ previsto (Hz)** | **7,69 ± 0,28** | **13,71 ± 0,72** |
 | f₂ (Hz) | 78,6 | 76,6 |

@@ -18,8 +18,8 @@ Leituras de comprimento da mola interpretadas em **cm** (ver README).
 | φ(x_a)/φ(a) | 0.4732 | 0.4903 |
 | φ(a)/φ(x_a) | 2.1133 | 2.0396 |
 | efeito do acelerômetro em f₁ (%) | -0.152 | -0.134 |
-| f₁ sem massa da mola e ferragens (Hz) | 9.004 | 17.474 |
-| f₁ com k de catálogo, sem massa da mola (Hz) | 9.721 | 18.005 |
+| f₁ sem m_ef (mola e ferragens) (Hz) | 9.004 | 17.474 |
+| f₁ com k de catálogo, sem m_ef (mola e ferragens) (Hz) | 9.721 | 18.005 |
 | f₁ se a leitura fosse em mm (Hz) | 23.91 | 40.98 |
 
 ## Frequências já medidas × modelo

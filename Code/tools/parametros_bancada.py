@@ -234,8 +234,8 @@ def markdown(res: dict) -> str:
     row("φ(x_a)/φ(a)", "razao_forma_modal_xa_sobre_a", 4)
     row("φ(a)/φ(x_a)", "razao_forma_modal_a_sobre_xa", 4)
     row("efeito do acelerômetro em f₁ (%)", "efeito_acelerometro_pct", 3)
-    row("f₁ sem massa da mola e ferragens (Hz)", "f1_sem_massa_da_mola_hz", 3)
-    row("f₁ com k de catálogo, sem massa da mola (Hz)", "f1_catalogo_sem_massa_da_mola_hz", 3)
+    row("f₁ sem m_ef (mola e ferragens) (Hz)", "f1_sem_massa_da_mola_hz", 3)
+    row("f₁ com k de catálogo, sem m_ef (mola e ferragens) (Hz)", "f1_catalogo_sem_massa_da_mola_hz", 3)
     row("f₁ se a leitura fosse em mm (Hz)", "f1_se_leitura_em_mm_hz", 2)
     lines += ["", "## Frequências já medidas × modelo", "",
               "| Mola | Medida | f (Hz) | erro × modelo (%) | em u(modelo) | k que reproduz (N/m) "
