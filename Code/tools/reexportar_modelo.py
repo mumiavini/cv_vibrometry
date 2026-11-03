@@ -22,6 +22,11 @@ sincronismo da sessão (``deslocamento_video.csv``, ``comparacao.csv``,
 ``tabela_comparacao.tex`` e as figuras de deslocamento e comparação também são
 regravados).
 
+Com ``--figuras`` as figuras da comparação com o acelerômetro
+(``fig_comparacao_tempo`` e ``fig_comparacao_espectro``) são refeitas com o
+sincronismo da sessão, sem alterar ``resultados.json`` (útil quando só o
+desenho das figuras mudou).
+
 Uso (a partir de Code/):
     python -m tools.reexportar_modelo sessions/<sessão>.vibro.json [...]
     python -m tools.reexportar_modelo --escala-rois Acelerometro Parafuso sessions/<sessão>.vibro.json
@@ -112,6 +117,27 @@ def rescale(session_path: Path, s: Session, out: Path, roi_a: str, roi_b: str) -
     _write(session_path, txt, "\r\n" in raw)
     s.video.scale_mm_per_px = new
     return factor
+
+
+def redraw_comparison(session_path: Path) -> list[Path]:
+    """Redraw the accelerometer-comparison figures from the exported signals
+    and the session's sync; resultados.json is left untouched."""
+    s = Session.load(session_path)
+    out = session_path.parent / f"{session_path.name.removesuffix(SESSION_SUFFIX)}_resultados"
+    res = json.loads((out / "resultados.json").read_text(encoding="utf-8"))
+    if not (s.accel.path and Path(s.accel.path).exists() and res.get("comparacao")):
+        return []
+    analysis = rebuild_analysis(s, res, out)
+    _, rec = load_accel(s)
+    comparison = build_comparison(s, analysis, rec)
+    written = []
+    for stem, fig in (("fig_comparacao_tempo", fig_comparison_time(comparison)),
+                      ("fig_comparacao_espectro", fig_comparison_spectrum(comparison))):
+        for ext, kw in (("pdf", {}), ("png", {"dpi": 200})):
+            if (out / f"{stem}.{ext}").exists():
+                fig.savefig(out / f"{stem}.{ext}", **kw)
+                written.append(out / f"{stem}.{ext}")
+    return written
 
 
 def reexport(session_path: Path, scale_rois: tuple[str, str] | None = None) -> dict:
@@ -211,7 +237,13 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("sessoes", nargs="+")
     ap.add_argument("--escala-rois", nargs=2, metavar=("ROI_A", "ROI_B"),
                     help="refaz a escala pela distância entre estas duas ROIs posicionadas")
+    ap.add_argument("--figuras", action="store_true",
+                    help="só refaz as figuras da comparação com o acelerômetro")
     args = ap.parse_args(argv)
+    if args.figuras:
+        for a in args.sessoes:
+            print(f"{Path(a).name}: {len(redraw_comparison(Path(a)))} figuras")
+        return 0
     for a in args.sessoes:
         res = reexport(Path(a), tuple(args.escala_rois) if args.escala_rois else None)
         f_pred = next(iter(res["video"]["modal"].values()))["f_predicted_hz"]
