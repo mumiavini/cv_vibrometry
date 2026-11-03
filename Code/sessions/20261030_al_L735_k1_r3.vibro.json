@@ -48,7 +48,7 @@
     "level": "k1",
     "repetition": 3,
     "camera": "iphone",
-    "notes": "2a visita. Mola k1, tomada 3; excitacao por batida na barra (sem medir forca); video e PULSE simultaneos. Video no Drive: tcc2/dia 2/Mola K1/Medição 3 Mola 1/IMG_7710.mov -> salvar como videos/20261030_al_L735_k1_r3.mov. Acelerometro: med6_1.csv (curva com colunas t, a, a_max, a_min). Modelo: f1 = 7,69 +- 0,28 Hz. Posicoes de Ponto_aleatorio_marcado/liso estimadas pela imagem (interpolacao entre acelerometro 305 mm e parafuso 655 mm); medir na barra se possivel.",
+    "notes": "2a visita. Mola k1, tomada 3; excitacao por batida na barra (sem medir forca); video e PULSE simultaneos. Video no Drive: tcc2/dia 2/Mola K1/Medição 3 Mola 1/IMG_7710.mov -> salvar como videos/20261030_al_L735_k1_r3.mov. Acelerometro: med6_1.csv (curva com colunas t, a, a_max, a_min). Modelo: f1 = 7,69 +- 0,28 Hz. Posicoes de Ponto_aleatorio_marcado/liso estimadas pela imagem (interpolacao entre acelerometro 305 mm e parafuso 655 mm); medir na barra se possivel. Sincronismo: offset corrigido de -1.574 para -2.596 s (2026-11-03): o registro med6 do PULSE começa 1.02 s depois da batida (horário 'Status' do PULSE × horário da batida no vídeo, referência med5); antes o início do registro tinha sido alinhado à batida. Ajuste fino pela correlação (máximo de r), erro de período inteiro.",
     "checklist": [
       false,
       false,
@@ -159,11 +159,11 @@
     "f_hp": 0.6,
     "f_lp": null,
     "sync_mode": "impact",
-    "offset_s": -1.574,
+    "offset_s": -2.596,
     "drift_ppm": 0.0,
     "window": [
-      1.5791666666666666,
-      5.575
+      2.9,
+      6.5
     ],
     "f_analysis": null,
     "crit_freq_pct": 1.0,

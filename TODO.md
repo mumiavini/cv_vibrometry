@@ -67,7 +67,10 @@ dos 65 mm em ≈ 113 px. Com ela o vídeo dá **mais** amplitude que o acelerôm
 +48 %, k₂ +24 / +23 / +30 % (sincronismo conferido: as batidas alinham em ≤ 0,06 s). Lado da referência: a tela do
 PULSE (≈ 51 amostras/s) liga as amostras com retas, o que atenua a senoide por sinc²(f/fs) ≈ 0,92 (k₁) e ≈ 0,76
 (k₂) — explica quase toda a diferença da k₂, não a dispersão da k₁; conferir também o passa-alta da entrada do
-LAN-XI (0,7 / 7 / 22,4 Hz). A amplitude do vídeo é sustentada pela forma modal. k₂ do modelo = 3291 N/m (medido); o vídeo pede ≈ 3770 N/m (+7 %), coerente com o
+LAN-XI (0,7 / 7 / 22,4 Hz). **Dispersão da k₁ resolvida (2026-11-03): sincronismo.** `med4` e `med6` começam
+3,06 e 1,01 s depois da batida (horário "Status" do PULSE × batida no vídeo), mas o início deles tinha sido alinhado
+à batida (erro de 24 e 8 períodos, por isso a fase concordava). Corrigido: k₁ +13 / +14 / +16 %; com sinc²,
++4 a +8 % (k₁) e −7 a −2 % (k₂). Detalhes em `Code/data/acelerometro/dia2/README.md`. A amplitude do vídeo é sustentada pela forma modal. k₂ do modelo = 3291 N/m (medido); o vídeo pede ≈ 3770 N/m (+7 %), coerente com o
 ajuste estático sem o ponto de 0 N (3806 N/m).
 
 **Acelerômetro da 2ª visita** (`Code/data/acelerometro/dia2/`, sessões `20261030_*`; f pelo ajuste

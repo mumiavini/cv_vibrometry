@@ -51,7 +51,7 @@
       "level": "k1",
       "repetition": 1,
       "camera": "iphone",
-      "notes": "2a visita. Mola k1, tomada 1; excitacao por batida na barra (sem medir forca); video e PULSE simultaneos. Video no Drive: tcc2/dia 2/Mola K1/Medição 1 Mola 1/IMG_7710.mov -> salvar como videos/20261030_al_L735_k1_r1.mov. Acelerometro: med4_1.csv (curva com colunas t, a, a_max, a_min). Modelo: f1 = 7,69 +- 0,28 Hz. Posicoes de Ponto_aleatorio_marcado/Ponto_aleatorio_liso estimadas pela imagem (interpolacao entre acelerometro 305 mm e parafuso 655 mm).",
+      "notes": "2a visita. Mola k1, tomada 1; excitacao por batida na barra (sem medir forca); video e PULSE simultaneos. Video no Drive: tcc2/dia 2/Mola K1/Medição 1 Mola 1/IMG_7710.mov -> salvar como videos/20261030_al_L735_k1_r1.mov. Acelerometro: med4_1.csv (curva com colunas t, a, a_max, a_min). Modelo: f1 = 7,69 +- 0,28 Hz. Posicoes de Ponto_aleatorio_marcado/Ponto_aleatorio_liso estimadas pela imagem (interpolacao entre acelerometro 305 mm e parafuso 655 mm). Sincronismo: offset corrigido de -0.940 para -4.012 s (2026-11-03): o registro med4 do PULSE começa 3.07 s depois da batida (horário 'Status' do PULSE × horário da batida no vídeo, referência med5); antes o início do registro tinha sido alinhado à batida. Ajuste fino pela correlação (máximo de r), erro de período inteiro.",
       "checklist": [
         false,
         false,
@@ -162,9 +162,12 @@
       "f_hp": null,
       "f_lp": null,
       "sync_mode": "impact",
-      "offset_s": -0.94,
+      "offset_s": -4.012,
       "drift_ppm": 0.0,
-      "window": null,
+      "window": [
+        4.3,
+        13.9
+      ],
       "f_analysis": null,
       "crit_freq_pct": 1.0,
       "crit_amp_pct": 10.0,
@@ -483,33 +486,33 @@
     "dominio": "displacement",
     "unidade_video": "mm",
     "unidade_acelerometro": "mm",
-    "offset_s": -0.94,
+    "offset_s": -4.012,
     "deriva_ppm": 0.0,
     "janela_s": [
-      0.9458333333333333,
-      10.95
+      4.3,
+      13.9
     ],
     "metricas": {
-      "f_ref": 7.816607679325513,
-      "f_test": 7.806715338590872,
-      "freq_error_percent": -0.12655542072048692,
-      "f_common": 7.816607679325513,
-      "amp_ref": 4.413934859519046,
-      "amp_test": 8.057441290853657,
-      "amp_error_percent": 82.54554150197893,
-      "phase_ref_deg": -67.91492271788844,
-      "phase_test_deg": -62.60925364248646,
-      "phase_diff_deg": 5.305669075401994,
-      "r2_ref": 0.7236807257861013,
-      "r2_test": 0.8190227301757149,
-      "rms_ref": 3.666000067138147,
-      "rms_test": 6.291380569720636,
-      "rms_error_percent": 71.61430590567298,
-      "pearson_r": 0.9538595247418294,
-      "rmse": 3.0034994970961995,
-      "nrmse_percent": 81.92851724197793,
-      "gain": 1.6369594027008412,
-      "coherence": 0.9673859764254783
+      "f_ref": 7.816050095445212,
+      "f_test": 7.821419016073678,
+      "freq_error_percent": 0.06869097002838366,
+      "f_common": 7.816050095445212,
+      "amp_ref": 4.344689973428433,
+      "amp_test": 4.900840023775316,
+      "amp_error_percent": 12.80068436984515,
+      "phase_ref_deg": -71.41971046281127,
+      "phase_test_deg": -67.61324078585551,
+      "phase_diff_deg": 3.8064696769557713,
+      "r2_ref": 0.7428817993561119,
+      "r2_test": 0.759890203416718,
+      "rms_ref": 3.565328004350801,
+      "rms_test": 3.9766220345095,
+      "rms_error_percent": 11.53593805834395,
+      "pearson_r": 0.9884440561126199,
+      "rmse": 0.7048703736193174,
+      "nrmse_percent": 19.770141001309216,
+      "gain": 1.1024703501671544,
+      "coherence": 0.9946107034173945
     }
   },
   "incerteza_modelo": {
@@ -600,19 +603,19 @@
   "criterios": [
     {
       "criterio": "Frequência, vídeo × acelerômetro [%]",
-      "valor": 0.12655542072048692,
+      "valor": 0.06869097002838366,
       "limite": 1.0,
       "ok": true
     },
     {
       "criterio": "Amplitude, vídeo × acelerômetro [%]",
-      "valor": 82.54554150197893,
+      "valor": 12.80068436984515,
       "limite": 10.0,
       "ok": false
     },
     {
       "criterio": "Fase, vídeo × acelerômetro [°]",
-      "valor": 5.305669075401994,
+      "valor": 3.8064696769557713,
       "limite": 10.0,
       "ok": true
     },
@@ -642,8 +645,8 @@
     }
   ],
   "modelo_atualizado": {
-    "em": "2026-11-02T20:07:04",
-    "versao_codigo": "a8e4532",
-    "nota": "previsão do modelo, forma modal, incerteza e critérios × modelo recalculados com a sessão atual (tools/reexportar_modelo.py); sinais, sincronismo e comparação são os da exportação original (gerado_em)"
+    "em": "2026-11-03T19:03:55",
+    "versao_codigo": "820c3f1",
+    "nota": "previsão do modelo, forma modal, incerteza e critérios × modelo recalculados com a sessão atual (tools/reexportar_modelo.py); comparação com o acelerômetro refeita com o sincronismo atual da sessão"
   }
 }
