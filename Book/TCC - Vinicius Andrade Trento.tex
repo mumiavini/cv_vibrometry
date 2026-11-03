@@ -79,6 +79,26 @@
 \setlength{\parindent}{1.25em}
 \setlength{\columnsep}{0.6cm}
 
+% ----- Diagramacao ----------------------------------------------------------
+% sem linhas isoladas no topo/pe de coluna; floats podem ocupar mais da coluna
+% (menos paginas so de figuras e menos espacos vazios)
+\widowpenalty=10000
+\clubpenalty=10000
+\displaywidowpenalty=10000
+\AtBeginDocument{\raggedbottom}
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.6}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.8}
+\renewcommand{\dbltopfraction}{0.85}
+\renewcommand{\dblfloatpagefraction}{0.8}
+\setcounter{topnumber}{3}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{5}
+\setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
+\setlength{\floatsep}{8pt plus 2pt minus 2pt}
+\setlength{\intextsep}{8pt plus 2pt minus 2pt}
+
 \begin{document}
 
 %==============================================================================
@@ -136,13 +156,6 @@
 
 Os acelerômetros são os dispositivos mais difundidos para a medição de vibrações nos setores automotivo, aeroespacial e industrial \cite{Anna2026}. Eles operam através da detecção de forças estáticas contínuas ou de vibrações e movimentos dinâmicos, sendo capazes de capturar fenômenos que variam desde impactos e oscilações comuns até eventos sísmicos. Dependendo do tipo de elemento sensível utilizado, esses sensores são classificados em piezorresistivos, capacitivos, piezoelétricos ou ressonantes \cite{PiezoAccelerometer2023}. A Figura \ref{fig:acelerometro_dewesoft} apresenta um esquema representativo de um acelerômetro de compressão piezoelétrico, um dos tipos mais comuns utilizados em aplicações industriais para medição de altas frequências.
 
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=0.85\columnwidth]{Images/acelerometro_dewesoft traduzido.jpg}
-    \caption{Acelerômetro de compressão piezoelétrico da Dewesoft. Fonte: \cite{aceletrometroDewesoft2025}.}
-    \label{fig:acelerometro_dewesoft}
-\end{figure}
-
 Contudo, uma vez que é necessário fazer a montagem física dos sensores nas peças, limitações físicas e de acesso podem restringir ou impedir sua utilização em certos casos. Alguns exemplos de aplicações críticas incluem:
 
 \begin{itemize}
@@ -150,6 +163,14 @@ Contudo, uma vez que é necessário fazer a montagem física dos sensores nas pe
     \item Medição de vibrações em componentes muito leves ou frágeis.
     \item Componentes que trabalham em altas temperaturas.
 \end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=3.9cm,trim=150 50 85 85,clip]{Images/acelerometro_dewesoft traduzido.jpg}
+    \caption{Acelerômetro de compressão piezoelétrico da Dewesoft. Fonte: \cite{aceletrometroDewesoft2025}.}
+    \label{fig:acelerometro_dewesoft}
+\end{figure}
+
 
 Para contornar as limitações de instrumentação física, técnicas de vibrometria óptica têm sido cada vez mais utilizadas para a medição sem contato \cite{Phase2022}. Essas técnicas permitem a obtenção de informações sobre o comportamento dinâmico de estruturas sem o acréscimo indesejado de massa (\textit{mass loading}), o que é particularmente vantajoso em sistemas sensíveis. Uma das técnicas ópticas consagradas é a vibrometria por Laser Doppler (LDV) apresentada na Figura \ref{fig:ldv}. No entanto, apesar de sua alta fidelidade e precisão \cite{LDVpolytec2006}, sistemas LDV industriais apresentam custos de aquisição e manutenção bastante elevados, além de exigirem \textit{setups} experimentais complexos e realizarem medições limitadas a pontos específicos (espacialmente discretas). Isso enfatiza a necessidade de alternativas que mantenham a natureza não intrusiva, mas com maior viabilidade econômica e capacidade de monitoramento global.
 
@@ -380,7 +401,10 @@ O filtro de Gabor é um filtro de banda passante orientado, definido pelo produt
 \end{equation}
 em que $(x', y') = (x\cos\theta + y\sin\theta,\; -x\sin\theta + y\cos\theta)$ são as coordenadas rotacionadas segundo $\theta$ e $\sigma$ controla a extensão espacial da envoltória gaussiana. A convolução do quadro $I(x,y,t)$ com $G_{\theta,\omega_0}$ produz um coeficiente complexo $C_{\theta,\omega_0}(x,y,t)$ em cada pixel:
 \begin{equation}
-    C_{\theta,\omega_0}(x,y,t) = \big(I * G_{\theta,\omega_0}\big)(x,y,t) = A(x,y,t)\,\exp\!\big(j\,\varphi(x,y,t)\big),
+    \begin{split}
+        C_{\theta,\omega_0}(x,y,t) &= \big(I * G_{\theta,\omega_0}\big)(x,y,t) \\
+        &= A(x,y,t)\,\exp\!\big(j\,\varphi(x,y,t)\big),
+    \end{split}
     \label{eq:gabor_coef}
 \end{equation}
 do qual se extraem dois mapas: a amplitude local $A = |C|$, que indica a presença de textura na orientação $\theta$ e frequência $\omega_0$, e a fase local $\varphi = \arg(C)$, que codifica a posição sub-pixel da estrutura naquela banda \cite{Wadhwa2013}.
@@ -477,25 +501,25 @@ A referência por contato foi um acelerômetro piezoelétrico Brüel \& Kjær Ty
 
 A bancada (Figura~\ref{fig:bancada}) é um equipamento didático para ensaios de vibrações livres e forçadas, construído sobre uma estrutura rígida de perfis de aço cuja base possui rasgos para a fixação dos componentes. Ela conta com um braço articulado por mancal de rolamento, molas helicoidais que conectam o braço a uma travessa superior e um amortecedor viscoso. Neste trabalho foram realizados apenas ensaios de vibração livre.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=\columnwidth]{Images/bancada_teste.jpg}
     \caption{Bancada de vibrações do laboratório. Fonte: O autor.}
     \label{fig:bancada}
 \end{figure}
 
-O corpo de prova é uma barra maciça de alumínio 6351-T6 de seção retangular, com 750\,mm de comprimento, largura de 1\,polegada ($b = 25{,}4$\,mm), espessura de 1/2\,polegada ($h = 12{,}7$\,mm) e massa de 644\,g (Figura~\ref{fig:barra_aluminio}). A liga 6351 pertence à série 6xxx, cujos principais elementos de liga são o magnésio e o silício, que se combinam formando o precipitado endurecedor Mg$_2$Si; a têmpera T6 indica solubilização e envelhecimento artificial, condição que maximiza a resistência mecânica da liga, com limite de escoamento típico da ordem de 280\,MPa \cite{ASM1990}. Para o ensaio dinâmico, as propriedades de interesse são o módulo de elasticidade $E \approx 69$\,GPa e a densidade $\rho \approx 2710$\,kg/m\textsuperscript{3}; no modelo, usou-se a densidade efetiva de 2662\,kg/m\textsuperscript{3}, obtida da massa medida e das dimensões nominais da barra, que já inclui o efeito dos furos. A superfície extrudada é lisa e reflexiva.
-
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=\columnwidth]{Images/barra_aluminio_6351.jpg}
     \caption{Barras de alumínio 6351-T6 ($1'' \times 1/2''$) utilizadas como corpo de prova, com furos para fixação. Fonte: O autor.}
     \label{fig:barra_aluminio}
 \end{figure}
 
+O corpo de prova é uma barra maciça de alumínio 6351-T6 de seção retangular, com 750\,mm de comprimento, largura de 1\,polegada ($b = 25{,}4$\,mm), espessura de 1/2\,polegada ($h = 12{,}7$\,mm) e massa de 644\,g (Figura~\ref{fig:barra_aluminio}). A liga 6351 pertence à série 6xxx, cujos principais elementos de liga são o magnésio e o silício, que se combinam formando o precipitado endurecedor Mg$_2$Si; a têmpera T6 indica solubilização e envelhecimento artificial, condição que maximiza a resistência mecânica da liga, com limite de escoamento típico da ordem de 280\,MPa \cite{ASM1990}. Para o ensaio dinâmico, as propriedades de interesse são o módulo de elasticidade $E \approx 69$\,GPa e a densidade $\rho \approx 2710$\,kg/m\textsuperscript{3}; no modelo, usou-se a densidade efetiva de 2662\,kg/m\textsuperscript{3}, obtida da massa medida e das dimensões nominais da barra, que já inclui o efeito dos furos. A superfície extrudada é lisa e reflexiva.
+
 Na configuração ensaiada (Figura~\ref{fig:frame_ensaio}), uma extremidade da barra é presa a uma junta com mancal, que permite a rotação no plano vertical, e o comprimento do centro do mancal até a ponta é $L = 735$\,mm. A barra é suspensa por uma mola helicoidal presa à travessa superior e ligada, por um parafuso, ao furo situado a 80\,mm da ponta, isto é, a $a = 655$\,mm do centro da articulação. Foram utilizadas duas molas, de rigidez nominal de catálogo $k_1 = 1000$\,N/m e $k_2 = 3500$\,N/m, cujas rigidezes e massas foram medidas no laboratório (Seção~\ref{sec:res_parametros}). O acelerômetro fica a $x_a = 305$\,mm da articulação. Cada ensaio consiste em excitar a barra com uma batida manual, sem medição da força aplicada, e registrar a resposta livre simultaneamente pela câmera e pelo acelerômetro. Como a análise usa apenas a resposta livre após a batida, a força de excitação não é necessária para identificar a frequência natural e o amortecimento.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=\columnwidth]{Images/frame_ensaio_mola.jpg}
     \caption{Quadro do vídeo do ensaio: barra articulada à esquerda, acelerômetro sobre a barra e mola presa ao parafuso próximo à ponta. Fonte: O autor.}
@@ -790,16 +814,16 @@ O sinal do acelerômetro é convertido para deslocamento por integração dupla 
 \end{equation}
 O vídeo e o acelerômetro são gravados por relógios independentes. O atraso entre eles é estimado pelo evento de impacto aplicado no início de cada tomada, visível nos dois registros, ou pela correlação cruzada das formas de onda, com interpolação do pico para resolução fracionária; a deriva relativa entre os relógios é verificada em dois eventos. Após um filtro comum aos dois sinais, são calculados o erro de frequência, o erro de amplitude e a diferença de fase do ajuste senoidal na frequência de análise, além da correlação de Pearson e do erro quadrático médio normalizado. Como verificação independente do sincronismo, as envoltórias são comparadas em aceleração, convertendo o deslocamento do vídeo em $\omega_n^2\,x(t)$, e as taxas de decaimento $\sigma$ dos dois sensores são confrontadas. A Figura~\ref{fig:app_sinc} mostra os dois sinais sincronizados no aplicativo.
 
-\begin{figure}[htbp]
+\subsubsection{Comparação entre pontos e forma modal}
+
+Com duas ou mais ROIs posicionadas ao longo da barra, a razão entre as amplitudes do ajuste senoidal de cada ROI e da ROI de maior amplitude é comparada à razão correspondente da forma modal do modelo, $|\phi(x_i)|/|\phi(x_{ref})|$, no modo de frequência mais próxima da medida. Essa comparação independe do acelerômetro e da calibração espacial, pois a escala se cancela na razão.
+
+\begin{figure}[H]
     \centering
     \includegraphics[width=\columnwidth]{Images/app_sincronismo.png}
     \caption{Vídeo e acelerômetro sincronizados pelo impacto no aplicativo (etapa Comparar), com a janela de análise destacada e o detalhe de alguns ciclos. Fonte: O autor.}
     \label{fig:app_sinc}
 \end{figure}
-
-\subsubsection{Comparação entre pontos e forma modal}
-
-Com duas ou mais ROIs posicionadas ao longo da barra, a razão entre as amplitudes do ajuste senoidal de cada ROI e da ROI de maior amplitude é comparada à razão correspondente da forma modal do modelo, $|\phi(x_i)|/|\phi(x_{ref})|$, no modo de frequência mais próxima da medida. Essa comparação independe do acelerômetro e da calibração espacial, pois a escala se cancela na razão.
 
 \subsection{Estratégia de Validação}
 \label{sec:validacao}
@@ -846,7 +870,7 @@ Antes dos ensaios, as massas da mola, das ferragens, do acelerômetro e da barra
 
 Em cada tomada, a gravação do vídeo e a aquisição do acelerômetro foram iniciadas, e a barra foi excitada por uma batida manual, sem medição da força, registrando-se o decaimento livre simultaneamente pelos dois sensores; a própria batida serve de evento de sincronismo entre os registros. O vídeo foi gravado continuamente ao longo de várias tomadas, e cada tomada foi recortada no \textit{software}, do instante logo anterior à batida até o fim da oscilação (15 a 28\,s); os registros do acelerômetro têm 10\,s (4\,s em uma tomada). Foram feitas três tomadas com cada mola, em 29/10/2026 (Tabela~\ref{tab:tomadas}).
 
-\begin{table}[htbp]
+\begin{table}[H]
     \centering
     \caption{Tomadas da campanha de bancada.}
     \label{tab:tomadas}
@@ -1049,14 +1073,14 @@ A frequência medida pelo vídeo diferiu da do acelerômetro em 0,21\,\% em méd
 
 As frequências desta tabela já incorporam a correção da base de tempo (Seção~\ref{sec:equipamentos_camera}). Sem ela, isto é, supondo os quadros igualmente espaçados a 240\,fps, o vídeo de uma tomada com a mola $k_1$ indicaria 9,1\,Hz, 16\,\% acima do acelerômetro, que é a fração de tempo correspondente aos quadros descartados pelo aparelho.
 
-O espectrograma do deslocamento do parafuso (Figura~\ref{fig:res_espectrograma}) mostra o primeiro modo, em 7,8\,Hz, dominando o registro desde a batida e decaindo ao longo de cerca de 15\,s; as demais componentes ficam pelo menos 40\,dB abaixo dele.
-
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=\columnwidth]{Images/fig_bancada_espectrograma.png}
     \caption{Espectrograma (STFT) do deslocamento medido pelo vídeo na ROI do parafuso da mola (mola $k_1$, tomada 2). Fonte: O autor.}
     \label{fig:res_espectrograma}
 \end{figure}
+
+O espectrograma do deslocamento do parafuso (Figura~\ref{fig:res_espectrograma}) mostra o primeiro modo, em 7,8\,Hz, dominando o registro desde a batida e decaindo ao longo de cerca de 15\,s; as demais componentes ficam pelo menos 40\,dB abaixo dele.
 
 \subsection{Forma Modal Multiponto}
 \label{sec:res_forma_modal}
