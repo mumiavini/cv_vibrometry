@@ -22,6 +22,11 @@ sincronismo da sessão (``deslocamento_video.csv``, ``comparacao.csv``,
 ``tabela_comparacao.tex`` e as figuras de deslocamento e comparação também são
 regravados).
 
+Com ``--comparacao`` a comparação com o acelerômetro é refeita com o
+sincronismo e a janela atuais da sessão (por exemplo, depois de corrigir
+``compare.offset_s``): métricas e critérios de ``resultados.json``,
+``comparacao.csv``, ``tabela_comparacao.tex`` e as figuras da comparação.
+
 Com ``--figuras`` as figuras da comparação com o acelerômetro
 (``fig_comparacao_tempo`` e ``fig_comparacao_espectro``) são refeitas com o
 sincronismo da sessão, sem alterar ``resultados.json`` (útil quando só o
@@ -140,7 +145,8 @@ def redraw_comparison(session_path: Path) -> list[Path]:
     return written
 
 
-def reexport(session_path: Path, scale_rois: tuple[str, str] | None = None) -> dict:
+def reexport(session_path: Path, scale_rois: tuple[str, str] | None = None,
+             recompare: bool = False) -> dict:
     s = Session.load(session_path)
     out = session_path.parent / f"{session_path.name.removesuffix(SESSION_SUFFIX)}_resultados"
     res_path = out / "resultados.json"
@@ -186,8 +192,11 @@ def reexport(session_path: Path, scale_rois: tuple[str, str] | None = None) -> d
     if s.specimen.uncertainties:
         res["incerteza_modelo"] = model_uncertainty(s.specimen, s.specimen.uncertainties).to_dict()
     comparison = None
-    if factor is not None and rec is not None and res.get("comparacao"):
-        comparison = build_comparison(s, analysis, rec)      # same sync as exported
+    if (factor is not None or recompare) and rec is not None and res.get("comparacao"):
+        comparison = build_comparison(s, analysis, rec)      # sync of the session file
+        res["comparacao"].update({
+            "offset_s": comparison.offset_s, "deriva_ppm": comparison.drift_ppm,
+            "janela_s": list(comparison.window)})
         res["comparacao"]["metricas"] = (comparison.metrics.to_dict()
                                          if comparison.metrics else None)
         res["video"]["escala_mm_px"] = s.video.scale_mm_per_px
@@ -199,9 +208,11 @@ def reexport(session_path: Path, scale_rois: tuple[str, str] | None = None) -> d
         res["criterios"] = kept + [c for c in criteria_checks(s, analysis, None)]
     res["modelo_atualizado"] = {
         "em": datetime.now().isoformat(timespec="seconds"), "versao_codigo": code_version(),
-        "nota": "previsão do modelo, forma modal, incerteza e critérios × modelo recalculados "
-                "com a sessão atual (tools/reexportar_modelo.py); sinais, sincronismo e "
-                "comparação são os da exportação original (gerado_em)"}
+        "nota": ("previsão do modelo, forma modal, incerteza e critérios × modelo recalculados "
+                 "com a sessão atual (tools/reexportar_modelo.py); "
+                 + ("comparação com o acelerômetro refeita com o sincronismo atual da sessão"
+                    if comparison is not None else
+                    "sinais, sincronismo e comparação são os da exportação original (gerado_em)"))}
     _write(res_path, json.dumps(_clean(res), indent=2, ensure_ascii=False), crlf)
 
     # --- tables and spectrum figure --------------------------------------- #
@@ -213,18 +224,18 @@ def reexport(session_path: Path, scale_rois: tuple[str, str] | None = None) -> d
     figs = {"fig_espectro": fig_spectrum(analysis)}
     if factor is not None:
         figs["fig_deslocamento"] = fig_displacement(analysis)
-        if comparison is not None and comparison.metrics is not None:
-            p = out / "tabela_comparacao.tex"
-            _write(p, latex_comparison_table(comparison, s), _is_crlf(p))
-            p = out / "comparacao.csv"
-            df = pl.DataFrame({"tempo_s": comparison.t,
-                               f"video_{comparison.unit_video}": comparison.video,
-                               f"acelerometro_{comparison.unit_accel}": comparison.accel})
-            _write(p, df.write_csv(), _is_crlf(p))
-            figs.update({"fig_comparacao_tempo": fig_comparison_time(comparison),
-                         "fig_comparacao_espectro": fig_comparison_spectrum(comparison),
-                         "fig_dispersao": fig_scatter(comparison),
-                         "fig_coerencia": fig_coherence(comparison)})
+    if comparison is not None and comparison.metrics is not None:
+        p = out / "tabela_comparacao.tex"
+        _write(p, latex_comparison_table(comparison, s), _is_crlf(p))
+        p = out / "comparacao.csv"
+        df = pl.DataFrame({"tempo_s": comparison.t,
+                           f"video_{comparison.unit_video}": comparison.video,
+                           f"acelerometro_{comparison.unit_accel}": comparison.accel})
+        _write(p, df.write_csv(), _is_crlf(p))
+        figs.update({"fig_comparacao_tempo": fig_comparison_time(comparison),
+                     "fig_comparacao_espectro": fig_comparison_spectrum(comparison),
+                     "fig_dispersao": fig_scatter(comparison),
+                     "fig_coerencia": fig_coherence(comparison)})
     for stem, fig in figs.items():
         for ext, kw in (("pdf", {}), ("png", {"dpi": 200})):
             if (out / f"{stem}.{ext}").exists():
@@ -237,6 +248,8 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("sessoes", nargs="+")
     ap.add_argument("--escala-rois", nargs=2, metavar=("ROI_A", "ROI_B"),
                     help="refaz a escala pela distância entre estas duas ROIs posicionadas")
+    ap.add_argument("--comparacao", action="store_true",
+                    help="refaz a comparação com o acelerômetro com o sincronismo atual da sessão")
     ap.add_argument("--figuras", action="store_true",
                     help="só refaz as figuras da comparação com o acelerômetro")
     args = ap.parse_args(argv)
@@ -245,10 +258,11 @@ def main(argv: list[str] | None = None) -> int:
             print(f"{Path(a).name}: {len(redraw_comparison(Path(a)))} figuras")
         return 0
     for a in args.sessoes:
-        res = reexport(Path(a), tuple(args.escala_rois) if args.escala_rois else None)
+        res = reexport(Path(a), tuple(args.escala_rois) if args.escala_rois else None,
+                       recompare=args.comparacao)
         f_pred = next(iter(res["video"]["modal"].values()))["f_predicted_hz"]
         msg = f"{Path(a).name}: modelo {f_pred:.3f} Hz; forma modal {'ok' if res.get('forma_modal') else '—'}"
-        if args.escala_rois:
+        if args.escala_rois or args.comparacao:
             m = (res.get("comparacao") or {}).get("metricas") or {}
             msg += (f"; escala {res['video'].get('escala_mm_px', float('nan')):.4f} mm/px; "
                     f"A vídeo {m.get('amp_test', float('nan')):.3f} × acel. {m.get('amp_ref', float('nan')):.3f} mm "
