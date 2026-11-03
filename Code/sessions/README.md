@@ -7,7 +7,7 @@ são relativos a esta pasta (`../videos/…`, `../data/acelerometro/…`). O cac
 
 | Sessão | Ensaio |
 |---|---|
-| `k1_cm_acc.vibro.json` | barra Al 6351-T6 + mola k₁ (857 N/m medido; catálogo 1500), com acelerômetro; 15/10/2026. Parâmetros do corpo de prova medidos em `../data/bancada/` (2ª visita) |
+| `k1_cm_acc.vibro.json` | barra Al 6351-T6 + mola k₁ (857 N/m medido; catálogo 1000), com acelerômetro; 15/10/2026. Parâmetros do corpo de prova medidos em `../data/bancada/` (2ª visita) |
 
 | `20261030_al_L735_k{1,2}_r{1,2,3}.vibro.json` | 2ª visita: molas k₁ e k₂, 3 tomadas cada, vídeo (original do iPhone, trecho de cada tomada) + acelerômetro simultâneos (batida). Processadas e exportadas (`*_resultados/`); resumo em `resumo_dia2.md`/`.csv` (`python -m tools.resumo_tomadas`) |
 | `20261030_al_L735_k1_afrouxa_c{1..5}.vibro.json` | teste de afrouxamento improvisado (ciclos 1–5), só vídeo |

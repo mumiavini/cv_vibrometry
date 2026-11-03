@@ -61,7 +61,7 @@ cd Code && python -m tools.resumo_tomadas sessions/resumo_dia2 sessions/20261030
 
 Barra de alumínio 6351-T6 (750 mm; 25,4 × 12,7 mm; 644 g) **articulada em mancal**, eixo a 735 mm da ponta,
 com mola presa a 655 mm do eixo: k₁ = 857 ± 62 N/m (161 g) ou k₂ = 3291 ± 346 N/m (382 g), medidas em ensaio
-estático (catálogo: 1500 e 2500 N/m). Acelerômetro B&K 4507 001 (5 g) a 305 mm do eixo; aquisição B&K LAN-XI
+estático (catálogo: 1000 e 3500 N/m). Acelerômetro B&K 4507 001 (5 g) a 305 mm do eixo; aquisição B&K LAN-XI
 3160-A-4/2 + PULSE LabShop; vídeo com iPhone 17e a 240 fps. Modelo (`BeamFE`): f₁ = 7,69 ± 0,28 Hz (k₁) e
 13,7 ± 0,7 Hz (k₂). Medições em `Code/data/bancada/`.
 Estado e pendências em `TODO.md` e `issues.md`.

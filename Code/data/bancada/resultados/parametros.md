@@ -5,9 +5,9 @@ Leituras de comprimento da mola interpretadas em **cm** (ver README).
 
 | Grandeza | k₁ | k₂ |
 |---|---|---|
-| k de catálogo (N/m) | 1500 | 2500 |
+| k de catálogo (N/m) | 1000 | 3500 |
 | k medido (N/m) | 857 ± 62 (7.2 %) | 3291 ± 346 (10.5 %) |
-| diferença ao catálogo (%) | -42.9 | 31.6 |
+| diferença ao catálogo (%) | -14.3 | -6.0 |
 | R² do ajuste | 0.9846 | 0.9679 |
 | k incremental entre leituras (N/m) | 667, 1429, 1163, 704 | 1176, 4286, 4167, 3571 |
 | massa efetiva m_s/3 + m_f (g) | 99.7 | 173.3 |
@@ -19,7 +19,7 @@ Leituras de comprimento da mola interpretadas em **cm** (ver README).
 | φ(a)/φ(x_a) | 2.1133 | 2.0396 |
 | efeito do acelerômetro em f₁ (%) | -0.152 | -0.134 |
 | f₁ sem massa da mola e ferragens (Hz) | 9.004 | 17.474 |
-| f₁ com k de catálogo, sem massa da mola (Hz) | 11.882 | 15.279 |
+| f₁ com k de catálogo, sem massa da mola (Hz) | 9.721 | 18.005 |
 | f₁ se a leitura fosse em mm (Hz) | 23.91 | 40.98 |
 
 ## Frequências já medidas × modelo

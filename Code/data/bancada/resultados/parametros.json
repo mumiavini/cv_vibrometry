@@ -33,8 +33,8 @@
         "n": 5,
         "rel_u": 0.07211936663660261
       },
-      "k_catalogo_n_m": 1500.0,
-      "diferenca_catalogo_pct": -42.89629612327045,
+      "k_catalogo_n_m": 1000.0,
+      "diferenca_catalogo_pct": -14.344444184905681,
       "m_ef_g": 99.66666666666666,
       "especime": {
         "L_mm": 735.0,
@@ -62,7 +62,7 @@
       "f1_sem_acelerometro_hz": 7.703208704944767,
       "efeito_acelerometro_pct": -0.15151235887404135,
       "f1_sem_massa_da_mola_hz": 9.004050326753624,
-      "f1_catalogo_sem_massa_da_mola_hz": 11.882196608810569,
+      "f1_catalogo_sem_massa_da_mola_hz": 9.72087298870873,
       "f1_se_leitura_em_mm_hz": 23.905067651417713,
       "razao_forma_modal_xa_sobre_a": 0.4731844630024242,
       "razao_forma_modal_a_sobre_xa": 2.1133407332414396,
@@ -187,8 +187,8 @@
         "n": 5,
         "rel_u": 0.10507134819981546
       },
-      "k_catalogo_n_m": 2500.0,
-      "diferenca_catalogo_pct": 31.63802174675513,
+      "k_catalogo_n_m": 3500.0,
+      "diferenca_catalogo_pct": -5.972841609460622,
       "m_ef_g": 173.33333333333331,
       "especime": {
         "L_mm": 735.0,
@@ -216,7 +216,7 @@
       "f1_sem_acelerometro_hz": 13.727951659281464,
       "efeito_acelerometro_pct": -0.13414691913916896,
       "f1_sem_massa_da_mola_hz": 17.473997501582744,
-      "f1_catalogo_sem_massa_da_mola_hz": 15.278807280022553,
+      "f1_catalogo_sem_massa_da_mola_hz": 18.004935560013852,
       "f1_se_leitura_em_mm_hz": 40.980000255140936,
       "razao_forma_modal_xa_sobre_a": 0.4903027525598213,
       "razao_forma_modal_a_sobre_xa": 2.039556161533054,
