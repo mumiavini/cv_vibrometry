@@ -1152,7 +1152,7 @@ A Tabela~\ref{tab:res_amortecimento} compara as razões de amortecimento obtidas
 \end{table}
 % 1a visita (tomadas diferentes): video ~0,0010 x PULSE ~0,0072; a diferenca era de tomada, nao de metodo.
 
-Na mesma tomada, o vídeo e o acelerômetro forneceram razões de amortecimento médias de 0,0051 e 0,0052 com $k_1$ e de 0,0027 e 0,0024 com $k_2$, com diferenças por tomada entre $-$12 e $+$16\,\%. A variação entre tomadas da mesma mola (0,0039 a 0,0059 com $k_1$) é maior que a diferença entre os sensores e acompanha a tomada nos dois sensores, o que sugere uma dependência real do ensaio, como a amplitude da batida. A diferença de cerca de sete vezes observada na primeira visita, entre um vídeo e um registro do acelerômetro de tomadas diferentes, não se repetiu: decorria da comparação entre tomadas diferentes, e não do método. O ensaio com a lâmina do amortecedor da bancada imersa no óleo não foi realizado nesta campanha.
+Na mesma tomada, o vídeo e o acelerômetro forneceram razões de amortecimento médias de 0,0051 e 0,0052 com $k_1$ e de 0,0027 e 0,0024 com $k_2$, com diferenças por tomada entre $-$12 e $+$16\,\%. A variação entre tomadas da mesma mola (0,0039 a 0,0059 com $k_1$) é maior que a diferença entre os sensores e acompanha a tomada nos dois sensores, o que sugere uma dependência real do ensaio, como a amplitude da batida. Por isso, o amortecimento só pode ser comparado entre sensores na mesma tomada. O ensaio com a lâmina do amortecedor da bancada imersa no óleo não foi realizado nesta campanha.
 
 \subsection{Comparação no Domínio do Tempo}
 \label{sec:res_tempo}
@@ -1232,7 +1232,7 @@ Quatro características do aparelho afetam a medição. A primeira é o obturado
 
 \subsection{A referência por contato}
 
-O acelerômetro é a referência da validação, mas sua configuração limitou a comparação. Nas duas visitas a aquisição foi feita com banda reduzida (10 e 20\,Hz). Para a frequência e o amortecimento isso bastou: a frequência pelo ajuste senoidal não depende da forma dos picos, e os dois sensores concordaram dentro de 0,4\,\% na frequência e de 16\,\% no amortecimento, por tomada. Para a amplitude, não: com poucas amostras por ciclo e sem a calibração do sensor verificada, a amplitude da referência ficou incerta. Uma terceira visita deveria adquirir com banda de pelo menos 100\,Hz e exportar o sinal no tempo. A lição principal foi a necessidade de registrar o vídeo e o acelerômetro na mesma excitação: na primeira visita, com tomadas diferentes, o amortecimento diferia em sete vezes; na mesma tomada, concordou.
+O acelerômetro é a referência da validação, mas sua configuração limitou a comparação. A aquisição foi feita com banda reduzida, de 20\,Hz. Para a frequência e o amortecimento isso bastou: a frequência pelo ajuste senoidal não depende da forma dos picos, e os dois sensores concordaram dentro de 0,4\,\% na frequência e de 16\,\% no amortecimento, por tomada. Para a amplitude, não: com poucas amostras por ciclo e sem a calibração do sensor verificada, a amplitude da referência ficou incerta. Ensaios futuros devem adquirir com banda de pelo menos 100\,Hz e exportar o sinal no tempo. Também foi essencial registrar o vídeo e o acelerômetro na mesma excitação, já que o amortecimento variou de uma tomada para outra.
 
 \subsection{O modelo analítico}
 \label{sec:disc_modelo}
