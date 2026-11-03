@@ -233,14 +233,17 @@ def fig_comparison_time(cmp: ComparisonData) -> Figure:
     fig, (a1, a2) = _fig(8, 5.6, nrows=2)
     lab_v = f"Vídeo [{cmp.unit_video}]"
     lab_a = f"Acelerômetro [{cmp.unit_accel}]"
+    quantity = "Deslocamento" if cmp.domain == "displacement" else "Aceleração"
+    unit = (cmp.unit_video if cmp.unit_video == cmp.unit_accel
+            else f"{cmp.unit_video} | {cmp.unit_accel}")
     for ax in (a1, a2):
         ax.plot(cmp.t, cmp.video, color=C_VIDEO, linewidth=0.8, label=lab_v)
         ax.plot(cmp.t, cmp.accel, color=C_ACC, linewidth=0.8, label=lab_a,
                 alpha=0.9)
-        ax.set_ylabel("Deslocamento" if cmp.domain == "displacement"
-                      else "Aceleração")
+        ax.set_ylabel(f"{quantity} [{unit}]")
+        ax.set_xlabel("Tempo [s]")
     a1.axvspan(*cmp.window, color="0.85", alpha=0.5, lw=0)
-    a1.set_title("Vídeo × acelerômetro (sincronizados)")
+    a1.set_title("(a) Vídeo × acelerômetro (sincronizados)")
     a1.legend(loc="upper right")
     # detail: ~6 periods in the middle of the window
     m = cmp.metrics
@@ -256,8 +259,7 @@ def fig_comparison_time(cmp: ComparisonData) -> Figure:
     if vals.size:
         pad = 0.1 * (vals.max() - vals.min() + 1e-12)
         a2.set_ylim(vals.min() - pad, vals.max() + pad)
-    a2.set_xlabel("Tempo [s]")
-    a2.set_title("Detalhe")
+    a2.set_title("(b) Detalhe de alguns ciclos")
     return fig
 
 
@@ -270,8 +272,10 @@ def fig_comparison_spectrum(cmp: ComparisonData) -> Figure:
         ax.plot(f, a, color=c, linewidth=1.0, label=lab)
     if cmp.metrics is not None and cmp.metrics.f_common:
         ax.set_xlim(0, min(cmp.fs / 2, 4 * cmp.metrics.f_common))
+    unit = (cmp.unit_video if cmp.unit_video == cmp.unit_accel
+            else f"{cmp.unit_video} | {cmp.unit_accel}")
     ax.set_xlabel("Frequência [Hz]")
-    ax.set_ylabel("Amplitude")
+    ax.set_ylabel(f"Amplitude [{unit}]")
     ax.set_title("Espectros na janela de análise")
     ax.legend(loc="upper right")
     return fig

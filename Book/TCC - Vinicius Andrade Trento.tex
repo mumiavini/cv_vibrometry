@@ -241,7 +241,7 @@ com $\omega_d = \omega_n\sqrt{1 - \zeta^2}$ a frequência natural amortecida. Ta
     \caption{Regimes de resposta livre em função da razão de amortecimento $\zeta$.}
     \label{tab:casos_amortecimento}
     \small
-    \begin{tabularx}{\columnwidth}{>{\raggedright\arraybackslash}p{0.24\columnwidth} >{\centering\arraybackslash}p{0.17\columnwidth} >{\raggedright\arraybackslash}X}
+    \begin{tabularx}{\columnwidth}{@{}>{\raggedright\arraybackslash}p{0.27\columnwidth} >{\centering\arraybackslash}p{0.15\columnwidth} >{\raggedright\arraybackslash}X@{}}
         \toprule
         \textbf{Regime} & \textbf{$\zeta$} & \textbf{Natureza da resposta} \\
         \midrule
@@ -578,7 +578,7 @@ A Tabela~\ref{tab:parametros_materiais} apresenta os parâmetros dos materiais c
 \subsubsection{Barra articulada suspensa por mola: modelo de 1 GDL}
 \label{sec:modelo_1gdl}
 
-A Figura~\ref{fig:dcl} apresenta a montagem da bancada e o diagrama de corpo livre da barra. Para pequenas rotações $\theta$ em torno da articulação $O$ (positivas no sentido horário, que abaixa a ponta), atuam sobre a barra as reações da articulação ($R_x$, $R_y$), os pesos da barra ($m_b g$, aplicado em $L/2$), do acelerômetro ($m_a g$, em $x_a$) e da massa efetiva da mola e das ferragens ($m_{ef} g$, em $a$), e a força da mola $k(\delta_e + a\theta)$, em que $\delta_e$ é o alongamento da mola na posição de equilíbrio.
+A Figura~\ref{fig:dcl} apresenta a montagem da bancada e o diagrama de corpo livre da barra. Para pequenas rotações $\theta$ em torno da articulação $O$ (positivas no sentido horário, que abaixa a ponta), atuam sobre a barra as reações da articulação ($R_x$, $R_y$), os pesos da barra ($m_b g$, aplicado em $L/2$, em que $m_b = \rho b h L \approx 631$\,g é a massa do vão de 735\,mm entre o eixo e a ponta), do acelerômetro ($m_a g$, em $x_a$) e da massa efetiva da mola e das ferragens ($m_{ef} g$, em $a$), e a força da mola $k(\delta_e + a\theta)$, em que $\delta_e$ é o alongamento da mola na posição de equilíbrio.
 
 \begin{figure}[htbp]
     \centering
@@ -643,6 +643,7 @@ com o momento de inércia em relação à articulação
     J_O = \frac{m_b L^2}{3} + m_a x_a^2 + m_{ef}\, a^2 .
     \label{eq:JO}
 \end{equation}
+O trecho de 15\,mm da barra atrás do eixo (cerca de 13\,g) contribui com menos de 0,001\,\% de $J_O$ e foi desprezado, como no modelo de elementos finitos.
 A gravidade, portanto, não altera a frequência: ela só define a posição de equilíbrio. A massa da mola não se move como um corpo rígido; pelo método de Rayleigh, considerando o perfil linear de velocidades ao longo das espiras, sua contribuição equivale a um terço da massa $m_s$ concentrada na extremidade móvel \cite{Rao2010}, somada à massa $m_f$ das ferragens (parafuso, porcas e arruelas):
 \begin{equation}
     m_{ef} = \frac{m_s}{3} + m_f .
@@ -1020,8 +1021,8 @@ A Tabela~\ref{tab:parametros_medidos} reúne os parâmetros medidos no laborató
         $m_{ef} = m_s/3 + m_f$ (g) & 99,7 & 173,3 \\
         $f_1$ previsto (Hz) & 7,69 $\pm$ 0,28 & 13,71 $\pm$ 0,72 \\
         \midrule
-        \multicolumn{3}{l}{Barra: 644\,g; acelerômetro: 5\,g; $L$ = 735\,mm;} \\
-        \multicolumn{3}{l}{$a$ = 655\,mm; $x_a$ = 305\,mm (do centro do mancal)} \\
+        \multicolumn{3}{l}{Barra (750\,mm): 644\,g; vão $L$ = 735\,mm: 631\,g;} \\
+        \multicolumn{3}{l}{acelerômetro: 5\,g; $a$ = 655\,mm; $x_a$ = 305\,mm (do mancal)} \\
         \bottomrule
     \end{tabularx}
 \end{table}
@@ -1036,7 +1037,7 @@ A Tabela~\ref{tab:parametros_medidos} reúne os parâmetros medidos no laborató
     \label{fig:rigidez_molas}
 \end{figure}
 
-O $k$ medido diferiu do valor de catálogo em $-$14\,\% para $k_1$ e $-$6\,\% para $k_2$. A massa efetiva no ponto da mola, de 99,7\,g ($k_1$) e 173,3\,g ($k_2$), responde por 27\,\% e 40\,\% de $J_O$. A frequência medida com $k_1$, cerca de 7,8\,Hz, fica bem abaixo dos 9,72\,Hz previstos com o $k$ de catálogo e sem a massa da mola por dois motivos: a mola é mais macia que o especificado, o que leva a previsão a 9,00\,Hz, e, principalmente, sua massa efetiva, somada à das ferragens, reduz a previsão a 7,69\,Hz. Com $k_2$ ocorre o mesmo: 18,00\,Hz com o catálogo, 17,47\,Hz com o $k$ medido e 13,71\,Hz com a massa efetiva. A rigidez de $k_1$ não é perfeitamente linear na faixa ensaiada (inclinações entre leituras consecutivas de 667 a 1429\,N/m; $R^2 = 0{,}985$), e o primeiro trecho de $k_2$ é mais macio que os demais; ambos os efeitos estão contidos na incerteza do ajuste, que é a principal parcela da incerteza da previsão.
+O $k$ medido diferiu do valor de catálogo em $-$14\,\% para $k_1$ e $-$6\,\% para $k_2$. A massa efetiva no ponto da mola, de 99,7\,g ($k_1$) e 173,3\,g ($k_2$), responde por 27\,\% e 39\,\% de $J_O$. A frequência medida com $k_1$, cerca de 7,8\,Hz, fica bem abaixo dos 9,72\,Hz previstos com o $k$ de catálogo e sem a massa da mola por dois motivos: a mola é mais macia que o especificado, o que leva a previsão a 9,00\,Hz, e, principalmente, sua massa efetiva, somada à das ferragens, reduz a previsão a 7,69\,Hz. Com $k_2$ ocorre o mesmo: 18,00\,Hz com o catálogo, 17,47\,Hz com o $k$ medido e 13,71\,Hz com a massa efetiva. A rigidez de $k_1$ não é perfeitamente linear na faixa ensaiada (inclinações entre leituras consecutivas de 667 a 1429\,N/m; $R^2 = 0{,}985$), e o primeiro trecho de $k_2$ é mais macio que os demais; ambos os efeitos estão contidos na incerteza do ajuste, que é a principal parcela da incerteza da previsão.
 
 \subsection{Frequência Natural}
 \label{sec:res_frequencia}
@@ -1045,24 +1046,24 @@ A Tabela~\ref{tab:res_frequencia} compara, para cada tomada, a frequência ident
 
 \begin{table}[H]
     \centering
-    \caption{Frequência natural por tomada (29/10/2026): vídeo (ROI do acelerômetro), acelerômetro e diferença ao modelo de elementos finitos ($f^{mod}$ = 7,69\,Hz com $k_1 = 857$\,N/m e 13,71\,Hz com $k_2 = 3291$\,N/m).}
+    \caption{Frequência natural por tomada (29/10/2026): vídeo (ROI do acelerômetro), acelerômetro e diferença ao modelo de elementos finitos ($f^{mod}$ = 7,69\,Hz com $k_1 = 857$\,N/m e 13,71\,Hz com $k_2 = 3291$\,N/m). Diferenças, médias e CV calculados com os valores da tabela.}
     \label{tab:res_frequencia}
     \small
-    \setlength{\tabcolsep}{4pt}
+    \setlength{\tabcolsep}{3.8pt}
     \begin{tabular}{c c c c c c}
         \toprule
         \textbf{Tomada} & \textbf{Mola} & \textbf{$f^{opt}$ (Hz)} & \textbf{$f^{acc}$ (Hz)} & \textbf{$\varepsilon_{acc}$ (\%)} & \textbf{$\varepsilon_{mod}$ (\%)} \\
         \midrule
-        1 & $k_1$ & 7,815 & 7,816 & $-$0,02 & $+$1,6 \\
-        2 & $k_1$ & 7,828 & 7,814 & $+$0,19 & $+$1,8 \\
-        3 & $k_1$ & 7,837 & 7,818 & $+$0,25 & $+$1,9 \\
-        4 & $k_2$ & 14,706 & 14,659 & $+$0,32 & $+$7,3 \\
-        5 & $k_2$ & 14,705 & 14,647 & $+$0,40 & $+$7,3 \\
-        6 & $k_2$ & 14,719 & 14,706 & $+$0,09 & $+$7,4 \\
+        1 & $k_1$ & 7,8150 & 7,8163 & $-$0,02 & $+$1,6 \\
+        2 & $k_1$ & 7,8285 & 7,8138 & $+$0,19 & $+$1,8 \\
+        3 & $k_1$ & 7,8372 & 7,8175 & $+$0,25 & $+$1,9 \\
+        4 & $k_2$ & 14,7057 & 14,6589 & $+$0,32 & $+$7,3 \\
+        5 & $k_2$ & 14,7047 & 14,6466 & $+$0,40 & $+$7,3 \\
+        6 & $k_2$ & 14,7191 & 14,7055 & $+$0,09 & $+$7,4 \\
         \midrule
-        \multicolumn{2}{l}{Média $k_1$} & 7,827 & 7,816 & $+$0,14 & $+$1,8 \\
-        \multicolumn{2}{l}{Média $k_2$} & 14,710 & 14,670 & $+$0,27 & $+$7,3 \\
-        \multicolumn{2}{l}{CV $k_1$ / $k_2$} & \multicolumn{2}{c}{0,14\,\% / 0,06\,\%} & & \\
+        \multicolumn{2}{l}{Média $k_1$} & 7,8269 & 7,8159 & $+$0,14 & $+$1,8 \\
+        \multicolumn{2}{l}{Média $k_2$} & 14,7098 & 14,6703 & $+$0,27 & $+$7,3 \\
+        \multicolumn{2}{l}{CV $k_1$ / $k_2$} & \multicolumn{2}{c}{0,14\,\% / 0,05\,\%} & & \\
         \bottomrule
     \end{tabular}
 \end{table}
@@ -1076,7 +1077,7 @@ A Tabela~\ref{tab:res_frequencia} compara, para cada tomada, a frequência ident
     \label{fig:res_espectro}
 \end{figure}
 
-A frequência medida pelo vídeo diferiu da do acelerômetro em 0,21\,\% na média dos valores absolutos das seis tomadas (no máximo 0,40\,\%; as médias com sinal da Tabela~\ref{tab:res_frequencia}, $+$0,14 e $+$0,27\,\%, comparam as frequências médias de cada mola), dentro do critério, que é a resolução espectral relativa dos registros de 10\,s do acelerômetro (1,3\,\% com $k_1$ e 0,7\,\% com $k_2$) e de 3,2\,\% na tomada 3, cujo registro tem 4\,s, na qual a diferença foi de 0,25\,\%; a frequência de cada sinal é obtida pelo ajuste senoidal, mais fino que a resolução. Em relação ao modelo, a diferença foi de $+$1,8\,\% para $k_1$, a 0,5 incerteza-padrão da previsão ($7{,}69 \pm 0{,}28$\,Hz), e de $+$7,3\,\% para $k_2$, a 1,4 incertezas-padrão ($13{,}71 \pm 0{,}72$\,Hz); as duas ficam dentro do critério de duas incertezas-padrão, mas a de $k_2$ é sistemática nas três tomadas. O coeficiente de variação entre as três tomadas de cada mola foi de 0,14\,\% ($k_1$) e 0,06\,\% ($k_2$) no vídeo, abaixo da resolução relativa. A razão entre as frequências medidas com as duas molas, 1,879 pelo vídeo e 1,877 pelo acelerômetro, mostra que o método acompanha a variação de rigidez; o modelo prevê 1,782, diferença que vem de $k_2$ (Seção~\ref{sec:disc_modelo}).
+A frequência medida pelo vídeo diferiu da do acelerômetro em 0,21\,\% na média dos valores absolutos das seis tomadas (no máximo 0,40\,\%; as médias com sinal da Tabela~\ref{tab:res_frequencia}, $+$0,14 e $+$0,27\,\%, comparam as frequências médias de cada mola), dentro do critério, que é a resolução espectral relativa dos registros de 10\,s do acelerômetro (1,3\,\% com $k_1$ e 0,7\,\% com $k_2$) e de 3,2\,\% na tomada 3, cujo registro tem 4\,s, na qual a diferença foi de 0,25\,\%; a frequência de cada sinal é obtida pelo ajuste senoidal, mais fino que a resolução. Em relação ao modelo, a diferença foi de $+$1,8\,\% para $k_1$, a 0,5 incerteza-padrão da previsão ($7{,}69 \pm 0{,}28$\,Hz), e de $+$7,3\,\% para $k_2$, a 1,4 incertezas-padrão ($13{,}71 \pm 0{,}72$\,Hz); as duas ficam dentro do critério de duas incertezas-padrão, mas a de $k_2$ é sistemática nas três tomadas. O coeficiente de variação entre as três tomadas de cada mola foi de 0,14\,\% ($k_1$) e 0,05\,\% ($k_2$) no vídeo, abaixo da resolução relativa. A razão entre as frequências medidas com as duas molas, 1,879 pelo vídeo e 1,877 pelo acelerômetro, mostra que o método acompanha a variação de rigidez; o modelo prevê 1,782, diferença que vem de $k_2$ (Seção~\ref{sec:disc_modelo}).
 
 As frequências desta tabela já incorporam a correção da base de tempo (Seção~\ref{sec:equipamentos_camera}). Sem ela, isto é, supondo os quadros igualmente espaçados a 240\,fps, o vídeo de uma tomada com a mola $k_1$ indicaria 9,1\,Hz, 16\,\% acima do acelerômetro, valor que corresponde aos 14\,\% de quadros descartados pelo aparelho ($1/0{,}86 \approx 1{,}16$).
 
@@ -1104,25 +1105,26 @@ Todas oscilam em fase, e a Tabela~\ref{tab:res_forma_modal} compara a razão ent
 
 \begin{table}[H]
     \centering
-    \caption{Razão entre a amplitude de cada ROI e a da ROI do parafuso (média de três tomadas $\pm$ desvio-padrão).}
+    \caption{Razão entre a amplitude de cada ROI e a da ROI do parafuso (média de três tomadas $\pm$ desvio-padrão). Para a marca de fita, cuja posição foi estimada em cada tomada, a prevista é a média das três previsões; para a borda lisa, faixa das quatro tomadas válidas; $\varepsilon$ calculado com os valores da tabela.}
     \label{tab:res_forma_modal}
     \small
-    \begin{tabularx}{\columnwidth}{X c c c}
+    \setlength{\tabcolsep}{4pt}
+    \begin{tabularx}{\columnwidth}{@{}>{\raggedright\arraybackslash}X c c c@{}}
         \toprule
-        \textbf{Mola} & \textbf{Medida} & \textbf{Prevista} & \textbf{$\varepsilon$ (\%)} \\
+        \textbf{ROI, mola} & \textbf{Medida} & \textbf{Prevista} & \textbf{$\varepsilon$ (\%)} \\
         \midrule
-        Acelerômetro, $k_1$ & 0,476 $\pm$ 0,007 & 0,473 & $+$0,5 \\
-        Acelerômetro, $k_2$ & 0,486 $\pm$ 0,023 & 0,490 & $-$0,8 \\
-        Marca de fita, $k_1$ & 0,548 $\pm$ 0,010 & 0,538 & $+$1,7 \\
-        Marca de fita, $k_2$ & 0,587 $\pm$ 0,002 & 0,558 & $+$5,3 \\
-        Borda lisa (4 tomadas válidas) & -- & -- & $-$4 a $-$43 \\
+        Acelerômetro, $k_1$ & 0,4756 $\pm$ 0,0066 & 0,4732 & $+$0,5 \\
+        Acelerômetro, $k_2$ & 0,4862 $\pm$ 0,0226 & 0,4903 & $-$0,8 \\
+        Marca de fita, $k_1$ & 0,5476 $\pm$ 0,0099 & 0,5384 & $+$1,7 \\
+        Marca de fita, $k_2$ & 0,5876 $\pm$ 0,0023 & 0,5577 & $+$5,4 \\
+        Borda lisa, $k_1$ e $k_2$ & -- & -- & $-$4 a $-$43 \\
         \bottomrule
     \end{tabularx}
 \end{table}
 % Por tomada (acel./parafuso): k1 0,469 / 0,475 / 0,482; k2 0,499 / 0,499 / 0,460. Borda lisa: perdeu o
 % rastreamento em k1 r1 e k2 r2; nas demais, -4,4 / -18,1 / -17,8 / -42,7 %.
 
-Na média das tomadas, a razão do acelerômetro concordou com o modelo em 0,5\,\% ($k_1$) e 0,8\,\% ($k_2$), com tomadas individuais entre $-$6,2 e $+$2,0\,\%, e a da marca de fita em 1,7 e 5,3\,\%. Pelo critério de duas vezes o desvio-padrão entre tomadas, a razão do acelerômetro atende com as duas molas e a da marca de fita com $k_1$; com $k_2$, a marca de fita fica fora do critério, mas sua posição foi estimada na imagem, e a diferença de 5,3\,\% corresponderia a um erro de cerca de 20\,mm nessa posição. Com essa ressalva, a concordância nos pontos com textura mostra que o vídeo mede a distribuição espacial do movimento, e não apenas a frequência, em vários pontos obtidos do mesmo registro, sem sensores adicionais, e sustenta as amplitudes relativas medidas pelo vídeo independentemente do acelerômetro; a amplitude absoluta depende ainda da calibração espacial. O ponto sobre a borda lisa, sem marcador, perdeu o rastreamento em duas das seis tomadas e, nas demais, diferiu do modelo de $-$4 a $-$43\,\%: sem textura ao longo da borda, a correlação desliza ao longo dela, o que reforça a necessidade de marcadores de contraste.
+Na média das tomadas, a razão do acelerômetro concordou com o modelo em 0,5\,\% ($k_1$) e 0,8\,\% ($k_2$), com tomadas individuais entre $-$6,2 e $+$2,0\,\%, e a da marca de fita em 1,7 e 5,4\,\%. Pelo critério de duas vezes o desvio-padrão entre tomadas, a razão do acelerômetro atende com as duas molas e a da marca de fita com $k_1$; com $k_2$, a marca de fita fica fora do critério, mas sua posição foi estimada na imagem, e a diferença de 5,4\,\% corresponderia a um erro de cerca de 20\,mm nessa posição. Com essa ressalva, a concordância nos pontos com textura mostra que o vídeo mede a distribuição espacial do movimento, e não apenas a frequência, em vários pontos obtidos do mesmo registro, sem sensores adicionais, e sustenta as amplitudes relativas medidas pelo vídeo independentemente do acelerômetro; a amplitude absoluta depende ainda da calibração espacial. O ponto sobre a borda lisa, sem marcador, perdeu o rastreamento em duas das seis tomadas e, nas demais, diferiu do modelo de $-$4 a $-$43\,\%: sem textura ao longo da borda, a correlação desliza ao longo dela, o que reforça a necessidade de marcadores de contraste.
 
 \subsection{Amortecimento}
 \label{sec:res_amortecimento}
@@ -1131,22 +1133,22 @@ A Tabela~\ref{tab:res_amortecimento} compara as razões de amortecimento obtidas
 
 \begin{table}[H]
     \centering
-    \caption{Razão de amortecimento por tomada (decremento logarítmico), vídeo e acelerômetro na mesma tomada.}
+    \caption{Razão de amortecimento por tomada (decremento logarítmico), vídeo e acelerômetro na mesma tomada; diferenças e médias calculadas com os valores da tabela.}
     \label{tab:res_amortecimento}
     \small
     \begin{tabularx}{\columnwidth}{X c c c}
         \toprule
-        \textbf{Tomada} & \textbf{$\zeta^{opt}$} & \textbf{$\zeta^{acc}$} & \textbf{Dif. (\%)} \\
+        \textbf{Tomada} & \textbf{$\zeta^{opt} \times 10^3$} & \textbf{$\zeta^{acc} \times 10^3$} & \textbf{Dif. (\%)} \\
         \midrule
-        1 ($k_1$) & 0,0039 & 0,0045 & $-$12 \\
-        2 ($k_1$) & 0,0053 & 0,0053 & $-$1 \\
-        3 ($k_1$) & 0,0059 & 0,0057 & $+$4 \\
-        4 ($k_2$) & 0,0025 & 0,0024 & $+$6 \\
-        5 ($k_2$) & 0,0027 & 0,0023 & $+$15 \\
-        6 ($k_2$) & 0,0029 & 0,0025 & $+$16 \\
+        1 ($k_1$) & 3,945 & 4,483 & $-$12 \\
+        2 ($k_1$) & 5,290 & 5,346 & $-$1 \\
+        3 ($k_1$) & 5,943 & 5,728 & $+$4 \\
+        4 ($k_2$) & 2,530 & 2,394 & $+$6 \\
+        5 ($k_2$) & 2,656 & 2,314 & $+$15 \\
+        6 ($k_2$) & 2,868 & 2,466 & $+$16 \\
         \midrule
-        Média $k_1$ & 0,0051 & 0,0052 & $-$2 \\
-        Média $k_2$ & 0,0027 & 0,0024 & $+$12 \\
+        Média $k_1$ & 5,059 & 5,186 & $-$2 \\
+        Média $k_2$ & 2,685 & 2,391 & $+$12 \\
         \bottomrule
     \end{tabularx}
 \end{table}
@@ -1224,7 +1226,7 @@ A Tabela~\ref{tab:res_controles} resume os controles. O ruído das ROIs sobre re
 
 \subsection{Desempenho do método}
 
-Na bancada, o vídeo de \textit{smartphone} identificou a frequência natural da barra com diferença média absoluta de 0,21\,\% (no máximo 0,40\,\%) em relação ao acelerômetro na mesma tomada, de $+$1,8\,\% ($k_1$) e $+$7,3\,\% ($k_2$) em relação ao modelo e repetibilidade de 0,14\,\% e 0,06\,\%; o amortecimento médio diferiu 2\,\% ($k_1$) e 12\,\% ($k_2$) do medido pelo acelerômetro, e a razão de amplitudes entre o acelerômetro e o parafuso concordou com o modelo dentro de 1\,\% na média. Separadamente, a verificação com dados sintéticos, em que o movimento é conhecido, indica que o \textit{software} não é o fator limitante: ali os erros ficaram abaixo de 0,1\,\% em frequência e de 1\,\% em amplitude. As diferenças observadas na bancada se devem, portanto, principalmente às condições físicas do ensaio, à referência e aos parâmetros do modelo.
+Na bancada, o vídeo de \textit{smartphone} identificou a frequência natural da barra com diferença média absoluta de 0,21\,\% (no máximo 0,40\,\%) em relação ao acelerômetro na mesma tomada, de $+$1,8\,\% ($k_1$) e $+$7,3\,\% ($k_2$) em relação ao modelo e repetibilidade de 0,14\,\% e 0,05\,\%; o amortecimento médio diferiu 2\,\% ($k_1$) e 12\,\% ($k_2$) do medido pelo acelerômetro, e a razão de amplitudes entre o acelerômetro e o parafuso concordou com o modelo dentro de 1\,\% na média. Separadamente, a verificação com dados sintéticos, em que o movimento é conhecido, indica que o \textit{software} não é o fator limitante: ali os erros ficaram abaixo de 0,1\,\% em frequência e de 1\,\% em amplitude. As diferenças observadas na bancada se devem, portanto, principalmente às condições físicas do ensaio, à referência e aos parâmetros do modelo.
 
 \subsection{O \textit{smartphone} como sensor}
 
@@ -1258,7 +1260,7 @@ As principais conclusões podem ser resumidas a seguir:
 \begin{itemize}
     \item verificação do \textit{software}: em vídeos sintéticos, cujo movimento é conhecido, as rotinas de estimativa de movimento por fase recuperaram a frequência com erro inferior a 0,1\,\%, a amplitude com erro inferior a 1\,\% e o atraso entre vídeo e acelerômetro com erro inferior a 0,1\,ms; esses valores medem o erro do processamento, e não a exatidão da medição em bancada;
     \item o aplicativo integrou planejamento, processamento, sincronização e geração de tabelas e figuras, e foi usado em toda a campanha de bancada;
-    \item nos ensaios de bancada, a metodologia com câmera de \textit{smartphone} identificou a frequência natural da barra articulada com diferença média absoluta de 0,21\,\% (no máximo 0,40\,\%) em relação ao acelerômetro e de 1,8\,\% ($k_1$) e 7,3\,\% ($k_2$) em relação ao modelo, com repetibilidade de 0,14\,\% e 0,06\,\%, e acompanhou a variação de rigidez entre as duas molas;
+    \item nos ensaios de bancada, a metodologia com câmera de \textit{smartphone} identificou a frequência natural da barra articulada com diferença média absoluta de 0,21\,\% (no máximo 0,40\,\%) em relação ao acelerômetro e de 1,8\,\% ($k_1$) e 7,3\,\% ($k_2$) em relação ao modelo, com repetibilidade de 0,14\,\% e 0,05\,\%, e acompanhou a variação de rigidez entre as duas molas;
     \item ainda na bancada, em comparação ao acelerômetro, o método óptico mediu sem contato e sem \textit{mass loading}, obteve vários pontos de medição do mesmo registro, cuja razão de amplitudes concordou com a forma modal prevista dentro de 1\,\% na média, e forneceu amortecimento médio a 2\,\% ($k_1$) e 12\,\% ($k_2$) do da referência; a amplitude absoluta não pôde ser validada contra o acelerômetro, cuja aquisição limitou essa comparação. Como limitações, apresentou menor faixa de frequência, defasagem por obturador de rolagem e perda de quadros na câmera lenta, cujos efeitos foram avaliados e, quando possível, quantificados.
 \end{itemize}
 
